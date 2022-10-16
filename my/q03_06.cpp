@@ -15,7 +15,7 @@ int count_simple(const int k, const int n) {
 
 int count_better(const int k, const int n) {
     if (k < 0 || n < 0) {
-        throw std::invalid_argument("argument must be positive");
+        throw std::invalid_argument("argument must not be negative");
     }
 
     if (3 * k < n) { // この場合, 条件を満たす組は存在しない
