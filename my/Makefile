@@ -5,7 +5,7 @@ TARGETS = q03_06
 
 all: $(TARGETS)
 
-test: $(TARGETS)
+testall: $(TARGETS)
 	 for t in $(TARGETS); do ./$$t; done
 
 clean:
