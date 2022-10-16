@@ -14,6 +14,10 @@ int count_simple(int k, int n) {
 }
 
 int count_better(int k, int n) {
+    if (k < 0 || n < 0) {
+        throw std::invalid_argument("argument must be positive");
+    }
+
     if (3 * k < n) { // この場合, 条件を満たす組は存在しない
         return 0;
     }
@@ -33,17 +37,25 @@ int count_better(int k, int n) {
     return count;
 }
 
-TEST(TestCase, NotExist) {
-    EXPECT_EQ(0, count_simple(3, 10));
-    EXPECT_EQ(0, count_better(3, 10));
+TEST(TestCase, SolutionNotExists) {
+    EXPECT_EQ(count_simple(3, 10), 0);
+    EXPECT_EQ(count_better(3, 10), 0);
 }
 
-TEST(TestCase, Test1) {
-    EXPECT_EQ(10, count_simple(3, 3));
-    EXPECT_EQ(10, count_better(3, 3));
+TEST(TestCase, k_equal_to_n) {
+    EXPECT_EQ(count_simple(3, 3), 10);
+    EXPECT_EQ(count_better(3, 3), 10);
 }
 
-TEST(TestCase, Test2) {
-    EXPECT_EQ(10, count_simple(10, 3));
-    EXPECT_EQ(10, count_better(10, 3));
+TEST(TestCase, k_greater_than_n) {
+    EXPECT_EQ(count_simple(10, 3), 10);
+    EXPECT_EQ(count_better(10, 3), 10);
+}
+
+TEST(TestCase, k_negative) {
+    EXPECT_THROW(count_better(-1, 3), std::invalid_argument);
+}
+
+TEST(TestCase, n_negative) {
+    EXPECT_THROW(count_better(3, -1), std::invalid_argument);
 }
