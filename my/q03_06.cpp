@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int count_simple(int k, int n) {
+int count_simple(const int k, const int n) {
     int count = 0;
     for (int x = 0; x <= k; x++) {
         for (int y = 0; y <= k; y++) {
@@ -13,7 +13,7 @@ int count_simple(int k, int n) {
     return count;
 }
 
-int count_better(int k, int n) {
+int count_better(const int k, const int n) {
     if (k < 0 || n < 0) {
         throw std::invalid_argument("argument must be positive");
     }
@@ -23,7 +23,7 @@ int count_better(int k, int n) {
     }
 
     // k > nの場合, 0 <= x,y,z <= nの範囲のみ探索すれば十分
-    int boundary = std::min(k, n);
+    const int boundary = std::min(k, n);
 
     int count = 0;
     for (int x = 0; x <= boundary; x++) {
