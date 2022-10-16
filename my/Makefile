@@ -6,7 +6,7 @@ TARGETS = q03_06 q03_07
 all: $(TARGETS)
 
 testall: $(TARGETS)
-	 for t in $(TARGETS); do ./$$t; done
+	for t in $(TARGETS); do ./$$t; done
 
 clean:
 	$(RM) $(TARGETS)
