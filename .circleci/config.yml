@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: archlinux
+     # - image: fedora
+    steps:
+      - checkout
+      - run:
+          command: pacman -Sy --noconfirm make clang gtest
+          # command: dnf -y install make clang gtest
+      - run:
+          command: cd my; make testall
+
