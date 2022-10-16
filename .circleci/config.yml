@@ -1,9 +1,11 @@
-version: 2
+version: 2.1
+orbs:
+  slack: circleci/slack@4.10
 jobs:
-  build:
+  test:
     docker:
       - image: archlinux
-     # - image: fedora
+      # - image: fedora
     steps:
       - checkout
       - run:
@@ -11,4 +13,11 @@ jobs:
           # command: dnf -y install make clang gtest
       - run:
           command: cd my; make testall
-
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+workflows:
+  slack:
+    jobs:
+      - test:
+          context: slack
