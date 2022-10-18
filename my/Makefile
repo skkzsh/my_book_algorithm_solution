@@ -11,4 +11,4 @@ testall: $(TARGETS)
 clean:
 	$(RM) $(TARGETS)
 
-.PHONY: clean
+.PHONY: testall clean
