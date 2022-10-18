@@ -1,6 +1,10 @@
 #include "gtest/gtest.h"
 
 int tribo(int N) {
+    if (N < 0) {
+        throw std::invalid_argument("argument must not be negative");
+    }
+
     // ベースケース
     switch(N) {
         case 0:
@@ -19,5 +23,9 @@ int tribo(int N) {
 
 TEST(TestCase, Test20) {
     EXPECT_EQ(tribo(20), 35890);
+}
+
+TEST(TestCase, Negative) {
+    EXPECT_THROW(tribo(-1), std::invalid_argument);
 }
 
