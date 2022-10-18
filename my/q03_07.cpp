@@ -1,12 +1,17 @@
 #include "gtest/gtest.h"
 
-int sum_bit(const std::string s, const int bit) {
+int sum_bit(const std::string s, const unsigned int bit) {
     const int l = s.size();
     int sum = 0;
     int tmp = 0;
 
     for (int i = 0; i < l - 1; ++i) {
-        tmp += s[i] - '0';
+        int num = s[i] - '0';
+        if (num < 0 || num > 9) {
+            throw std::invalid_argument("argument must be number");
+        }
+
+        tmp += num;
 
         if (bit & (1 << i)) {
             sum += tmp;
@@ -52,3 +57,6 @@ TEST(TestCase, Test1) {
     EXPECT_EQ(sum_combi("125"), 176);
 }
 
+TEST(TestCase, IllegalArgumentTest) {
+    EXPECT_THROW(sum_combi("1?5"), std::invalid_argument);
+}
