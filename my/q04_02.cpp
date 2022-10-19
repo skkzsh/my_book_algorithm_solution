@@ -18,7 +18,6 @@ int tribo(int N, std::vector<long long>& memo) {
     }
 
     // すでに計算済みならば解をリターン
-    //  FIXME: -1である前提をやめたい
     if (memo[N] != -1) {
         return memo[N];
     }
@@ -28,12 +27,17 @@ int tribo(int N, std::vector<long long>& memo) {
 }
 
 
-TEST(TestCase, Test10) {
-    int N = 10;
+std::vector<long long> tribo_wrapper(int N) {
     // tribo(N) の解をメモ化する配列
     std::vector<long long> memo(N + 1, -1);
 
     tribo(N, memo);
+
+    return memo;
+}
+
+TEST(TestCase, Test10) {
+    std::vector<long long> memo = tribo_wrapper(10);
 
     EXPECT_EQ(memo[10], 81);
     EXPECT_EQ(memo[9], 44);
@@ -49,8 +53,6 @@ TEST(TestCase, Test10) {
 }
 
 TEST(TestCase, Negative) {
-    std::vector<long long> memo(1, -1);
-
-    EXPECT_THROW(tribo(-1, memo), std::invalid_argument);
+    EXPECT_THROW(tribo_wrapper(-1), std::invalid_argument);
 }
 
