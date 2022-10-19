@@ -1,7 +1,7 @@
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -O2 -lm # -g -lpthread
 CXXFLAGS += -std=c++11 -lgtest_main -lgtest
-TARGETS = q03_06 q03_07 q04_01 q04_02
+TARGETS = q03_06 q03_07 q04_01 q04_02 q04_05
 
 all: $(TARGETS)
 
