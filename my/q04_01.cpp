@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int tribo(int N) {
+int tribo(const int N) {
     if (N < 0) {
         throw std::invalid_argument("argument must not be negative");
     }

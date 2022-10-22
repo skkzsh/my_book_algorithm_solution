@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 //  FIXME: 参照渡しをやめたい
-int tribo(int N, std::vector<long long>& memo) {
+int tribo(const int N, std::vector<long long>& memo) {
     if (N < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
@@ -27,7 +27,7 @@ int tribo(int N, std::vector<long long>& memo) {
 }
 
 
-std::vector<long long> tribo_wrapper(int N) {
+std::vector<long long> tribo_wrapper(const int N) {
     // tribo(N) の解をメモ化する配列
     std::vector<long long> memo(N + 1, -1);
 

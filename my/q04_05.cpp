@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int count753(int k) {
+int count753(const int k) {
     if (k < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
