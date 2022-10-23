@@ -1,9 +1,13 @@
 #include "gtest/gtest.h"
 
-//  FIXME: 参照渡しをやめたい
 int tribo(const int N, std::vector<long long> &memo) {
     if (N < 0) {
         throw std::invalid_argument("argument must not be negative");
+    }
+
+    // すでに計算済みならば解をリターン
+    if (memo[N] != -1) {
+        return memo[N];
     }
 
     // ベースケース
@@ -15,11 +19,6 @@ int tribo(const int N, std::vector<long long> &memo) {
             return memo[N] = 1;
         default:
             break;
-    }
-
-    // すでに計算済みならば解をリターン
-    if (memo[N] != -1) {
-        return memo[N];
     }
 
     // 答えをメモ化しながら, 再帰呼び出し
