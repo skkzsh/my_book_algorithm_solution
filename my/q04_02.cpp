@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
 //  FIXME: 参照渡しをやめたい
-int tribo(const int N, std::vector<long long>& memo) {
+int tribo(const int N, std::vector<long long> &memo) {
     if (N < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
