@@ -5,19 +5,17 @@ jobs:
   test:
     docker:
       - image: archlinux
-      # - image: fedora
     steps:
       - checkout
       - run:
           command: pacman -Sy --noconfirm make clang gtest
-          # command: dnf -y install make clang gtest
       - run:
           command: cd my; make testall
       - slack/notify:
           event: fail
           template: basic_fail_1
 workflows:
-  slack:
+  test_and_notify:
     jobs:
       - test:
           context: slack
