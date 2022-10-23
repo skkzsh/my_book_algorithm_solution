@@ -1,12 +1,12 @@
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -O2 -lm # -g -lpthread
 CXXFLAGS += -std=c++11 -lgtest_main -lgtest
-TARGETS = q03_06 q03_07 q04_01 q04_02 q04_05 q04_06
+TARGETS = $(patsubst %.cpp, %, $(wildcard *.cpp))
 
 all: $(TARGETS)
 
 testall: $(TARGETS)
-	for t in $(TARGETS); do ./$$t; done
+	for t in $(TARGETS); do echo "[$$t]"; ./$$t; done
 
 clean:
 	$(RM) $(TARGETS)
