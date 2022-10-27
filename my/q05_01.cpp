@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <algorithm>
 using std::vector;
 
 template<class T> void chmax(T& a, T b) {
