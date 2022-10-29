@@ -40,9 +40,7 @@ bool partial_sum_exists_push(const int W, const vector<int> a) {
     for (int n = 0; n < N; ++n) {
         for (int w = 0; w <= W; ++w) {
             if(dp[n][w]) {
-                if(n < N) {
-                    dp[n + 1][w] = true;
-                }
+                dp[n + 1][w] = true;
                 if(w + a[n] <= W) {
                     dp[n + 1][w + a[n]] = true;
                 }
