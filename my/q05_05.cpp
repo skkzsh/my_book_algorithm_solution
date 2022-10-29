@@ -46,7 +46,7 @@ bool partial_sum_exists_push(const int W, const vector<int> a) {
 
 
 TEST(TestCase, TestTrue) {
-    const vector<int> a = {1};
+    const vector<int> a = {2};
     EXPECT_EQ(partial_sum_exists_pull(10, a), true);
     EXPECT_EQ(partial_sum_exists_push(10, a), true);
 }
