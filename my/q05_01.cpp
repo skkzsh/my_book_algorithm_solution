@@ -1,10 +1,7 @@
 #include "gtest/gtest.h"
+#include "template.hpp"
 #include <algorithm>
 using std::vector;
-
-template<class T> void chmax(T& a, T b) {
-    a = std::max(a, b);
-}
 
 int happy_max(const int N, const vector<vector<int>> z) {
     vector<vector<int>> dp(N + 1, vector<int>(3, 0));

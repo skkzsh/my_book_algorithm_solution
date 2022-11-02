@@ -1,12 +1,9 @@
 #include "gtest/gtest.h"
+#include "template.hpp"
 using std::vector;
 
 // 十分大きな値
 const int INF = 1 << 29;
-
-template<class T> void chmin(T& a, T b) {
-    a = std::min(a, b);
-}
 
 bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) {
     const int N = a.size();

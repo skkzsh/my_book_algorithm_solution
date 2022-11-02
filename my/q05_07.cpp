@@ -1,16 +1,6 @@
 #include "gtest/gtest.h"
+#include "template.hpp"
 using std::string;
-
-template<class T> void print2d(vector<vector<T>> vv) {
-    std::cout << "print2d start" << std::endl;
-    for (vector<T> v : vv) {
-        for (T i : v) {
-            std::cout << i << ' ';
-        }
-        std::cout << std::endl;
-    }
-    std::cout << "print2d end" << std::endl;
-}
 
 string longest_common_substring(const string S, const string T) {
     using std::vector;
