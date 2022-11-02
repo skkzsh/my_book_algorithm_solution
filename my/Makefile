@@ -1,7 +1,10 @@
 CXX = clang++
 CXXFLAGS = -Wall -Wextra -O2 -lm # -g -lpthread
 CXXFLAGS += -std=c++11 -lgtest_main -lgtest
-TARGETS = $(patsubst %.cpp, %, $(wildcard *.cpp))
+
+#TYPE_HEADER = type.h
+
+TARGETS = $(patsubst %.cpp, %, $(wildcard q[01][0-9]_[0-9][0-9].cpp))
 
 all: $(TARGETS)
 

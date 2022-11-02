@@ -1,11 +1,6 @@
 #include "gtest/gtest.h"
+#include "type.h"
 using std::vector;
-
-typedef enum {
-    Tri_Undetermined = -1,
-    Tri_False = false,
-    Tri_True = true,
-} Tri_Bool;
 
 bool func(const int i, const int w, const vector<int> a, vector<vector<Tri_Bool>> &memo) {
     // すでに計算済みならば解をリターン
