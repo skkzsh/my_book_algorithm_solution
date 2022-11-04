@@ -3,11 +3,11 @@
 using std::vector;
 
 // 十分大きな値
-const int INF = 1 << 29;
+const unsigned int INF = 1 << 29;
 
-bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<int> m) {
+bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsigned int> m) {
     const int N = a.size();
-    vector<vector<int>> dp(N + 1, vector<int>(W + 1, INF));
+    vector<vector<unsigned int>> dp(N + 1, vector<unsigned int>(W + 1, INF));
 
     // 初期条件
     dp[0][0] = 0;
@@ -33,9 +33,9 @@ bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<int>
     return dp[N][W] <= m[N - 1];
 }
 
-bool partial_sum_exists_push(const int W, const vector<int> a, const vector<int> m) {
+bool partial_sum_exists_push(const int W, const vector<int> a, const vector<unsigned int> m) {
     const int N = a.size();
-    vector<vector<int>> dp(N + 1, vector<int>(W + 1, INF));
+    vector<vector<unsigned int>> dp(N + 1, vector<unsigned int>(W + 1, INF));
 
     // 初期条件
     dp[0][0] = 0;
@@ -67,14 +67,14 @@ bool partial_sum_exists_push(const int W, const vector<int> a, const vector<int>
 
 TEST(TestCase, TestFalse) {
     const vector<int> a = {1, 2};
-    const vector<int> m = {1, 4};
+    const vector<unsigned int> m = {1, 4};
     EXPECT_EQ(partial_sum_exists_pull(10, a, m), false);
     EXPECT_EQ(partial_sum_exists_push(10, a, m), false);
 }
 
 TEST(TestCase, TestTrue) {
     const vector<int> a = {1, 2};
-    const vector<int> m = {2, 4};
+    const vector<unsigned int> m = {2, 4};
     EXPECT_EQ(partial_sum_exists_pull(10, a, m), true);
     EXPECT_EQ(partial_sum_exists_push(10, a, m), true);
 }
