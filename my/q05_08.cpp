@@ -17,7 +17,52 @@ double aqua(const int M, const vector<int> a) {
 
     for (int n = 1; n <= N; ++n) {
         for (int m = 1; m <= std::min(n, M); ++m) {
+            // (PoC) m = 1の場合
             dp[n][m] = (double) std::accumulate(a.begin(), a.begin() + n, 0) / n;
+            // (PoC)
+            // 選ぶ場合, 選ばない場合
+            if (m == 2) {
+                switch (n) {
+                    case 2:
+                        dp[n][m] = dp[n - 1][m - 1] + a[n - 1];
+                        break;
+                    case 3:
+                        dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
+                                                dp[n - 2][m - 1] + (double) (a[n - 2] + a[n - 1]) / 2,
+                                                });
+                        break;
+                    case 4:
+                        dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
+                                                dp[n - 2][m - 1] + (double) (a[n - 2] + a[n - 1]) / 2,
+                                                dp[n - 3][m - 1] + (double) (a[n - 3] + a[n - 2] + a[n - 1]) / 3,
+                                                });
+                        break;
+                    case 5:
+                        dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
+                                                dp[n - 2][m - 1] + (double) (a[n - 2] + a[n - 1]) / 2,
+                                                dp[n - 3][m - 1] + (double) (a[n - 3] + a[n - 2] + a[n - 1]) / 3,
+                                                dp[n - 4][m - 1] + (double) (a[n - 4] + a[n - 3] + a[n - 2] + a[n - 1]) / 4,
+                                                });
+                        break;
+                }
+            } else if (m == 3) {
+                switch (n) {
+                    case 3:
+                        dp[n][m] = dp[n - 1][m - 1] + a[n - 1];
+                        break;
+                    case 4:
+                        dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
+                                                dp[n - 2][m - 1] + (double) (a[n - 2] + a[n - 1]) / 2,
+                                                });
+                        break;
+                    case 5:
+                        dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
+                                                dp[n - 2][m - 1] + (double) (a[n - 2] + a[n - 1]) / 2,
+                                                dp[n - 3][m - 1] + (double) (a[n - 3] + a[n - 2] + a[n - 1]) / 3,
+                                                });
+                        break;
+                }
+            }
         }
     }
 
