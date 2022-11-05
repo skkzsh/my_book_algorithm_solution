@@ -8,7 +8,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: pacman -Sy --noconfirm make clang gtest
+          command: pacman -Syu --noconfirm make clang gtest
       - run:
           command: cd my; make testall
       - slack/notify:

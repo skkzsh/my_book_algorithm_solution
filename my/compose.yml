@@ -1,0 +1,11 @@
+version: "3"
+services:
+  gtest:
+    container_name: gtest
+    image: skkzsh/gtest
+    build: .
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - $PWD:/work
+    working_dir: /work

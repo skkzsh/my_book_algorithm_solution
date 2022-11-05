@@ -19,7 +19,7 @@ int happy_max(const int N, const vector<vector<int>> z) {
         // dp[i + 1] = dp[i] + std::max({a[i], b[i], c[i]});
     }
 
-    return *std::max_element(dp[N].begin(), dp[N].end());
+    return *std::ranges::max_element(dp[N]);
 }
 
 

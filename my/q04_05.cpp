@@ -31,9 +31,8 @@ int count753recursive(const int k) {
         }
     }
 
-    // TODO: 一般化
     // if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
-    if (std::all_of(count753map.begin(), count753map.end(),
+    if (std::ranges::all_of(count753map,
         [](const auto& x) { return x.second > 0; })) {
         return count753recursive(k - 1) + 1;
     }
@@ -53,9 +52,9 @@ int count753permutation(const int k) {
     do {
         std::string str(v.begin(), v.end());
         candidates.push_back(std::stoi(str));
-    } while (std::next_permutation(v.begin(), v.end()));
+    } while (std::next_permutation(v.begin(), v.end())); // TODO: TODO: C++20 (ranges)
 
-    return std::count_if(candidates.begin(), candidates.end(), [k](int c) { return c <= k; });
+    return std::ranges::count_if(candidates, [k](int c) { return c <= k; });
 }
 
 

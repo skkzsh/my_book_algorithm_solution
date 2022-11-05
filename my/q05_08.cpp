@@ -27,7 +27,7 @@ double aqua(const int M, const vector<int> a) {
             for (int i = 0; i <= n - m; ++i) {
                 tmp[i] = dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
             }
-            dp[n][m] = *std::max_element(tmp.begin(), tmp.end());
+            dp[n][m] = *std::ranges::max_element(tmp);
         }
     }
 
