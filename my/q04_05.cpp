@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <algorithm>
+#include <unordered_map>
 
 // 3, 5, 7のカウントから算出する
 int count753recursive(const int k) {
@@ -11,7 +12,7 @@ int count753recursive(const int k) {
         return 0;
     }
 
-    std::map<int, int> count753map = {
+    std::unordered_map<int, int> count753map = {
         {3, 0},
         {5, 0},
         {7, 0},
@@ -30,9 +31,10 @@ int count753recursive(const int k) {
         }
     }
 
-    // if (std::all_of(count753map.begin(), count753map.end(),
-    //             [](std::map<int, int>::iterator x) { return (x -> second > 0); })) {
-    if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
+    // TODO: 一般化
+    // if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
+    if (std::all_of(count753map.begin(), count753map.end(),
+        [](const auto& x) { return x.second > 0; })) {
         return count753recursive(k - 1) + 1;
     }
     return count753recursive(k - 1);

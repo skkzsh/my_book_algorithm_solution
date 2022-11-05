@@ -1,5 +1,5 @@
 CXX = clang++
-CXXFLAGS = -Wall -Wextra -O2 -std=c++11 # -g -lpthread
+CXXFLAGS = -Wall -Wextra -O2 -std=c++14 # -g -lpthread
 CXXFLAGS += -lgtest_main -lgtest
 
 TYPE_HEADER = type.h
