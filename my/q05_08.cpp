@@ -5,6 +5,8 @@ using std::vector;
 using std::accumulate;
 using std::next;
 
+const int INF = 1 << 29;
+
 double aqua(const int M, const vector<int> a) {
     const int N = a.size();
 
@@ -12,7 +14,7 @@ double aqua(const int M, const vector<int> a) {
          throw std::invalid_argument("0 <= M <= N required");
      }
 
-    vector<vector<double>> dp(N + 1, vector<double>(M + 1, 0));
+    vector<vector<double>> dp(N + 1, vector<double>(M + 1, - INF));
 
     // 初期条件
     dp[0][0] = 0;
@@ -43,7 +45,7 @@ TEST(TestCase, Sample2) {
 
 TEST(TestCase, Sample3) {
     const vector<int> a = {11, 18, 9, 20, 4, 18, 12, 14};
-    EXPECT_EQ(aqua(3, a), 44.7);
+    EXPECT_NEAR(aqua(3, a), 44.66666666666667, 1e-14);
 }
 
 TEST(TestCase, M_Negative) {
