@@ -19,33 +19,8 @@ double aqua(const int M, const vector<int> a) {
 
     for (int n = 1; n <= N; ++n) {
         for (int m = 1; m <= std::min(n, M); ++m) {
-            if (m == 1) { // PoC
-                // dp[n][m] = (double) accumulate(a.begin(), a.begin() + n, 0) / n;
-                dp[n][m] = (double) accumulate(next(a.end(), - N), next(a.end(), - N + n), 0) / n;
-            }
-            // 選ぶ場合, 選ばない場合
-            switch (n - m) { // PoC
-                case 0:
-                    dp[n][m] = dp[n - 1][m - 1] + a[n - 1];
-                    break;
-                case 1:
-                    dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
-                                            dp[n - 2][m - 1] + (double) accumulate(next(a.end(), - N + m - 1), next(a.end(), - N + n), 0) / (n - m + 1),
-                                            });
-                    break;
-                case 2:
-                    dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
-                                            dp[n - 2][m - 1] + (double) accumulate(next(a.end(), - N + m), next(a.end(), - N + n), 0) / (n - m),
-                                            dp[n - 3][m - 1] + (double) accumulate(next(a.end(), - N + m - 1), next(a.end(), - N + n), 0) / (n - m + 1),
-                                            });
-                    break;
-                case 3:
-                    dp[n][m] = std::max({dp[n - 1][m - 1] + a[n - 1],
-                                            dp[n - 2][m - 1] + (double) accumulate(next(a.end(), - N + m + 1), next(a.end(), - N + n), 0) / (n - m - 1),
-                                            dp[n - 3][m - 1] + (double) accumulate(next(a.end(), - N + m), next(a.end(), - N + n), 0) / (n - m),
-                                            dp[n - 4][m - 1] + (double) accumulate(next(a.end(), - N + m - 1), next(a.end(), - N + n), 0) / (n - m + 1),
-                                            });
-                    break;
+            for (int i = 0; i <= n - m; ++i) {
+                chmax(dp[n][m], dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1));
             }
         }
     }
