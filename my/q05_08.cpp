@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 #include <numeric>
+#include <algorithm>
 using std::vector;
 using std::accumulate;
 using std::next;
@@ -21,9 +22,12 @@ double aqua(const int M, const vector<int> a) {
 
     for (int n = 1; n <= N; ++n) {
         for (int m = 1; m <= std::min(n, M); ++m) {
+            vector<double> tmp(n - m + 1);
+            // TODO: map関数で生成
             for (int i = 0; i <= n - m; ++i) {
-                chmax(dp[n][m], dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1));
+                tmp[i] = dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
             }
+            dp[n][m] = *std::max_element(tmp.begin(), tmp.end());
         }
     }
 
