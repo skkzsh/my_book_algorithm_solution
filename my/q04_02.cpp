@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int tribo(const int N, std::vector<long long> &memo) {
+long long tribo(const int N, std::vector<long long> &memo) {
     if (N < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
@@ -14,15 +14,15 @@ int tribo(const int N, std::vector<long long> &memo) {
     switch(N) {
         case 0:
         case 1:
-            return memo[N] = 0;
+            memo[N] = 0; break;
         case 2:
-            return memo[N] = 1;
+            memo[N] = 1; break;
         default:
-            break;
+            // 答えをメモ化しながら, 再帰呼び出し
+            memo[N] = tribo(N - 1, memo) + tribo(N - 2, memo) + tribo(N - 3, memo); break;
     }
 
-    // 答えをメモ化しながら, 再帰呼び出し
-    return memo[N] = tribo(N - 1, memo) + tribo(N - 2, memo) + tribo(N - 3, memo);
+    return memo[N];
 }
 
 
