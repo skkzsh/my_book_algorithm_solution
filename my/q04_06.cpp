@@ -2,6 +2,7 @@
 #include "type.h"
 using std::vector;
 
+// TODO: Use optional
 bool func(const int i, const int w, const vector<int> a, vector<vector<Tri_Bool>> &memo) {
     // すでに計算済みならば解をリターン
     if (memo[i][w] != Tri_Undetermined) {
@@ -11,24 +12,22 @@ bool func(const int i, const int w, const vector<int> a, vector<vector<Tri_Bool>
     // ベースケース
     if (i == 0) {
         if (w == 0) {
-            return memo[i][w] = Tri_True;
+            memo[i][w] = Tri_True;
         } else {
-            return memo[i][w] = Tri_False;
+            memo[i][w] = Tri_False;
         }
+        return memo[i][w];
     }
 
-    // a[i - 1] を選ばない場合
-    if (func(i - 1, w, a, memo)) {
-        return memo[i][w] = Tri_True;
-    }
-
-    // a[i - 1] を選ぶ場合
-    if (func(i - 1, w - a[i - 1], a, memo)) {
-        return memo[i][w] = Tri_True;
+    // a[i - 1] を選ばない場合, 選ぶ場合
+    if (func(i - 1, w, a, memo) || func(i - 1, w - a[i - 1], a, memo)) {
+        memo[i][w] = Tri_True;
+        return memo[i][w];
     }
 
     // どちらも false の場合は false
-    return memo[i][w] = Tri_False;
+    memo[i][w] = Tri_False;
+    return memo[i][w];
 }
 
 bool partial_sum_exists(const int w, const vector<int> a) {
