@@ -13,11 +13,9 @@ int tribo(const int N) {
         case 2:
             return 1;
         default:
-            break;
+            // 再帰呼び出し
+            return tribo(N - 1) + tribo(N - 2) + tribo(N - 3);
     }
-
-    // 再帰呼び出し
-    return tribo(N - 1) + tribo(N - 2) + tribo(N - 3);
 }
 
 
