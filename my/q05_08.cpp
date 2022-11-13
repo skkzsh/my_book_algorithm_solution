@@ -3,12 +3,12 @@
 #include <numeric>
 #include <algorithm>
 using std::vector;
-using std::accumulate;
-using std::next;
-
-const int INF = 1 << 29;
 
 double aqua(const int M, const vector<int> a) {
+    using std::accumulate;
+    using std::next;
+    constexpr int INF = 1 << 29; // 十分大きな値
+
     const int N = a.size();
 
      if (M > N || M < 0) {

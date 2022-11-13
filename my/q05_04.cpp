@@ -2,8 +2,7 @@
 #include "template.hpp"
 using std::vector;
 
-// 十分大きな値
-const int INF = 1 << 29;
+constexpr int INF = 1 << 29;  // 十分大きな値
 
 bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) {
      if (K < 0) {
