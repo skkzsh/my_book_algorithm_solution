@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int sum_bit(std::string_view s, const unsigned int bit) {
+int sum_bit(std::string_view s, const int bit) {
     const int l = s.size();
     int sum = 0;
     int tmp = 0;
