@@ -12,7 +12,7 @@ int count753recursive(const int k) {
         return 0;
     }
 
-    std::unordered_map<int, int> count753map = {
+    std::unordered_map<int, int> count753map {
         {3, 0},
         {5, 0},
         {7, 0},
@@ -45,7 +45,7 @@ int count753permutation(const int k) {
         throw std::invalid_argument("argument must not be negative");
     }
 
-    std::vector<char> v = {'3', '5', '7'};
+    std::vector<char> v {'3', '5', '7'};
     // int digit = std::to_string(k).length(); // TODO: 4ケタ以上の場合に対応する
 
     std::vector<int> candidates;

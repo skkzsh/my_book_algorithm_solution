@@ -55,19 +55,19 @@ bool partial_sum_exists_push(const int W, const int K, const vector<int> a) {
 }
 
 TEST(TestCase, TestFalse) {
-    const vector<int> a = {1, 2, 4, 5, 11};
+    const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_EQ(partial_sum_exists_pull(10, 2, a), false);
     EXPECT_EQ(partial_sum_exists_push(10, 2, a), false);
 }
 
 TEST(TestCase, TestTrue) {
-    const vector<int> a = {1, 2, 4, 5, 11};
+    const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_EQ(partial_sum_exists_pull(10, 3, a), true);
     EXPECT_EQ(partial_sum_exists_push(10, 3, a), true);
 }
 
 TEST(TestCase, K_Negative) {
-    const vector<int> a = {1, 2, 4, 5, 11};
+    const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_THROW(partial_sum_exists_pull(10, -1, a), std::invalid_argument);
     EXPECT_THROW(partial_sum_exists_push(10, -1, a), std::invalid_argument);
 }

@@ -38,25 +38,25 @@ double aqua(const int M, const vector<int> a) {
 }
 
 TEST(TestCase, Sample1) {
-    const vector<int> a = {9, 1, 2, 3, 9};
+    const vector<int> a {9, 1, 2, 3, 9};
     EXPECT_EQ(aqua(3, a), 20);
 }
 
 TEST(TestCase, Sample2) {
-    const vector<int> a = {14, 4, 9, 7};
+    const vector<int> a {14, 4, 9, 7};
     EXPECT_EQ(aqua(1, a), 8.5);
 }
 
 TEST(TestCase, Sample3) {
-    const vector<int> a = {11, 18, 9, 20, 4, 18, 12, 14};
+    const vector<int> a {11, 18, 9, 20, 4, 18, 12, 14};
     EXPECT_NEAR(aqua(3, a), 44.66666666666667, 1e-14);
 }
 
 TEST(TestCase, M_Negative) {
-    const vector<int> a = {9, 1, 2, 3, 9};
+    const vector<int> a {9, 1, 2, 3, 9};
     EXPECT_THROW(aqua(-1, a), std::invalid_argument);
 }
 TEST(TestCase, M_GreaterThan_N) {
-    const vector<int> a = {9, 1, 2, 3, 9};
+    const vector<int> a {9, 1, 2, 3, 9};
     EXPECT_THROW(aqua(6, a), std::invalid_argument);
 }
