@@ -2,6 +2,7 @@
 #include "template.hpp"
 #include <numeric>
 #include <algorithm>
+// #include <ranges>
 using std::vector;
 
 double aqua(const int M, const vector<int> a) {
@@ -20,10 +21,13 @@ double aqua(const int M, const vector<int> a) {
     // 初期条件
     dp[0][0] = 0;
 
+    // もらう方式
     for (int n = 1; n <= N; ++n) {
         for (int m = 1; m <= std::min(n, M); ++m) {
             vector<double> tmp(n - m + 1);
-            // TODO: map関数で生成
+            // std::ranges::transform(std::views::iota(0, n - m + 1), tmp.begin(), [=](const int i) {
+            //     return dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
+            // });
             for (int i = 0; i <= n - m; ++i) {
                 tmp[i] = dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
             }
