@@ -2,7 +2,7 @@
 #include "template.hpp"
 using std::vector;
 
-constexpr unsigned int INF = 1 << 29; // 十分大きな値
+constexpr unsigned int INF = std::numeric_limits<unsigned int>::max();
 
 bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsigned int> m) {
     const int N = a.size();
