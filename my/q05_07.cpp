@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <algorithm>
 #include "template.hpp"
 using std::string;
 
@@ -12,7 +13,7 @@ string longest_common_substring(const string S, const string T) {
             if (S[i - 1] == T[j - 1]) { // i字目 = j文字目を選ぶ場合
                 dp[i][j] = dp[i - 1][j - 1] + S[i - 1];
             } else { // i字目を選ばない場合, j字目を選ばない場合
-                dp[i][j] = std::max({dp[i - 1][j], dp[i][j - 1]}, [](auto a, auto b) { return a.length() < b.length(); });
+                 dp[i][j] = std::ranges::max({dp[i - 1][j], dp[i][j - 1]}, {}, std::ranges::size);
             }
          }
      }
