@@ -12,8 +12,7 @@ string longest_common_substring(const string S, const string T) {
             if (S[i - 1] == T[j - 1]) { // i字目 = j文字目を選ぶ場合
                 dp[i][j] = dp[i - 1][j - 1] + S[i - 1];
             } else { // i字目を選ばない場合, j字目を選ばない場合
-                // TODO: max()を使えないか
-                dp[i][j] = dp[i - 1][j].length() > dp[i][j - 1].length() ? dp[i - 1][j] : dp[i][j - 1];
+                dp[i][j] = std::max({dp[i - 1][j], dp[i][j - 1]}, [](auto a, auto b) { return a.length() < b.length(); });
             }
          }
      }
@@ -26,7 +25,7 @@ string longest_common_substring(const string S, const string T) {
 
 
 TEST(TestCase, Ex1) {
-    EXPECT_EQ(longest_common_substring("axyb", "abyxb"), "ayb"); // axbでも可
+    EXPECT_EQ(longest_common_substring("axyb", "abyxb"), "axb"); // aybでも可
 }
 
 TEST(TestCase, Ex2) {
