@@ -52,7 +52,7 @@ int count753permutation(const int k) {
     do {
         std::string str(v.begin(), v.end());
         candidates.push_back(std::stoi(str));
-    } while (std::next_permutation(v.begin(), v.end())); // TODO: TODO: C++20 (ranges)
+    } while (std::ranges::next_permutation(v).found);
 
     return std::ranges::count_if(candidates, [k](int c) { return c <= k; });
 }
