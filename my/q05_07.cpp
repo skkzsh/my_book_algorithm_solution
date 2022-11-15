@@ -1,10 +1,11 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include "template.hpp"
-using std::string;
+using std::string_view;
 
-string longest_common_substring(const string S, const string T) {
+string_view longest_common_substring(string_view S, string_view T) {
     using std::vector;
+    using std::string;
     vector<vector<string>> dp(S.length() + 1, vector<string>(T.length() + 1, ""));
 
     // もらう方式

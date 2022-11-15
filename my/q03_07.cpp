@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-int sum_bit(const std::string s, const unsigned int bit) {
+int sum_bit(std::string_view s, const unsigned int bit) {
     const int l = s.size();
     int sum = 0;
     int tmp = 0;
@@ -26,7 +26,7 @@ int sum_bit(const std::string s, const unsigned int bit) {
     return sum;
 }
 
-int sum_combi(const std::string s) {
+int sum_combi(std::string_view s) {
     const int l = s.size();
     int sum_all = 0;
 
