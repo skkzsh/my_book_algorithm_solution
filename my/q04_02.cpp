@@ -38,7 +38,7 @@ vector<long long> tribo_wrapper(const int N) {
     // optionalはがし
     vector<long long> result(N + 1);
     std::ranges::transform(memo, result.begin(),
-        [](optional<long long> x) { return x.value(); }
+        [](const optional<auto> x) { return x.value(); } // TODO: ラムダ式やめれないか
     );
 
     return result;
