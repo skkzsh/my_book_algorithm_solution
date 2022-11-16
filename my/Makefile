@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -O2 -std=c++20 # -g -lpthread
-CXXFLAGS += -lgtest_main -lgtest
+CXXFLAGS = -Wall -Wextra -O2 -std=c++20 # -g
+CXXFLAGS += -lgtest_main -lgtest -lpthread
 
 TYPE_HEADER = type.h
 TEMPLATE_HEADER = template.hpp
@@ -8,9 +8,12 @@ TEMPLATE_HEADER = template.hpp
 TARGETS = $(basename $(wildcard q[01][0-9]_[0-9][0-9].cpp))
 USE_TYPE_TARGETS = q04_06
 # USE_TEMPLATE_TARGETS = q05_01 q05_04 q05_06 q05_07
-# C20_TARGETS = q04_05 q05_01 q05_08  # std::ranges
+# C++20未満のターゲット (MacでC++20をcompileしづらいため)
+C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06
 
 all: $(TARGETS)
+
+c20less: $(C20LESS_TARGETS)
 
 $(USE_TYPE_TARGETS): $(USE_TYPE_TARGETS).cpp $(TYPE_HEADER)
 	$(CXX) $(CXXFLAGS) $< -o $@
@@ -22,7 +25,10 @@ q05_%: q05_%.cpp $(TEMPLATE_HEADER)
 testall: $(TARGETS)
 	for t in $(TARGETS); do echo "[$$t]"; ./$$t; done
 
+c20lesstestall: $(C20LESS_TARGETS)
+	for t in $(C20LESS_TARGETS); do echo "[$$t]"; ./$$t; done
+
 clean:
 	$(RM) $(TARGETS)
 
-.PHONY: testall clean
+.PHONY: testall clean c20less c20lesstestall
