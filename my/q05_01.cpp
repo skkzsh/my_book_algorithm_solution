@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "template.hpp"
 #include <algorithm>
 using std::vector;
 
@@ -8,12 +7,14 @@ int happy_max(const int N, const vector<vector<int>> z) {
 
     for(int i = 0; i < N; ++i) {
         for(int j = 0; j < 3; ++j) {
+            vector<int> tmp(3, -1);
             for(int k = 0; k < 3; ++k) {
                 if (j == k) {
                     continue;
                 }
-                chmax(dp[i + 1][j], dp[i][k] + z[i][j]);
+                tmp[k] = dp[i][k] + z[i][j];
             }
+            dp[i + 1][j] = *std::ranges::max_element(tmp);
         }
         // 2日連続で同じ行動してもいい場合
         // dp[i + 1] = dp[i] + std::max({a[i], b[i], c[i]});
