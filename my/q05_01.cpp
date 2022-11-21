@@ -1,26 +1,30 @@
 #include "gtest/gtest.h"
 #include <algorithm>
+#include <ranges>
 using std::vector;
 
 int happy_max(const int N, const vector<vector<int>> z) {
-    vector<vector<int>> dp(N + 1, vector<int>(3, 0));
+    using std::views::iota;
+    using std::ranges::max_element;
 
-    for(int i = 0; i < N; ++i) {
-        for(int j = 0; j < 3; ++j) {
-            vector<int> tmp(3, -1);
-            for(int k = 0; k < 3; ++k) {
-                if (j == k) {
-                    continue;
+    constexpr int M = 3;
+    vector<vector<int>> dp(N + 1, vector<int>(M, 0));
+
+    for (int i : iota(0, N)) {
+        for (int j : iota(0, M)) {
+            vector<int> tmp(M, -1); // TODO: views::(filter|transform)で直接作れないか
+            for (int k : iota(0, M)) {
+                if (k != j) {
+                    tmp[k] = dp[i][k] + z[i][j];
                 }
-                tmp[k] = dp[i][k] + z[i][j];
             }
-            dp[i + 1][j] = *std::ranges::max_element(tmp);
+            dp[i + 1][j] = *max_element(tmp);
         }
         // 2日連続で同じ行動してもいい場合
         // dp[i + 1] = dp[i] + std::max({a[i], b[i], c[i]});
     }
 
-    return *std::ranges::max_element(dp[N]);
+    return *max_element(dp[N]);
 }
 
 
