@@ -17,7 +17,7 @@ bool partial_sum_exists_pull(const int W, const vector<int> a) {
     // もらう方式
     for (int n = 0; n < N; ++n) {
         for (int w = 0; w <= W; ++w) {
-            if(dp[n][w] || (a[n] <= w && dp[n][w - a[n]])) {
+            if (dp[n][w] || (a[n] <= w && dp[n][w - a[n]])) {
                 dp[n + 1][w] = true;
             }
         }
@@ -39,9 +39,9 @@ bool partial_sum_exists_push(const int W, const vector<int> a) {
     // 配る方式
     for (int n = 0; n < N; ++n) {
         for (int w = 0; w <= W; ++w) {
-            if(dp[n][w]) {
+            if (dp[n][w]) {
                 dp[n + 1][w] = true;
-                if(w + a[n] <= W) {
+                if (w + a[n] <= W) {
                     dp[n + 1][w + a[n]] = true;
                 }
             }

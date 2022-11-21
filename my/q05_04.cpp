@@ -45,7 +45,7 @@ bool partial_sum_exists_push(const int W, const int K, const vector<int> a) {
     for (int n = 0; n < N; ++n) {
         for (int w = 0; w <= W; ++w) {
             chmin(dp[n + 1][w], dp[n][w]);
-            if(w + a[n] <= W) {
+            if (w + a[n] <= W) {
                 chmin(dp[n + 1][w + a[n]], dp[n][w] + 1);
             }
         }

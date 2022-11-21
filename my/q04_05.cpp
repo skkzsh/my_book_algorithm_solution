@@ -27,7 +27,6 @@ int count753recursive(const int k) {
                 break;
             default:
                 return count753recursive(k - 1);
-                break;
         }
     }
 
