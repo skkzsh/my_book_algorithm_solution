@@ -3,10 +3,11 @@
 #include <ranges>
 using std::vector;
 
-int happy_max(const int N, const vector<vector<int>> z) {
+int happy_max(const vector<vector<int>> z) {
     using std::views::iota;
     using std::ranges::max_element;
 
+    const int N = z.size();
     constexpr int M = 3;
     vector<vector<int>> dp(N + 1, vector<int>(M, 0));
 
@@ -29,17 +30,11 @@ int happy_max(const int N, const vector<vector<int>> z) {
 
 
 TEST(TestCase, Test0) {
-    const vector<vector<int>> z {};
-
-    EXPECT_EQ(happy_max(0, z), 0);
+    EXPECT_EQ(happy_max({}), 0);
 }
 
 TEST(TestCase, Test1) {
-    const vector<vector<int>> z {
-        {1, 3, 2},
-    };
-
-    EXPECT_EQ(happy_max(1, z), 3);
+    EXPECT_EQ(happy_max({{1, 3, 2}}), 3);
 }
 
 TEST(TestCase, Test2) {
@@ -48,7 +43,7 @@ TEST(TestCase, Test2) {
         {110, 11, 2},
     };
 
-    EXPECT_EQ(happy_max(2, z), 120);
+    EXPECT_EQ(happy_max(z), 120);
 }
 
 TEST(TestCase, Example1) {
@@ -58,7 +53,7 @@ TEST(TestCase, Example1) {
         {30, 60, 90},
     };
 
-    EXPECT_EQ(happy_max(3, z), 210);
+    EXPECT_EQ(happy_max(z), 210);
 }
 
 TEST(TestCase, Example3) {
@@ -72,6 +67,6 @@ TEST(TestCase, Example3) {
         {7, 5, 1},
     };
 
-    EXPECT_EQ(happy_max(7, z), 46);
+    EXPECT_EQ(happy_max(z), 46);
 }
 
