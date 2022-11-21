@@ -36,7 +36,7 @@ vector<long long> tribo_wrapper(const int N) {
     tribo(N, memo);
 
     // optionalはがし
-    vector<long long> result(N + 1);
+    vector<long long> result(N + 1); // TODO: views::transformで直接作れないか
     std::ranges::transform(memo, result.begin(),
         [](const optional<auto> x) { return x.value(); } // TODO: ラムダ式やめれないか
     );
@@ -45,7 +45,7 @@ vector<long long> tribo_wrapper(const int N) {
 }
 
 TEST(TestCase, Test10) {
-    vector<long long> result = tribo_wrapper(10);
+    const vector<long long> result = tribo_wrapper(10);
 
     EXPECT_EQ(result[10], 81);
     EXPECT_EQ(result[9], 44);
