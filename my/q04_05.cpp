@@ -4,6 +4,8 @@
 
 // 3, 5, 7のカウントから算出する
 int count753recursive(const int k) {
+    using std::ranges::all_of;
+
     if (k < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
@@ -31,7 +33,7 @@ int count753recursive(const int k) {
     }
 
     // if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
-    if (std::ranges::all_of(count753map,
+    if (all_of(count753map,
         [](const auto& x) { return x.second > 0; })) {
         return count753recursive(k - 1) + 1;
     }
@@ -40,20 +42,23 @@ int count753recursive(const int k) {
 
 // 3, 5, 7の順列から算出する
 int count753permutation(const int k) {
+    using std::vector;
+    using namespace std::ranges;
+
     if (k < 0) {
         throw std::invalid_argument("argument must not be negative");
     }
 
-    std::vector<char> v {'3', '5', '7'};
+    vector<char> v {'3', '5', '7'};
     // int digit = std::to_string(k).length(); // TODO: 4ケタ以上の場合に対応する
 
-    std::vector<int> candidates;
+    vector<int> candidates;
     do {
         std::string str(v.begin(), v.end());
         candidates.push_back(std::stoi(str));
-    } while (std::ranges::next_permutation(v).found);
+    } while (next_permutation(v).found);
 
-    return std::ranges::count_if(candidates, [k](int c) { return c <= k; });
+    return count_if(candidates, [k](int c) { return c <= k; });
 }
 
 

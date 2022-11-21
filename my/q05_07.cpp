@@ -6,6 +6,7 @@ using std::string_view;
 string_view longest_common_substring(string_view S, string_view T) {
     using std::vector;
     using std::string;
+    using namespace std::ranges;
     vector<vector<string>> dp(S.length() + 1, vector<string>(T.length() + 1, ""));
 
     // もらう方式
@@ -14,7 +15,7 @@ string_view longest_common_substring(string_view S, string_view T) {
             if (S[i - 1] == T[j - 1]) { // i字目 = j文字目を選ぶ場合
                 dp[i][j] = dp[i - 1][j - 1] + S[i - 1];
             } else { // i字目を選ばない場合, j字目を選ばない場合
-                 dp[i][j] = std::ranges::max({dp[i - 1][j], dp[i][j - 1]}, {}, std::ranges::size);
+                 dp[i][j] = max({dp[i - 1][j], dp[i][j - 1]}, {}, size);
             }
          }
      }

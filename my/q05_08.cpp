@@ -8,6 +8,7 @@ using std::vector;
 double aqua(const int M, const vector<int> a) {
     using std::accumulate;
     using std::next;
+    using namespace std::ranges;
     constexpr int INF = 1 << 29; // 十分大きな値
 
     const int N = a.size();
@@ -23,7 +24,7 @@ double aqua(const int M, const vector<int> a) {
 
     // もらう方式
     for (int n = 1; n <= N; ++n) {
-        for (int m = 1; m <= std::min(n, M); ++m) {
+        for (int m = 1; m <= min(n, M); ++m) {
             // TODO: 一時変数なくせないか
             // auto tmp = std::views::iota(0, n - m + 1) | std::views::transform([=](const int i) {
             //      return dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
@@ -32,7 +33,7 @@ double aqua(const int M, const vector<int> a) {
             for (int i = 0; i <= n - m; ++i) {
                 tmp[i] = dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
             }
-            dp[n][m] = *std::ranges::max_element(tmp);
+            dp[n][m] = *max_element(tmp);
         }
     }
 

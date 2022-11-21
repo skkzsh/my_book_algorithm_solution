@@ -30,6 +30,8 @@ long long tribo(const int N, vector<optional<long long>> &memo) {
 
 
 vector<long long> tribo_wrapper(const int N) {
+    using std::ranges::transform;
+
     // tribo(N) の解をメモ化する配列
     vector<optional<long long>> memo(N + 1);
 
@@ -37,7 +39,7 @@ vector<long long> tribo_wrapper(const int N) {
 
     // optionalはがし
     vector<long long> result(N + 1); // TODO: views::transformで直接作れないか
-    std::ranges::transform(memo, result.begin(),
+    transform(memo, result.begin(),
         [](const optional<auto> x) { return x.value(); } // TODO: ラムダ式やめれないか
     );
 
