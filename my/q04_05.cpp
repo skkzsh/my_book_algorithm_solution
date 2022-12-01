@@ -21,11 +21,11 @@ int count753recursive(const int k) {
     };
 
     for (int tail = k; tail > 0; tail /= 10) {
-        switch(tail % 10) {
+        switch (const int n = tail % 10) {
             case 3:
             case 5:
             case 7:
-                count753map[tail % 10]++;
+                count753map[n]++;
                 break;
             default:
                 return count753recursive(k - 1);
@@ -34,7 +34,7 @@ int count753recursive(const int k) {
 
     // if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
     if (all_of(count753map,
-        [](const auto& x) { return x.second > 0; })) {
+        [](const auto& p) { return p.second > 0; })) {
         return count753recursive(k - 1) + 1;
     }
     return count753recursive(k - 1);
