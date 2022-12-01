@@ -4,10 +4,6 @@ using std::vector;
 using std::optional;
 
 long long tribo(const int N, vector<optional<long long>> &memo) {
-    if (N < 0) {
-        throw std::invalid_argument("argument must not be negative");
-    }
-
     // すでに計算済みならば解をリターン
     if (memo[N].has_value()) {
         return memo[N].value();
@@ -30,6 +26,10 @@ long long tribo(const int N, vector<optional<long long>> &memo) {
 
 
 vector<long long> tribo_wrapper(const int N) {
+    if (N < 0) {
+        throw std::invalid_argument("argument must not be negative");
+    }
+
     using std::ranges::transform;
 
     // tribo(N) の解をメモ化する配列
