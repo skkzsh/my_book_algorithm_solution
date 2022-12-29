@@ -5,6 +5,10 @@ using std::vector;
 
 // O(N ^ 3)
 int festival_simple(const vector<vector<int>> z) {
+    if (z.size() != 3) {
+        throw std::invalid_argument("1d size must be 3");
+    }
+
     int count = 0;
 
     for (const int a : z[0]) {
@@ -25,6 +29,10 @@ int festival_simple(const vector<vector<int>> z) {
 
 // O(N log N)
 int festival_binary(vector<vector<int>> z) {
+    if (z.size() != 3) {
+        throw std::invalid_argument("1d size must be 3");
+    }
+
     using namespace std::ranges;
 
     for (const int i : std::views::iota(0, 3)) {
@@ -75,4 +83,14 @@ TEST(TestCase, Ex3) {
 
     EXPECT_EQ(festival_simple(z), 87);
     EXPECT_EQ(festival_binary(z), 87);
+}
+
+TEST(TestCase, IllegalArgumentTest) {
+    const vector<vector<int>> z {
+        {1, 1, 1},
+        {2, 2, 2},
+    };
+
+    EXPECT_THROW(festival_simple(z), std::invalid_argument);
+    EXPECT_THROW(festival_binary(z), std::invalid_argument);
 }
