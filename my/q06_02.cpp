@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include <algorithm>
 using std::vector;
 
 int festival(const vector<vector<int>> z) {
@@ -12,6 +13,7 @@ int festival(const vector<vector<int>> z) {
                         count++;
                     }
                 }
+                // count += std::ranges::count_if(z[2], [b](int c){ return b < c; });
             }
         }
     }
