@@ -5,18 +5,20 @@ using std::vector;
 
 vector<int> ranking(const vector<int> a) {
     using namespace std::ranges;
-    const int N = a.size();
 
     // aをsortしたvector
     vector<int> sorted = a;
     sort(sorted);
 
-    vector<int> result(N);
+    vector<int> result(a.size());
 
-    for (const int i : std::views::iota(0, N)) {
-        result[i] = find(sorted, a[i]) - sorted.begin();
-//        result[i] = find(a, sorted[i]) - a.begin();
-    }
+    transform(a, result.begin(),
+        [sorted](const int i) {
+            return find(sorted, i) - sorted.begin();
+            // find(sorted, a[i]) - sorted.begin();
+            // find(a, sorted[i]) - a.begin();
+         }
+    );
 
     return result;
 }
