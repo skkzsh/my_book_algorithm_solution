@@ -13,7 +13,7 @@ vector<int> ranking(const vector<int> a) {
 
     vector<int> result(N);
 
-    for (int i : std::views::iota(0, N)) {
+    for (const int i : std::views::iota(0, N)) {
         result[i] = find(sorted, a[i]) - sorted.begin();
 //        result[i] = find(a, sorted[i]) - a.begin();
     }

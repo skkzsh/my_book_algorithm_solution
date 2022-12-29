@@ -11,10 +11,10 @@ int happy_max(const vector<vector<int>> z) {
     constexpr int M = 3;
     vector<vector<int>> dp(N + 1, vector<int>(M, 0));
 
-    for (int i : iota(0, N)) {
-        for (int j : iota(0, M)) {
+    for (const int i : iota(0, N)) {
+        for (const int j : iota(0, M)) {
             vector<int> tmp(M, -1); // TODO: views::(filter|transform)で直接作れないか
-            for (int k : iota(0, M)) {
+            for (const int k : iota(0, M)) {
                 if (k != j) {
                     tmp[k] = dp[i][k] + z[i][j];
                 }

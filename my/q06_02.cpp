@@ -7,8 +7,8 @@ using std::vector;
 int festival_simple(const vector<vector<int>> z) {
     int count = 0;
 
-    for (int a : z[0]) {
-        for (int b : z[1]) {
+    for (const int a : z[0]) {
+        for (const int b : z[1]) {
             if (a < b) {
                 for (int c : z[2]) {
                     if (b < c) {
@@ -27,7 +27,7 @@ int festival_simple(const vector<vector<int>> z) {
 int festival_binary(vector<vector<int>> z) {
     using namespace std::ranges;
 
-    for (int i : std::views::iota(0, 3)) {
+    for (const int i : std::views::iota(0, 3)) {
         sort(z[i]);
     }
 

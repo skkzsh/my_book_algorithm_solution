@@ -6,7 +6,7 @@ int sum_bit(std::string_view s, const int bit) {
     int tmp = 0;
 
     for (int i = 0; i < l - 1; ++i) {
-        int num = s[i] - '0';
+        const int num = s[i] - '0';
         if (num < 0 || num > 9) {
             throw std::invalid_argument("argument must be number");
         }

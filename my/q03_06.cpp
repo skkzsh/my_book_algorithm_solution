@@ -4,7 +4,7 @@ int count_simple(const int k, const int n) {
     int count = 0;
     for (int x = 0; x <= k; x++) {
         for (int y = 0; y <= k; y++) {
-            if (int z = n - x - y; z >= 0 && z <= k) {
+            if (const int z = n - x - y; z >= 0 && z <= k) {
                 count++;
             }
         }
@@ -27,7 +27,7 @@ int count_better(const int k, const int n) {
     int count = 0;
     for (int x = 0; x <= boundary; x++) {
         for (int y = 0; y <= boundary; y++) {
-            if (int z = n - x - y; z >= 0 && z <= k) {
+            if (const int z = n - x - y; z >= 0 && z <= k) {
                 count++;
             }
         }
