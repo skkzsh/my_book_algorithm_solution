@@ -85,6 +85,28 @@ TEST(TestCase, Ex3) {
     EXPECT_EQ(festival_binary(z), 87);
 }
 
+TEST(TestCase, Ex0ab) {
+    const vector<vector<int>> z {
+        {1, 1},
+        {1, 1},
+        {2, 2},
+    };
+
+    EXPECT_EQ(festival_simple(z), 0);
+    EXPECT_EQ(festival_binary(z), 0);
+}
+
+TEST(TestCase, Ex0bc) {
+    const vector<vector<int>> z {
+        {1, 1},
+        {2, 2},
+        {2, 2},
+    };
+
+    EXPECT_EQ(festival_simple(z), 0);
+    EXPECT_EQ(festival_binary(z), 0);
+}
+
 TEST(TestCase, IllegalArgumentTest) {
     const vector<vector<int>> z {
         {1, 1, 1},
