@@ -12,7 +12,7 @@ int darts_simple(const vector<int> a, const int M) {
             for (const int r : a) {
                 for (const int s : a) {
                     const int tmp = p + q + r + s;
-                    if (tmp < M) {
+                    if (tmp <= M) {
                         chmax(max, tmp);
                     }
                 }
@@ -27,7 +27,7 @@ int darts_simple(const vector<int> a, const int M) {
 int darts_binary(const vector<int> a, const int M) {
     using namespace std::ranges;
 
-    if (4 * *min_element(a) >= M) {
+    if (4 * *min_element(a) > M) {
         throw std::invalid_argument("Solution does not exist");
     }
 
@@ -39,9 +39,15 @@ int darts_binary(const vector<int> a, const int M) {
     }
     sort(aa);
 
+    // 問題の言い換え: aaから2つの値aa[i], aa[j]を選んで aa[i] + aa[j] <= M となる最大値を求める
+    // 小問題: aa[j]を固定して、aa[i] <= M - aa[j] となる最大のiを求める
+    // <=> aa[j]を固定して a[i] > M - a[j] となる最小のiを求める
+    // aa[i] + aa[j] > M となる最小のi
+    // <=> aa[i - 1] + aa[j] <= M < aa[i] + aa[j]
+
     vector<int> tmp(aa.size());
     for (const int k : aa) {
-        tmp.push_back(k + *std::prev(lower_bound(aa, M - k)));
+        tmp.push_back(k + *std::prev(upper_bound(aa, M - k)));
     }
 
     return *max_element(tmp);
@@ -52,7 +58,16 @@ TEST(TestCase, Ex1) {
     EXPECT_EQ(darts_binary({3, 14, 15, 9}, 50), 48);
 }
 
-TEST(TestCase, InvalidArgumentTest) {
-    EXPECT_EQ(darts_simple({1}, 4), -1);
-    EXPECT_THROW(darts_binary({1}, 4), std::invalid_argument);
+TEST(TestCase, Boundary) {
+    EXPECT_EQ(darts_simple({1}, 4), 4);
+    EXPECT_EQ(darts_binary({1}, 4), 4);
+    // 4を越えない範囲の最大値 <=> 4以下の最大値
+    // <=> 4を越えたら例外 (4は例外でない) <=> 5以上は例外
+}
+
+TEST(TestCase, greater_than_M) {
+    EXPECT_EQ(darts_simple({1}, 3), -1);
+    EXPECT_THROW(darts_binary({1}, 3), std::invalid_argument);
+    // 3を越えない範囲の最大値 <=> 3以下の最大値
+    // <=> 3を越えたら例外 (3は例外でない) <=> 4以上は例外
 }
