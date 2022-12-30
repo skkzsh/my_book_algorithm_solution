@@ -5,10 +5,6 @@ using std::vector;
 
 // O(N ^ 3)
 int festival_simple(const vector<vector<int>> z) {
-    if (z.size() != 3) {
-        throw std::invalid_argument("1d size must be 3");
-    }
-
     int count = 0;
 
     for (const int a : z[0]) {
@@ -107,12 +103,11 @@ TEST(TestCase, Ex0bc) {
     EXPECT_EQ(festival_binary(z), 0);
 }
 
-TEST(TestCase, IllegalArgumentTest) {
+TEST(TestCase, 1D_size_less_than_3) {
     const vector<vector<int>> z {
         {1, 1, 1},
         {2, 2, 2},
     };
 
-    EXPECT_THROW(festival_simple(z), std::invalid_argument);
     EXPECT_THROW(festival_binary(z), std::invalid_argument);
 }

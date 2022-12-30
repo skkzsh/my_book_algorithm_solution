@@ -27,6 +27,10 @@ int darts_simple(const vector<int> a, const int M) {
 int darts_binary(const vector<int> a, const int M) {
     using namespace std::ranges;
 
+    if (4 * *min_element(a) >= M) {
+        throw std::invalid_argument("Solution does not exist");
+    }
+
     vector<int> aa(a.size() * a.size());
     for (const int i : a) {
         for (const int j : a) {
@@ -46,4 +50,9 @@ int darts_binary(const vector<int> a, const int M) {
 TEST(TestCase, Ex1) {
     EXPECT_EQ(darts_simple({3, 14, 15, 9}, 50), 48);
     EXPECT_EQ(darts_binary({3, 14, 15, 9}, 50), 48);
+}
+
+TEST(TestCase, InvalidArgumentTest) {
+    EXPECT_EQ(darts_simple({1}, 4), -1);
+    EXPECT_THROW(darts_binary({1}, 4), std::invalid_argument);
 }

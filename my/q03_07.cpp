@@ -57,6 +57,6 @@ TEST(TestCase, Test1) {
     EXPECT_EQ(sum_combi("125"), 176);
 }
 
-TEST(TestCase, IllegalArgumentTest) {
+TEST(TestCase, NotNumber) {
     EXPECT_THROW(sum_combi("1?5"), std::invalid_argument);
 }
