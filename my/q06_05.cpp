@@ -15,16 +15,32 @@ int product_th_simple(const vector<int> a, const vector<int> b, const int K) {
     return p[K - 1];
 }
 
+/*
+元の問題: a[i] * b[j] の中でK番目に小さい値をを求める
+<=> 判定問題: a[i] * b[j] のうちx以下がKコ (以上) あるかどうか
+*/
+
+// a[i] * b[j] <= x の数を返す関数
+// a, bはソート済が前提
+// O(N * log N)
+int countx(const vector<int> a, const vector<int> b, const int x) {
+    /*
+    a[i] を固定して b[j] <= x / a[i] となる最大のjを求める
+    <=> a[i] を固定して b[j] > x / a[i] となる最小のjを求める
+    <=> b[j - 1] <= x / a[i] < b[j]
+
+    j - 1 までで (j - 1) - 0 + 1 = jコ
+    */
+
+    int count = 0;
+    for (const int m : a) {
+        count += upper_bound(b, x / m) - b.begin();
+    }
+    return count;
+}
+
 // O(N * log N * log C)
 int product_th_binary(vector<int> a, vector<int> b, const int K) {
-    // 元の問題: a[i] * b[j] の中でK番目に小さい値をを求める
-    // <=> 判定問題: a[i] * b[j] のうちx以下がKコ (以上) あるかどうか
-    // a[i] * b[j] <= x
-    // a[i] を固定して b[j] <= x / a[i] となる最大のjを求める
-    // <=> a[i] を固定して b[j] > x / a[i] となる最小のjを求める
-    // <=> b[j - 1] <= x / a[i] < b[j]
-    // j - 1 までで (j - 1) + 1 = jコ
-
     sort(a);
     sort(b);
 
@@ -38,12 +54,7 @@ int product_th_binary(vector<int> a, vector<int> b, const int K) {
     while (right - left > 1) {
         const int x = (left + right) / 2;
 
-        int count = 0;
-        for (const int k : a) {
-            count += upper_bound(b, x / k) - b.begin();
-        }
-
-        if (count >= K) {
+        if (countx(a, b, x) >= K) {
             right = x;
         } else {
             left = x;

@@ -1,17 +1,38 @@
 #include "gtest/gtest.h"
 #include <ranges>
+using std::vector;
 
-int cows(const std::vector<int> a, const int M) {
+/*
+元の問題: 「選んだMコの小屋のうち2つの小屋の距離の最小値」の最大値を求める
+<=> 判定問題: 「選んだMコの小屋のうち2つの小屋の距離の最小値」をx以上にすることができるか
+<=> 判定問題: 選んだMコの小屋のすべての距離をx以上にすることができるか
+<=> 判定問題: すべての小屋の距離をx以上にして, 小屋をMコ選べるか
+*/
+
+// すべての小屋の距離をx以上にして, 選べる小屋の最大個数
+int countx(const vector<int> a, const int x) {
+    const int N = a.size();
+
+    int prev = 0; // 前回選んだ小屋のindex
+    int count = 1; // 小屋を選んだ個数
+
+    // 貪欲法
+    for (const int i : std::views::iota(0, N)) {
+        if (a[i] - a[prev] >= x) {
+            count++;
+            prev = i;
+        };
+    }
+
+    return count;
+}
+
+int cows(const vector<int> a, const int M) {
     const int N = a.size();
 
     if (M < 2 || M > N) {
         throw std::invalid_argument("2 <= M <= N required");
     }
-
-    // 元の問題: 「選んだMコの小屋のうち2つの小屋の距離の最小値」の最大値を求める
-    // <=> 判定問題: 「選んだMコの小屋のうち2つの小屋の距離の最小値」をx以上にすることができるか
-    // <=> 判定問題: 選んだMコの小屋のすべての距離をx以上にすることができるか
-    // <=> 判定問題: すべての小屋の距離をx以上にして, 小屋をMコを選べるか
 
     int left = 0; // 常にtrue
     int right = a[N - 1] + 1; // 常にfalse
@@ -19,18 +40,7 @@ int cows(const std::vector<int> a, const int M) {
     while (right - left > 1) {
         const int x = (left + right) / 2;
 
-        int prev = 0; // 前回選んだ小屋のindex
-        int count = 1; // 小屋を選んだ個数
-
-        // 貪欲法
-        for (const int i : std::views::iota(0, N)) {
-            if (a[i] - a[prev] >= x) {
-                count++;
-                prev = i;
-            };
-        }
-
-        if (count >= M) { // Mコ以上選べた => もっと距離を離せる => xはもっと大きい (true領域を更新)
+        if (countx(a, x) >= M) { // Mコ以上選べた => もっと距離を離せる => xはもっと大きい (true領域を更新)
             left = x;
         } else {  // Mコ選べなかった => 距離を離せていない => xはもっと小さい (false領域を更新)
             right = x;
