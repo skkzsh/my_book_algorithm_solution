@@ -4,17 +4,19 @@
 using std::tuple;
 using std::pair;
 
+using Constant = tuple<int, int, int>;
+
 constexpr double EPS = 1e-6; // 精度
 
-double func(const double t, const tuple<int, int, int> constants) {
+double func(const double t, const Constant constant) {
     using std::sin;
     using std::numbers::pi;
 
-    const auto [A, B, C] = constants;
+    const auto [A, B, C] = constant;
     return A * t + B * sin(C * t * pi) - 100;
 }
 
-double bisection(const tuple<int, int, int> constants, const pair<double, double> interval) {
+double bisection(const Constant constant, const pair<double, double> interval) {
     auto [left, right] = interval;
 
     if (left >= right) {
@@ -22,17 +24,17 @@ double bisection(const tuple<int, int, int> constants, const pair<double, double
     }
 
     // debug
-    // std::cout << func(left, constants) << ' ' << func(right, constants) << std::endl;
+    // std::cout << func(left, constant) << ' ' << func(right, constant) << std::endl;
 
     // func(left) < 0 かつ func(right) > 0 が必要条件
-    if (func(left, constants) >= 0 || func(right, constants) <= 0) {
+    if (func(left, constant) >= 0 || func(right, constant) <= 0) {
         throw std::invalid_argument("func(left) < 0 and func(right) > 0 required");
     }
 
     while (right - left > EPS) {
         const double t = (left + right) / 2;
 
-        if (func(t, constants) >= 0) {
+        if (func(t, constant) >= 0) {
             right = t;
         } else {
             left = t;
