@@ -9,8 +9,8 @@ using std::get;
 using Trio = tuple<vector<int>, vector<int>, vector<int>>;
 
 // O(N ^ 3)
-int festival_simple(const Trio z) {
-    int count = 0;
+unsigned int festival_simple(const Trio z) {
+    unsigned int count = 0;
 
     for (const int a : get<0>(z)) {
         for (const int b : get<1>(z)) {
@@ -29,7 +29,7 @@ int festival_simple(const Trio z) {
 }
 
 // O(N log N)
-int festival_binary(Trio z) {
+unsigned int festival_binary(Trio z) {
     using namespace std::ranges;
 
 //    for (const int i : std::views::iota(0, 3)) {
@@ -40,7 +40,7 @@ int festival_binary(Trio z) {
     sort(get<1>(z));
     sort(get<2>(z));
 
-    int count = 0;
+    unsigned int count = 0;
 
     for (const int b : get<1>(z)) {
         count += (lower_bound(get<0>(z), b) - get<0>(z).begin()) // a[i] >= b となる最小のi <=> a[i - 1] < b <= a[i] => 数は (i - 1) - 0 + 1 = iコ
