@@ -4,6 +4,8 @@ using std::vector;
 
 constexpr unsigned int INF = std::numeric_limits<unsigned int>::max();
 
+// a, mをpairにするのもいい
+
 bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsigned int> m) {
     const int N = a.size();
     vector<vector<unsigned int>> dp(N + 1, vector<unsigned int>(W + 1, INF));
