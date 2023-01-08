@@ -5,11 +5,11 @@ CXXFLAGS += -lgtest_main -lgtest -lpthread
 TYPE_HEADER = type.h
 TEMPLATE_HEADER = template.hpp
 
-TARGETS = $(basename $(wildcard q[01][0-9]_[0-9][0-9].cpp))
+TARGETS = $(basename $(wildcard *[01][0-9]_[0-9][0-9].cpp))
 USE_TYPE_TARGETS = q04_06
 # USE_TEMPLATE_TARGETS = q05_01 q05_04 q05_06 q05_07
 # C++20未満のターゲット (MacでC++20をcompileしづらいため)
-C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06
+C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06 code07_03
 
 all: $(TARGETS)
 
