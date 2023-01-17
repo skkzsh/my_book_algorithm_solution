@@ -4,11 +4,11 @@
 using std::tuple;
 using std::pair;
 
-using Constant = tuple<int, int, int>;
+template<class T> using Constant = tuple<T, T, T>;
 
 constexpr double EPS = 1e-6; // 精度
 
-double func(const double t, const Constant constant) {
+double func(const double t, const Constant<int> constant) {
     using std::sin;
     using std::numbers::pi;
 
@@ -16,7 +16,7 @@ double func(const double t, const Constant constant) {
     return A * t + B * sin(C * t * pi) - 100;
 }
 
-double bisection(const Constant constant, const pair<double, double> interval) {
+double bisection(const Constant<int> constant, const pair<double, double> interval) {
     auto [left, right] = interval;
 
     if (left >= right) {

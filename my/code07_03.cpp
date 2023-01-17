@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
 using std::vector;
 using std::pair;
-using pairs = vector<pair<int, int>>;
+template<class T> using pairs = vector<pair<T, T>>;
 
-int min_push(pairs p) {
+int min_push(pairs<int> p) {
     int sum = 0;
 
     for (int i = p.size() - 1; i >= 0; --i) {
@@ -26,7 +26,7 @@ int min_push(pairs p) {
 
 
 TEST(TestCase, Ex1) {
-    const pairs p {
+    const pairs<int> p {
         {3, 5},
         {2, 7},
         {9, 4},
@@ -36,7 +36,7 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const pairs p {
+    const pairs<int> p {
         {3, 1},
         {4, 1},
         {5, 9},

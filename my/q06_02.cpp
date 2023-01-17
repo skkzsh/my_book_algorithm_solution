@@ -6,10 +6,10 @@ using std::vector;
 using std::tuple;
 using std::get;
 
-using Trio = tuple<vector<int>, vector<int>, vector<int>>;
+template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
-unsigned int festival_simple(const Trio z) {
+unsigned int festival_simple(const Trio<int> z) {
     unsigned int count = 0;
 
     for (const int a : get<0>(z)) {
@@ -29,7 +29,7 @@ unsigned int festival_simple(const Trio z) {
 }
 
 // O(N log N)
-unsigned int festival_binary(Trio z) {
+unsigned int festival_binary(Trio<int> z) {
     using namespace std::ranges;
 
 //    for (const int i : std::views::iota(0, 3)) {
@@ -54,7 +54,7 @@ unsigned int festival_binary(Trio z) {
 
 
 TEST(TestCase, Ex1) {
-    const Trio z {
+    const Trio<int> z {
         {1, 5},
         {2, 4},
         {3, 6},
@@ -65,7 +65,7 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const Trio z {
+    const Trio<int> z {
         {1, 1, 1},
         {2, 2, 2},
         {3, 3, 3},
@@ -76,7 +76,7 @@ TEST(TestCase, Ex2) {
 }
 
 TEST(TestCase, Ex3) {
-    const Trio z {
+    const Trio<int> z {
         {3, 14, 159, 2, 6, 53},
         {58, 9, 79, 323, 84, 6},
         {2643, 383, 2, 79, 50, 288},
@@ -87,7 +87,7 @@ TEST(TestCase, Ex3) {
 }
 
 TEST(TestCase, Ex0ab) {
-    const Trio z {
+    const Trio<int> z {
         {1, 1},
         {1, 1},
         {2, 2},
@@ -98,7 +98,7 @@ TEST(TestCase, Ex0ab) {
 }
 
 TEST(TestCase, Ex0bc) {
-    const Trio z {
+    const Trio<int> z {
         {1, 1},
         {2, 2},
         {2, 2},
