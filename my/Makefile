@@ -23,10 +23,10 @@ q05_%: q05_%.cpp $(TEMPLATE_HEADER)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 testall: $(TARGETS)
-	for t in $(TARGETS); do echo "[$$t]"; ./$$t; done
+	./runall.sh $(TARGETS)
 
 c20lesstestall: $(C20LESS_TARGETS)
-	for t in $(C20LESS_TARGETS); do echo "[$$t]"; ./$$t; done
+	./runall.sh $(C20LESS_TARGETS)
 
 clean:
 	$(RM) $(TARGETS)
