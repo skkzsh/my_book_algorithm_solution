@@ -31,4 +31,7 @@ c20lesstestall: $(C20LESS_TARGETS)
 clean:
 	$(RM) $(TARGETS)
 
-.PHONY: testall clean c20less c20lesstestall
+c20lessclean:
+	$(RM) $(C20LESS_TARGETS)
+
+.PHONY: testall clean c20less c20lesstestall c20lessclean
