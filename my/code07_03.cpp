@@ -1,27 +1,32 @@
 #include "gtest/gtest.h"
+#include <numeric>
 using std::vector;
 using std::pair;
 template<class T> using pairs = vector<pair<T, T>>;
 
+// n * p.second = p.first + d
+// を満たすような最小の整数dを返す
+int count(const pair<int, int> p) {
+    int n = 1;
+    while (n * p.second <= p.first) {
+        ++n;
+    }
+    return n * p.second - p.first;
+}
+
 int min_push(pairs<int> p) {
-    int sum = 0;
+    vector<int> counts(p.size());
 
     for (int i = p.size() - 1; i >= 0; --i) {
-        int n = 1;
-        while (p[i].first >= n * p[i].second) {
-            ++n;
-        }
-        int count = n * p[i].second - p[i].first;
-        std::cout << "i: "  << i << ", count: " << count << std::endl;
+        counts[i] = count(p[i]);
+        std::cout << "i: "  << i << ", count: " << counts[i] << std::endl;  // debug
 
-        for (int j = 0; j <= i; ++j) {
-            p[j].first += count;
+        for (int j = i; j >= 0; --j) {
+            p[j].first += counts[i];
         }
-
-        sum += count;
     }
 
-    return sum;
+    return std::accumulate(counts.begin(), counts.end(), 0);
 }
 
 
