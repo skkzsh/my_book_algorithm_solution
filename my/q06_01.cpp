@@ -27,9 +27,9 @@ TEST(TestCase, Ex) {
     const vector<int> result = ranking({12, 43, 7, 15, 9});
     // sorted: 7, 9, 12, 15, 43
 
-    EXPECT_EQ(result[0], 2);
-    EXPECT_EQ(result[1], 4);
-    EXPECT_EQ(result[2], 0);
-    EXPECT_EQ(result[3], 3);
-    EXPECT_EQ(result[4], 1);
+    EXPECT_EQ(result.at(0), 2);
+    EXPECT_EQ(result.at(1), 4);
+    EXPECT_EQ(result.at(2), 0);
+    EXPECT_EQ(result.at(3), 3);
+    EXPECT_EQ(result.at(4), 1);
 }

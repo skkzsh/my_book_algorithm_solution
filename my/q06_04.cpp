@@ -18,7 +18,7 @@ int countx(const vector<int> a, const int x) {
 
     // 貪欲法
     for (const int i : std::views::iota(0, N)) {
-        if (a[i] - a[prev] >= x) {
+        if (a.at(i) - a.at(prev) >= x) {
             count++;
             prev = i;
         };
@@ -35,7 +35,7 @@ int cows(const vector<int> a, const int M) {
     }
 
     int left = 0; // 常にtrue
-    int right = a[N - 1] + 1; // 常にfalse
+    int right = a.at(N - 1) + 1; // 常にfalse
 
     while (right - left > 1) {
         const int x = (left + right) / 2;

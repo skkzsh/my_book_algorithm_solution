@@ -12,7 +12,7 @@ int product_th_simple(const vector<int> a, const vector<int> b, const int K) {
         }
     }
     sort(p);
-    return p[K - 1];
+    return p.at(K - 1);
 }
 
 /*
@@ -44,12 +44,12 @@ int product_th_binary(vector<int> a, vector<int> b, const int K) {
     sort(a);
     sort(b);
 
-    if (a[0] <= 0 || b[0] <= 0) {
+    if (a.at(0) <= 0 || b.at(0) <= 0) {
         throw std::invalid_argument("a and b must be positive numbers");
     }
 
     int left = 0; // 常にfalse (∵ a, b > 0)
-    int right = a[a.size() - 1] * b[b.size() - 1]; // 常にtrue
+    int right = a.at(a.size() - 1) * b.at(b.size() - 1); // 常にtrue
 
     while (right - left > 1) {
         const int x = (left + right) / 2;
