@@ -5,10 +5,10 @@ using std::pair;
 template<class T> using pairs = vector<pair<T, T>>;
 
 // n * p.second = p.first + d
-// を満たすような最小の整数dを返す
+// を満たすような最小の整数 d (>= 0) を返す
 int count(const pair<int, int> p) {
     int n = 1;
-    while (n * p.second <= p.first) {
+    while (n * p.second < p.first) {
         ++n;
     }
     return n * p.second - p.first;
@@ -19,7 +19,7 @@ int min_push(pairs<int> p) {
 
     for (int i = p.size() - 1; i >= 0; --i) {
         counts[i] = count(p[i]);
-        std::cout << "i: "  << i << ", count: " << counts[i] << std::endl;  // debug
+        // std::cout << "i: "  << i << ", count: " << counts[i] << std::endl;  // debug
 
         for (int j = i; j >= 0; --j) {
             p[j].first += counts[i];
@@ -27,6 +27,19 @@ int min_push(pairs<int> p) {
     }
 
     return std::accumulate(counts.begin(), counts.end(), 0);
+}
+
+
+TEST(TestCase, a_greater_than_b) {
+    EXPECT_EQ(count({9, 4}), 3);
+}
+
+TEST(TestCase, a_less_than_b) {
+    EXPECT_EQ(count({4, 9}), 5);
+}
+
+TEST(TestCase, a_equal_to_multiple_of_b) {
+    EXPECT_EQ(count({3, 1}), 0);
 }
 
 
