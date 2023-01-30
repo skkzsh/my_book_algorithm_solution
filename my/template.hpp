@@ -24,4 +24,6 @@ template<class T> void print2d(std::vector<std::vector<T>> vv) {
     cout << "print2d end" << endl;
 }
 
+template<class T> using pairs = std::vector<std::pair<T, T>>;
+
 #endif

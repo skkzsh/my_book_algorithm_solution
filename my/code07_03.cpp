@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
 #include <numeric>
+#include "template.hpp"
+
 using std::vector;
 using std::pair;
-template<class T> using pairs = vector<pair<T, T>>;
 
 // n * p.second = p.first + d
 // を満たすような最小の整数 d (>= 0) を返す
