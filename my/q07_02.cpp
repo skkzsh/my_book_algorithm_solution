@@ -7,13 +7,17 @@ int pair_max(pairs<int> r, pairs<int> b) {
     sort(r);
     sort(b);
 
-    int i = 0;
-    for (const auto &q : b) {
-        if (r.at(i).first < q.first && r.at(i).second < q.second) {
-            ++i;
+    int count = 0;
+    for (int j = 0; j < b.size(); j++) {
+        for (int i = 0; i < r.size(); i++) {
+            if (r.at(i).first < b.at(j).first && r.at(i).second < b.at(j).second) {
+                ++count;
+                r.erase(r.begin() + i);
+                break;
+            }
         }
     }
-    return i;
+    return count;
 }
 
 
