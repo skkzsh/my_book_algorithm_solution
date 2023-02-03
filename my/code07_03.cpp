@@ -15,7 +15,7 @@ int count(const pair<int, int> p) {
     return n * p.second - p.first;
 }
 
-int min_push(pairs<int> p) {
+int min_push(Pairs<int> p) {
     vector<int> counts(p.size());
 
     for (int i = p.size() - 1; i >= 0; --i) {
@@ -45,7 +45,7 @@ TEST(TestCase, a_equal_to_multiple_of_b) {
 
 
 TEST(TestCase, Ex1) {
-    const pairs<int> p {
+    const Pairs<int> p {
         {3, 5},
         {2, 7},
         {9, 4},
@@ -55,7 +55,7 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const pairs<int> p {
+    const Pairs<int> p {
         {3, 1},
         {4, 1},
         {5, 9},

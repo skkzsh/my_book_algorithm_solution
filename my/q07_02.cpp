@@ -1,33 +1,48 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include "template.hpp"
+using std::vector;
 
-int pair_max(pairs<int> r, pairs<int> b) {
+int pair_max(Pairs<int> r, Pairs<int> b) {
+    constexpr int INF = 1 << 29; // 十分大きな値
+
     using std::ranges::sort;
     sort(r);
     sort(b);
 
+    vector<bool> used(r.size(), false);  // rが使用済かどうか
     int count = 0;
-    for (int j = 0; j < b.size(); j++) {
-        for (int i = 0; i < r.size(); i++) {
-            if (r.at(i).first < b.at(j).first && r.at(i).second < b.at(j).second) {
-                ++count;
-                r.erase(r.begin() + i);
-                break;
+
+    for (int j = 0; j < (int) b.size(); j++) {
+        int max_second = - INF;
+        std::optional<int> max_key;
+
+        for (int i = 0; i < (int) r.size(); i++) {
+            if (!used.at(i) && r.at(i).first < b.at(j).first && r.at(i).second < b.at(j).second) {
+                 if (max_second < r.at(i).second) {
+                     max_second = r.at(i).second;
+                     max_key = i;
+                 }
             }
         }
+
+        if (max_key.has_value()) {
+            ++count;
+            used.at(max_key.value()) = true;
+        }
     }
+
     return count;
 }
 
 
 TEST(TestCase, Ex1) {
-    const pairs<int> r {
+    const Pairs<int> r {
         {2, 0},
         {3, 1},
         {1, 3},
     };
-    const pairs<int> b {
+    const Pairs<int> b {
         {4, 2},
         {0, 4},
         {5, 5},
@@ -37,12 +52,12 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const pairs<int> r {
+    const Pairs<int> r {
         {0, 0},
         {1, 1},
         {5, 2},
     };
-    const pairs<int> b {
+    const Pairs<int> b {
         {2, 3},
         {3, 4},
         {4, 5},
@@ -52,11 +67,11 @@ TEST(TestCase, Ex2) {
 }
 
 TEST(TestCase, Ex3) {
-    const pairs<int> r {
+    const Pairs<int> r {
         {2, 2},
         {3, 3},
     };
-    const pairs<int> b {
+    const Pairs<int> b {
         {0, 0},
         {1, 1},
     };
@@ -65,14 +80,14 @@ TEST(TestCase, Ex3) {
 }
 
 TEST(TestCase, Ex4) {
-    const pairs<int> r {
+    const Pairs<int> r {
         {0, 0},
         {7, 3},
         {2, 2},
         {4, 8},
         {1, 6},
     };
-    const pairs<int> b {
+    const Pairs<int> b {
         {8, 5},
         {6, 9},
         {5, 4},
@@ -84,14 +99,14 @@ TEST(TestCase, Ex4) {
 }
 
 TEST(TestCase, Ex5) {
-    const pairs<int> r {
+    const Pairs<int> r {
         {0, 0},
         {1, 1},
         {5, 5},
         {6, 6},
         {7, 7},
     };
-    const pairs<int> b {
+    const Pairs<int> b {
         {2, 2},
         {3, 3},
         {4, 4},
