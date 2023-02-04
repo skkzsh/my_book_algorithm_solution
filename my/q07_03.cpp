@@ -2,6 +2,23 @@
 #include <algorithm>
 #include "template.hpp"
 
+// 例で考える
+// {P(10, 30), Q(40, 50)} => P -> Qの順が必須
+// {P(10, 30), Q(20, 40)} => どの順でもOK
+
+// 定義
+// P(d[i], t[i]), Q(d[j], t[j])
+// t[i] < t[j]
+// 命題
+// Q -> P の順 <=> d[j] < t[j] かつ d[j] + d[i] < t[i]
+// を
+// P -> Q の順 <=> d[i] < t[i] かつ d[i] + d[j] < t[j]
+// にできるか
+// 導出
+// d[i] < t[i] - d[i] < t[i] => d[i] < t[i]
+// d[i] + d[j] < t[i] < t[j] => d[i] + d[j] < t[j]
+// => 交換可能
+
 bool can_done(Pairs<int> tasks) { // {d, t}
     std::ranges::sort(tasks, [](const auto p, const auto q) {
         return p.second < q.second;

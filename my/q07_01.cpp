@@ -2,6 +2,19 @@
 #include <algorithm>
 using std::vector;
 
+// 前提
+// a[0] <= a[i]
+// b[0] <= b[j]
+// 定義
+// a[i] < b[0]
+// a[0] < b[j]
+// =>
+// a[0] <= a[i] < b[0] <= b[j]
+// =>
+// a[0] < b[0]
+// a[i] < b[j]
+// => 交換可能
+
 int pair_max(vector<int> a, vector<int> b) {
     using std::ranges::sort;
     sort(a);
