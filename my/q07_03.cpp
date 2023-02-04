@@ -1,22 +1,15 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include "template.hpp"
-using std::pair;
-
-template<class T> T remain(const pair<T, T> p) {
-    return p.second - p.first;
-}
 
 bool can_done(Pairs<int> tasks) { // {d, t}
-    using std::ranges::sort;
-    sort(tasks, [](const auto p, auto const q) {
-        return remain(p) < remain(q);
+    std::ranges::sort(tasks, [](const auto p, const auto q) {
+        return p.second < q.second;
     });
 
     int now = 0;
 
     for (const auto& task : tasks) {
-        // std::cout << task << ' ' << task << std::endl; // debug
         now += task.first;
         if (now > task.second) {
             return false;
