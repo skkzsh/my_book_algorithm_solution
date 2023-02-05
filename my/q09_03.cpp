@@ -2,7 +2,7 @@
 #include "template.hpp"
 #include <stack>
 
-Pairs<int> paren_pairs(std::string_view parens) {
+Pairs<int> pairing_paren(std::string_view parens) {
     Pairs<int> result;
     std::stack<int> st; // 左括弧の index を格納する stack
 
@@ -27,7 +27,7 @@ Pairs<int> paren_pairs(std::string_view parens) {
 
 // NOTE: assert順はアルゴリズムの出力結果に合わせている (右括弧の昇順)
 TEST(TestCase, Q) {
-    const Pairs<int> result = paren_pairs("(()(())())(()())");
+    const Pairs<int> result = pairing_paren("(()(())())(()())");
     EXPECT_EQ(result.at(0).first,  1);
     EXPECT_EQ(result.at(0).second, 2);
     EXPECT_EQ(result.at(1).first,  4);
@@ -47,13 +47,13 @@ TEST(TestCase, Q) {
 }
 
 TEST(TestCase, MissingLeftParen) {
-    EXPECT_THROW(paren_pairs(")("), std::invalid_argument);
+    EXPECT_THROW(pairing_paren(")("), std::invalid_argument);
 }
 
 TEST(TestCase, MissingRightParen) {
-    EXPECT_THROW(paren_pairs("(("), std::invalid_argument);
+    EXPECT_THROW(pairing_paren("(("), std::invalid_argument);
 }
 
 TEST(TestCase, NotParens) {
-    EXPECT_THROW(paren_pairs("{}"), std::invalid_argument);
+    EXPECT_THROW(pairing_paren("{}"), std::invalid_argument);
 }

@@ -15,7 +15,7 @@ using std::vector;
 // a[i] < b[j]
 // => 交換可能
 
-unsigned int pair_max(vector<int> a, vector<int> b) {
+unsigned int max_pairing(vector<int> a, vector<int> b) {
     using std::ranges::sort;
     sort(a);
     sort(b);
@@ -33,29 +33,29 @@ unsigned int pair_max(vector<int> a, vector<int> b) {
 TEST(TestCase, Ex1) {
     const vector<int> a {2, 3, 1};
     const vector<int> b {4, 0, 5};
-    EXPECT_EQ(pair_max(a, b), 2);
+    EXPECT_EQ(max_pairing(a, b), 2);
 }
 
 TEST(TestCase, Ex2) {
     const vector<int> a {0, 1, 5};
     const vector<int> b {2, 3, 4};
-    EXPECT_EQ(pair_max(a, b), 2);
+    EXPECT_EQ(max_pairing(a, b), 2);
 }
 
 TEST(TestCase, Ex3) {
     const vector<int> a {2, 3};
     const vector<int> b {0, 1};
-    EXPECT_EQ(pair_max(a, b), 0);
+    EXPECT_EQ(max_pairing(a, b), 0);
 }
 
 TEST(TestCase, Ex4) {
     const vector<int> a {0, 7, 2, 4, 1};
     const vector<int> b {8, 6, 5, 9, 3};
-    EXPECT_EQ(pair_max(a, b), 5);
+    EXPECT_EQ(max_pairing(a, b), 5);
 }
 
 TEST(TestCase, Ex5) {
     const vector<int> a {0, 1, 5, 6, 7};
     const vector<int> b {2, 3, 4, 8, 9};
-    EXPECT_EQ(pair_max(a, b), 4);
+    EXPECT_EQ(max_pairing(a, b), 4);
 }

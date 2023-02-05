@@ -3,7 +3,7 @@
 #include "template.hpp"
 using std::vector;
 
-unsigned int pair_max(Pairs<int> r, Pairs<int> b) {
+unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
     constexpr int INF = 1 << 29; // 十分大きな値
 
     using std::ranges::sort;
@@ -48,7 +48,7 @@ TEST(TestCase, Ex1) {
         {5, 5},
     };
 
-    EXPECT_EQ(pair_max(r, b), 2);
+    EXPECT_EQ(max_pairing(r, b), 2);
 }
 
 TEST(TestCase, Ex2) {
@@ -63,7 +63,7 @@ TEST(TestCase, Ex2) {
         {4, 5},
     };
 
-    EXPECT_EQ(pair_max(r, b), 2);
+    EXPECT_EQ(max_pairing(r, b), 2);
 }
 
 TEST(TestCase, Ex3) {
@@ -76,7 +76,7 @@ TEST(TestCase, Ex3) {
         {1, 1},
     };
 
-    EXPECT_EQ(pair_max(r, b), 0);
+    EXPECT_EQ(max_pairing(r, b), 0);
 }
 
 TEST(TestCase, Ex4) {
@@ -95,7 +95,7 @@ TEST(TestCase, Ex4) {
         {3, 7},
     };
 
-    EXPECT_EQ(pair_max(r, b), 5);
+    EXPECT_EQ(max_pairing(r, b), 5);
 }
 
 TEST(TestCase, Ex5) {
@@ -114,5 +114,5 @@ TEST(TestCase, Ex5) {
         {9, 9},
     };
 
-    EXPECT_EQ(pair_max(r, b), 4);
+    EXPECT_EQ(max_pairing(r, b), 4);
 }
