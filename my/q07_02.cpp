@@ -3,7 +3,7 @@
 #include "template.hpp"
 using std::vector;
 
-int pair_max(Pairs<int> r, Pairs<int> b) {
+unsigned int pair_max(Pairs<int> r, Pairs<int> b) {
     constexpr int INF = 1 << 29; // 十分大きな値
 
     using std::ranges::sort;
@@ -11,7 +11,7 @@ int pair_max(Pairs<int> r, Pairs<int> b) {
     sort(b);
 
     vector<bool> used(r.size(), false);  // rが使用済かどうか
-    int count = 0;
+    unsigned int count = 0;
 
     for (int j = 0; j < (int) b.size(); j++) {
         int max_second = - INF;

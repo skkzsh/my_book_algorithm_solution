@@ -19,12 +19,12 @@
 // d[i] + d[j] < t[i] < t[j] => d[i] + d[j] < t[j]
 // => 交換可能
 
-bool can_done(Pairs<int> tasks) { // {d, t}
+bool can_done(Pairs<unsigned int> tasks) { // {d, t}
     std::ranges::sort(tasks, [](const auto p, const auto q) {
         return p.second < q.second;
     });
 
-    int now = 0;
+    unsigned int now = 0;
 
     for (const auto& task : tasks) {
         now += task.first;
@@ -38,7 +38,7 @@ bool can_done(Pairs<int> tasks) { // {d, t}
 
 
 TEST(TestCase, Ex1) {
-    const Pairs<int> tasks {
+    const Pairs<unsigned int> tasks {
         {2, 4},
         {1, 9},
         {1, 8},
@@ -50,7 +50,7 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const Pairs<int> tasks {
+    const Pairs<unsigned int> tasks {
         {334, 1000},
         {334, 1000},
         {334, 1000},
@@ -60,7 +60,7 @@ TEST(TestCase, Ex2) {
 }
 
 TEST(TestCase, Ex3) {
-    const Pairs<int> tasks {
+    const Pairs<unsigned int> tasks {
         { 384,  8895  },
         { 1725, 9791  },
         { 170,  1024  },
