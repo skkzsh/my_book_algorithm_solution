@@ -13,11 +13,11 @@ unsigned int pair_max(Pairs<int> r, Pairs<int> b) {
     vector<bool> used(r.size(), false);  // rが使用済かどうか
     unsigned int count = 0;
 
-    for (int j = 0; j < (int) b.size(); j++) {
+    for (size_t j = 0; j < b.size(); j++) {
         int max_second = - INF;
         std::optional<int> max_key;
 
-        for (int i = 0; i < (int) r.size(); i++) {
+        for (size_t i = 0; i < r.size(); i++) {
             if (!used.at(i) && r.at(i).first < b.at(j).first && r.at(i).second < b.at(j).second) {
                  if (max_second < r.at(i).second) {
                      max_second = r.at(i).second;
