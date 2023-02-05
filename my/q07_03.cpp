@@ -20,7 +20,7 @@
 // => 交換可能
 
 bool can_done(Pairs<unsigned int> tasks) { // {d, t}
-    std::ranges::sort(tasks, [](const auto p, const auto q) {
+    std::sort(tasks.begin(), tasks.end(), [](const auto p, const auto q) { // TODO: Use ranges
         return p.second < q.second;
     });
 

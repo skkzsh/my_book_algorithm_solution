@@ -3,15 +3,15 @@
 #include "template.hpp"
 using std::vector;
 
-unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
+int max_pairing(Pairs<int> r, Pairs<int> b) {
     constexpr int INF = 1 << 29; // 十分大きな値
 
-    using std::ranges::sort;
-    sort(r);
-    sort(b);
+    using std::sort;  // TODO: using ranges
+    sort(r.begin(), r.end());
+    sort(b.begin(), b.end());
 
     vector<bool> used(r.size(), false);  // rが使用済かどうか
-    unsigned int count = 0;
+    int count = 0;
 
     for (size_t j = 0; j < b.size(); j++) {
         int max_second = - INF;

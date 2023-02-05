@@ -15,12 +15,12 @@ using std::vector;
 // a[i] < b[j]
 // => 交換可能
 
-unsigned int max_pairing(vector<int> a, vector<int> b) {
-    using std::ranges::sort;
-    sort(a);
-    sort(b);
+int max_pairing(vector<int> a, vector<int> b) {
+    using std::sort; // TODO: using ranges
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
 
-    unsigned int i = 0;
+    int i = 0;
     for (const int m : b) {
         if (a.at(i) < m) {
             ++i;
