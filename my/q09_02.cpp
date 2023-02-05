@@ -21,7 +21,7 @@ double polish(std::string_view expr) {
                 case '-': st.push(b - a); break;
                 case '*': st.push(b * a); break;
                 case '/': st.push(b / a); break;
-                default: throw std::invalid_argument("argument must be number or operator");
+                default: throw std::invalid_argument("Argument must be number or operator");
             }
         }
     }
