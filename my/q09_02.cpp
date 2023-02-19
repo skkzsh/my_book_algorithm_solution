@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <stack>
+using std::invalid_argument;
 
 double polish(std::string_view expr) {
     std::stack<double> st;
@@ -8,11 +9,11 @@ double polish(std::string_view expr) {
         if ('0' <= c && c <= '9') {
             st.push(c - '0');
         } else {
-            if (st.empty()) { throw std::invalid_argument("No operand exist"); }
+            if (st.empty()) { throw invalid_argument("No operand exist"); }
             const double a = st.top();
             st.pop();
 
-            if (st.empty()) { throw std::invalid_argument("One operand only exist"); }
+            if (st.empty()) { throw invalid_argument("One operand only exist"); }
             const double b = st.top();
             st.pop();
 
@@ -21,12 +22,12 @@ double polish(std::string_view expr) {
                 case '-': st.push(b - a); break;
                 case '*': st.push(b * a); break;
                 case '/': st.push(b / a); break;
-                default: throw std::invalid_argument("Argument must be number or operator");
+                default: throw invalid_argument("Argument must be number or operator");
             }
         }
     }
 
-    if (st.size() != 1) { throw std::invalid_argument("Invalid expression"); }
+    if (st.size() != 1) { throw invalid_argument("Invalid expression"); }
     return st.top();
 }
 
@@ -35,21 +36,21 @@ TEST(TestCase, Q) {
 }
 
 TEST(TestCase, InvalidOperator) {
-    EXPECT_THROW(polish("34+12-?"), std::invalid_argument);
+    EXPECT_THROW(polish("34+12-?"), invalid_argument);
 }
 
 TEST(TestCase, NoOperandExist) {
-    EXPECT_THROW(polish("+12-*"), std::invalid_argument);
+    EXPECT_THROW(polish("+12-*"), invalid_argument);
 }
 
 TEST(TestCase, OneOperandOnlyExist) {
-    EXPECT_THROW(polish("4+12-*"), std::invalid_argument);
+    EXPECT_THROW(polish("4+12-*"), invalid_argument);
 }
 
 TEST(TestCase, TooManyNumbers) {
-    EXPECT_THROW(polish("134+12-*"), std::invalid_argument);
+    EXPECT_THROW(polish("134+12-*"), invalid_argument);
 }
 
 TEST(TestCase, TooManyOperators) {
-    EXPECT_THROW(polish("34+12-*/"), std::invalid_argument);
+    EXPECT_THROW(polish("34+12-*/"), invalid_argument);
 }

@@ -1,8 +1,10 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 #include <stack>
+using std::invalid_argument;
 
 Pairs<int> pairing_paren(std::string_view parens) {
+
     Pairs<int> result;
     std::stack<int> st; // 左括弧の index を格納する stack
 
@@ -12,16 +14,16 @@ Pairs<int> pairing_paren(std::string_view parens) {
                 st.push(i);
                 break;
             case ')':
-                if (st.empty()) { throw std::invalid_argument("Missing left paren to pair"); }
+                if (st.empty()) { throw invalid_argument("Missing left paren to pair"); }
                 result.push_back({st.top(), i});
                 st.pop();
                 break;
             default:
-                throw std::invalid_argument("Something that isn't paren included");
+                throw invalid_argument("Something that isn't paren included");
         }
     }
 
-    if (!st.empty()) { throw std::invalid_argument("Missing right paren to pair"); }
+    if (!st.empty()) { throw invalid_argument("Missing right paren to pair"); }
     return result;
 }
 
@@ -47,13 +49,13 @@ TEST(TestCase, Q) {
 }
 
 TEST(TestCase, MissingLeftParen) {
-    EXPECT_THROW(pairing_paren(")("), std::invalid_argument);
+    EXPECT_THROW(pairing_paren(")("), invalid_argument);
 }
 
 TEST(TestCase, MissingRightParen) {
-    EXPECT_THROW(pairing_paren("(("), std::invalid_argument);
+    EXPECT_THROW(pairing_paren("(("), invalid_argument);
 }
 
 TEST(TestCase, NotParens) {
-    EXPECT_THROW(pairing_paren("{}"), std::invalid_argument);
+    EXPECT_THROW(pairing_paren("{}"), invalid_argument);
 }

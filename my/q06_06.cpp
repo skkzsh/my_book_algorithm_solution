@@ -17,10 +17,12 @@ double func(const double t, const Constant<int> constant) {
 }
 
 double bisection(const Constant<int> constant, const pair<double, double> interval) {
+   using std::invalid_argument;
+
     auto [left, right] = interval;
 
     if (left >= right) {
-        throw std::invalid_argument("left must be less than right");
+        throw invalid_argument("left must be less than right");
     }
 
     // debug
@@ -28,7 +30,7 @@ double bisection(const Constant<int> constant, const pair<double, double> interv
 
     // func(left) < 0 かつ func(right) > 0 が必要条件
     if (func(left, constant) >= 0 || func(right, constant) <= 0) {
-        throw std::invalid_argument("func(left) < 0 and func(right) > 0 required");
+        throw invalid_argument("func(left) < 0 and func(right) > 0 required");
     }
 
     while (right - left > EPS) {
