@@ -15,6 +15,8 @@ USE_TYPE_TARGETS = q04_06
 # C++20未満のターゲット (MacでC++20をcompileしづらいため)
 C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03
 
+RUN_SCRIPT = ./runall.sh
+
 all: $(TARGETS)
 
 c20less: $(C20LESS_TARGETS)
@@ -37,10 +39,10 @@ $(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HEADER)
 	$(CXX) -c $< $(CXX_BASE_FLAGS)
 
 testall: $(TARGETS)
-	./runall.sh $(TARGETS)
+	$(RUN_SCRIPT) $(TARGETS)
 
 c20lesstestall: $(C20LESS_TARGETS)
-	./runall.sh $(C20LESS_TARGETS)
+	$(RUN_SCRIPT) $(C20LESS_TARGETS)
 
 clean:
 	$(RM) $(TARGETS) $(UNION_FIND_OBJ)
