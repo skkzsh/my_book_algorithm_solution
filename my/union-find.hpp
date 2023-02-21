@@ -1,5 +1,4 @@
-#ifndef UNION_FIND_H
-#define UNION_FIND_H
+#pragma once
 
 #include <vector>
 #include <optional>
@@ -20,5 +19,3 @@ class UnionFind {
     private:
         int size(int x);
 };
-
-#endif

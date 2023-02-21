@@ -1,5 +1,4 @@
-#ifndef TYPE_H
-#define TYPE_H
+#pragma once
 
 // 3値
 typedef enum {
@@ -7,5 +6,3 @@ typedef enum {
     Tri_False = false,
     Tri_True = true,
 } Tri_Bool;
-
-#endif

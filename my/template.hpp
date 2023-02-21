@@ -1,5 +1,4 @@
-#ifndef TEMPLATE_H
-#define TEMPLATE_H
+#pragma once
 
 template<class T> void chmin(T& a, T b) {
     a = std::min(a, b);
@@ -25,5 +24,3 @@ template<class T> void print2d(std::vector<std::vector<T>> vv) {
 }
 
 template<class T> using Pairs = std::vector<std::pair<T, T>>;
-
-#endif
