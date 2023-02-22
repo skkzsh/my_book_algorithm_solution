@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
 
-int sum_bit(std::string_view s, const int bit) {
-    const int l = s.size();
+int sum_bit(std::string_view S, const int bit) {
+    const int L = S.length();
     int sum = 0;
     int tmp = 0;
 
-    for (int i = 0; i < l - 1; ++i) {
-        const int num = s[i] - '0';
+    for (int i = 0; i < L - 1; ++i) {
+        const int num = S[i] - '0';
         if (num < 0 || num > 9) {
             throw std::invalid_argument("argument must be number");
         }
@@ -22,16 +22,16 @@ int sum_bit(std::string_view s, const int bit) {
     }
 
     sum += tmp;
-    sum += s[l - 1] - '0';
+    sum += S[L - 1] - '0';
     return sum;
 }
 
-int sum_combi(std::string_view s) {
-    const int l = s.size();
+int sum_combi(std::string_view S) {
+    const int L = S.size();
     int sum_all = 0;
 
-    for (int bit = 0; bit < (1 << (l - 1)); ++bit) {
-        sum_all += sum_bit(s, bit);
+    for (int bit = 0; bit < (1 << (L - 1)); ++bit) {
+        sum_all += sum_bit(S, bit);
     }
 
     return sum_all;

@@ -33,6 +33,6 @@ void UnionFind::unite(const int x, const int y) {
     }
 }
 
-int UnionFind::size(int x) {
+int UnionFind::size(const int x) {
     return sizes[root(x)];
 }
