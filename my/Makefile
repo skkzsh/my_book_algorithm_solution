@@ -15,7 +15,7 @@ USE_TYPE_TARGETS = q04_06
 USE_TEMPLATE_TARGETS = q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 code07_03 q07_02 q07_03 q09_03
 USE_UNION_FIND_TARGETS = code11_% q11_%
 # C++20未満のターゲット (MacでC++20をcompileしづらいため)
-C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03 code11_03 q11_01
+C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03
 
 RUN_SCRIPT = ./runall.sh
 
@@ -58,6 +58,6 @@ clean:
 	$(RM) $(TARGETS) $(UNION_FIND_OBJ)
 
 c20lessclean:
-	$(RM) $(C20LESS_TARGETS) $(UNION_FIND_OBJ)
+	$(RM) $(C20LESS_TARGETS)
 
 .PHONY: testall clean c20less c20lesstestall c20lessclean
