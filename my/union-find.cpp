@@ -1,5 +1,6 @@
 #include "union-find.hpp"
 #include <stdexcept>
+#include <utility>
 
 UnionFind::UnionFind(const int n) : parents(n), sizes(n, 1) {}
 
@@ -17,8 +18,8 @@ bool UnionFind::is_same_set(const int u, const int v) {
 }
 
 bool UnionFind::unite(const int u, const int v) {
-    const int root_u = root(u);
-    const int root_v = root(v);
+    int root_u = root(u);
+    int root_v = root(v);
 
     if (root_u == root_v) {
         return false;
@@ -26,12 +27,20 @@ bool UnionFind::unite(const int u, const int v) {
 
     // union by size
     if (sizes.at(root_u) < sizes.at(root_v)) {
-        parents.at(root_u) = root_v;
-        sizes.at(root_v) += sizes.at(root_u);
-    } {
-        parents.at(root_v) = root_u;
-        sizes.at(root_u) += sizes.at(root_v);
+        std::swap(root_u, root_v);
     }
+
+    parents.at(root_v) = root_u;
+    sizes.at(root_u) += sizes.at(root_v);
+
+// TODO
+//    if (sizes.at(root_u) < sizes.at(root_v)) {
+//        parents.at(root_u) = root_v;
+//        sizes.at(root_v) += sizes.at(root_u);
+//    } {
+//        parents.at(root_v) = root_u;
+//        sizes.at(root_u) += sizes.at(root_v);
+//    }
 
     return true;
 }
