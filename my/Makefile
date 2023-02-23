@@ -3,12 +3,12 @@ CXX_BASE_FLAGS = -Wall -Wextra -O2 -std=c++20
 CXXFLAGS = $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread
 # -g
 
-TYPE_HEADER = type.h
-TEMPLATE_HEADER = template.hpp
+TYPE_HDR = type.h
+TEMPLATE_HDR = template.hpp
 
 UNION_FIND_SRC = union-find.cpp
 UNION_FIND_OBJ = $(UNION_FIND_SRC:.cpp=.o)
-UNION_FIND_HEADER = $(UNION_FIND_SRC:.cpp=.hpp)
+UNION_FIND_HDR = $(UNION_FIND_SRC:.cpp=.hpp)
 
 TARGETS = $(basename $(wildcard *[01][0-9]_[0-9][0-9].cpp))
 TARGETS_WITH_TYPE = q04_06
@@ -23,10 +23,10 @@ all: $(TARGETS)
 
 c20less: $(C20LESS_TARGETS)
 
-$(TARGETS_WITH_TYPE): %: %.cpp $(TYPE_HEADER)
+$(TARGETS_WITH_TYPE): %: %.cpp $(TYPE_HDR)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-$(TARGETS_WITH_TEMPLATE): %: %.cpp $(TEMPLATE_HEADER)
+$(TARGETS_WITH_TEMPLATE): %: %.cpp $(TEMPLATE_HDR)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 # TODO: rm *11_*.o されるのを調査 (cleanに追加)
@@ -34,12 +34,12 @@ define CXX_WITH_UNION_FIND
 $(1): $(1).o $(UNION_FIND_OBJ)
 	$(CXX) $(CXXFLAGS) $$^ -o $$@
 
-$(1).o: $(1).cpp $(UNION_FIND_HEADER)
+$(1).o: $(1).cpp $(UNION_FIND_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_UNION_FIND), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
 
-$(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HEADER)
+$(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HDR)
 
 .cpp.o:
 	$(CXX) $(CXX_BASE_FLAGS) -c $<
