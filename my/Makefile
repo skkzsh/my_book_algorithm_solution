@@ -23,15 +23,11 @@ all: $(TARGETS)
 
 c20less: $(C20LESS_TARGETS)
 
-$(TARGETS_WITH_TYPE): $(TARGETS_WITH_TYPE).cpp $(TYPE_HEADER)
+$(TARGETS_WITH_TYPE): %: %.cpp $(TYPE_HEADER)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-define CXX_WITH_TEMPLATE
-$(1): $(1).cpp $(TEMPLATE_HEADER)
-	$(CXX) $(CXXFLAGS) $$< -o $$@
-endef
-
-$(foreach T, $(TARGETS_WITH_TEMPLATE), $(eval $(call CXX_WITH_TEMPLATE, $(T))))
+$(TARGETS_WITH_TEMPLATE): %: %.cpp $(TEMPLATE_HEADER)
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 # TODO: rm *11_*.o されるのを調査 (cleanに追加)
 define CXX_WITH_UNION_FIND
