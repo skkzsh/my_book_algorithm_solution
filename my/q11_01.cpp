@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include "template.hpp"
 #include "union-find.hpp"
+#include "template.hpp"
 #include <ranges>
 
 // E: 辺集合 (連結かつ0以上の連番であること)
