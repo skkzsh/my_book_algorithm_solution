@@ -5,27 +5,27 @@
 #include <algorithm>
 using std::vector;
 
-// R, T: 辺集合 (0以上の連番であること)
+// E: 辺集合 (0以上の連番であること)
 // N: 都市の数 (R, Tと整合が取れていること)
-vector<int> cities(const Pairs<int> R, const Pairs<int> T, const int N) {
+vector<int> cities(const vector<Pairs<int>> E, const int N) {
     using namespace std::ranges;
     using std::views::iota;
     // const int N = ;  // TODO
-    UnionFind road_uf(N);
-    UnionFind train_uf(N);
+    UnionFind uf0(N);
+    UnionFind uf1(N);
 
-    for (const auto& e : R) {
-        road_uf.unite(e.first, e.second);
+    for (const auto& e : E.at(0)) {
+        uf0.unite(e.first, e.second);
     }
-    for (const auto& e : T) {
-        train_uf.unite(e.first, e.second);
+    for (const auto& e : E.at(1)) {
+        uf1.unite(e.first, e.second);
     }
 
     vector<int> results(N);
 
     transform(iota(0, N), results.begin(), [&](const int u) {
         return count_if(iota(0, N), [&](const int v) {
-            return road_uf.is_same_set(u, v) && train_uf.is_same_set(u, v);
+            return uf0.is_same_set(u, v) && uf1.is_same_set(u, v);
         });
     });
 
@@ -33,15 +33,11 @@ vector<int> cities(const Pairs<int> R, const Pairs<int> T, const int N) {
 }
 
 TEST(TestCase, Ex1) {
-    const Pairs<int> R {
-        {0, 1},
-        {1, 2},
-        {2, 3},
+    const vector<Pairs<int>> E {
+        { {0, 1}, {1, 2}, {2, 3}, },
+        { {1, 2}, },
     };
-    const Pairs<int> T {
-        {1, 2},
-    };
-    const vector<int> results = cities(R, T, 4);
+    const vector<int> results = cities(E, 4);
     EXPECT_EQ(results.at(0), 1);
     EXPECT_EQ(results.at(1), 2);
     EXPECT_EQ(results.at(2), 2);
@@ -49,15 +45,11 @@ TEST(TestCase, Ex1) {
 }
 
 TEST(TestCase, Ex2) {
-    const Pairs<int> R {
-        {0, 1},
-        {1, 2},
+    const vector<Pairs<int>> E {
+        { {0, 1}, {1, 2}, },
+        { {0, 3}, {1, 2}, },
     };
-    const Pairs<int> T {
-        {0, 3},
-        {1, 2},
-    };
-    const vector<int> results = cities(R, T, 4);
+    const vector<int> results = cities(E, 4);
     EXPECT_EQ(results.at(0), 1);
     EXPECT_EQ(results.at(1), 2);
     EXPECT_EQ(results.at(2), 2);
@@ -65,19 +57,11 @@ TEST(TestCase, Ex2) {
 }
 
 TEST(TestCase, Ex3) {
-    const Pairs<int> R {
-        {0, 1},
-        {1, 2},
-        {1, 4},
-        {5, 6},
+    const vector<Pairs<int>> E {
+        { {0, 1}, {1, 2}, {1, 4}, {5, 6}, },
+        { {2, 4}, {3, 4}, {2, 3}, {5, 6}, },
     };
-    const Pairs<int> T {
-        {2, 4},
-        {3, 4},
-        {2, 3},
-        {5, 6},
-    };
-    const vector<int> results = cities(R, T, 7);
+    const vector<int> results = cities(E, 7);
     EXPECT_EQ(results.at(0), 1);
     EXPECT_EQ(results.at(1), 1);
     EXPECT_EQ(results.at(2), 2);
