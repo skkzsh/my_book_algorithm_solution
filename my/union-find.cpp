@@ -3,38 +3,38 @@
 
 UnionFind::UnionFind(const int n) : parents(n), sizes(n, 1) {}
 
-int UnionFind::root(const int x) {
-    if (parents.at(x).has_value()) {
-        parents.at(x) = root(parents.at(x).value()); // 経路圧縮
-        return parents.at(x).value();
+int UnionFind::root(const int v) {
+    if (parents.at(v).has_value()) {
+        parents.at(v) = root(parents.at(v).value()); // 経路圧縮
+        return parents.at(v).value();
     }
-    return x;
+    return v;
 }
 
-bool UnionFind::is_same_set(const int x, const int y) {
-    return root(x) == root(y);
+bool UnionFind::is_same_set(const int u, const int v) {
+    return root(u) == root(v);
 }
 
-bool UnionFind::unite(const int x, const int y) {
-    const int root_x = root(x);
-    const int root_y = root(y);
+bool UnionFind::unite(const int u, const int v) {
+    const int root_u = root(u);
+    const int root_v = root(v);
 
-    if (root_x == root_y) {
+    if (root_u == root_v) {
         return false;
     }
 
     // union by size
-    if (sizes.at(root_x) < sizes.at(root_y)) {
-        parents.at(root_x) = root_y;
-        sizes.at(root_y) += sizes.at(root_x);
+    if (sizes.at(root_u) < sizes.at(root_v)) {
+        parents.at(root_u) = root_v;
+        sizes.at(root_v) += sizes.at(root_u);
     } {
-        parents.at(root_y) = root_x;
-        sizes.at(root_x) += sizes.at(root_y);
+        parents.at(root_v) = root_u;
+        sizes.at(root_u) += sizes.at(root_v);
     }
 
     return true;
 }
 
-int UnionFind::size(const int x) {
-    return sizes[root(x)];
+int UnionFind::size(const int v) {
+    return sizes[root(v)];
 }

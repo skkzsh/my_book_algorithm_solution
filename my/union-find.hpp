@@ -11,9 +11,9 @@ class UnionFind {
         vector<int> sizes;
     public:
         UnionFind(const int n);
-        int root(const int x);
-        bool is_same_set(const int x, const int y);
-        bool unite(const int x, const int y);
+        int root(const int v);
+        bool is_same_set(const int u, const int v);
+        bool unite(const int u, const int v);
     private:
-        int size(int x);
+        int size(int v);
 };
