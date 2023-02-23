@@ -9,7 +9,7 @@ Pairs<int> pairing_paren(std::string_view parens) {
     std::stack<int> st; // 左括弧の index を格納する stack
 
     for (size_t i = 0; i < parens.length() ; ++i) {
-        switch (parens[i]) {
+        switch (parens.at(i)) {
             case '(':
                 st.push(i);
                 break;
