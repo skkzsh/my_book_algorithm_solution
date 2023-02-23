@@ -1,19 +1,21 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 #include "union-find.hpp"
+#include <ranges>
 
-// G: グラフ (連結かつ0以上の連番であること)
+// E: 辺集合 (連結かつ0以上の連番であること)
 // N: 頂点数 (Gと整合が取れていること)
-int bridges(const Pairs<int> G, const int N) {
+int bridges(const Pairs<int> E, const int N) {
+    auto edge_view = std::views::iota(0, (int) E.size());
     // const int N = ;  // TODO
     int count = 0;
 
-    for (size_t j = 0; j < G.size(); ++j) {
+    for (const int j : edge_view) {
         UnionFind uf(N);
 
-        for (size_t i = 0; i < G.size(); ++i) {
+        for (const int i : edge_view) {
             if (i != j) {
-                uf.unite(G.at(i).first, G.at(i).second);
+                uf.unite(E.at(i).first, E.at(i).second);
             }
         }
 
@@ -26,7 +28,7 @@ int bridges(const Pairs<int> G, const int N) {
 }
 
 TEST(TestCase, Ex1) {
-    const Pairs<int> G {
+    const Pairs<int> E {
         {0, 2},
         {1, 6},
         {2, 3},
@@ -36,22 +38,22 @@ TEST(TestCase, Ex1) {
         {5, 6},
     };
 
-    EXPECT_EQ(bridges(G, 7), 4);
+    EXPECT_EQ(bridges(E, 7), 4);
 }
 
 TEST(TestCase, Ex2) {
-    const Pairs<int> G {
+    const Pairs<int> E {
         {2, 2},
         {0, 1},
         {0, 2},
         {1, 2},
     };
 
-    EXPECT_EQ(bridges(G, 3), 0);
+    EXPECT_EQ(bridges(E, 3), 0);
 }
 
 TEST(TestCase, Ex3) {
-    const Pairs<int> G {
+    const Pairs<int> E {
         {0, 1},
         {1, 2},
         {2, 3},
@@ -59,5 +61,5 @@ TEST(TestCase, Ex3) {
         {4, 5},
     };
 
-    EXPECT_EQ(bridges(G, 6), 5);
+    EXPECT_EQ(bridges(E, 6), 5);
 }

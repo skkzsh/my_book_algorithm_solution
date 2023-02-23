@@ -13,6 +13,7 @@ int max_pairing(Pairs<int> r, Pairs<int> b) {
     vector<bool> used(r.size(), false);  // rが使用済かどうか
     int count = 0;
 
+     // TODO: using iota
     for (size_t j = 0; j < b.size(); j++) {
         int max_second = - INF;
         std::optional<int> max_key;
