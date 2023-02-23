@@ -2,11 +2,13 @@
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
+#include <algorithm>
 using std::vector;
 
 // R, T: 辺集合 (0以上の連番であること)
 // N: 都市の数 (R, Tと整合が取れていること)
 vector<int> cities(const Pairs<int> R, const Pairs<int> T, const int N) {
+    using namespace std::ranges;
     using std::views::iota;
     // const int N = ;  // TODO
     UnionFind road_uf(N);
@@ -19,17 +21,13 @@ vector<int> cities(const Pairs<int> R, const Pairs<int> T, const int N) {
         train_uf.unite(e.first, e.second);
     }
 
-    vector<int> results(N, 0);
+    vector<int> results(N);
 
-    for (const int u : iota(0, N)) {
-        int count = 0;
-        for (const int v : iota(0, N)) {
-            if (road_uf.is_same_set(u, v) && train_uf.is_same_set(u, v)) {
-                count++;
-            }
-        }
-        results.at(u) = count;
-    }
+    transform(iota(0, N), results.begin(), [&](const int u) {
+        return count_if(iota(0, N), [&](const int v) {
+            return road_uf.is_same_set(u, v) && train_uf.is_same_set(u, v);
+        });
+    });
 
     return results;
 }
