@@ -4,11 +4,12 @@
 UnionFind::UnionFind(const int n) : parents(n), sizes(n, 1) {}
 
 int UnionFind::root(const int v) {
-    if (parents.at(v).has_value()) {
-        parents.at(v) = root(parents.at(v).value()); // 経路圧縮
-        return parents.at(v).value();
+    if (!parents.at(v).has_value()) {
+        return v;
     }
-    return v;
+
+    parents.at(v) = root(parents.at(v).value()); // 経路圧縮
+    return parents.at(v).value();
 }
 
 bool UnionFind::is_same_set(const int u, const int v) {
