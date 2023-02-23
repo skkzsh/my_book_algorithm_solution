@@ -11,9 +11,9 @@ UNION_FIND_OBJ = $(UNION_FIND_SRC:.cpp=.o)
 UNION_FIND_HEADER = $(UNION_FIND_SRC:.cpp=.hpp)
 
 TARGETS = $(basename $(wildcard *[01][0-9]_[0-9][0-9].cpp))
-USE_TYPE_TARGETS = q04_06
-USE_TEMPLATE_TARGETS = q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 code07_03 q07_02 q07_03 q09_03
-USE_UNION_FIND_TARGETS = code11_% q11_%
+TARGETS_WITH_TYPE = q04_06
+TARGETS_WITH_TEMPLATE = q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 code07_03 q07_02 q07_03 q09_03
+TARGETS_WITH_UNION_FIND = code11_% q11_%
 # C++20未満のターゲット (MacでC++20をcompileしづらいため)
 C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_06 q05_02 q05_04 q05_05 q05_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03
 
@@ -23,7 +23,7 @@ all: $(TARGETS)
 
 c20less: $(C20LESS_TARGETS)
 
-$(USE_TYPE_TARGETS): $(USE_TYPE_TARGETS).cpp $(TYPE_HEADER)
+$(TARGETS_WITH_TYPE): $(TARGETS_WITH_TYPE).cpp $(TYPE_HEADER)
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 define CXX_WITH_TEMPLATE
@@ -31,7 +31,7 @@ $(1): $(1).cpp $(TEMPLATE_HEADER)
 	$(CXX) $(CXXFLAGS) $$< -o $$@
 endef
 
-$(foreach T, $(USE_TEMPLATE_TARGETS), $(eval $(call CXX_WITH_TEMPLATE, $(T))))
+$(foreach T, $(TARGETS_WITH_TEMPLATE), $(eval $(call CXX_WITH_TEMPLATE, $(T))))
 
 # TODO: rm *11_*.o されるのを調査 (cleanに追加)
 define CXX_WITH_UNION_FIND
@@ -41,7 +41,7 @@ $(1): $(1).o $(UNION_FIND_OBJ)
 $(1).o: $(1).cpp $(UNION_FIND_HEADER)
 endef
 
-$(foreach T, $(USE_UNION_FIND_TARGETS), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
+$(foreach T, $(TARGETS_WITH_UNION_FIND), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
 
 $(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HEADER)
 
