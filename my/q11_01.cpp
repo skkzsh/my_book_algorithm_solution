@@ -6,7 +6,7 @@
 // N: 頂点数 (Gと整合が取れていること)
 int bridges(const Pairs<int> G, const int N) {
     // const int N = ;  // TODO
-    int result = 0;
+    int count = 0;
 
     for (size_t j = 0; j < G.size(); ++j) {
         UnionFind uf(N);
@@ -18,11 +18,11 @@ int bridges(const Pairs<int> G, const int N) {
         }
 
         if (uf.count_set() > 1) {
-             ++result;
+             ++count;
         }
     }
 
-    return result;
+    return count;
 }
 
 TEST(TestCase, Ex1) {

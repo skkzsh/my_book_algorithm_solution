@@ -38,28 +38,28 @@ vector<long long> tribo_wrapper(const int N) {
     tribo(N, memo);
 
     // optionalはがし
-    vector<long long> result(N + 1); // TODO: views::transformで直接作れないか
-    transform(memo, result.begin(),
+    vector<long long> results(N + 1); // TODO: views::transformで直接作れないか
+    transform(memo, results.begin(),
         [](const optional<auto> x) { return x.value(); } // TODO: ラムダ式やめれないか
     );
 
-    return result;
+    return results;
 }
 
 TEST(TestCase, Test10) {
-    const vector<long long> result = tribo_wrapper(10);
+    const vector<long long> results = tribo_wrapper(10);
 
-    EXPECT_EQ(result[10], 81);
-    EXPECT_EQ(result[9], 44);
-    EXPECT_EQ(result[8], 24);
-    EXPECT_EQ(result[7], 13);
-    EXPECT_EQ(result[6], 7);
-    EXPECT_EQ(result[5], 4);
-    EXPECT_EQ(result[4], 2);
-    EXPECT_EQ(result[3], 1);
-    EXPECT_EQ(result[2], 1);
-    EXPECT_EQ(result[1], 0);
-    EXPECT_EQ(result[0], 0);
+    EXPECT_EQ(results.at(10), 81);
+    EXPECT_EQ(results.at(9), 44);
+    EXPECT_EQ(results.at(8), 24);
+    EXPECT_EQ(results.at(7), 13);
+    EXPECT_EQ(results.at(6), 7);
+    EXPECT_EQ(results.at(5), 4);
+    EXPECT_EQ(results.at(4), 2);
+    EXPECT_EQ(results.at(3), 1);
+    EXPECT_EQ(results.at(2), 1);
+    EXPECT_EQ(results.at(1), 0);
+    EXPECT_EQ(results.at(0), 0);
 }
 
 TEST(TestCase, Negative) {
