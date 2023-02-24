@@ -2,6 +2,8 @@
 #include <algorithm>
 #include "template.hpp"
 using std::string_view;
+using std::get;
+using std::make_tuple;
 
 string_view longest_common_substring(string_view S, string_view T) {
     using std::vector;
@@ -27,18 +29,19 @@ string_view longest_common_substring(string_view S, string_view T) {
 }
 
 
-TEST(TestCase, Ex1) {
-    EXPECT_EQ(longest_common_substring("axyb", "abyxb"), "axb"); // aybでも可
+class StringsSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
+
+TEST_P(StringsSuite, Ex) {
+    EXPECT_EQ(longest_common_substring(get<0>(GetParam()), get<1>(GetParam())), get<2>(GetParam()));
 }
 
-TEST(TestCase, Ex2) {
-    EXPECT_EQ(longest_common_substring("aa", "xayaz"), "aa");
-}
-
-TEST(TestCase, Ex3) {
-    EXPECT_EQ(longest_common_substring("a", "z"), "");
-}
-
-TEST(TestCase, Ex4) {
-    EXPECT_EQ(longest_common_substring("abracadabra", "avadakedavra"), "aaadara");
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    StringsSuite,
+    ::testing::Values( // TODO: make pair tuple
+        make_tuple("axyb", "abyxb", "axb"), // aybでも可
+        make_tuple("aa", "xayaz", "aa"),
+        make_tuple("a", "z", ""),
+        make_tuple("abracadabra", "avadakedavra", "aaadara")
+    )
+);

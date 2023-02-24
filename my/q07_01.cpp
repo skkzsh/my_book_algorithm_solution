@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
 #include <algorithm>
 using std::vector;
 
@@ -30,32 +31,38 @@ int max_pairing(vector<int> a, vector<int> b) {
 }
 
 
-TEST(TestCase, Ex1) {
-    const vector<int> a {2, 3, 1};
-    const vector<int> b {4, 0, 5};
-    EXPECT_EQ(max_pairing(a, b), 2);
+TEST_P(PairVectorIntSuite, Ex) {
+    EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-TEST(TestCase, Ex2) {
-    const vector<int> a {0, 1, 5};
-    const vector<int> b {2, 3, 4};
-    EXPECT_EQ(max_pairing(a, b), 2);
-}
-
-TEST(TestCase, Ex3) {
-    const vector<int> a {2, 3};
-    const vector<int> b {0, 1};
-    EXPECT_EQ(max_pairing(a, b), 0);
-}
-
-TEST(TestCase, Ex4) {
-    const vector<int> a {0, 7, 2, 4, 1};
-    const vector<int> b {8, 6, 5, 9, 3};
-    EXPECT_EQ(max_pairing(a, b), 5);
-}
-
-TEST(TestCase, Ex5) {
-    const vector<int> a {0, 1, 5, 6, 7};
-    const vector<int> b {2, 3, 4, 8, 9};
-    EXPECT_EQ(max_pairing(a, b), 4);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairVectorIntSuite,
+    ::testing::Values(
+        PairVectorIntParam(
+            {2, 3, 1},
+            {4, 0, 5},
+            2
+        ),
+        PairVectorIntParam(
+            {0, 1, 5},
+            {2, 3, 4},
+            2
+        ),
+        PairVectorIntParam(
+            {2, 3},
+            {0, 1},
+            0
+        ),
+        PairVectorIntParam(
+            {0, 7, 2, 4, 1},
+            {8, 6, 5, 9, 3},
+            5
+        ),
+        PairVectorIntParam(
+            {0, 1, 5, 6, 7},
+            {2, 3, 4, 8, 9},
+            4
+        )
+    )
+);

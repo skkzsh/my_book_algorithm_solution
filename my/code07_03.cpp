@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
-#include <numeric>
+#include "gtest-helper.hpp"
 #include "template.hpp"
+#include <numeric>
 
 using std::vector;
 using std::pair;
@@ -44,26 +45,33 @@ TEST(TestCase, a_equal_to_multiple_of_b) {
 }
 
 
-TEST(TestCase, Ex1) {
-    const Pairs<int> p {
-        {3, 5},
-        {2, 7},
-        {9, 4},
-    };
-
-    EXPECT_EQ(min_push(p), 7);
+TEST_P(PairsIntSuite, Ex) {
+    EXPECT_EQ(min_push(GetParam().p), GetParam().expected);
 }
 
-TEST(TestCase, Ex2) {
-    const Pairs<int> p {
-        {3, 1},
-        {4, 1},
-        {5, 9},
-        {2, 6},
-        {5, 3},
-        {5, 8},
-        {9, 7},
-    };
-
-    EXPECT_EQ(min_push(p), 22);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairsIntSuite,
+    ::testing::Values(
+        PairsIntParam(
+            {
+                {3, 5},
+                {2, 7},
+                {9, 4},
+            },
+            7
+        ),
+        PairsIntParam(
+            {
+                {3, 1},
+                {4, 1},
+                {5, 9},
+                {2, 6},
+                {5, 3},
+                {5, 8},
+                {9, 7},
+            },
+            22
+        )
+    )
+);

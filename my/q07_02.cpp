@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
-#include <algorithm>
+#include "gtest-helper.hpp"
 #include "template.hpp"
+#include <algorithm>
 using std::vector;
 
 int max_pairing(Pairs<int> r, Pairs<int> b) {
@@ -37,83 +38,84 @@ int max_pairing(Pairs<int> r, Pairs<int> b) {
 }
 
 
-TEST(TestCase, Ex1) {
-    const Pairs<int> r {
-        {2, 0},
-        {3, 1},
-        {1, 3},
-    };
-    const Pairs<int> b {
-        {4, 2},
-        {0, 4},
-        {5, 5},
-    };
-
-    EXPECT_EQ(max_pairing(r, b), 2);
+TEST_P(PairPairsIntSuite, Ex) {
+    EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-TEST(TestCase, Ex2) {
-    const Pairs<int> r {
-        {0, 0},
-        {1, 1},
-        {5, 2},
-    };
-    const Pairs<int> b {
-        {2, 3},
-        {3, 4},
-        {4, 5},
-    };
-
-    EXPECT_EQ(max_pairing(r, b), 2);
-}
-
-TEST(TestCase, Ex3) {
-    const Pairs<int> r {
-        {2, 2},
-        {3, 3},
-    };
-    const Pairs<int> b {
-        {0, 0},
-        {1, 1},
-    };
-
-    EXPECT_EQ(max_pairing(r, b), 0);
-}
-
-TEST(TestCase, Ex4) {
-    const Pairs<int> r {
-        {0, 0},
-        {7, 3},
-        {2, 2},
-        {4, 8},
-        {1, 6},
-    };
-    const Pairs<int> b {
-        {8, 5},
-        {6, 9},
-        {5, 4},
-        {9, 1},
-        {3, 7},
-    };
-
-    EXPECT_EQ(max_pairing(r, b), 5);
-}
-
-TEST(TestCase, Ex5) {
-    const Pairs<int> r {
-        {0, 0},
-        {1, 1},
-        {5, 5},
-        {6, 6},
-        {7, 7},
-    };
-    const Pairs<int> b {
-        {2, 2},
-        {3, 3},
-        {4, 4},
-        {8, 8},
-        {9, 9},
-    };
-
-    EXPECT_EQ(max_pairing(r, b), 4);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairPairsIntSuite,
+    ::testing::Values(
+        PairPairsIntParam(
+            {
+                {2, 0},
+                {3, 1},
+                {1, 3},
+            },
+            {
+                {4, 2},
+                {0, 4},
+                {5, 5},
+            },
+            2
+        ),
+        PairPairsIntParam(
+            {
+                {0, 0},
+                {1, 1},
+                {5, 2},
+            },
+            {
+                {2, 3},
+                {3, 4},
+                {4, 5},
+            },
+            2
+        ),
+        PairPairsIntParam(
+            {
+                {2, 2},
+                {3, 3},
+            },
+            {
+                {0, 0},
+                {1, 1},
+            },
+            0
+        ),
+        PairPairsIntParam(
+            {
+                {0, 0},
+                {7, 3},
+                {2, 2},
+                {4, 8},
+                {1, 6},
+            },
+            {
+                {8, 5},
+                {6, 9},
+                {5, 4},
+                {9, 1},
+                {3, 7},
+            },
+            5
+        ),
+        PairPairsIntParam(
+            {
+                {0, 0},
+                {1, 1},
+                {5, 5},
+                {6, 6},
+                {7, 7},
+            },
+            {
+                {2, 2},
+                {3, 3},
+                {4, 4},
+                {8, 8},
+                {9, 9},
+            },
+            4
+        )
+    )
+);
