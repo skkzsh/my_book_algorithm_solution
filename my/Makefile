@@ -39,7 +39,7 @@ define CXX_WITH_UNION_FIND
 $(1): $(1).o $(UNION_FIND_OBJ)
 	$(CXX) $(CXXFLAGS) $$^ -o $$@
 
-$(1).o: $(1).cpp $(UNION_FIND_HDR)
+$(1).o: $(1).cpp $(UNION_FIND_HDR) $(TEMPLATE_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_UNION_FIND), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
