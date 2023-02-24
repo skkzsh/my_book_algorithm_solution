@@ -1,9 +1,11 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
 #include <algorithm>
 #include <map>
+using ::testing::ElementsAreArray;
 using std::vector;
 
 vector<int> roots(const int v, vector<UnionFind> ufs) {
@@ -61,11 +63,7 @@ TEST(TestCase, Ex1) {
         { {0, 1}, {1, 2}, {2, 3}, },
         { {1, 2}, },
     };
-    const vector<int> results = cities(E, 4);
-    EXPECT_EQ(results.at(0), 1);
-    EXPECT_EQ(results.at(1), 2);
-    EXPECT_EQ(results.at(2), 2);
-    EXPECT_EQ(results.at(3), 1);
+    EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
 }
 
 TEST(TestCase, Ex2) {
@@ -73,11 +71,7 @@ TEST(TestCase, Ex2) {
         { {0, 1}, {1, 2}, },
         { {0, 3}, {1, 2}, },
     };
-    const vector<int> results = cities(E, 4);
-    EXPECT_EQ(results.at(0), 1);
-    EXPECT_EQ(results.at(1), 2);
-    EXPECT_EQ(results.at(2), 2);
-    EXPECT_EQ(results.at(3), 1);
+    EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
 }
 
 TEST(TestCase, Ex3) {
@@ -85,12 +79,5 @@ TEST(TestCase, Ex3) {
         { {0, 1}, {1, 2}, {1, 4}, {5, 6}, },
         { {2, 4}, {3, 4}, {2, 3}, {5, 6}, },
     };
-    const vector<int> results = cities(E, 7);
-    EXPECT_EQ(results.at(0), 1);
-    EXPECT_EQ(results.at(1), 1);
-    EXPECT_EQ(results.at(2), 2);
-    EXPECT_EQ(results.at(3), 1);
-    EXPECT_EQ(results.at(4), 2);
-    EXPECT_EQ(results.at(5), 2);
-    EXPECT_EQ(results.at(6), 2);
+    EXPECT_THAT(cities(E, 7), ElementsAreArray({1, 1, 2, 1, 2, 2, 2}));
 }

@@ -1,6 +1,9 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "template.hpp"
 #include <stack>
+using ::testing::ElementsAreArray;
+using ::testing::Pair;
 using std::invalid_argument;
 
 Pairs<int> pairing_paren(std::string_view parens) {
@@ -30,23 +33,18 @@ Pairs<int> pairing_paren(std::string_view parens) {
 
 // NOTE: assert順はアルゴリズムの出力結果に合わせている (右括弧の昇順)
 TEST(TestCase, Q) {
-    const Pairs<int> results = pairing_paren("(()(())())(()())");
-    EXPECT_EQ(results.at(0).first,  1);
-    EXPECT_EQ(results.at(0).second, 2);
-    EXPECT_EQ(results.at(1).first,  4);
-    EXPECT_EQ(results.at(1).second, 5);
-    EXPECT_EQ(results.at(2).first,  3);
-    EXPECT_EQ(results.at(2).second, 6);
-    EXPECT_EQ(results.at(3).first,  7);
-    EXPECT_EQ(results.at(3).second, 8);
-    EXPECT_EQ(results.at(4).first,  0);
-    EXPECT_EQ(results.at(4).second, 9);
-    EXPECT_EQ(results.at(5).first,  11);
-    EXPECT_EQ(results.at(5).second, 12);
-    EXPECT_EQ(results.at(6).first,  13);
-    EXPECT_EQ(results.at(6).second, 14);
-    EXPECT_EQ(results.at(7).first,  10);
-    EXPECT_EQ(results.at(7).second, 15);
+   EXPECT_THAT(pairing_paren("(()(())())(()())"),
+       ElementsAreArray({
+           Pair( 1,  2),
+           Pair( 4,  5),
+           Pair( 3,  6),
+           Pair( 7,  8),
+           Pair( 0,  9),
+           Pair(11, 12),
+           Pair(13, 14),
+           Pair(10, 15),
+       })
+   );
 }
 
 TEST(TestCase, MissingLeftParen) {

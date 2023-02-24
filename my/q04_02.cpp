@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include <algorithm>
+using ::testing::ElementsAreArray;
 using std::vector;
 using std::optional;
 
@@ -47,19 +49,7 @@ vector<long long> tribo_wrapper(const int N) {
 }
 
 TEST(TestCase, Test10) {
-    const vector<long long> results = tribo_wrapper(10);
-
-    EXPECT_EQ(results.at(10), 81);
-    EXPECT_EQ(results.at(9), 44);
-    EXPECT_EQ(results.at(8), 24);
-    EXPECT_EQ(results.at(7), 13);
-    EXPECT_EQ(results.at(6), 7);
-    EXPECT_EQ(results.at(5), 4);
-    EXPECT_EQ(results.at(4), 2);
-    EXPECT_EQ(results.at(3), 1);
-    EXPECT_EQ(results.at(2), 1);
-    EXPECT_EQ(results.at(1), 0);
-    EXPECT_EQ(results.at(0), 0);
+    EXPECT_THAT(tribo_wrapper(10), ElementsAreArray({0, 0, 1, 1, 2, 4, 7, 13, 24, 44, 81}));
 }
 
 TEST(TestCase, Negative) {

@@ -1,6 +1,8 @@
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 #include "union-find.hpp"
 #include "template.hpp"
+using ::testing::ElementsAreArray;
 using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
@@ -26,12 +28,7 @@ TEST(TestCase, Ex1) {
         {1, 2},
         {0, 3},
     };
-    const vector<int> results = decay(E, 4);
-    EXPECT_EQ(results.at(0), 1);
-    EXPECT_EQ(results.at(1), 1);
-    EXPECT_EQ(results.at(2), 2);
-    EXPECT_EQ(results.at(3), 3);
-    EXPECT_EQ(results.at(4), 4);
+    EXPECT_THAT(decay(E, 4), ElementsAreArray({1, 1, 2, 3, 4}));
 }
 
 TEST(TestCase, Ex2) {
@@ -42,14 +39,9 @@ TEST(TestCase, Ex2) {
         {2, 3},
         {3, 4},
     };
-    const vector<int> results = decay(E, 6);
-    EXPECT_EQ(results.at(0), 2);
-    EXPECT_EQ(results.at(1), 3);
-    EXPECT_EQ(results.at(2), 4);
-    EXPECT_EQ(results.at(3), 5);
-    EXPECT_EQ(results.at(4), 6);
+    EXPECT_THAT(decay(E, 6), ElementsAreArray({2, 3, 4, 5, 6}));
 }
 
 TEST(TestCase, Ex3) {
-    EXPECT_EQ(decay({{0, 1}}, 2).at(0), 2);
+    EXPECT_THAT(decay({{0, 1}}, 2), ElementsAreArray({2}));
 }
