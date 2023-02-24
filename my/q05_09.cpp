@@ -35,14 +35,14 @@ int min_union_cost(const vector<int> slimes) {
     return dp[0][N];
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     EXPECT_EQ(min_union_cost({10, 20, 30, 40}), 190);
 }
 
-//TEST(TestCase, Ex2) {
+//TEST(TestSuite, Ex2) {
 //    EXPECT_EQ(min_union_cost({10, 10, 10, 10}), 120);
 //}
 
-//TEST(TestCase, Ex4) {
+//TEST(TestSuite, Ex4) {
 //    EXPECT_EQ(min_union_cost({7, 6, 8, 6, 1, 1}), 68);
 //}

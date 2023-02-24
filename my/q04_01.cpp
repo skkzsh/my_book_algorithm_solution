@@ -19,11 +19,11 @@ long long tribo(const int N) {
 }
 
 
-TEST(TestCase, Test20) {
+TEST(TestSuite, Test20) {
     EXPECT_EQ(tribo(20), 35890);
 }
 
-TEST(TestCase, Negative) {
+TEST(TestSuite, Negative) {
     EXPECT_THROW(tribo(-1), std::invalid_argument);
 }
 

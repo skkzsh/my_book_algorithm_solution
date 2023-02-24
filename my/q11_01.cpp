@@ -27,7 +27,7 @@ int bridges(const Pairs<int> E, const int N) {
     return count;
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     const Pairs<int> E {
         {0, 2},
         {1, 6},
@@ -41,7 +41,7 @@ TEST(TestCase, Ex1) {
     EXPECT_EQ(bridges(E, 7), 4);
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     const Pairs<int> E {
         {2, 2},
         {0, 1},
@@ -52,7 +52,7 @@ TEST(TestCase, Ex2) {
     EXPECT_EQ(bridges(E, 3), 0);
 }
 
-TEST(TestCase, Ex3) {
+TEST(TestSuite, Ex3) {
     const Pairs<int> E {
         {0, 1},
         {1, 2},

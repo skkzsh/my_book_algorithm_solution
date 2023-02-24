@@ -37,10 +37,10 @@ bool partial_sum_exists(const int w, const vector<int> a) {
     return func(a.size(), w, a, memo);
 }
 
-TEST(TestCase, TestTrue) {
+TEST(TestSuite, TestTrue) {
     EXPECT_TRUE(partial_sum_exists(10, {1, 2, 4, 5, 11}));
 }
 
-TEST(TestCase, TestFalse) {
+TEST(TestSuite, TestFalse) {
     EXPECT_FALSE(partial_sum_exists(10, {1, 5, 8, 11}));
 }

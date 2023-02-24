@@ -25,7 +25,7 @@ vector<int> ranking(const vector<int> a) {
     return results;
 }
 
-TEST(TestCase, Ex) {
+TEST(TestSuite, Ex) {
     EXPECT_THAT(ranking({12, 43, 7, 15, 9}), ElementsAreArray({2, 4, 0, 3, 1}));
     // sorted: 7, 9, 12, 15, 43
 }

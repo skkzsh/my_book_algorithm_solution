@@ -32,15 +32,15 @@ int min_push(Pairs<int> p) {
 }
 
 
-TEST(TestCase, a_greater_than_b) {
+TEST(TestSuite, a_greater_than_b) {
     EXPECT_EQ(count({9, 4}), 3);
 }
 
-TEST(TestCase, a_less_than_b) {
+TEST(TestSuite, a_less_than_b) {
     EXPECT_EQ(count({4, 9}), 5);
 }
 
-TEST(TestCase, a_equal_to_multiple_of_b) {
+TEST(TestSuite, a_equal_to_multiple_of_b) {
     EXPECT_EQ(count({3, 1}), 0);
 }
 

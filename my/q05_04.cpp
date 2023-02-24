@@ -54,19 +54,19 @@ bool partial_sum_exists_push(const int W, const int K, const vector<int> a) {
     return dp[N][W] <= K;
 }
 
-TEST(TestCase, TestFalse) {
+TEST(TestSuite, TestFalse) {
     const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_FALSE(partial_sum_exists_pull(10, 2, a));
     EXPECT_FALSE(partial_sum_exists_push(10, 2, a));
 }
 
-TEST(TestCase, TestTrue) {
+TEST(TestSuite, TestTrue) {
     const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_TRUE(partial_sum_exists_pull(10, 3, a));
     EXPECT_TRUE(partial_sum_exists_push(10, 3, a));
 }
 
-TEST(TestCase, K_Negative) {
+TEST(TestSuite, K_Negative) {
     const vector<int> a {1, 2, 4, 5, 11};
     EXPECT_THROW(partial_sum_exists_pull(10, -1, a), std::invalid_argument);
     EXPECT_THROW(partial_sum_exists_push(10, -1, a), std::invalid_argument);

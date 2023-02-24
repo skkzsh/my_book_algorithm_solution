@@ -31,26 +31,26 @@ double polish(std::string_view expr) {
     return st.top();
 }
 
-TEST(TestCase, Q) {
+TEST(TestSuite, Q) {
     EXPECT_EQ(polish("34+12-*"), -7);
 }
 
-TEST(TestCase, InvalidOperator) {
+TEST(TestSuite, InvalidOperator) {
     EXPECT_THROW(polish("34+12-?"), invalid_argument);
 }
 
-TEST(TestCase, NoOperandExist) {
+TEST(TestSuite, NoOperandExist) {
     EXPECT_THROW(polish("+12-*"), invalid_argument);
 }
 
-TEST(TestCase, OneOperandOnlyExist) {
+TEST(TestSuite, OneOperandOnlyExist) {
     EXPECT_THROW(polish("4+12-*"), invalid_argument);
 }
 
-TEST(TestCase, TooManyNumbers) {
+TEST(TestSuite, TooManyNumbers) {
     EXPECT_THROW(polish("134+12-*"), invalid_argument);
 }
 
-TEST(TestCase, TooManyOperators) {
+TEST(TestSuite, TooManyOperators) {
     EXPECT_THROW(polish("34+12-*/"), invalid_argument);
 }

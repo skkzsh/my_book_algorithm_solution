@@ -32,7 +32,7 @@ Pairs<int> pairing_paren(std::string_view parens) {
 }
 
 // NOTE: assert順はアルゴリズムの出力結果に合わせている (右括弧の昇順)
-TEST(TestCase, Q) {
+TEST(TestSuite, Q) {
    EXPECT_THAT(pairing_paren("(()(())())(()())"),
        ElementsAreArray({
            Pair( 1,  2),
@@ -47,14 +47,14 @@ TEST(TestCase, Q) {
    );
 }
 
-TEST(TestCase, MissingLeftParen) {
+TEST(TestSuite, MissingLeftParen) {
     EXPECT_THROW(pairing_paren(")("), invalid_argument);
 }
 
-TEST(TestCase, MissingRightParen) {
+TEST(TestSuite, MissingRightParen) {
     EXPECT_THROW(pairing_paren("(("), invalid_argument);
 }
 
-TEST(TestCase, NotParens) {
+TEST(TestSuite, NotParens) {
     EXPECT_THROW(pairing_paren("{}"), invalid_argument);
 }

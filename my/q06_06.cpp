@@ -48,10 +48,10 @@ double bisection(const Constants<int> constants, const pair<double, double> inte
 
 // 解は複数あるが, 返却値はそのうちの1つであり, 探索範囲によって変わることに注意
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     EXPECT_NEAR(bisection({1, 1, 1}, {0, 200}), 100, EPS);
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     EXPECT_NEAR(bisection({53, 82, 49}, {1.58, 1.65}), 1.63372043395339, EPS);
 }

@@ -48,11 +48,11 @@ vector<long long> tribo_wrapper(const int N) {
     return results;
 }
 
-TEST(TestCase, Test10) {
+TEST(TestSuite, Test10) {
     EXPECT_THAT(tribo_wrapper(10), ElementsAreArray({0, 0, 1, 1, 2, 4, 7, 13, 24, 44, 81}));
 }
 
-TEST(TestCase, Negative) {
+TEST(TestSuite, Negative) {
     EXPECT_THROW(tribo_wrapper(-1), std::invalid_argument);
 }
 

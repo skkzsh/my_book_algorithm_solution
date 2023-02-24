@@ -64,17 +64,17 @@ int product_th_binary(vector<int> a, vector<int> b, const int K) {
     return right;
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     EXPECT_EQ(product_th_simple({2, 3}, {3, 5}, 3), 10);
     EXPECT_EQ(product_th_binary({2, 3}, {3, 5}, 3), 10);
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     EXPECT_EQ(product_th_simple({1, 2, 1}, {2, 1, 2}, 7), 2);
     EXPECT_EQ(product_th_binary({1, 2, 1}, {2, 1, 2}, 7), 2);
 }
 
-TEST(TestCase, Zero) {
+TEST(TestSuite, Zero) {
     EXPECT_THROW(product_th_binary({1, 0, 1}, {1, 1, 1}, 1), std::invalid_argument);
     EXPECT_THROW(product_th_binary({1, 1, 1}, {1, 1, 0}, 1), std::invalid_argument);
 }

@@ -58,7 +58,7 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
     return results;
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     const vector<Pairs<int>> E {
         { {0, 1}, {1, 2}, {2, 3}, },
         { {1, 2}, },
@@ -66,7 +66,7 @@ TEST(TestCase, Ex1) {
     EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     const vector<Pairs<int>> E {
         { {0, 1}, {1, 2}, },
         { {0, 3}, {1, 2}, },
@@ -74,7 +74,7 @@ TEST(TestCase, Ex2) {
     EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
 }
 
-TEST(TestCase, Ex3) {
+TEST(TestSuite, Ex3) {
     const vector<Pairs<int>> E {
         { {0, 1}, {1, 2}, {1, 4}, {5, 6}, },
         { {2, 4}, {3, 4}, {2, 3}, {5, 6}, },

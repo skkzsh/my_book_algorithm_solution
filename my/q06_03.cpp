@@ -53,19 +53,19 @@ int darts_binary(const vector<int> a, const int M) {
     return *max_element(tmp);
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     EXPECT_EQ(darts_simple({3, 14, 15, 9}, 50), 48);
     EXPECT_EQ(darts_binary({3, 14, 15, 9}, 50), 48);
 }
 
-TEST(TestCase, Boundary) {
+TEST(TestSuite, Boundary) {
     EXPECT_EQ(darts_simple({1}, 4), 4);
     EXPECT_EQ(darts_binary({1}, 4), 4);
     // 4を越えない範囲の最大値 <=> 4以下の最大値
     // <=> 4を越えたら例外 (4は例外でない) <=> 5以上は例外
 }
 
-TEST(TestCase, greater_than_M) {
+TEST(TestSuite, greater_than_M) {
     EXPECT_EQ(darts_simple({1}, 3), -1);
     EXPECT_THROW(darts_binary({1}, 3), std::invalid_argument);
     // 3を越えない範囲の最大値 <=> 3以下の最大値

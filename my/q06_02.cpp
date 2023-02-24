@@ -53,7 +53,7 @@ unsigned int festival_binary(Trio<int> z) {
 }
 
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     const Trio<int> z {
         {1, 5},
         {2, 4},
@@ -64,7 +64,7 @@ TEST(TestCase, Ex1) {
     EXPECT_EQ(festival_binary(z), 3);
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     const Trio<int> z {
         {1, 1, 1},
         {2, 2, 2},
@@ -75,7 +75,7 @@ TEST(TestCase, Ex2) {
     EXPECT_EQ(festival_binary(z), 27);
 }
 
-TEST(TestCase, Ex3) {
+TEST(TestSuite, Ex3) {
     const Trio<int> z {
         {3, 14, 159, 2, 6, 53},
         {58, 9, 79, 323, 84, 6},
@@ -86,7 +86,7 @@ TEST(TestCase, Ex3) {
     EXPECT_EQ(festival_binary(z), 87);
 }
 
-TEST(TestCase, Ex0ab) {
+TEST(TestSuite, Ex0ab) {
     const Trio<int> z {
         {1, 1},
         {1, 1},
@@ -97,7 +97,7 @@ TEST(TestCase, Ex0ab) {
     EXPECT_EQ(festival_binary(z), 0);
 }
 
-TEST(TestCase, Ex0bc) {
+TEST(TestSuite, Ex0bc) {
     const Trio<int> z {
         {1, 1},
         {2, 2},

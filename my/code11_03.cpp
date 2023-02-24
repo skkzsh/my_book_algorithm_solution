@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "union-find.hpp"
 
-TEST(TestCase, Ex) {
+TEST(TestSuite, Ex) {
     UnionFind uf(7); // {0}, {1}, {2}, {3}, {4}, {5}, {6}
 
     uf.unite(1, 2); // {0}, {1, 2}, {3}, {4}, {5}, {6}

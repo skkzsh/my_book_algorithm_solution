@@ -50,22 +50,22 @@ int cows(const vector<int> a, const int M) {
     return left;
 }
 
-TEST(TestCase, Ex) {
+TEST(TestSuite, Ex) {
     EXPECT_EQ(cows({1, 2, 4, 8, 9}, 3), 3);
 }
 
-TEST(TestCase, M_less_than_2) {
+TEST(TestSuite, M_less_than_2) {
     EXPECT_THROW(cows({1, 2, 4, 8, 9}, 1), std::invalid_argument);
 }
 
-TEST(TestCase, M_equal_to_2) {
+TEST(TestSuite, M_equal_to_2) {
     EXPECT_EQ(cows({1, 2, 4, 8, 9}, 2), 8);
 }
 
-TEST(TestCase, M_equal_to_N) {
+TEST(TestSuite, M_equal_to_N) {
     EXPECT_EQ(cows({1, 2, 4, 8, 9}, 5), 1);
 }
 
-TEST(TestCase, M_greater_than_N) {
+TEST(TestSuite, M_greater_than_N) {
     EXPECT_THROW(cows({1, 2, 4, 8, 9}, 6), std::invalid_argument);
 }

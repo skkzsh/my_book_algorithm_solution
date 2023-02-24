@@ -29,15 +29,15 @@ int happy_max(const vector<vector<int>> z) {
 }
 
 
-TEST(TestCase, Test0) {
+TEST(TestSuite, Test0) {
     EXPECT_EQ(happy_max({}), 0);
 }
 
-TEST(TestCase, Test1) {
+TEST(TestSuite, Test1) {
     EXPECT_EQ(happy_max({{1, 3, 2}}), 3);
 }
 
-TEST(TestCase, Test2) {
+TEST(TestSuite, Test2) {
     const vector<vector<int>> z {
         {100, 10, 1},
         {110, 11, 2},
@@ -46,7 +46,7 @@ TEST(TestCase, Test2) {
     EXPECT_EQ(happy_max(z), 120);
 }
 
-TEST(TestCase, Example1) {
+TEST(TestSuite, Example1) {
     const vector<vector<int>> z {
         {10, 40, 70},
         {20, 50, 80},
@@ -56,7 +56,7 @@ TEST(TestCase, Example1) {
     EXPECT_EQ(happy_max(z), 210);
 }
 
-TEST(TestCase, Example3) {
+TEST(TestSuite, Example3) {
     const vector<vector<int>> z {
         {6, 7, 8},
         {8, 8, 3},

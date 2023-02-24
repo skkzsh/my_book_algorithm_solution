@@ -62,37 +62,37 @@ int count753permutation(const int K) {
 }
 
 
-TEST(TestCase, Test0) {
+TEST(TestSuite, Test0) {
     EXPECT_EQ(count753recursive(356), 0);
     EXPECT_EQ(count753permutation(356), 0);
 }
 
-TEST(TestCase, Test1Min) {
+TEST(TestSuite, Test1Min) {
     EXPECT_EQ(count753recursive(357), 1);
     EXPECT_EQ(count753permutation(357), 1);
 }
 
-TEST(TestCase, Test1Max) {
+TEST(TestSuite, Test1Max) {
     EXPECT_EQ(count753recursive(374), 1);
     EXPECT_EQ(count753permutation(374), 1);
 }
 
-TEST(TestCase, Test2Min) {
+TEST(TestSuite, Test2Min) {
     EXPECT_EQ(count753recursive(375), 2);
     EXPECT_EQ(count753permutation(375), 2);
 }
 
-TEST(TestCase, Test4digit1) {
+TEST(TestSuite, Test4digit1) {
     EXPECT_EQ(count753recursive(1357), 6);
     EXPECT_EQ(count753permutation(1357), 6);
 }
 
-TEST(TestCase, Test4digitMin) {
+TEST(TestSuite, Test4digitMin) {
     EXPECT_EQ(count753recursive(3357), 7);
     // EXPECT_EQ(count753permutation(3357), 7); // TODO
 }
 
-TEST(TestCase, Negative) {
+TEST(TestSuite, Negative) {
     EXPECT_THROW(count753recursive(-1), std::invalid_argument);
     EXPECT_THROW(count753permutation(-1), std::invalid_argument);
 }

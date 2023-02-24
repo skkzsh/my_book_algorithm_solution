@@ -37,7 +37,7 @@ bool can_done(Pairs<unsigned int> tasks) { // {d, t}
 }
 
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     const Pairs<unsigned int> tasks {
         {2, 4},
         {1, 9},
@@ -49,7 +49,7 @@ TEST(TestCase, Ex1) {
     EXPECT_TRUE(can_done(tasks));
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     const Pairs<unsigned int> tasks {
         {334, 1000},
         {334, 1000},
@@ -59,7 +59,7 @@ TEST(TestCase, Ex2) {
     EXPECT_FALSE(can_done(tasks));
 }
 
-TEST(TestCase, Ex3) {
+TEST(TestSuite, Ex3) {
     const Pairs<unsigned int> tasks {
         { 384,  8895  },
         { 1725, 9791  },

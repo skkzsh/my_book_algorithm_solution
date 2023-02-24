@@ -37,26 +37,26 @@ int sum_combi(std::string_view S) {
     return sum_all;
 }
 
-TEST(TestCase, MiniTest00) {
+TEST(TestSuite, MiniTest00) {
     EXPECT_EQ(sum_bit("125", 0b00), 125);
 }
 
-TEST(TestCase, MiniTest01) {
+TEST(TestSuite, MiniTest01) {
     EXPECT_EQ(sum_bit("125", 0b01), 26);
 }
 
-TEST(TestCase, MiniTest10) {
+TEST(TestSuite, MiniTest10) {
     EXPECT_EQ(sum_bit("125", 0b10), 17);
 }
 
-TEST(TestCase, MiniTest11) {
+TEST(TestSuite, MiniTest11) {
     EXPECT_EQ(sum_bit("125", 0b11), 8);
 }
 
-TEST(TestCase, Test1) {
+TEST(TestSuite, Test1) {
     EXPECT_EQ(sum_combi("125"), 176);
 }
 
-TEST(TestCase, NotNumber) {
+TEST(TestSuite, NotNumber) {
     EXPECT_THROW(sum_combi("1?5"), std::invalid_argument);
 }

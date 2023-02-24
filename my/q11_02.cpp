@@ -20,7 +20,7 @@ vector<int> decay(const Pairs<int> E, const int N) {
     return results;
 }
 
-TEST(TestCase, Ex1) {
+TEST(TestSuite, Ex1) {
     const Pairs<int> E {
         {0, 1},
         {2, 3},
@@ -31,7 +31,7 @@ TEST(TestCase, Ex1) {
     EXPECT_THAT(decay(E, 4), ElementsAreArray({1, 1, 2, 3, 4}));
 }
 
-TEST(TestCase, Ex2) {
+TEST(TestSuite, Ex2) {
     const Pairs<int> E {
         {1, 2},
         {0, 1},
@@ -42,6 +42,6 @@ TEST(TestCase, Ex2) {
     EXPECT_THAT(decay(E, 6), ElementsAreArray({2, 3, 4, 5, 6}));
 }
 
-TEST(TestCase, Ex3) {
+TEST(TestSuite, Ex3) {
     EXPECT_THAT(decay({{0, 1}}, 2), ElementsAreArray({2}));
 }
