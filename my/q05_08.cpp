@@ -55,7 +55,7 @@ TEST(TestCase, Sample2) {
 
 TEST(TestCase, Sample3) {
     const vector<int> a {11, 18, 9, 20, 4, 18, 12, 14};
-    EXPECT_NEAR(aqua(3, a), 44.66666666666667, 1e-14);
+    EXPECT_DOUBLE_EQ(aqua(3, a), 44.66666666666667);
 }
 
 TEST(TestCase, M_Negative) {
