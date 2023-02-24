@@ -69,13 +69,13 @@ bool partial_sum_exists_push(const int W, const vector<int> a, const vector<unsi
 TEST(TestCase, TestFalse) {
     const vector<int> a {1, 2};
     const vector<unsigned int> m {1, 4};
-    EXPECT_EQ(partial_sum_exists_pull(10, a, m), false);
-    EXPECT_EQ(partial_sum_exists_push(10, a, m), false);
+    EXPECT_FALSE(partial_sum_exists_pull(10, a, m));
+    EXPECT_FALSE(partial_sum_exists_push(10, a, m));
 }
 
 TEST(TestCase, TestTrue) {
     const vector<int> a {1, 2};
     const vector<unsigned int> m {2, 4};
-    EXPECT_EQ(partial_sum_exists_pull(10, a, m), true);
-    EXPECT_EQ(partial_sum_exists_push(10, a, m), true);
+    EXPECT_TRUE(partial_sum_exists_pull(10, a, m));
+    EXPECT_TRUE(partial_sum_exists_push(10, a, m));
 }

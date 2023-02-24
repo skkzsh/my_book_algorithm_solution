@@ -38,9 +38,9 @@ bool partial_sum_exists(const int w, const vector<int> a) {
 }
 
 TEST(TestCase, TestTrue) {
-    EXPECT_EQ(partial_sum_exists(10, {1, 2, 4, 5, 11}), true);
+    EXPECT_TRUE(partial_sum_exists(10, {1, 2, 4, 5, 11}));
 }
 
 TEST(TestCase, TestFalse) {
-    EXPECT_EQ(partial_sum_exists(10, {1, 5, 8, 11}), false);
+    EXPECT_FALSE(partial_sum_exists(10, {1, 5, 8, 11}));
 }

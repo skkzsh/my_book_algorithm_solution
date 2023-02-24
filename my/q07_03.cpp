@@ -46,7 +46,7 @@ TEST(TestCase, Ex1) {
         {3, 12},
     };
 
-    EXPECT_EQ(can_done(tasks), true);
+    EXPECT_TRUE(can_done(tasks));
 }
 
 TEST(TestCase, Ex2) {
@@ -56,7 +56,7 @@ TEST(TestCase, Ex2) {
         {334, 1000},
     };
 
-    EXPECT_EQ(can_done(tasks), false);
+    EXPECT_FALSE(can_done(tasks));
 }
 
 TEST(TestCase, Ex3) {
@@ -93,5 +93,5 @@ TEST(TestCase, Ex3) {
         { 334,  5720  },
     };
 
-    EXPECT_EQ(can_done(tasks), true);
+    EXPECT_TRUE(can_done(tasks));
 }

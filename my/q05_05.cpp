@@ -45,12 +45,12 @@ bool partial_sum_exists_push(const int W, const vector<int> a) {
 
 TEST(TestCase, TestTrue) {
     const vector<int> a {2};
-    EXPECT_EQ(partial_sum_exists_pull(10, a), true);
-    EXPECT_EQ(partial_sum_exists_push(10, a), true);
+    EXPECT_TRUE(partial_sum_exists_pull(10, a));
+    EXPECT_TRUE(partial_sum_exists_push(10, a));
 }
 
 TEST(TestCase, TestFalse) {
     const vector<int> a {3, 6, 8, 9, 11};
-    EXPECT_EQ(partial_sum_exists_pull(10, a), false);
-    EXPECT_EQ(partial_sum_exists_push(10, a), false);
+    EXPECT_FALSE(partial_sum_exists_pull(10, a));
+    EXPECT_FALSE(partial_sum_exists_push(10, a));
 }
