@@ -6,14 +6,12 @@
 #include <map>
 using std::vector;
 
-vector<int> roots(const int v, const vector<UnionFind> ufs) {
-    using namespace std::ranges;
-
+vector<int> roots(const int v, vector<UnionFind> ufs) {
     vector<int> results(ufs.size());
 
-    transform(ufs, results.begin(), [&](UnionFind uf) {
-        return uf.root(v);
-    });
+    for (UnionFind uf : ufs) {
+        results.push_back(uf.root(v));
+    }
 
     return results;
 }
@@ -43,11 +41,17 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
         results.at(v) = counts[roots(v, ufs)];
     }
 
-    // transform(iota(0, N), results.begin(), [&](const int u) {
-    //     return count_if(iota(0, N), [&](const int v) {
-    //         return all_of(ufs, [&](UnionFind uf) { return uf.is_same_set(u, v); });
-    //     });
-    // });
+    // for (const int u : iota(0, N)) {
+    //     int count = 0;
+    //     for (const int v : iota(0, N)) {
+    //         if (all_of(ufs, [&](UnionFind uf) {
+    //             return uf.is_same_set(u, v);
+    //         })) {
+    //             count++;
+    //         }
+    //     }
+    //     results.at(u) = count;
+    // }
 
     return results;
 }
