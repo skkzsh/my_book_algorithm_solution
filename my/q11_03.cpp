@@ -3,13 +3,27 @@
 #include "template.hpp"
 #include <ranges>
 #include <algorithm>
+#include <map>
 using std::vector;
+
+vector<int> roots(const int v, const vector<UnionFind> ufs) {
+    using namespace std::ranges;
+
+    vector<int> results(ufs.size());
+
+    transform(ufs, results.begin(), [&](UnionFind uf) {
+        return uf.root(v);
+    });
+
+    return results;
+}
 
 // E: 辺集合 (0以上の連番であること)
 // N: 都市の数 (Eと整合が取れていること)
 vector<int> cities(const vector<Pairs<int>> E, const int N) {
-    using namespace std::ranges;
     using std::views::iota;
+    using std::map;
+
     // const int N = ;  // TODO
     vector<UnionFind> ufs(E.size(), N);
 
@@ -19,13 +33,21 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
         }
     }
 
-    vector<int> results(N);
+    map<vector<int>, int> counts;
+    for (const int v : iota(0, N)) {
+        counts[roots(v, ufs)]++;
+    }
 
-    transform(iota(0, N), results.begin(), [&](const int u) {
-        return count_if(iota(0, N), [&](const int v) {
-            return all_of(ufs, [&](UnionFind uf) { return uf.is_same_set(u, v); });
-        });
-    });
+    vector<int> results(N);
+    for (const int v : iota(0, N)) {
+        results.at(v) = counts[roots(v, ufs)];
+    }
+
+    // transform(iota(0, N), results.begin(), [&](const int u) {
+    //     return count_if(iota(0, N), [&](const int v) {
+    //         return all_of(ufs, [&](UnionFind uf) { return uf.is_same_set(u, v); });
+    //     });
+    // });
 
     return results;
 }

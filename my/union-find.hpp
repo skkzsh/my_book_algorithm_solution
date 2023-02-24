@@ -12,9 +12,7 @@ class UnionFind {
         vector<int> sizes; // 各要素の属する集合の要素数
     public:
         UnionFind(const int N);
-    private:
         int root(const int v);
-    public:
         bool is_same_set(const int u, const int v);
         bool unite(const int u, const int v);
     private:
