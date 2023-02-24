@@ -1,4 +1,3 @@
-#include "gtest/gtest.h"
 #include "gmock/gmock.h"
 #include "union-find.hpp"
 #include "template.hpp"
