@@ -6,26 +6,24 @@
 using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
-// N: 都市の数 (R, Tと整合が取れていること)
+// N: 都市の数 (Eと整合が取れていること)
 vector<int> cities(const vector<Pairs<int>> E, const int N) {
     using namespace std::ranges;
     using std::views::iota;
     // const int N = ;  // TODO
-    UnionFind uf0(N);
-    UnionFind uf1(N);
+    vector<UnionFind> ufs(E.size(), N);
 
-    for (const auto& e : E.at(0)) {
-        uf0.unite(e.first, e.second);
-    }
-    for (const auto& e : E.at(1)) {
-        uf1.unite(e.first, e.second);
+    for (size_t i = 0; i < E.size(); ++i) {
+        for (const auto& e : E.at(i)) {
+            ufs.at(i).unite(e.first, e.second);
+        }
     }
 
     vector<int> results(N);
 
     transform(iota(0, N), results.begin(), [&](const int u) {
         return count_if(iota(0, N), [&](const int v) {
-            return uf0.is_same_set(u, v) && uf1.is_same_set(u, v);
+            return all_of(ufs, [&](UnionFind uf) { return uf.is_same_set(u, v); });
         });
     });
 
