@@ -14,6 +14,14 @@ struct PairsIntParam {
 
 class PairsIntSuite : public ::testing::TestWithParam<PairsIntParam> {};
 
+struct PairsIntIntParam {
+    const Pairs<int> E;
+    const int N;
+    const int expected;
+};
+
+class PairsIntIntSuite : public ::testing::TestWithParam<PairsIntIntParam> {};
+
 
 template<class T> struct PairIntParam {
     const T a;

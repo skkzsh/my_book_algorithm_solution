@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
@@ -27,39 +28,50 @@ int bridges(const Pairs<int> E, const int N) {
     return count;
 }
 
-TEST(TestSuite, Ex1) {
-    const Pairs<int> E {
-        {0, 2},
-        {1, 6},
-        {2, 3},
-        {3, 4},
-        {3, 5},
-        {4, 5},
-        {5, 6},
-    };
 
-    EXPECT_EQ(bridges(E, 7), 4);
+TEST_P(PairsIntIntSuite, Ex) {
+    EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().expected);
 }
 
-TEST(TestSuite, Ex2) {
-    const Pairs<int> E {
-        {2, 2},
-        {0, 1},
-        {0, 2},
-        {1, 2},
-    };
+const PairsIntIntParam params[] {
+    {
+        {
+            {0, 2},
+            {1, 6},
+            {2, 3},
+            {3, 4},
+            {3, 5},
+            {4, 5},
+            {5, 6},
+        },
+        7,
+        4,
+    },
+    {
+        {
+            {2, 2},
+            {0, 1},
+            {0, 2},
+            {1, 2},
+        },
+        3,
+        0,
+    },
+    {
+        {
+            {0, 1},
+            {1, 2},
+            {2, 3},
+            {3, 4},
+            {4, 5},
+        },
+        6,
+        5,
+    },
+};
 
-    EXPECT_EQ(bridges(E, 3), 0);
-}
-
-TEST(TestSuite, Ex3) {
-    const Pairs<int> E {
-        {0, 1},
-        {1, 2},
-        {2, 3},
-        {3, 4},
-        {4, 5},
-    };
-
-    EXPECT_EQ(bridges(E, 6), 5);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairsIntIntSuite,
+    ::testing::ValuesIn(params)
+);
