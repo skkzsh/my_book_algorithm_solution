@@ -32,6 +32,7 @@ double polish(std::string_view expr) {
     return st.top();
 }
 
+
 TEST(TestSuite, Q) {
     EXPECT_EQ(polish("34+12-*"), -7);
 }
@@ -41,9 +42,9 @@ TEST_P(PairStringSuite, Invalid) {
 }
 
 const std::pair<string_view, string_view> params[] {
-    {"34+12-?", "InvalidOperator"},
-    {"+12-*", "NoOperandExist"},
-    {"4+12-*", "OneOperandOnlyExist"},
+    {"34+12-?",  "InvalidOperator"},
+    {"+12-*",    "NoOperandExist"},
+    {"4+12-*",   "OneOperandOnlyExist"},
     {"134+12-*", "TooManyNumbers"},
     {"34+12-*/", "TooManyOperators"},
 };
