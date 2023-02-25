@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
-#include <algorithm>
+#include "gtest-helper.hpp"
 #include "template.hpp"
+#include <algorithm>
 using std::string_view;
 using std::get;
-using std::make_tuple;
 
 string_view longest_common_substring(string_view S, string_view T) {
     using std::vector;
@@ -29,19 +29,19 @@ string_view longest_common_substring(string_view S, string_view T) {
 }
 
 
-class StringsSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
-
-TEST_P(StringsSuite, Ex) {
+TEST_P(TrioStringSuite, Ex) {
     EXPECT_EQ(longest_common_substring(get<0>(GetParam()), get<1>(GetParam())), get<2>(GetParam()));
 }
 
+const std::tuple<string_view, string_view, string_view> params[] {
+        {"axyb", "abyxb", "axb"}, // aybでも可
+        {"aa", "xayaz", "aa"},
+        {"a", "z", ""},
+        {"abracadabra", "avadakedavra", "aaadara"},
+};
+
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    StringsSuite,
-    ::testing::Values( // TODO: make pair tuple
-        make_tuple("axyb", "abyxb", "axb"), // aybでも可
-        make_tuple("aa", "xayaz", "aa"),
-        make_tuple("a", "z", ""),
-        make_tuple("abracadabra", "avadakedavra", "aaadara")
-    )
+    TrioStringSuite,
+    ::testing::ValuesIn(params)
 );

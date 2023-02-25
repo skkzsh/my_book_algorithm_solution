@@ -34,6 +34,7 @@ struct PairPairsIntParam {
 class PairPairsIntSuite : public ::testing::TestWithParam<PairPairsIntParam> {};
 
 
+class TrioStringSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
 class PairStringSuite : public ::testing::TestWithParam<std::pair<string_view, string_view>> {};
 
 string PrintToSecondParamName(const testing::TestParamInfo<PairStringSuite::ParamType>& info) {

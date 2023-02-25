@@ -49,7 +49,7 @@ TEST_P(PairsIntSuite, Ex) {
     EXPECT_EQ(min_push(GetParam().p), GetParam().expected);
 }
 
-PairsIntParam params[] {
+const PairsIntParam params[] {
     {
         {
             {3, 5},
@@ -68,7 +68,7 @@ PairsIntParam params[] {
             {5, 8},
             {9, 7},
         },
-        22
+        22,
     },
 };
 

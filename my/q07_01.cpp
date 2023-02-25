@@ -35,31 +35,31 @@ TEST_P(PairVectorIntSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-PairVectorIntParam params[] {
+const PairVectorIntParam params[] {
     {
         {2, 3, 1},
         {4, 0, 5},
-        2
+        2,
     },
     {
         {0, 1, 5},
         {2, 3, 4},
-        2
+        2,
     },
     {
         {2, 3},
         {0, 1},
-        0
+        0,
     },
     {
         {0, 7, 2, 4, 1},
         {8, 6, 5, 9, 3},
-        5
+        5,
     },
     {
         {0, 1, 5, 6, 7},
         {2, 3, 4, 8, 9},
-        4
+        4,
     },
 };
 
