@@ -49,14 +49,13 @@ int count753permutation(const int K) {
         throw std::invalid_argument("argument must not be negative");
     }
 
-    vector<char> v {'3', '5', '7'};
+    std::string s = "357";
     // int digit = std::to_string(K).length(); // TODO: 4ケタ以上の場合に対応する
 
     vector<int> candidates;
     do {
-        std::string str(v.begin(), v.end());
-        candidates.push_back(std::stoi(str));
-    } while (next_permutation(v).found);
+        candidates.push_back(std::stoi(s));
+    } while (next_permutation(s).found);
 
     return count_if(candidates, [K](int c) { return c <= K; });
 }
