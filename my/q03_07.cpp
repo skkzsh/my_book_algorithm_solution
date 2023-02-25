@@ -1,6 +1,8 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
+using std::string_view;
 
-int sum_bit(std::string_view S, const int bit) {
+int sum_bit(string_view S, const int bit) {
     const int L = S.length();
     int sum = 0;
     int tmp = 0;
@@ -26,7 +28,7 @@ int sum_bit(std::string_view S, const int bit) {
     return sum;
 }
 
-int sum_combi(std::string_view S) {
+int sum_combi(string_view S) {
     const int L = S.size();
     int sum_all = 0;
 
@@ -37,21 +39,25 @@ int sum_combi(std::string_view S) {
     return sum_all;
 }
 
-TEST(TestSuite, MiniTest00) {
-    EXPECT_EQ(sum_bit("125", 0b00), 125);
+
+const std::pair<int, int> params[] = {
+    {0b00, 125},
+    {0b01, 26},
+    {0b10, 17},
+    {0b11, 8},
+};
+
+TEST_P(PairIntSuite, SubTest) {
+    EXPECT_EQ(sum_bit("125", GetParam().first), GetParam().second);
 }
 
-TEST(TestSuite, MiniTest01) {
-    EXPECT_EQ(sum_bit("125", 0b01), 26);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairIntSuite,
+    ::testing::ValuesIn(params),
+    PrintToFirstParamName
+);
 
-TEST(TestSuite, MiniTest10) {
-    EXPECT_EQ(sum_bit("125", 0b10), 17);
-}
-
-TEST(TestSuite, MiniTest11) {
-    EXPECT_EQ(sum_bit("125", 0b11), 8);
-}
 
 TEST(TestSuite, Test1) {
     EXPECT_EQ(sum_combi("125"), 176);
