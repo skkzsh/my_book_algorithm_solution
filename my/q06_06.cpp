@@ -48,10 +48,23 @@ double bisection(const Constants<int> constants, const pair<double, double> inte
 
 // 解は複数あるが, 返却値はそのうちの1つであり, 探索範囲によって変わることに注意
 
-TEST(TestSuite, Ex1) {
-    EXPECT_NEAR(bisection({1, 1, 1}, {0, 200}), 100, EPS);
+struct TestParam {
+    const Constants<int> constants;
+    const pair<double, double> interval;
+    const double expected;
+} params[] = {
+    { {1, 1, 1}, {0, 200}, 100 },
+    { {53, 82, 49}, {1.58, 1.65}, 1.63372043395339 },
+};
+
+class TestSuite : public ::testing::TestWithParam<TestParam> {};
+
+TEST_P(TestSuite, Ex) {
+    EXPECT_NEAR(bisection(GetParam().constants, GetParam().interval), GetParam().expected, EPS);
 }
 
-TEST(TestSuite, Ex2) {
-    EXPECT_NEAR(bisection({53, 82, 49}, {1.58, 1.65}), 1.63372043395339, EPS);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    TestSuite,
+    ::testing::ValuesIn(params)
+);
