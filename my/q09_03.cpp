@@ -1,14 +1,14 @@
-#include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "template.hpp"
 #include <stack>
+#include <map>
 using ::testing::ElementsAreArray;
 using ::testing::Pair;
+using std::map;
 using std::invalid_argument;
 
-Pairs<int> pairing_paren(std::string_view parens) {
+map<int, int> pairing_paren(std::string_view parens) {
 
-    Pairs<int> result;
+    map<int, int> result;
     std::stack<int> st; // 左括弧の index を格納する stack
 
     // TODO: using iota
@@ -19,7 +19,7 @@ Pairs<int> pairing_paren(std::string_view parens) {
                 break;
             case ')':
                 if (st.empty()) { throw invalid_argument("Missing left paren to pair"); }
-                result.push_back({st.top(), i});
+                result.insert({st.top(), i});
                 st.pop();
                 break;
             default:
@@ -31,18 +31,19 @@ Pairs<int> pairing_paren(std::string_view parens) {
     return result;
 }
 
-// NOTE: assert順はアルゴリズムの出力結果に合わせている (右括弧の昇順)
+// NOTE: mapには右括弧の昇順でinsertされるが, mapのアルゴリズムにより左括弧の昇順に並び替えられている
+
 TEST(TestSuite, Q) {
    EXPECT_THAT(pairing_paren("(()(())())(()())"),
        ElementsAreArray({
-           Pair( 1,  2),
-           Pair( 4,  5),
-           Pair( 3,  6),
-           Pair( 7,  8),
            Pair( 0,  9),
+           Pair( 1,  2),
+           Pair( 3,  6),
+           Pair( 4,  5),
+           Pair( 7,  8),
+           Pair(10, 15),
            Pair(11, 12),
            Pair(13, 14),
-           Pair(10, 15),
        })
    );
 }
