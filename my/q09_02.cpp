@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
 #include <stack>
 using std::invalid_argument;
 
@@ -35,22 +36,21 @@ TEST(TestSuite, Q) {
     EXPECT_EQ(polish("34+12-*"), -7);
 }
 
-TEST(TestSuite, InvalidOperator) {
-    EXPECT_THROW(polish("34+12-?"), invalid_argument);
+TEST_P(PairStringSuite, Invalid) {
+    EXPECT_THROW(polish(GetParam().first), invalid_argument);
 }
 
-TEST(TestSuite, NoOperandExist) {
-    EXPECT_THROW(polish("+12-*"), invalid_argument);
-}
+const std::pair<string_view, string_view> params[] {
+    {"34+12-?", "InvalidOperator"},
+    {"+12-*", "NoOperandExist"},
+    {"4+12-*", "OneOperandOnlyExist"},
+    {"134+12-*", "TooManyNumbers"},
+    {"34+12-*/", "TooManyOperators"},
+};
 
-TEST(TestSuite, OneOperandOnlyExist) {
-    EXPECT_THROW(polish("4+12-*"), invalid_argument);
-}
-
-TEST(TestSuite, TooManyNumbers) {
-    EXPECT_THROW(polish("134+12-*"), invalid_argument);
-}
-
-TEST(TestSuite, TooManyOperators) {
-    EXPECT_THROW(polish("34+12-*/"), invalid_argument);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairStringSuite,
+    ::testing::ValuesIn(params),
+    PrintToSecondParamName
+);

@@ -1,7 +1,10 @@
 #pragma once
 
+#include "gtest/gtest.h"
 #include "template.hpp"
 using std::vector;
+using std::string_view;
+using std::string;
 
 
 struct PairsIntParam {
@@ -12,6 +15,7 @@ struct PairsIntParam {
 class PairsIntSuite : public ::testing::TestWithParam<PairsIntParam> {};
 
 
+// TODO: template
 struct PairVectorIntParam {
     const vector<int> a;
     const vector<int> b;
@@ -28,3 +32,10 @@ struct PairPairsIntParam {
 };
 
 class PairPairsIntSuite : public ::testing::TestWithParam<PairPairsIntParam> {};
+
+
+class PairStringSuite : public ::testing::TestWithParam<std::pair<string_view, string_view>> {};
+
+string PrintToSecondParamName(const testing::TestParamInfo<PairStringSuite::ParamType>& info) {
+    return (string) info.param.second;
+}

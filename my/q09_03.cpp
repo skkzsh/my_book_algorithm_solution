@@ -1,12 +1,14 @@
 #include "gmock/gmock.h"
+#include "gtest-helper.hpp"
 #include <stack>
 #include <map>
 using ::testing::ElementsAreArray;
 using ::testing::Pair;
+using std::string_view;
 using std::map;
 using std::invalid_argument;
 
-map<int, int> pairing_paren(std::string_view parens) {
+map<int, int> pairing_paren(string_view parens) {
 
     map<int, int> result;
     std::stack<int> st; // 左括弧の index を格納する stack
@@ -48,14 +50,19 @@ TEST(TestSuite, Q) {
    );
 }
 
-TEST(TestSuite, MissingLeftParen) {
-    EXPECT_THROW(pairing_paren(")("), invalid_argument);
+TEST_P(PairStringSuite, Invalid) {
+    EXPECT_THROW(pairing_paren(GetParam().first), invalid_argument);
 }
 
-TEST(TestSuite, MissingRightParen) {
-    EXPECT_THROW(pairing_paren("(("), invalid_argument);
-}
+const std::pair<string_view, string_view> params[] {
+    {")(", "MissingLeftParen"},
+    {"((", "MissingRightParen"},
+    {"{}", "NotParens"},
+};
 
-TEST(TestSuite, NotParens) {
-    EXPECT_THROW(pairing_paren("{}"), invalid_argument);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    PairStringSuite,
+    ::testing::ValuesIn(params),
+    PrintToSecondParamName
+);
