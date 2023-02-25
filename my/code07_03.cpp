@@ -49,29 +49,31 @@ TEST_P(PairsIntSuite, Ex) {
     EXPECT_EQ(min_push(GetParam().p), GetParam().expected);
 }
 
+PairsIntParam params[] {
+    {
+        {
+            {3, 5},
+            {2, 7},
+            {9, 4},
+        },
+        7,
+    },
+    {
+        {
+            {3, 1},
+            {4, 1},
+            {5, 9},
+            {2, 6},
+            {5, 3},
+            {5, 8},
+            {9, 7},
+        },
+        22
+    },
+};
+
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairsIntSuite,
-    ::testing::Values(
-        PairsIntParam(
-            {
-                {3, 5},
-                {2, 7},
-                {9, 4},
-            },
-            7
-        ),
-        PairsIntParam(
-            {
-                {3, 1},
-                {4, 1},
-                {5, 9},
-                {2, 6},
-                {5, 3},
-                {5, 8},
-                {9, 7},
-            },
-            22
-        )
-    )
+    ::testing::ValuesIn(params)
 );

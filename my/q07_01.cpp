@@ -35,34 +35,36 @@ TEST_P(PairVectorIntSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
+PairVectorIntParam params[] {
+    {
+        {2, 3, 1},
+        {4, 0, 5},
+        2
+    },
+    {
+        {0, 1, 5},
+        {2, 3, 4},
+        2
+    },
+    {
+        {2, 3},
+        {0, 1},
+        0
+    },
+    {
+        {0, 7, 2, 4, 1},
+        {8, 6, 5, 9, 3},
+        5
+    },
+    {
+        {0, 1, 5, 6, 7},
+        {2, 3, 4, 8, 9},
+        4
+    },
+};
+
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairVectorIntSuite,
-    ::testing::Values(
-        PairVectorIntParam(
-            {2, 3, 1},
-            {4, 0, 5},
-            2
-        ),
-        PairVectorIntParam(
-            {0, 1, 5},
-            {2, 3, 4},
-            2
-        ),
-        PairVectorIntParam(
-            {2, 3},
-            {0, 1},
-            0
-        ),
-        PairVectorIntParam(
-            {0, 7, 2, 4, 1},
-            {8, 6, 5, 9, 3},
-            5
-        ),
-        PairVectorIntParam(
-            {0, 1, 5, 6, 7},
-            {2, 3, 4, 8, 9},
-            4
-        )
-    )
+    ::testing::ValuesIn(params)
 );
