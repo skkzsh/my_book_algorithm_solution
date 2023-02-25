@@ -15,28 +15,20 @@ struct PairsIntParam {
 class PairsIntSuite : public ::testing::TestWithParam<PairsIntParam> {};
 
 
-// TODO: template
-struct PairVectorIntParam {
-    const vector<int> a;
-    const vector<int> b;
+template<class T> struct PairIntParam {
+    const T a;
+    const T b;
     const int expected;
 };
 
-class PairVectorIntSuite : public ::testing::TestWithParam<PairVectorIntParam> {};
-
-
-struct PairPairsIntParam {
-    const Pairs<int> a;
-    const Pairs<int> b;
-    const int expected;
-};
-
-class PairPairsIntSuite : public ::testing::TestWithParam<PairPairsIntParam> {};
+class PairVectorIntSuite : public ::testing::TestWithParam<PairIntParam<vector<int>>> {};
+class PairPairsIntSuite : public ::testing::TestWithParam<PairIntParam<Pairs<int>>> {};
 
 
 class TrioStringSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
 class PairStringSuite : public ::testing::TestWithParam<std::pair<string_view, string_view>> {};
 
+// TODO: NOT header
 string PrintToSecondParamName(const testing::TestParamInfo<PairStringSuite::ParamType>& info) {
     return (string) info.param.second;
 }

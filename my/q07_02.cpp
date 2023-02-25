@@ -42,7 +42,7 @@ TEST_P(PairPairsIntSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-const PairPairsIntParam params[] {
+const PairIntParam<Pairs<int>> params[] {
     {
         {
             {2, 0},

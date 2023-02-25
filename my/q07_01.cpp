@@ -35,7 +35,7 @@ TEST_P(PairVectorIntSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-const PairVectorIntParam params[] {
+const PairIntParam<vector<int>> params[] {
     {
         {2, 3, 1},
         {4, 0, 5},
