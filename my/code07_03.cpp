@@ -20,15 +20,15 @@ int min_push(Pairs<int> p) {
     vector<int> counts(p.size());
 
     for (int i = p.size() - 1; i >= 0; --i) {
-        counts[i] = count(p[i]);
-        // std::cout << "i: "  << i << ", count: " << counts[i] << std::endl;  // debug
+        counts.at(i) = count(p.at(i));
+        // std::cout << "i: "  << i << ", count: " << counts.at(i) << std::endl;  // debug
 
         for (int j = i; j >= 0; --j) {
-            p[j].first += counts[i];
+            p.at(j).first += counts.at(i);
         }
     }
 
-    return std::accumulate(counts.begin(), counts.end(), 0);
+    return std::accumulate(counts.begin(), counts.end(), 0); // TODO: using ranges
 }
 
 
