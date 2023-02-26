@@ -40,10 +40,12 @@ TEST(TestSuite, Ex1) {
     EXPECT_EQ(min_union_cost({10, 20, 30, 40}), 190);
 }
 
-//TEST(TestSuite, Ex2) {
-//    EXPECT_EQ(min_union_cost({10, 10, 10, 10}), 120);
-//}
+TEST(TestSuite, Ex2) {
+    GTEST_SKIP() << "実装中のため";
+    EXPECT_EQ(min_union_cost({10, 10, 10, 10}), 120);
+}
 
-//TEST(TestSuite, Ex4) {
-//    EXPECT_EQ(min_union_cost({7, 6, 8, 6, 1, 1}), 68);
-//}
+TEST(TestSuite, Ex4) {
+    GTEST_SKIP() << "実装中のため";
+    EXPECT_EQ(min_union_cost({7, 6, 8, 6, 1, 1}), 68);
+}

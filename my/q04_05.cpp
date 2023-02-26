@@ -89,11 +89,11 @@ TEST(TestSuite, Test4digit1) {
 
 TEST(TestSuite, Test4digitMin) {
     EXPECT_EQ(count753recursive(3357), 7);
-    // EXPECT_EQ(count753permutation(3357), 7); // TODO
+    GTEST_SKIP() << "未実装のため";
+    EXPECT_EQ(count753permutation(3357), 7); // TODO
 }
 
 TEST(TestSuite, Negative) {
     EXPECT_THROW(count753recursive(-1), invalid_argument);
     EXPECT_THROW(count753permutation(-1), invalid_argument);
 }
-
