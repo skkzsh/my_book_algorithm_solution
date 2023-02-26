@@ -57,26 +57,46 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
     return results;
 }
 
-TEST(TestSuite, Ex1) {
-    const vector<Pairs<int>> E {
-        { {0, 1}, {1, 2}, {2, 3}, },
-        { {1, 2}, },
-    };
-    EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
+
+const struct TestParam {
+    const vector<Pairs<int>> E;
+    const int N;
+    const vector<int> expected;
+} params[] {
+    {
+        {
+            { {0, 1}, {1, 2}, {2, 3}, },
+            { {1, 2}, },
+        },
+        4,
+        {1, 2, 2, 1},
+    },
+    {
+        {
+            { {0, 1}, {1, 2}, },
+            { {0, 3}, {1, 2}, },
+        },
+        4,
+        {1, 2, 2, 1},
+    },
+    {
+        {
+            { {0, 1}, {1, 2}, {1, 4}, {5, 6}, },
+            { {2, 4}, {3, 4}, {2, 3}, {5, 6}, },
+        },
+        7,
+        {1, 1, 2, 1, 2, 2, 2},
+    },
+};
+
+class TestSuite : public ::testing::TestWithParam<TestParam> {};
+
+TEST_P(TestSuite, Ex) {
+    EXPECT_THAT(cities(GetParam().E, GetParam().N), ElementsAreArray(GetParam().expected));
 }
 
-TEST(TestSuite, Ex2) {
-    const vector<Pairs<int>> E {
-        { {0, 1}, {1, 2}, },
-        { {0, 3}, {1, 2}, },
-    };
-    EXPECT_THAT(cities(E, 4), ElementsAreArray({1, 2, 2, 1}));
-}
-
-TEST(TestSuite, Ex3) {
-    const vector<Pairs<int>> E {
-        { {0, 1}, {1, 2}, {1, 4}, {5, 6}, },
-        { {2, 4}, {3, 4}, {2, 3}, {5, 6}, },
-    };
-    EXPECT_THAT(cities(E, 7), ElementsAreArray({1, 1, 2, 1, 2, 2, 2}));
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    TestSuite,
+    ::testing::ValuesIn(params)
+);
