@@ -2,7 +2,6 @@
 #include "gtest-helper.hpp"
 #include "template.hpp"
 #include <algorithm>
-using std::vector;
 
 int max_pairing(Pairs<int> r, Pairs<int> b) {
     constexpr int INF = 1 << 29; // 十分大きな値
@@ -11,7 +10,7 @@ int max_pairing(Pairs<int> r, Pairs<int> b) {
     sort(r.begin(), r.end());
     sort(b.begin(), b.end());
 
-    vector<bool> used(r.size(), false);  // rが使用済かどうか
+    std::vector<bool> used(r.size(), false);  // rが使用済かどうか
     int count = 0;
 
      // TODO: using iota
@@ -38,11 +37,13 @@ int max_pairing(Pairs<int> r, Pairs<int> b) {
 }
 
 
-TEST_P(PairPairsIntSuite, Ex) {
+class TestSuite : public ::testing::TestWithParam<PairTestParam<Pairs<int>>> {};
+
+TEST_P(TestSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-const PairIntParam<Pairs<int>> params[] {
+const PairTestParam<Pairs<int>> params[] {
     {
         {
             {2, 0},
@@ -118,6 +119,6 @@ const PairIntParam<Pairs<int>> params[] {
 
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    PairPairsIntSuite,
+    TestSuite,
     ::testing::ValuesIn(params)
 );

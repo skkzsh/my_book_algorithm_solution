@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
-#include <algorithm>
 #include "template.hpp"
+#include <algorithm>
 
 // 例で考える
 // {P(10, 30), Q(40, 50)} => P -> Qの順が必須

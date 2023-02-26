@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "gtest-helper.hpp"
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
@@ -29,11 +28,11 @@ int bridges(const Pairs<int> E, const int N) {
 }
 
 
-TEST_P(PairsIntIntSuite, Ex) {
-    EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().expected);
-}
-
-const PairsIntIntParam params[] {
+const struct TestParam {
+    const Pairs<int> E;
+    const int N;
+    const int expected;
+} params[] {
     {
         {
             {0, 2},
@@ -70,8 +69,14 @@ const PairsIntIntParam params[] {
     },
 };
 
+class TestSuite : public ::testing::TestWithParam<TestParam> {};
+
+TEST_P(TestSuite, Ex) {
+    EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().expected);
+}
+
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    PairsIntIntSuite,
+    TestSuite,
     ::testing::ValuesIn(params)
 );

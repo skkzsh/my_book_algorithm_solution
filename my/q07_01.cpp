@@ -31,11 +31,13 @@ int max_pairing(vector<int> a, vector<int> b) {
 }
 
 
-TEST_P(PairVectorIntSuite, Ex) {
+class TestSuite : public ::testing::TestWithParam<PairTestParam<vector<int>>> {};
+
+TEST_P(TestSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-const PairIntParam<vector<int>> params[] {
+const PairTestParam<vector<int>> params[] {
     {
         {2, 3, 1},
         {4, 0, 5},
@@ -65,6 +67,6 @@ const PairIntParam<vector<int>> params[] {
 
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    PairVectorIntSuite,
+    TestSuite,
     ::testing::ValuesIn(params)
 );

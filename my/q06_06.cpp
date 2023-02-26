@@ -48,11 +48,11 @@ double bisection(const Constants<int> constants, const pair<double, double> inte
 
 // 解は複数あるが, 返却値はそのうちの1つであり, 探索範囲によって変わることに注意
 
-struct TestParam {
+const struct TestParam {
     const Constants<int> constants;
     const pair<double, double> interval;
     const double expected;
-} params[] = {
+} params[] {
     { {1, 1, 1}, {0, 200}, 100 },
     { {53, 82, 49}, {1.58, 1.65}, 1.63372043395339 },
 };

@@ -2,7 +2,8 @@
 #include "gtest-helper.hpp"
 #include "template.hpp"
 #include <numeric>
-
+using ::testing::TestWithParam;
+using ::testing::ValuesIn;
 using std::vector;
 using std::pair;
 
@@ -16,15 +17,15 @@ int count(const pair<int, int> p) {
     return n * p.second - p.first;
 }
 
-int min_push(Pairs<int> p) {
-    vector<int> counts(p.size());
+int min_push(Pairs<int> ps) {
+    vector<int> counts(ps.size());
 
-    for (int i = p.size() - 1; i >= 0; --i) {
-        counts.at(i) = count(p.at(i));
+    for (int i = ps.size() - 1; i >= 0; --i) {
+        counts.at(i) = count(ps.at(i));
         // std::cout << "i: "  << i << ", count: " << counts.at(i) << std::endl;  // debug
 
         for (int j = i; j >= 0; --j) {
-            p.at(j).first += counts.at(i);
+            ps.at(j).first += counts.at(i);
         }
     }
 
@@ -32,48 +33,59 @@ int min_push(Pairs<int> p) {
 }
 
 
-TEST(TestSuite, a_greater_than_b) {
-    EXPECT_EQ(count({9, 4}), 3);
+class SubTestSuite : public TestWithParam<SingleTestParam<pair<int, int>>> {};
+
+TEST_P(SubTestSuite, SubEx) {
+    EXPECT_EQ(count(GetParam().x), GetParam().expected);
 }
 
-TEST(TestSuite, a_less_than_b) {
-    EXPECT_EQ(count({4, 9}), 5);
+const SingleTestParam<pair<int, int>> sub_params[] {
+      {{9, 4}, 3, "a_greater_than_b"},
+      {{4, 9}, 5, "a_less_than_b"},
+      {{3, 1}, 0, "a_equal_to_multiple_of_b"},
+};
+
+INSTANTIATE_TEST_SUITE_P(
+    SubInst,
+    SubTestSuite,
+    ValuesIn(sub_params),
+    [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
+        return (std::string) info.param.test_name;
+    }
+);
+
+
+class TestSuite : public TestWithParam<SingleTestParam<Pairs<int>>> {};
+
+TEST_P(TestSuite, Ex) {
+    EXPECT_EQ(min_push(GetParam().x), GetParam().expected);
 }
 
-TEST(TestSuite, a_equal_to_multiple_of_b) {
-    EXPECT_EQ(count({3, 1}), 0);
-}
-
-
-TEST_P(PairsIntSuite, Ex) {
-    EXPECT_EQ(min_push(GetParam().p), GetParam().expected);
-}
-
-const PairsIntParam params[] {
-    {
-        {
-            {3, 5},
-            {2, 7},
-            {9, 4},
-        },
-        7,
-    },
-    {
-        {
-            {3, 1},
-            {4, 1},
-            {5, 9},
-            {2, 6},
-            {5, 3},
-            {5, 8},
-            {9, 7},
-        },
-        22,
-    },
+const SingleTestParam<Pairs<int>> params[] {
+  {
+      {
+          {3, 5},
+          {2, 7},
+          {9, 4},
+      },
+      7,
+  },
+  {
+      {
+          {3, 1},
+          {4, 1},
+          {5, 9},
+          {2, 6},
+          {5, 3},
+          {5, 8},
+          {9, 7},
+      },
+      22,
+  },
 };
 
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    PairsIntSuite,
-    ::testing::ValuesIn(params)
+    TestSuite,
+    ValuesIn(params)
 );

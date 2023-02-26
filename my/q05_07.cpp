@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "gtest-helper.hpp"
 #include "template.hpp"
 #include <algorithm>
 using std::string_view;
@@ -29,7 +28,9 @@ string_view longest_common_substring(string_view S, string_view T) {
 }
 
 
-TEST_P(TrioStringSuite, Ex) {
+class TestSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
+
+TEST_P(TestSuite, Ex) {
     EXPECT_EQ(longest_common_substring(get<0>(GetParam()), get<1>(GetParam())), get<2>(GetParam()));
 }
 
@@ -42,6 +43,6 @@ const std::tuple<string_view, string_view, string_view> params[] {
 
 INSTANTIATE_TEST_SUITE_P(
     Inst,
-    TrioStringSuite,
+    TestSuite,
     ::testing::ValuesIn(params)
 );

@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "gtest-helper.hpp"
 using std::string_view;
 
 int sum_bit(string_view S, const int bit) {
@@ -40,22 +39,26 @@ int sum_combi(string_view S) {
 }
 
 
-const std::pair<int, int> params[] = {
+class SubTestSuite : public ::testing::TestWithParam<std::pair<int, int>> {};
+
+TEST_P(SubTestSuite, SubTest) {
+    EXPECT_EQ(sum_bit("125", GetParam().first), GetParam().second);
+}
+
+const std::pair<int, int> params[] {
     {0b00, 125},
     {0b01, 26},
     {0b10, 17},
     {0b11, 8},
 };
 
-TEST_P(PairIntSuite, SubTest) {
-    EXPECT_EQ(sum_bit("125", GetParam().first), GetParam().second);
-}
-
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    PairIntSuite,
+    SubInst,
+    SubTestSuite,
     ::testing::ValuesIn(params),
-    PrintToFirstParamName
+    [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
+        return std::to_string(info.param.first);
+    }
 );
 
 
