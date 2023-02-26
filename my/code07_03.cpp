@@ -35,7 +35,7 @@ int min_push(Pairs<int> ps) {
 
 class SubTestSuite : public TestWithParam<SingleTestParam<pair<int, int>>> {};
 
-TEST_P(SubTestSuite, SubEx) {
+TEST_P(SubTestSuite, Ex) {
     EXPECT_EQ(count(GetParam().x), GetParam().expected);
 }
 
@@ -46,7 +46,7 @@ const SingleTestParam<pair<int, int>> sub_params[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    SubInst,
+    Inst,
     SubTestSuite,
     ValuesIn(sub_params),
     [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {

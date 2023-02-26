@@ -42,7 +42,7 @@ int sum_combi(string_view S) {
 
 class SubTestSuite : public ::testing::TestWithParam<std::pair<int, int>> {};
 
-TEST_P(SubTestSuite, SubTest) {
+TEST_P(SubTestSuite, Test) {
     EXPECT_EQ(sum_bit("125", GetParam().first), GetParam().second);
 }
 
@@ -54,7 +54,7 @@ const std::pair<int, int> params[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    SubInst,
+    Inst,
     SubTestSuite,
     ::testing::ValuesIn(params),
     [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
