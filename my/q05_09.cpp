@@ -6,6 +6,7 @@ using std::vector;
 
 // TODO: 実装
 int min_union_cost(const vector<int> slimes) {
+    using std::ranges::min_element;
     using std::accumulate;
     using std::next;
 
@@ -25,7 +26,7 @@ int min_union_cost(const vector<int> slimes) {
             for (int k = 0; k < j - i - 1; ++k) {
                 tmp[k] = dp[i][i + 1 + k] + dp[i + 1 + k][j] + accumulate(next(slimes.begin(), i), next(slimes.begin(), j), 0);
             }
-            dp[i][j] = *std::ranges::min_element(tmp);
+            dp[i][j] = *min_element(tmp);
         }
     }
 

@@ -27,6 +27,7 @@ int darts_simple(const vector<int> a, const int M) {
 // O(N^2 log N)
 int darts_binary(const vector<int> a, const int M) {
     using namespace std::ranges;
+    using std::prev;
 
     if (4 * *min_element(a) > M) {
         throw invalid_argument("Solution does not exist");
@@ -48,7 +49,7 @@ int darts_binary(const vector<int> a, const int M) {
 
     vector<int> tmp(aa.size());
     for (const int k : aa) {
-        tmp.push_back(k + *std::prev(upper_bound(aa, M - k)));
+        tmp.push_back(k + *prev(upper_bound(aa, M - k)));
     }
 
     return *max_element(tmp);

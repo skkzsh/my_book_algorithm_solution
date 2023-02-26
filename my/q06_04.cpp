@@ -12,13 +12,14 @@ using std::invalid_argument;
 
 // すべての小屋の距離をx以上にして, 選べる小屋の最大個数
 int countx(const vector<int> a, const int x) {
+    using std::views::iota;
     const int N = a.size();
 
     int prev = 0; // 前回選んだ小屋のindex
     int count = 1; // 小屋を選んだ個数
 
     // 貪欲法
-    for (const int i : std::views::iota(0, N)) {
+    for (const int i : iota(0, N)) {
         if (a.at(i) - a.at(prev) >= x) {
             count++;
             prev = i;
