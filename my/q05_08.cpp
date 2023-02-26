@@ -4,6 +4,7 @@
 #include <algorithm>
 // #include <ranges>
 using std::vector;
+using std::invalid_argument;
 
 double aqua(const int M, const vector<int> a) {
     using std::accumulate;
@@ -14,7 +15,7 @@ double aqua(const int M, const vector<int> a) {
     const int N = a.size();
 
      if (M > N || M < 0) {
-         throw std::invalid_argument("0 <= M <= N required");
+         throw invalid_argument("0 <= M <= N required");
      }
 
     vector<vector<double>> dp(N + 1, vector<double>(M + 1, - INF));
@@ -60,9 +61,9 @@ TEST(TestSuite, Sample3) {
 
 TEST(TestSuite, M_Negative) {
     const vector<int> a {9, 1, 2, 3, 9};
-    EXPECT_THROW(aqua(-1, a), std::invalid_argument);
+    EXPECT_THROW(aqua(-1, a), invalid_argument);
 }
 TEST(TestSuite, M_GreaterThan_N) {
     const vector<int> a {9, 1, 2, 3, 9};
-    EXPECT_THROW(aqua(6, a), std::invalid_argument);
+    EXPECT_THROW(aqua(6, a), invalid_argument);
 }

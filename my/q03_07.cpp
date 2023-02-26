@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 using std::string_view;
+using std::invalid_argument;
 
 int sum_bit(string_view S, const int bit) {
     const int L = S.length();
@@ -9,7 +10,7 @@ int sum_bit(string_view S, const int bit) {
     for (int i = 0; i < L - 1; ++i) {
         const int num = S[i] - '0';
         if (num < 0 || num > 9) {
-            throw std::invalid_argument("argument must be number");
+            throw invalid_argument("argument must be number");
         }
 
         tmp += num;
@@ -67,5 +68,5 @@ TEST(TestSuite, Test1) {
 }
 
 TEST(TestSuite, NotNumber) {
-    EXPECT_THROW(sum_combi("1?5"), std::invalid_argument);
+    EXPECT_THROW(sum_combi("1?5"), invalid_argument);
 }

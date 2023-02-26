@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+using std::invalid_argument;
 
 int count_simple(const int K, const int N) {
     int count = 0;
@@ -14,7 +15,7 @@ int count_simple(const int K, const int N) {
 
 int count_better(const int K, const int N) {
     if (K < 0 || N < 0) {
-        throw std::invalid_argument("argument must not be negative");
+        throw invalid_argument("argument must not be negative");
     }
 
     if (3 * K < N) { // この場合, 条件を満たす組は存在しない
@@ -51,9 +52,9 @@ TEST(TestSuite, k_greater_than_n) {
 }
 
 TEST(TestSuite, k_negative) {
-    EXPECT_THROW(count_better(-1, 3), std::invalid_argument);
+    EXPECT_THROW(count_better(-1, 3), invalid_argument);
 }
 
 TEST(TestSuite, n_negative) {
-    EXPECT_THROW(count_better(3, -1), std::invalid_argument);
+    EXPECT_THROW(count_better(3, -1), invalid_argument);
 }

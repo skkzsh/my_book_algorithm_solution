@@ -1,12 +1,13 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 using std::vector;
+using std::invalid_argument;
 
 constexpr int INF = 1 << 29;  // 十分大きな値
 
 bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) {
      if (K < 0) {
-         throw std::invalid_argument("K must be not negative");
+         throw invalid_argument("K must be not negative");
      }
 
     const int N = a.size();
@@ -32,7 +33,7 @@ bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) {
 
 bool partial_sum_exists_push(const int W, const int K, const vector<int> a) {
      if (K < 0) {
-         throw std::invalid_argument("K must be not negative");
+         throw invalid_argument("K must be not negative");
      }
 
     const int N = a.size();
@@ -68,6 +69,6 @@ TEST(TestSuite, TestTrue) {
 
 TEST(TestSuite, K_Negative) {
     const vector<int> a {1, 2, 4, 5, 11};
-    EXPECT_THROW(partial_sum_exists_pull(10, -1, a), std::invalid_argument);
-    EXPECT_THROW(partial_sum_exists_push(10, -1, a), std::invalid_argument);
+    EXPECT_THROW(partial_sum_exists_pull(10, -1, a), invalid_argument);
+    EXPECT_THROW(partial_sum_exists_push(10, -1, a), invalid_argument);
 }

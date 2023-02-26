@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 using std::vector;
+using std::invalid_argument;
 using namespace std::ranges;
 
 // O(N^2 * log N)
@@ -45,7 +46,7 @@ int product_th_binary(vector<int> a, vector<int> b, const int K) {
     sort(b);
 
     if (a.at(0) <= 0 || b.at(0) <= 0) {
-        throw std::invalid_argument("a and b must be positive numbers");
+        throw invalid_argument("a and b must be positive numbers");
     }
 
     int left = 0; // 常にfalse (∵ a, b > 0)
@@ -75,6 +76,6 @@ TEST(TestSuite, Ex2) {
 }
 
 TEST(TestSuite, Zero) {
-    EXPECT_THROW(product_th_binary({1, 0, 1}, {1, 1, 1}, 1), std::invalid_argument);
-    EXPECT_THROW(product_th_binary({1, 1, 1}, {1, 1, 0}, 1), std::invalid_argument);
+    EXPECT_THROW(product_th_binary({1, 0, 1}, {1, 1, 1}, 1), invalid_argument);
+    EXPECT_THROW(product_th_binary({1, 1, 1}, {1, 1, 0}, 1), invalid_argument);
 }

@@ -2,6 +2,7 @@
 #include "template.hpp"
 #include <algorithm>
 using std::vector;
+using std::invalid_argument;
 
 // O(N^4)
 int darts_simple(const vector<int> a, const int M) {
@@ -28,7 +29,7 @@ int darts_binary(const vector<int> a, const int M) {
     using namespace std::ranges;
 
     if (4 * *min_element(a) > M) {
-        throw std::invalid_argument("Solution does not exist");
+        throw invalid_argument("Solution does not exist");
     }
 
     vector<int> aa(a.size() * a.size());
@@ -67,7 +68,7 @@ TEST(TestSuite, Boundary) {
 
 TEST(TestSuite, greater_than_M) {
     EXPECT_EQ(darts_simple({1}, 3), -1);
-    EXPECT_THROW(darts_binary({1}, 3), std::invalid_argument);
+    EXPECT_THROW(darts_binary({1}, 3), invalid_argument);
     // 3を越えない範囲の最大値 <=> 3以下の最大値
     // <=> 3を越えたら例外 (3は例外でない) <=> 4以上は例外
 }

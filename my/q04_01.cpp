@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
+using std::invalid_argument;
 
 long long tribo(const int N) {
     if (N < 0) {
-        throw std::invalid_argument("argument must not be negative");
+        throw invalid_argument("argument must not be negative");
     }
 
     // ベースケース
@@ -24,6 +25,5 @@ TEST(TestSuite, Test20) {
 }
 
 TEST(TestSuite, Negative) {
-    EXPECT_THROW(tribo(-1), std::invalid_argument);
+    EXPECT_THROW(tribo(-1), invalid_argument);
 }
-

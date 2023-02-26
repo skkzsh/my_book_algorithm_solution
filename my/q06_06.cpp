@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <cmath>
 
+using std::invalid_argument;
 using std::tuple;
 using std::pair;
 
@@ -17,7 +18,6 @@ double func(const double t, const Constants<int> constants) {
 }
 
 double bisection(const Constants<int> constants, const pair<double, double> interval) {
-   using std::invalid_argument;
 
     auto [left, right] = interval;
 

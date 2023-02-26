@@ -1,13 +1,14 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <unordered_map>
+using std::invalid_argument;
 
 // 3, 5, 7のカウントから算出する
 int count753recursive(const int K) {
     using std::ranges::all_of;
 
     if (K < 0) {
-        throw std::invalid_argument("argument must not be negative");
+        throw invalid_argument("argument must not be negative");
     }
 
     if (K < 357) {
@@ -46,7 +47,7 @@ int count753permutation(const int K) {
     using namespace std::ranges;
 
     if (K < 0) {
-        throw std::invalid_argument("argument must not be negative");
+        throw invalid_argument("argument must not be negative");
     }
 
     std::string s = "357";
@@ -92,7 +93,7 @@ TEST(TestSuite, Test4digitMin) {
 }
 
 TEST(TestSuite, Negative) {
-    EXPECT_THROW(count753recursive(-1), std::invalid_argument);
-    EXPECT_THROW(count753permutation(-1), std::invalid_argument);
+    EXPECT_THROW(count753recursive(-1), invalid_argument);
+    EXPECT_THROW(count753permutation(-1), invalid_argument);
 }
 
