@@ -11,7 +11,7 @@ using std::invalid_argument;
 */
 
 // すべての小屋の距離をx以上にして, 選べる小屋の最大個数
-int countx(const vector<int> a, const int x) {
+constexpr int countx(const vector<int> a, const int x) {
     using std::views::iota;
     const int N = a.size();
 
@@ -29,7 +29,7 @@ int countx(const vector<int> a, const int x) {
     return count;
 }
 
-int cows(const vector<int> a, const int M) {
+constexpr int cows(const vector<int> a, const int M) {
     const int N = a.size();
 
     if (M < 2 || M > N) {

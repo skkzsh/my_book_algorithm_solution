@@ -9,7 +9,7 @@ using std::get;
 template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
-unsigned int festival_simple(const Trio<int> z) {
+constexpr unsigned int festival_simple(const Trio<int> z) {
     unsigned int count = 0;
 
     for (const int a : get<0>(z)) {
@@ -29,7 +29,7 @@ unsigned int festival_simple(const Trio<int> z) {
 }
 
 // O(N log N)
-unsigned int festival_binary(Trio<int> z) {
+constexpr unsigned int festival_binary(Trio<int> z) {
     using namespace std::ranges;
 
 //    for (const int i : std::views::iota(0, 3)) {

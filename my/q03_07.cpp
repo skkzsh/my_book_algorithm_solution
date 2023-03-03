@@ -2,7 +2,7 @@
 using std::string_view;
 using std::invalid_argument;
 
-int sum_bit(string_view S, const int bit) {
+constexpr int sum_bit(string_view S, const int bit) {
     const int L = S.length();
     int sum = 0;
     int tmp = 0;
@@ -28,7 +28,7 @@ int sum_bit(string_view S, const int bit) {
     return sum;
 }
 
-int sum_combi(string_view S) {
+constexpr int sum_combi(string_view S) {
     const int L = S.size();
     int sum_all = 0;
 

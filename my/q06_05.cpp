@@ -5,7 +5,7 @@ using std::invalid_argument;
 using namespace std::ranges;
 
 // O(N^2 * log N)
-int product_th_simple(const vector<int> a, const vector<int> b, const int K) {
+constexpr int product_th_simple(const vector<int> a, const vector<int> b, const int K) {
     vector<int> p; // (a.size() * b.size())
     for (const int i : a) {
         for (const int j : b) {
@@ -24,7 +24,7 @@ int product_th_simple(const vector<int> a, const vector<int> b, const int K) {
 // a[i] * b[j] <= x の数を返す関数
 // a, bはソート済が前提
 // O(N * log N)
-int countx(const vector<int> a, const vector<int> b, const int x) {
+constexpr int countx(const vector<int> a, const vector<int> b, const int x) {
     /*
     a[i] を固定して b[j] <= x / a[i] となる最大のjを求める
     <=> a[i] を固定して b[j] > x / a[i] となる最小のjを求める

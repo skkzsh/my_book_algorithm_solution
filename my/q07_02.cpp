@@ -3,7 +3,7 @@
 #include "template.hpp"
 #include <algorithm>
 
-int max_pairing(Pairs<int> r, Pairs<int> b) {
+int max_pairing(Pairs<int> r, Pairs<int> b) { // TODO: constexpr (C++20)
     constexpr int INF = 1 << 29; // 十分大きな値
 
     using std::sort;  // TODO: using ranges

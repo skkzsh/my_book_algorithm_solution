@@ -16,7 +16,7 @@ using std::vector;
 // a[i] < b[j]
 // => 交換可能
 
-int max_pairing(vector<int> a, vector<int> b) {
+int max_pairing(vector<int> a, vector<int> b) { // TODO: constexpr (C++20)
     using std::sort; // TODO: using ranges
     sort(a.begin(), a.end());
     sort(b.begin(), b.end());

@@ -6,7 +6,7 @@ constexpr unsigned int INF = std::numeric_limits<unsigned int>::max();
 
 // a, mをpairにするのもいい
 
-bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsigned int> m) {
+bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsigned int> m) { // TODO: constexpr (C++20)
     const int N = a.size();
     vector<vector<unsigned int>> dp(N + 1, vector<unsigned int>(W + 1, INF));
 
@@ -34,7 +34,7 @@ bool partial_sum_exists_pull(const int W, const vector<int> a, const vector<unsi
     return dp[N][W] <= m[N - 1];
 }
 
-bool partial_sum_exists_push(const int W, const vector<int> a, const vector<unsigned int> m) {
+bool partial_sum_exists_push(const int W, const vector<int> a, const vector<unsigned int> m) { // TODO: constexpr (C++20)
     const int N = a.size();
     vector<vector<unsigned int>> dp(N + 1, vector<unsigned int>(W + 1, INF));
 

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 using std::vector;
 
-bool partial_sum_exists_pull(const int W, const vector<int> a) {
+bool partial_sum_exists_pull(const int W, const vector<int> a) { // TODO: constexpr (C++20)
     const int N = a.size();
     vector<vector<bool>> dp(N + 1, vector<bool>(W + 1, false));
 
@@ -24,7 +24,7 @@ bool partial_sum_exists_pull(const int W, const vector<int> a) {
     return dp[N][W];
 }
 
-bool partial_sum_exists_push(const int W, const vector<int> a) {
+bool partial_sum_exists_push(const int W, const vector<int> a) { // TODO: constexpr (C++20)
     const int N = a.size();
     vector<vector<bool>> dp(N + 1, vector<bool>(W + 1, false));
 

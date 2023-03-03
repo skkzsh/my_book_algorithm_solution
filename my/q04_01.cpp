@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 using std::invalid_argument;
 
-long long tribo(const int N) {
+constexpr long long tribo(const int N) {
     if (N < 0) {
         throw invalid_argument("argument must not be negative");
     }

@@ -4,7 +4,7 @@
 using std::string_view;
 using std::get;
 
-string_view longest_common_substring(string_view S, string_view T) {
+constexpr string_view longest_common_substring(string_view S, string_view T) {
     using std::vector;
     using std::string;
     using namespace std::ranges;

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 using std::invalid_argument;
 
-int count_simple(const int K, const int N) {
+constexpr int count_simple(const int K, const int N) {
     int count = 0;
     for (int x = 0; x <= K; x++) {
         for (int y = 0; y <= K; y++) {
@@ -13,7 +13,7 @@ int count_simple(const int K, const int N) {
     return count;
 }
 
-int count_better(const int K, const int N) {
+constexpr int count_better(const int K, const int N) {
     if (K < 0 || N < 0) {
         throw invalid_argument("argument must not be negative");
     }

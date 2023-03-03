@@ -9,7 +9,7 @@ using std::pair;
 
 // n * p.second = p.first + d
 // を満たすような最小の整数 d (>= 0) を返す
-int count(const pair<int, int> p) {
+int count(const pair<int, int> p) { // TODO: constexpr (C++20)
     int n = 1;
     while (n * p.second < p.first) {
         ++n;
@@ -17,7 +17,7 @@ int count(const pair<int, int> p) {
     return n * p.second - p.first;
 }
 
-int min_push(Pairs<int> ps) {
+int min_push(Pairs<int> ps) { // TODO: constexpr (C++20)
     vector<int> counts(ps.size());
 
     for (int i = ps.size() - 1; i >= 0; --i) {

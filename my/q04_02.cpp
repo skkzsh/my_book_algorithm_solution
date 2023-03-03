@@ -5,7 +5,7 @@ using std::vector;
 using std::optional;
 using std::invalid_argument;
 
-long long tribo(const int N, vector<optional<long long>> &memo) {
+constexpr long long tribo(const int N, vector<optional<long long>> &memo) {
     // すでに計算済みならば解をリターン
     if (memo[N].has_value()) {
         return memo[N].value();
@@ -27,7 +27,7 @@ long long tribo(const int N, vector<optional<long long>> &memo) {
 }
 
 
-vector<long long> tribo_wrapper(const int N) {
+constexpr vector<long long> tribo_wrapper(const int N) {
     if (N < 0) {
         throw invalid_argument("argument must not be negative");
     }
