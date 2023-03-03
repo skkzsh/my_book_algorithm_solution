@@ -24,9 +24,7 @@ bool can_done(Pairs<unsigned int> tasks) { // {d, t} // TODO: constexpr (C++20)
         return p.second < q.second;
     });
 
-    unsigned int now = 0;
-
-    for (const auto& task : tasks) {
+    for (unsigned int now = 0; const auto& task : tasks) {
         now += task.first;
         if (now > task.second) {
             return false;
