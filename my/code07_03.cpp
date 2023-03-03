@@ -39,7 +39,7 @@ TEST_P(SubTestSuite, Ex) {
     EXPECT_EQ(count(GetParam().x), GetParam().expected);
 }
 
-const SingleTestParam<pair<int, int>> sub_params[] {
+constexpr SingleTestParam<pair<int, int>> sub_params[] {
       {{9, 4}, 3, "a_greater_than_b"},
       {{4, 9}, 5, "a_less_than_b"},
       {{3, 1}, 0, "a_equal_to_multiple_of_b"},

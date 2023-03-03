@@ -34,7 +34,7 @@ TEST_P(TestSuite, Ex) {
     EXPECT_EQ(longest_common_substring(get<0>(GetParam()), get<1>(GetParam())), get<2>(GetParam()));
 }
 
-const std::tuple<string_view, string_view, string_view> params[] {
+constexpr std::tuple<string_view, string_view, string_view> params[] {
         {"axyb", "abyxb", "axb"}, // aybでも可
         {"aa", "xayaz", "aa"},
         {"a", "z", ""},

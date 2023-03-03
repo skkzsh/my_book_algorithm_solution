@@ -46,7 +46,7 @@ TEST_P(SubTestSuite, Test) {
     EXPECT_EQ(sum_bit("125", GetParam().first), GetParam().second);
 }
 
-const std::pair<int, int> params[] {
+constexpr std::pair<int, int> params[] {
     {0b00, 125},
     {0b01, 26},
     {0b10, 17},
