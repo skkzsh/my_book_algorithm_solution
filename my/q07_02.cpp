@@ -3,12 +3,12 @@
 #include "template.hpp"
 #include <algorithm>
 
-int max_pairing(Pairs<int> r, Pairs<int> b) { // TODO: constexpr (C++20)
+constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
     constexpr int INF = 1 << 29; // 十分大きな値
 
-    using std::sort;  // TODO: using ranges
-    sort(r.begin(), r.end());
-    sort(b.begin(), b.end());
+    using std::ranges::sort;
+    sort(r);
+    sort(b);
 
     std::vector<bool> used(r.size(), false);  // rが使用済かどうか
     int count = 0;

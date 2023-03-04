@@ -19,8 +19,8 @@
 // d[i] + d[j] < t[i] < t[j] => d[i] + d[j] < t[j]
 // => 交換可能
 
-bool can_done(Pairs<unsigned int> tasks) { // {d, t} // TODO: constexpr (C++20)
-    std::sort(tasks.begin(), tasks.end(), [](const auto p, const auto q) { // TODO: Use ranges
+constexpr bool can_done(Pairs<unsigned int> tasks) { // {d, t}
+    std::ranges::sort(tasks, [](const auto p, const auto q) {
         return p.second < q.second;
     });
 
