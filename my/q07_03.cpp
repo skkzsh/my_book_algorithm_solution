@@ -19,12 +19,13 @@
 // d[i] + d[j] < t[i] < t[j] => d[i] + d[j] < t[j]
 // => 交換可能
 
-constexpr bool can_done(Pairs<unsigned int> tasks) { // {d, t}
-    std::ranges::sort(tasks, [](const auto p, const auto q) {
-        return p.second < q.second;
-    });
+constexpr bool can_done(Pairs<int> tasks) { // {d, t}
+    using std::ranges::sort;
+    using std::pair;
 
-    for (unsigned int now = 0; const auto& task : tasks) {
+    sort(tasks, {}, &pair<int, int>::second);
+
+    for (int now = 0; const auto& task : tasks) {
         now += task.first;
         if (now > task.second) {
             return false;
@@ -36,7 +37,7 @@ constexpr bool can_done(Pairs<unsigned int> tasks) { // {d, t}
 
 
 TEST(TestSuite, Ex1) {
-    const Pairs<unsigned int> tasks {
+    const Pairs<int> tasks {
         {2, 4},
         {1, 9},
         {1, 8},
@@ -48,7 +49,7 @@ TEST(TestSuite, Ex1) {
 }
 
 TEST(TestSuite, Ex2) {
-    const Pairs<unsigned int> tasks {
+    const Pairs<int> tasks {
         {334, 1000},
         {334, 1000},
         {334, 1000},
@@ -58,7 +59,7 @@ TEST(TestSuite, Ex2) {
 }
 
 TEST(TestSuite, Ex3) {
-    const Pairs<unsigned int> tasks {
+    const Pairs<int> tasks {
         { 384,  8895  },
         { 1725, 9791  },
         { 170,  1024  },
