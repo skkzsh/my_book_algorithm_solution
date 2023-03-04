@@ -4,7 +4,7 @@
 using std::invalid_argument;
 
 // 3, 5, 7のカウントから算出する
-int count753recursive(const int K) { // TODO: constexpr (C++23)
+constexpr int count753recursive(const int K) {
     using std::ranges::all_of;
 
     if (K < 0) {
