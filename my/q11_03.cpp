@@ -34,12 +34,12 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
 
     map<vector<int>, int> counts;
     for (const int v : iota(0, N)) {
-        counts[roots(v, ufs)]++;
+        counts[roots(v, ufs)]++; // TODO: at
     }
 
     vector<int> results(N);
     for (const int v : iota(0, N)) {
-        results.at(v) = counts[roots(v, ufs)];
+        results.at(v) = counts.at(roots(v, ufs));
     }
 
     // for (const int u : iota(0, N)) {

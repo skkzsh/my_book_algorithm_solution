@@ -8,7 +8,7 @@ constexpr int sum_bit(string_view S, const int bit) {
     int tmp = 0;
 
     for (int i = 0; i < L - 1; ++i) {
-        const int num = S[i] - '0';
+        const int num = S.at(i) - '0';
         if (num < 0 || num > 9) {
             throw invalid_argument("argument must be number");
         }
@@ -24,7 +24,7 @@ constexpr int sum_bit(string_view S, const int bit) {
     }
 
     sum += tmp;
-    sum += S[L - 1] - '0';
+    sum += S.at(L - 1) - '0';
     return sum;
 }
 

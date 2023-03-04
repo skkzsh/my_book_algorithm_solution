@@ -26,7 +26,7 @@ constexpr int count753recursive(const int K) {
             case 3:
             case 5:
             case 7:
-                count753map[n]++;
+                count753map.at(n)++;
                 break;
             default:
                 return count753recursive(K - 1);

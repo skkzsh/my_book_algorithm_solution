@@ -47,7 +47,7 @@ bool UnionFind::unite(const int u, const int v) {
 }
 
 int UnionFind::size(const int v) {
-    return sizes[root(v)];
+    return sizes.at(root(v));
 }
 
 int UnionFind::count_set() const {
