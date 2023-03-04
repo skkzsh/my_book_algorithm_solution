@@ -37,7 +37,7 @@ TEST_P(TestSuite, Ex) {
     EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
 }
 
-const PairTestParam<vector<int>> params[] {
+const PairTestParam<vector<int>> PARAMS[] {
     {
         {2, 3, 1},
         {4, 0, 5},
@@ -68,5 +68,5 @@ const PairTestParam<vector<int>> params[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(params)
+    ::testing::ValuesIn(PARAMS)
 );

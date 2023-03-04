@@ -39,7 +39,7 @@ TEST_P(SubTestSuite, Ex) {
     EXPECT_EQ(count(GetParam().x), GetParam().expected);
 }
 
-constexpr SingleTestParam<pair<int, int>> sub_params[] {
+constexpr SingleTestParam<pair<int, int>> SUB_PARAMS[] {
       {{9, 4}, 3, "a_greater_than_b"},
       {{4, 9}, 5, "a_less_than_b"},
       {{3, 1}, 0, "a_equal_to_multiple_of_b"},
@@ -48,7 +48,7 @@ constexpr SingleTestParam<pair<int, int>> sub_params[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     SubTestSuite,
-    ValuesIn(sub_params),
+    ValuesIn(SUB_PARAMS),
     [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
         return (std::string) info.param.test_name;
     }
@@ -61,7 +61,7 @@ TEST_P(TestSuite, Ex) {
     EXPECT_EQ(min_push(GetParam().x), GetParam().expected);
 }
 
-const SingleTestParam<Pairs<int>> params[] {
+const SingleTestParam<Pairs<int>> PARAMS[] {
   {
       {
           {3, 5},
@@ -87,5 +87,5 @@ const SingleTestParam<Pairs<int>> params[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ValuesIn(params)
+    ValuesIn(PARAMS)
 );

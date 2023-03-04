@@ -41,7 +41,7 @@ TEST_P(PairStringSuite, Invalid) {
     EXPECT_THROW(polish(GetParam().first), invalid_argument);
 }
 
-constexpr std::pair<string_view, string_view> params[] {
+constexpr std::pair<string_view, string_view> PARAMS[] {
     {"34+12-?",  "InvalidOperator"},
     {"+12-*",    "NoOperandExist"},
     {"4+12-*",   "OneOperandOnlyExist"},
@@ -52,6 +52,6 @@ constexpr std::pair<string_view, string_view> params[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairStringSuite,
-    ::testing::ValuesIn(params),
+    ::testing::ValuesIn(PARAMS),
     PrintToSecondParamName
 );

@@ -62,7 +62,7 @@ const struct TestParam {
     const vector<Pairs<int>> E;
     const int N;
     const vector<int> expected;
-} params[] {
+} PARAMS[] {
     {
         {
             { {0, 1}, {1, 2}, {2, 3}, },
@@ -98,5 +98,5 @@ TEST_P(TestSuite, Ex) {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(params)
+    ::testing::ValuesIn(PARAMS)
 );

@@ -54,7 +54,7 @@ TEST_P(PairStringSuite, Invalid) {
     EXPECT_THROW(pairing_paren(GetParam().first), invalid_argument);
 }
 
-constexpr std::pair<string_view, string_view> params[] {
+constexpr std::pair<string_view, string_view> PARAMS[] {
     {")(", "MissingLeftParen"},
     {"((", "MissingRightParen"},
     {"{}", "NotParens"},
@@ -63,6 +63,6 @@ constexpr std::pair<string_view, string_view> params[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairStringSuite,
-    ::testing::ValuesIn(params),
+    ::testing::ValuesIn(PARAMS),
     PrintToSecondParamName
 );

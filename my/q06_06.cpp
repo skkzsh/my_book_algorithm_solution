@@ -52,7 +52,7 @@ constexpr struct TestParam {
     const Constants<int> constants;
     const pair<double, double> interval;
     const double expected;
-} params[] {
+} PARAMS[] {
     { {1, 1, 1}, {0, 200}, 100 },
     { {53, 82, 49}, {1.58, 1.65}, 1.63372043395339 },
 };
@@ -66,5 +66,5 @@ TEST_P(TestSuite, Ex) {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(params)
+    ::testing::ValuesIn(PARAMS)
 );
