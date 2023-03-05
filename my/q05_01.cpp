@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
 #include <algorithm>
 #include <ranges>
 using std::vector;
@@ -29,44 +30,46 @@ constexpr int happy_max(const vector<vector<int>> z) {
 }
 
 
-TEST(TestSuite, Test0) {
-    EXPECT_EQ(happy_max({}), 0);
+class TestSuite : public ::testing::TestWithParam<SingleTestParam<vector<vector<int>>>> {};
+
+TEST_P(TestSuite, Ex) {
+    EXPECT_EQ(happy_max(GetParam().x), GetParam().expected);
 }
 
-TEST(TestSuite, Test1) {
-    EXPECT_EQ(happy_max({{1, 3, 2}}), 3);
-}
+const SingleTestParam<vector<vector<int>>> PARAMS[] {
+    { {}, 0 },
+    { {{1, 3, 2}}, 3 },
+    {
+        {
+            {100, 10, 1},
+            {110, 11, 2},
+        },
+        120,
+    },
+    {
+        {
+            {10, 40, 70},
+            {20, 50, 80},
+            {30, 60, 90},
+        },
+        210,
+    },
+    {
+        {
+            {6, 7, 8},
+            {8, 8, 3},
+            {2, 5, 2},
+            {7, 8, 6},
+            {4, 6, 8},
+            {2, 3, 4},
+            {7, 5, 1},
+        },
+        46,
+    },
+};
 
-TEST(TestSuite, Test2) {
-    const vector<vector<int>> z {
-        {100, 10, 1},
-        {110, 11, 2},
-    };
-
-    EXPECT_EQ(happy_max(z), 120);
-}
-
-TEST(TestSuite, Example1) {
-    const vector<vector<int>> z {
-        {10, 40, 70},
-        {20, 50, 80},
-        {30, 60, 90},
-    };
-
-    EXPECT_EQ(happy_max(z), 210);
-}
-
-TEST(TestSuite, Example3) {
-    const vector<vector<int>> z {
-        {6, 7, 8},
-        {8, 8, 3},
-        {2, 5, 2},
-        {7, 8, 6},
-        {4, 6, 8},
-        {2, 3, 4},
-        {7, 5, 1},
-    };
-
-    EXPECT_EQ(happy_max(z), 46);
-}
-
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    TestSuite,
+    ::testing::ValuesIn(PARAMS)
+);

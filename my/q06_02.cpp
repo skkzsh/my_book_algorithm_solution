@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+#include "gtest-helper.hpp"
 #include <algorithm>
 #include <ranges>
 
@@ -53,57 +54,58 @@ constexpr unsigned int festival_binary(Trio<int> z) {
 }
 
 
-TEST(TestSuite, Ex1) {
-    const Trio<int> z {
-        {1, 5},
-        {2, 4},
-        {3, 6},
-    };
+class TestSuite : public ::testing::TestWithParam<SingleTestParam<Trio<int>>> {};
 
-    EXPECT_EQ(festival_simple(z), 3);
-    EXPECT_EQ(festival_binary(z), 3);
+TEST_P(TestSuite, Ex) {
+    EXPECT_EQ(festival_simple(GetParam().x), GetParam().expected);
+    EXPECT_EQ(festival_binary(GetParam().x), GetParam().expected);
 }
 
-TEST(TestSuite, Ex2) {
-    const Trio<int> z {
-        {1, 1, 1},
-        {2, 2, 2},
-        {3, 3, 3},
-    };
+const SingleTestParam<Trio<int>> PARAMS[] {
+    {
+        {
+            {1, 5},
+            {2, 4},
+            {3, 6},
+        },
+        3,
+    },
+    {
+        {
+            {1, 1, 1},
+            {2, 2, 2},
+            {3, 3, 3},
+        },
+        27,
+    },
+    {
+        {
+            {3, 14, 159, 2, 6, 53},
+            {58, 9, 79, 323, 84, 6},
+            {2643, 383, 2, 79, 50, 288},
+        },
+        87,
+    },
+    {
+        {
+            {1, 1},
+            {1, 1},
+            {2, 2},
+        },
+        0,
+    },
+    {
+        {
+            {1, 1},
+            {2, 2},
+            {2, 2},
+        },
+        0,
+    },
+};
 
-    EXPECT_EQ(festival_simple(z), 27);
-    EXPECT_EQ(festival_binary(z), 27);
-}
-
-TEST(TestSuite, Ex3) {
-    const Trio<int> z {
-        {3, 14, 159, 2, 6, 53},
-        {58, 9, 79, 323, 84, 6},
-        {2643, 383, 2, 79, 50, 288},
-    };
-
-    EXPECT_EQ(festival_simple(z), 87);
-    EXPECT_EQ(festival_binary(z), 87);
-}
-
-TEST(TestSuite, Ex0ab) {
-    const Trio<int> z {
-        {1, 1},
-        {1, 1},
-        {2, 2},
-    };
-
-    EXPECT_EQ(festival_simple(z), 0);
-    EXPECT_EQ(festival_binary(z), 0);
-}
-
-TEST(TestSuite, Ex0bc) {
-    const Trio<int> z {
-        {1, 1},
-        {2, 2},
-        {2, 2},
-    };
-
-    EXPECT_EQ(festival_simple(z), 0);
-    EXPECT_EQ(festival_binary(z), 0);
-}
+INSTANTIATE_TEST_SUITE_P(
+    Inst,
+    TestSuite,
+    ::testing::ValuesIn(PARAMS)
+);
