@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include <ranges>
 using std::vector;
 using std::invalid_argument;
 
@@ -11,15 +10,14 @@ using std::invalid_argument;
 */
 
 // すべての小屋の距離をx以上にして, 選べる小屋の最大個数
-constexpr int countx(const vector<int> a, const int x) {
-  using std::views::iota;
+int countx(const vector<int> a, const int x) {
   const int N = a.size();
 
   int prev = 0; // 前回選んだ小屋のindex
   int count = 1; // 小屋を選んだ個数
 
   // 貪欲法
-  for (const int i : iota(0, N)) {
+  for (int i = 0; i < N; ++i) { // TODO: iota
     if (a.at(i) - a.at(prev) >= x) {
       count++;
       prev = i;
@@ -29,7 +27,7 @@ constexpr int countx(const vector<int> a, const int x) {
   return count;
 }
 
-constexpr int cows(const vector<int> a, const int M) {
+int cows(const vector<int> a, const int M) {
   const int N = a.size();
 
   if (M < 2 || M > N) {
