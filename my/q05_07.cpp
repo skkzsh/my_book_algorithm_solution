@@ -16,10 +16,10 @@ constexpr string_view longest_common_substring(string_view S, string_view T) {
             if (S[i - 1] == T[j - 1]) { // i字目 = j文字目を選ぶ場合
                 dp[i][j] = dp[i - 1][j - 1] + S[i - 1];
             } else { // i字目を選ばない場合, j字目を選ばない場合
-                 dp[i][j] = max({dp[i - 1][j], dp[i][j - 1]}, {}, size);
+                dp[i][j] = max({dp[i - 1][j], dp[i][j - 1]}, {}, size);
             }
-         }
-     }
+        }
+    }
 
     // debug
     print2d(dp);
@@ -35,10 +35,10 @@ TEST_P(TestSuite, Ex) {
 }
 
 constexpr std::tuple<string_view, string_view, string_view> PARAMS[] {
-        {"axyb", "abyxb", "axb"}, // aybでも可
-        {"aa", "xayaz", "aa"},
-        {"a", "z", ""},
-        {"abracadabra", "avadakedavra", "aaadara"},
+    {"axyb", "abyxb", "axb"}, // aybでも可
+    {"aa", "xayaz", "aa"},
+    {"a", "z", ""},
+    {"abracadabra", "avadakedavra", "aaadara"},
 };
 
 INSTANTIATE_TEST_SUITE_P(

@@ -36,18 +36,18 @@ map<int, int> pairing_paren(string_view parens) {
 // NOTE: mapには右括弧の昇順でinsertされるが, mapのアルゴリズムにより左括弧の昇順に並び替えられている
 
 TEST(TestSuite, Q) {
-   EXPECT_THAT(pairing_paren("(()(())())(()())"),
-       ElementsAreArray({
-           Pair( 0,  9),
-           Pair( 1,  2),
-           Pair( 3,  6),
-           Pair( 4,  5),
-           Pair( 7,  8),
-           Pair(10, 15),
-           Pair(11, 12),
-           Pair(13, 14),
-       })
-   );
+    EXPECT_THAT(pairing_paren("(()(())())(()())"),
+        ElementsAreArray({
+            Pair( 0,  9),
+            Pair( 1,  2),
+            Pair( 3,  6),
+            Pair( 4,  5),
+            Pair( 7,  8),
+            Pair(10, 15),
+            Pair(11, 12),
+            Pair(13, 14),
+        })
+    );
 }
 
 TEST_P(PairStringSuite, Invalid) {

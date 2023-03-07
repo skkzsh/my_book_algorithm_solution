@@ -20,7 +20,7 @@ constexpr int bridges(const Pairs<int> E, const int N) {
         }
 
         if (uf.count_set() > 1) {
-             ++count;
+            ++count;
         }
     }
 
