@@ -10,7 +10,7 @@ constexpr int happy_max(const vector<vector<int>> z) {
 
   const int N = z.size();
   constexpr int M = 3;
-  vector<vector<int>> dp(N + 1, vector<int>(M, 0));
+  vector<vector<int>> dp(N + 1, vector<int>(M));
 
   for (const int i : iota(0, N)) {
     for (const int j : iota(0, M)) {

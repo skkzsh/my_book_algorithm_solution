@@ -9,7 +9,7 @@ using std::vector;
 vector<int> decay(const Pairs<int> E, const int N) {
   // const int N = ;  // TODO
   UnionFind uf(N);
-  vector<int> results(E.size(), 0);
+  vector<int> results(E.size());
 
   for (int e = (int) E.size() - 1; e >= 0; --e) {
     results.at(e) = uf.count_set();
