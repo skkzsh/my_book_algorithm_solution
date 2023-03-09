@@ -51,13 +51,13 @@ bool partial_sum_exists_push(const int W, const vector<int> a) { // TODO: conste
 
 
 TEST(TestSuite, TestTrue) {
-  const vector<int> a {1, 2, 4, 5, 11};
+  const vector a {1, 2, 4, 5, 11};
   EXPECT_TRUE(partial_sum_exists_pull(10, a));
   EXPECT_TRUE(partial_sum_exists_push(10, a));
 }
 
 TEST(TestSuite, TestFalse) {
-  const vector<int> a {1, 5, 8, 11};
+  const vector a {1, 5, 8, 11};
   EXPECT_FALSE(partial_sum_exists_pull(10, a));
   EXPECT_FALSE(partial_sum_exists_push(10, a));
 }

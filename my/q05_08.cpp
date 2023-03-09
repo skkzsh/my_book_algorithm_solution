@@ -45,25 +45,25 @@ constexpr double aqua(const int M, const vector<int> a) {
 }
 
 TEST(TestSuite, Sample1) {
-  const vector<int> a {9, 1, 2, 3, 9};
+  const vector a {9, 1, 2, 3, 9};
   EXPECT_EQ(aqua(3, a), 20);
 }
 
 TEST(TestSuite, Sample2) {
-  const vector<int> a {14, 4, 9, 7};
+  const vector a {14, 4, 9, 7};
   EXPECT_EQ(aqua(1, a), 8.5);
 }
 
 TEST(TestSuite, Sample3) {
-  const vector<int> a {11, 18, 9, 20, 4, 18, 12, 14};
+  const vector a {11, 18, 9, 20, 4, 18, 12, 14};
   EXPECT_DOUBLE_EQ(aqua(3, a), 44.66666666666667);
 }
 
 TEST(TestSuite, M_Negative) {
-  const vector<int> a {9, 1, 2, 3, 9};
+  const vector a {9, 1, 2, 3, 9};
   EXPECT_THROW(aqua(-1, a), invalid_argument);
 }
 TEST(TestSuite, M_GreaterThan_N) {
-  const vector<int> a {9, 1, 2, 3, 9};
+  const vector a {9, 1, 2, 3, 9};
   EXPECT_THROW(aqua(6, a), invalid_argument);
 }
