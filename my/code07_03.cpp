@@ -7,14 +7,16 @@ using ::testing::ValuesIn;
 using std::vector;
 using std::pair;
 
-// n * p.second = p.first + d
+// n * b = a + d
 // を満たすような最小の整数 d (>= 0) を返す
 int count(const pair<int, int> p) { // TODO: constexpr (C++20)
+  const auto [a, b] = p;
+
   int n = 1;
-  while (n * p.second < p.first) {
+  while (n * b < a) {
     ++n;
   }
-  return n * p.second - p.first;
+  return n * b - a;
 }
 
 int min_push(Pairs<int> ps) { // TODO: constexpr (C++20)

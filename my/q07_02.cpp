@@ -17,11 +17,13 @@ constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
   for (size_t j = 0; j < b.size(); j++) {
     int max_second = - INF;
     std::optional<int> max_key;
+    const auto [bx, by] = b.at(j);
 
     for (size_t i = 0; i < r.size(); i++) {
-      if (!used.at(i) && r.at(i).first < b.at(j).first && r.at(i).second < b.at(j).second) {
-        if (max_second < r.at(i).second) {
-          max_second = r.at(i).second;
+      const auto [rx, ry] = r.at(i);
+      if (!used.at(i) && rx < bx && ry < by) {
+        if (max_second < ry) {
+          max_second = ry;
           max_key = i;
         }
       }
