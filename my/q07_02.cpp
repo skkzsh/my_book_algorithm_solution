@@ -10,7 +10,7 @@ constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
   sort(r);
   sort(b);
 
-  std::vector<bool> used(r.size(), false);  // rが使用済かどうか
+  std::vector<bool> used(r.size());  // rが使用済かどうか
   int count = 0;
 
   // TODO: using iota

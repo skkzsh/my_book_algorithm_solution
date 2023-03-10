@@ -3,7 +3,7 @@ using std::vector;
 
 bool partial_sum_exists_pull(const int W, const vector<int> a) { // TODO: constexpr (C++20)
   const int N = a.size();
-  vector<vector<bool>> dp(N + 1, vector<bool>(W + 1, false));
+  vector<vector<bool>> dp(N + 1, vector<bool>(W + 1));
 
   // 初期条件
   dp[0][0] = true;
@@ -20,7 +20,7 @@ bool partial_sum_exists_pull(const int W, const vector<int> a) { // TODO: conste
 
 bool partial_sum_exists_push(const int W, const vector<int> a) { // TODO: constexpr (C++20)
   const int N = a.size();
-  vector<vector<bool>> dp(N + 1, vector<bool>(W + 1, false));
+  vector<vector<bool>> dp(N + 1, vector<bool>(W + 1));
 
   // 初期条件
   dp[0][0] = true;
