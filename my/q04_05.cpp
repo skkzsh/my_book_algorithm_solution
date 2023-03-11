@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 using std::invalid_argument;
 
 // 3, 5, 7のカウントから算出する
@@ -43,7 +44,6 @@ constexpr int count753recursive(const int K) {
 
 // 3, 5, 7の順列から算出する
 int count753permutation(const int K) {
-  using std::vector;
   using namespace std::ranges;
 
   if (K < 0) {
@@ -53,9 +53,9 @@ int count753permutation(const int K) {
   std::string s = "357";
   // int digit = std::to_string(K).length(); // TODO: 4ケタ以上の場合に対応する
 
-  vector<int> candidates;
+  std::unordered_set<int> candidates;
   do {
-    candidates.push_back(std::stoi(s));
+    candidates.insert(std::stoi(s));
   } while (next_permutation(s).found);
 
   return count_if(candidates, [K](int c) { return c <= K; });
