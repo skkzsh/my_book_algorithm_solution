@@ -8,7 +8,7 @@ constexpr string_view longest_common_substring(string_view S, string_view T) {
   using std::vector;
   using std::string;
   using namespace std::ranges;
-  vector<vector<string>> dp(S.length() + 1, vector<string>(T.length() + 1, ""));
+  vector<vector<string>> dp(S.length() + 1, vector<string>(T.length() + 1));
 
   // もらう方式
   for (size_t i = 1; i <= S.length(); ++i) {
