@@ -6,14 +6,14 @@
 // E: 辺集合 (連結かつ0以上の連番であること)
 // N: 頂点数 (Gと整合が取れていること)
 constexpr int bridges(const Pairs<int> E, const int N) {
-  auto edge_view = std::views::iota(0, (int) E.size());
+  const auto ev = std::views::iota(0, (int) E.size());
   // const int N = ;  // TODO
   int count = 0;
 
-  for (const int j : edge_view) {
+  for (const int j : ev) {
     UnionFind uf(N);
 
-    for (const int i : edge_view) {
+    for (const int i : ev) {
       if (i != j) {
         uf.unite(E.at(i).first, E.at(i).second);
       }
