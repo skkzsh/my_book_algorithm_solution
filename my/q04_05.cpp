@@ -45,17 +45,20 @@ constexpr int count753recursive(const int K) {
 // 3, 5, 7の順列から算出する
 int count753permutation(const int K) {
   using namespace std::ranges;
+  using std::string;
+  using std::stoi;
+  using std::unordered_set;
 
   if (K < 0) {
     throw invalid_argument("argument must not be negative");
   }
 
-  std::string s = "357";
+  string s = "357";
   // int digit = std::to_string(K).length(); // TODO: 4ケタ以上の場合に対応する
 
-  std::unordered_set<int> candidates;
+  unordered_set<int> candidates;
   do {
-    candidates.insert(std::stoi(s));
+    candidates.insert(stoi(s));
   } while (next_permutation(s).found);
 
   return count_if(candidates, [K](int c) { return c <= K; });
