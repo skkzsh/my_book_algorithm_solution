@@ -34,7 +34,7 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
 
   map<vector<int>, int> counts;
   for (const int v : iota(0, N)) {
-    counts[roots(v, ufs)]++; // TODO: at
+    ++counts[roots(v, ufs)]; // TODO: at
   }
 
   vector<int> results(N);
@@ -48,7 +48,7 @@ vector<int> cities(const vector<Pairs<int>> E, const int N) {
   //         if (all_of(ufs, [&](UnionFind uf) {
   //             return uf.is_same_set(u, v);
   //         })) {
-  //             count++;
+  //             ++count;
   //         }
   //     }
   //     results.at(u) = count;

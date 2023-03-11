@@ -18,7 +18,7 @@ constexpr unsigned int festival_simple(const Trio<int> z) {
       if (a < b) {
         for (int c : get<2>(z)) {
           if (b < c) {
-            count++;
+            ++count;
           }
         }
         // count += std::ranges::count_if(z[2], [b](int c){ return b < c; });

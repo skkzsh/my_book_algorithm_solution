@@ -11,7 +11,7 @@ int min_cost(Pairs<int> shops, const int M) { // {cost, count}
   for (const auto& s : shops) {
     for (int i = 0; i < s.second; ++i) {
       cost += s.first;
-      count++;
+      ++count;
       if (count == M) {
         return cost;
       }

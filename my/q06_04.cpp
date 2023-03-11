@@ -19,7 +19,7 @@ int countx(const vector<int> a, const int x) {
   // 貪欲法
   for (int i = 0; i < N; ++i) { // TODO: iota
     if (a.at(i) - a.at(prev) >= x) {
-      count++;
+      ++count;
       prev = i;
     };
   }

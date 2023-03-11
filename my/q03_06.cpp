@@ -3,10 +3,10 @@ using std::invalid_argument;
 
 constexpr int count_simple(const int K, const int N) {
   int count = 0;
-  for (int x = 0; x <= K; x++) {
-    for (int y = 0; y <= K; y++) {
+  for (int x = 0; x <= K; ++x) {
+    for (int y = 0; y <= K; ++y) {
       if (const int z = N - x - y; z >= 0 && z <= K) {
-        count++;
+        ++count;
       }
     }
   }
@@ -26,10 +26,10 @@ constexpr int count_better(const int K, const int N) {
   const int boundary = std::min(K, N);
 
   int count = 0;
-  for (int x = 0; x <= boundary; x++) {
-    for (int y = 0; y <= boundary; y++) {
+  for (int x = 0; x <= boundary; ++x) {
+    for (int y = 0; y <= boundary; ++y) {
       if (const int z = N - x - y; z >= 0 && z <= K) {
-        count++;
+        ++count;
       }
     }
   }
