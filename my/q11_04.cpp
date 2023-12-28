@@ -8,7 +8,7 @@ template<class T> using Trios = vector<tuple<T, T, T>>;
 
 // N: Zと整合性が取れていること
 // Z: 0以上の連番であること
-bool exists(const int N, const Trios<int> Z) {
+bool exists(const int N, const Trios<int> &Z) {
   throw std::logic_error("未実装: " + N + Z.size());
 }
 

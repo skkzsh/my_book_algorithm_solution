@@ -5,7 +5,7 @@ using std::invalid_argument;
 
 constexpr int INF = 1 << 29;  // 十分大きな値
 
-bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) { // TODO: constexpr (C++20)
+bool partial_sum_exists_pull(const int W, const int K, const vector<int> &a) { // TODO: constexpr (C++20)
   if (K < 0) {
     throw invalid_argument("K must be not negative");
   }
@@ -31,7 +31,7 @@ bool partial_sum_exists_pull(const int W, const int K, const vector<int> a) { //
   return dp[N][W] <= K;
 }
 
-bool partial_sum_exists_push(const int W, const int K, const vector<int> a) { // TODO: constexpr (C++20)
+bool partial_sum_exists_push(const int W, const int K, const vector<int> &a) { // TODO: constexpr (C++20)
   if (K < 0) {
     throw invalid_argument("K must be not negative");
   }

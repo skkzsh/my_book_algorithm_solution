@@ -4,7 +4,7 @@
 #include <ranges>
 using std::vector;
 
-constexpr int happy_max(const vector<vector<int>> z) {
+constexpr int happy_max(const vector<vector<int>> &z) {
   using std::views::iota;
   using std::ranges::max_element;
 

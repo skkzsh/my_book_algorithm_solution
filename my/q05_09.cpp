@@ -5,7 +5,7 @@
 using std::vector;
 
 // TODO: 実装
-constexpr int min_union_cost(const vector<int> slimes) {
+constexpr int min_union_cost(const vector<int> &slimes) {
   using std::ranges::min_element;
   using std::accumulate;
   using std::next;

@@ -6,7 +6,7 @@
 using std::vector;
 using std::invalid_argument;
 
-constexpr double aqua(const int M, const vector<int> a) {
+constexpr double aqua(const int M, const vector<int> &a) {
   using std::accumulate;
   using std::next;
   using namespace std::ranges;

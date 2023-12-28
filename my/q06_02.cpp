@@ -10,13 +10,13 @@ using std::get;
 template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
-constexpr unsigned int festival_simple(const Trio<int> z) {
+constexpr unsigned int festival_simple(const Trio<int> &z) {
   unsigned int count = 0;
 
   for (const int a : get<0>(z)) {
     for (const int b : get<1>(z)) {
       if (a < b) {
-        for (int c : get<2>(z)) {
+        for (const int c : get<2>(z)) {
           if (b < c) {
             ++count;
           }

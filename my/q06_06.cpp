@@ -9,7 +9,7 @@ template<class T> using Constants = tuple<T, T, T>;
 
 constexpr double EPS = 1e-6; // 精度
 
-constexpr double func(const double t, const Constants<int> constants) {
+constexpr double func(const double t, const Constants<int> &constants) {
   using std::sin;
   using std::numbers::pi;
 
@@ -17,7 +17,7 @@ constexpr double func(const double t, const Constants<int> constants) {
   return A * t + B * sin(C * t * pi) - 100;
 }
 
-constexpr double bisection(const Constants<int> constants, const pair<double, double> interval) {
+constexpr double bisection(const Constants<int> &constants, const pair<double, double> &interval) {
 
   auto [left, right] = interval;
 

@@ -5,7 +5,7 @@ using std::vector;
 using std::invalid_argument;
 
 // O(N^4)
-constexpr int darts_simple(const vector<int> a, const int M) {
+constexpr int darts_simple(const vector<int> &a, const int M) {
   int max = -1;
 
   for (const int p : a) {
@@ -25,7 +25,7 @@ constexpr int darts_simple(const vector<int> a, const int M) {
 }
 
 // O(N^2 log N)
-constexpr int darts_binary(const vector<int> a, const int M) {
+constexpr int darts_binary(const vector<int> &a, const int M) {
   using namespace std::ranges;
   using std::prev;
 

@@ -6,7 +6,7 @@ using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
 // N: 頂点数 (Gと整合が取れていること)
-vector<int> decay(const Pairs<int> E, const int N) {
+vector<int> decay(const Pairs<int> &E, const int N) {
   // const int N = ;  // TODO
   UnionFind uf(N);
   vector<int> results(E.size());

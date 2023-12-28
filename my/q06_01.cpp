@@ -4,7 +4,7 @@
 using ::testing::ElementsAreArray;
 using std::vector;
 
-constexpr vector<int> ranking(const vector<int> a) {
+constexpr vector<int> ranking(const vector<int> &a) {
   using namespace std::ranges;
 
   // aをsortしたvector
