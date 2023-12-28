@@ -12,8 +12,7 @@ constexpr int darts_simple(const vector<int> &a, const int M) {
     for (const int q : a) {
       for (const int r : a) {
         for (const int s : a) {
-          const int tmp = p + q + r + s;
-          if (tmp <= M) {
+          if (const int tmp = p + q + r + s; tmp <= M) {
             chmax(max, tmp);
           }
         }

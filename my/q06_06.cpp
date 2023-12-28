@@ -34,9 +34,7 @@ constexpr double bisection(const Constants<int> &constants, const pair<double, d
   }
 
   while (right - left > EPS) {
-    const double t = (left + right) / 2;
-
-    if (func(t, constants) >= 0) {
+    if (const double t = (left + right) / 2; func(t, constants) >= 0) {
       right = t;
     } else {
       left = t;

@@ -38,9 +38,7 @@ int cows(const vector<int> &a, const int M) {
   int right = a.at(N - 1) + 1; // 常にfalse
 
   while (right - left > 1) {
-    const int x = (left + right) / 2;
-
-    if (countx(a, x) >= M) { // Mコ以上選べた => もっと距離を離せる => xはもっと大きい (true領域を更新)
+    if (const int x = (left + right) / 2; countx(a, x) >= M) { // Mコ以上選べた => もっと距離を離せる => xはもっと大きい (true領域を更新)
       left = x;
     } else {  // Mコ選べなかった => 距離を離せていない => xはもっと小さい (false領域を更新)
       right = x;
