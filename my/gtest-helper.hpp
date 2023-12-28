@@ -24,5 +24,5 @@ class PairStringSuite : public ::testing::TestWithParam<pair<string_view, string
 
 // TODO: NOT header
 string PrintToSecondParamName(const testing::TestParamInfo<PairStringSuite::ParamType>& info) {
-  return (string) info.param.second;
+  return string(info.param.second);
 }

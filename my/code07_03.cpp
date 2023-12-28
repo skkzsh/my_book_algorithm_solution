@@ -52,7 +52,7 @@ INSTANTIATE_TEST_SUITE_P(
     SubTestSuite,
     ValuesIn(SUB_PARAMS),
     [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
-      return (std::string) info.param.test_name;
+      return string(info.param.test_name);
     }
                          );
 
