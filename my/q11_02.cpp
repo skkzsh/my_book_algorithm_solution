@@ -13,7 +13,8 @@ vector<int> decay(const Pairs<int> &E, const int N) {
 
   for (int e = E.size() - 1; e >= 0; --e) {
     results.at(e) = uf.count_set();
-    uf.unite(E.at(e).first, E.at(e).second);
+    const auto [u, v] = E.at(e);
+    uf.unite(u, v);
   }
 
   return results;

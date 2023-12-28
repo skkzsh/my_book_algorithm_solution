@@ -15,7 +15,8 @@ constexpr int bridges(const Pairs<int> &E, const int N) {
 
     for (const int i : ev) {
       if (i != j) {
-        uf.unite(E.at(i).first, E.at(i).second);
+        const auto [u, v] = E.at(i);
+        uf.unite(u, v);
       }
     }
 
