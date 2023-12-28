@@ -32,7 +32,7 @@ constexpr double aqua(const int M, const vector<int> &a) {
       // });
       vector<double> tmp(n - m + 1);
       for (int i = 0; i <= n - m; ++i) {
-        tmp[i] = dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
+        tmp[i] = dp[n - i - 1][m - 1] + static_cast<double>(accumulate(next(a.end(), -N + n - i - 1), next(a.end(), -N + n), 0)) / (i + 1);
       }
       dp[n][m] = *max_element(tmp);
     }

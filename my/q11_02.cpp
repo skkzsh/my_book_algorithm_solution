@@ -11,7 +11,7 @@ vector<int> decay(const Pairs<int> &E, const int N) {
   UnionFind uf(N);
   vector<int> results(E.size());
 
-  for (int e = (int) E.size() - 1; e >= 0; --e) {
+  for (int e = E.size() - 1; e >= 0; --e) {
     results.at(e) = uf.count_set();
     uf.unite(E.at(e).first, E.at(e).second);
   }
