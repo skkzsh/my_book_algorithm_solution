@@ -8,9 +8,9 @@ int min_cost(Pairs<int> shops, const int M) { // {cost, count}
   int cost = 0;
   int count = 0;
 
-  for (const auto& s : shops) {
-    for (int i = 0; i < s.second; ++i) {
-      cost += s.first;
+  for (const auto &[A, B] : shops) {
+    for (int i = 0; i < B; ++i) {
+      cost += A;
       ++count;
       if (count == M) {
         return cost;

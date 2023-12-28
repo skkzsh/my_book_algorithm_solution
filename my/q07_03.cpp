@@ -31,9 +31,9 @@ constexpr bool can_done(Pairs<int> tasks) { // {d, t}
 
   sort(tasks, {}, &pair<int, int>::second);
 
-  for (int now = 0; const auto& task : tasks) {
-    now += task.first;
-    if (now > task.second) {
+  for (int now = 0; const auto &[d, t] : tasks) {
+    now += d;
+    if (now > t) {
       return false;
     }
   }

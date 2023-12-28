@@ -27,8 +27,8 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
   vector<UnionFind> ufs(E.size(), N);
 
   for (size_t i = 0; i < E.size(); ++i) {
-    for (const auto& e : E.at(i)) {
-      ufs.at(i).unite(e.first, e.second);
+    for (const auto &[u, v] : E.at(i)) {
+      ufs.at(i).unite(u, v);
     }
   }
 
