@@ -10,10 +10,10 @@ using std::get;
 template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
-constexpr unsigned int festival_simple(const Trio<int> &z) {
+constexpr unsigned int festival_simple(const Trio<int> &Z) {
   unsigned int count = 0;
 
-  const auto [A, B, C] = z;
+  const auto [A, B, C] = Z;
 
   for (const int a : A) {
     for (const int b : B) {
@@ -23,7 +23,7 @@ constexpr unsigned int festival_simple(const Trio<int> &z) {
             ++count;
           }
         }
-        // count += std::ranges::count_if(z[2], [b](int c){ return b < c; });
+        // count += std::ranges::count_if(Z[2], [b](int c){ return b < c; });
       }
     }
   }
@@ -32,14 +32,14 @@ constexpr unsigned int festival_simple(const Trio<int> &z) {
 }
 
 // O(N log N)
-constexpr unsigned int festival_binary(Trio<int> z) {
+constexpr unsigned int festival_binary(Trio<int> Z) {
   using namespace std::ranges;
 
   // for (const int i : std::views::iota(0, 3)) {
-  //   sort(get<i>(z));
+  //   sort(get<i>(Z));
   // }
 
-  auto [A, B, C] = z;
+  auto [A, B, C] = Z;
 
   sort(A);
   sort(B);
