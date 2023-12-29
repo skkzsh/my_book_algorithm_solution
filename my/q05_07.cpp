@@ -31,7 +31,8 @@ constexpr string_view longest_common_substring(string_view S, string_view T) {
 class TestSuite : public ::testing::TestWithParam<std::tuple<string_view, string_view, string_view>> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(longest_common_substring(get<0>(GetParam()), get<1>(GetParam())), get<2>(GetParam()));
+  const auto [S, T, expected] = GetParam();
+  EXPECT_EQ(longest_common_substring(S, T), expected);
 }
 
 constexpr std::tuple<string_view, string_view, string_view> PARAMS[] {

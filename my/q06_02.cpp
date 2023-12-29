@@ -13,10 +13,12 @@ template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 constexpr unsigned int festival_simple(const Trio<int> &z) {
   unsigned int count = 0;
 
-  for (const int a : get<0>(z)) {
-    for (const int b : get<1>(z)) {
+  const auto [A, B, C] = z;
+
+  for (const int a : A) {
+    for (const int b : B) {
       if (a < b) {
-        for (const int c : get<2>(z)) {
+        for (const int c : C) {
           if (b < c) {
             ++count;
           }
@@ -37,17 +39,19 @@ constexpr unsigned int festival_binary(Trio<int> z) {
   //   sort(get<i>(z));
   // }
 
-  sort(get<0>(z));
-  sort(get<1>(z));
-  sort(get<2>(z));
+  auto [A, B, C] = z;
+
+  sort(A);
+  sort(B);
+  sort(C);
 
   unsigned int count = 0;
 
-  for (const int b : get<1>(z)) {
-    count += (lower_bound(get<0>(z), b) - get<0>(z).begin()) // a[i] >= b となる最小のi <=> a[i - 1] < b <= a[i] => 数は (i - 1) - 0 + 1 = iコ
-             * (get<2>(z).end() - upper_bound(get<2>(z), b)); // c[i] > b となる最小のi => 数は N - i + 1 => c.end() - i
-    // count += (lower_bound(get<0>(z), b) - get<0>(z).begin())
-    //             * (N - (upper_bound(get<2>(z), b) - get<2>(z).begin()));
+  for (const int b : B) {
+    count += (lower_bound(A, b) - A.begin()) // a[i] >= b となる最小のi <=> a[i - 1] < b <= a[i] => 数は (i - 1) - 0 + 1 = iコ
+             * (C.end() - upper_bound(C, b)); // c[i] > b となる最小のi => 数は N - i + 1 => c.end() - i
+    // count += (lower_bound(A, b) - A.begin())
+    //             * (N - (upper_bound(C, b) - C.begin()));
   }
 
   return count;
