@@ -5,11 +5,11 @@ using std::views::iota;
 using std::invalid_argument;
 
 constexpr int sum_bit(string_view S, const int bit) {
-  const int L = S.length();
+  const size_t L = S.length();
   int sum = 0;
   int tmp = 0;
 
-  for (const int i : iota(0, L - 1)) {
+  for (const int i : iota(size_t{0}, L - 1)) {
     const int num = S.at(i) - '0';
     if (num < 0 || num > 9) {
       throw invalid_argument("argument must be number");
@@ -31,7 +31,7 @@ constexpr int sum_bit(string_view S, const int bit) {
 }
 
 constexpr int sum_combi(string_view S) {
-  const int L = S.size();
+  const size_t L = S.size();
   int sum_all = 0;
 
   for (const int bit : iota(0, 1 << (L - 1))) {

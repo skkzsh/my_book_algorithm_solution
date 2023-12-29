@@ -8,10 +8,10 @@ using std::string_view;
 using std::map;
 using std::invalid_argument;
 
-map<int, int> pairing_paren(string_view parens) {
+map<unsigned int, unsigned int> pairing_paren(string_view parens) {
 
-  map<int, int> result;
-  std::stack<int> st; // 左括弧の index を格納する stack
+  map<unsigned int, unsigned int> result;
+  std::stack<unsigned int> st; // 左括弧の index を格納する stack
 
   // TODO: using iota
   for (size_t i = 0; i < parens.length() ; ++i) {
