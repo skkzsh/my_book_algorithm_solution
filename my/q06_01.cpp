@@ -8,7 +8,7 @@ constexpr vector<int> ranking(const vector<int> &a) {
   using namespace std::ranges;
 
   // aをsortしたvector
-  vector<int> sorted(a);
+  vector sorted(a);
   sort(sorted);
 
   vector<int> results(a.size());
