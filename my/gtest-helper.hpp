@@ -15,7 +15,7 @@ template<class T> struct SingleTestParam {
 template<class T> struct PairTestParam {
   const T a;
   const T b;
-  const int expected;
+  const unsigned int expected;
   string_view test_name = "default";
 };
 

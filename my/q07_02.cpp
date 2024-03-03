@@ -4,7 +4,7 @@
 #include <ranges>
 #include <algorithm>
 
-constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
+constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   constexpr int INF = 1 << 29; // 十分大きな値
 
   using std::views::iota;
@@ -14,7 +14,7 @@ constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
   sort(b);
 
   std::vector<bool> used(r.size());  // rが使用済かどうか
-  int count = 0;
+  unsigned int count = 0;
 
   for (const auto j : iota(0u, b.size())) {
     int max_second = - INF;

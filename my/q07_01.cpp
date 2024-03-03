@@ -19,12 +19,12 @@ using std::vector;
   => 交換可能
 */
 
-constexpr int max_pairing(vector<int> a, vector<int> b) {
+constexpr unsigned int max_pairing(vector<int> a, vector<int> b) {
   using std::ranges::sort;
   sort(a);
   sort(b);
 
-  int i = 0;
+  unsigned int i = 0;
   for (const int m : b) {
     if (a.at(i) < m) {
       ++i;
