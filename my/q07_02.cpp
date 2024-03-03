@@ -1,25 +1,27 @@
 #include "gtest/gtest.h"
 #include "gtest-helper.hpp"
 #include "template.hpp"
+#include <ranges>
 #include <algorithm>
 
 constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
   constexpr int INF = 1 << 29; // 十分大きな値
 
+  using std::views::iota;
   using std::ranges::sort;
+
   sort(r);
   sort(b);
 
   std::vector<bool> used(r.size());  // rが使用済かどうか
   int count = 0;
 
-  // TODO: using iota
-  for (size_t j = 0; j < b.size(); j++) {
+  for (const size_t j : iota(size_t{0}, b.size())) {
     int max_second = - INF;
     std::optional<int> max_key;
     const auto [bx, by] = b.at(j);
 
-    for (size_t i = 0; i < r.size(); i++) {
+    for (const size_t i : iota(size_t{0}, r.size())) {
       const auto [rx, ry] = r.at(i);
       if (!used.at(i) && rx < bx && ry < by) {
         if (max_second < ry) {

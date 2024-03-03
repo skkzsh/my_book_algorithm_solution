@@ -1,5 +1,6 @@
 #include "gmock/gmock.h"
 #include "gtest-helper.hpp"
+#include <ranges>
 #include <stack>
 #include <map>
 using ::testing::ElementsAreArray;
@@ -9,12 +10,12 @@ using std::map;
 using std::invalid_argument;
 
 map<unsigned int, unsigned int> pairing_paren(string_view parens) {
+  using std::views::iota;
 
   map<unsigned int, unsigned int> result;
   std::stack<unsigned int> st; // 左括弧の index を格納する stack
 
-  // TODO: using iota
-  for (size_t i = 0; i < parens.length() ; ++i) {
+  for (const size_t i : iota(size_t{0}, parens.length())) {
     switch (parens.at(i)) {
       case '(':
         st.push(i);
