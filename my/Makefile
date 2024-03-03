@@ -17,13 +17,13 @@ TARGETS_WITH_TYPE = q04_06
 TARGETS_WITH_TEMPLATE = q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
 TARGETS_WITH_UNION_FIND = code11_% q11_%
 # C++20未満のターゲット (MacでC++20をcompileしづらいため)
-C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_05 q04_06 q05_01 q05_02 q05_04 q05_05 q05_06 q05_07 q05_08 q05_09 q06_01 q06_03 q06_04 q06_05 q06_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03 code11_03 q11_01 q11_02 q11_03 q12_02 # code13_04
+#C20LESS_TARGETS = q03_06 q03_07 q04_01 q04_05 q04_06 q05_01 q05_02 q05_04 q05_05 q05_06 q05_07 q05_08 q05_09 q06_01 q06_03 q06_04 q06_05 q06_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03 code11_03 q11_01 q11_02 q11_03 q12_02 # code13_04
 
 RUN_SCRIPT = ./runall.sh
 
 all: $(TARGETS)
 
-c20less: $(C20LESS_TARGETS)
+#c20less: $(C20LESS_TARGETS)
 
 $(TARGETS_WITH_GTEST_HELPER): %: %.cpp $(GTEST_HELPER_HDR) $(TEMPLATE_HDR)
 	$(CXX) $(CXXFLAGS) $< -o $@
@@ -52,13 +52,13 @@ $(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HDR)
 testall: $(TARGETS)
 	$(RUN_SCRIPT) $(TARGETS)
 
-c20lesstestall: $(C20LESS_TARGETS)
-	$(RUN_SCRIPT) $(C20LESS_TARGETS)
+#c20lesstestall: $(C20LESS_TARGETS)
+#	$(RUN_SCRIPT) $(C20LESS_TARGETS)
 
 clean:
 	$(RM) $(TARGETS) $(UNION_FIND_OBJ)
 
-c20lessclean:
-	$(RM) $(C20LESS_TARGETS)
+#c20lessclean:
+#	$(RM) $(C20LESS_TARGETS)
 
-.PHONY: testall clean c20less c20lesstestall c20lessclean
+.PHONY: testall clean # c20less c20lesstestall c20lessclean
