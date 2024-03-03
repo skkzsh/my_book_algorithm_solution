@@ -3,7 +3,7 @@
 using std::vector;
 
 // TODO: Use optional
-bool func(const int i, const int w, const vector<int> &a, vector<vector<Tri_Bool>> &memo) { // TODO: constexpr (C++20)
+constexpr bool func(const int i, const int w, const vector<int> &a, vector<vector<Tri_Bool>> &memo) {
   // すでに計算済みならば解をリターン
   if (memo[i][w] != Tri_Undetermined) {
     return memo[i][w];
@@ -30,7 +30,7 @@ bool func(const int i, const int w, const vector<int> &a, vector<vector<Tri_Bool
   return memo[i][w];
 }
 
-bool partial_sum_exists(const int w, const vector<int> &a) { // TODO: constexpr  (C++20)
+constexpr bool partial_sum_exists(const int w, const vector<int> &a) {
   // 解をメモ化する配列
   vector<vector<Tri_Bool>> memo(a.size() + 1, vector<Tri_Bool>(w + 1, Tri_Undetermined));
 

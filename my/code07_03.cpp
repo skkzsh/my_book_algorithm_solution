@@ -9,7 +9,7 @@ using std::pair;
 
 // n * b = a + d
 // を満たすような最小の整数 d (>= 0) を返す
-int count(const pair<int, int> &p) { // TODO: constexpr (C++20)
+constexpr int count(const pair<int, int> &p) {
   const auto [a, b] = p;
 
   int n = 1;
@@ -19,7 +19,7 @@ int count(const pair<int, int> &p) { // TODO: constexpr (C++20)
   return n * b - a;
 }
 
-int min_push(Pairs<int> ps) { // TODO: constexpr (C++20)
+constexpr int min_push(Pairs<int> ps) {
   vector<int> counts(ps.size());
 
   for (int i = ps.size() - 1; i >= 0; --i) {

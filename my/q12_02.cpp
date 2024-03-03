@@ -3,7 +3,7 @@
 #include <algorithm>
 using std::invalid_argument;
 
-int min_cost(Pairs<int> shops, const int M) { // {cost, count}
+constexpr int min_cost(Pairs<int> shops, const int M) { // {cost, count}
   std::sort(shops.begin(), shops.end());
 
   int cost = 0;
