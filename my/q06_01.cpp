@@ -21,6 +21,10 @@ constexpr vector<int> ranking(const vector<int> &a) {
             }
             );
 
+  // TODO: C++23
+  // using std::views::transform;
+  // using std::ranges::to;
+
   return results;
 }
 

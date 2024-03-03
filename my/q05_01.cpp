@@ -14,7 +14,7 @@ constexpr int happy_max(const vector<vector<int>> &z) {
 
   for (const int i : iota(0, N)) {
     for (const int j : iota(0, M)) {
-      vector<int> tmp(M, -1); // TODO: views::(filter|transform)で直接作れないか
+      vector<int> tmp(M, -1); // TODO: views::(filter|transform), ranges::to (C++23)
       for (const int k : iota(0, M)) {
         if (k != j) {
           tmp[k] = dp[i][k] + z[i][j];
