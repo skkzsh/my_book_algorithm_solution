@@ -10,8 +10,8 @@ using std::get;
 template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
-constexpr unsigned int festival_simple(const Trio<int> &Z) {
-  unsigned int count = 0;
+constexpr int festival_simple(const Trio<int> &Z) {
+  int count = 0;
 
   const auto [A, B, C] = Z;
 
@@ -32,7 +32,7 @@ constexpr unsigned int festival_simple(const Trio<int> &Z) {
 }
 
 // O(N log N)
-constexpr unsigned int festival_binary(Trio<int> Z) {
+constexpr int festival_binary(Trio<int> Z) {
   using namespace std::ranges;
 
   // for (const int i : std::views::iota(0, 3)) {
@@ -45,7 +45,7 @@ constexpr unsigned int festival_binary(Trio<int> Z) {
   sort(B);
   sort(C);
 
-  unsigned int count = 0;
+  int count = 0;
 
   for (const int b : B) {
     count += (lower_bound(A, b) - A.begin()) // a[i] >= b となる最小のi <=> a[i - 1] < b <= a[i] => 数は (i - 1) - 0 + 1 = iコ

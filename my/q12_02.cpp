@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
+#include <algorithm>
 using std::invalid_argument;
 
 int min_cost(Pairs<int> shops, const int M) { // {cost, count}

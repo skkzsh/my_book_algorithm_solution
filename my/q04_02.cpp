@@ -42,7 +42,7 @@ constexpr vector<long long> tribo_wrapper(const int N) {
   // optionalはがし
   vector<long long> results(N + 1); // TODO: views::transformで直接作れないか
   transform(memo, results.begin(),
-            [](const optional<auto> x) { return x.value(); }
+            [](const optional<auto> x) { return x.value(); }  // TODO: <auto>
             );
   // transform(memo, results.begin(), &optional<long long>::value); // TODO: projection
 
