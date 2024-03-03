@@ -6,7 +6,7 @@
 // E: 辺集合 (連結かつ0以上の連番であること)
 // N: 頂点数 (Gと整合が取れていること)
 constexpr int bridges(const Pairs<int> &E, const int N) {
-  const auto ev = std::views::iota(size_t{0}, E.size());
+  const auto ev = std::views::iota(0u, E.size());
   // const int N = ;  // TODO
   int count = 0;
 

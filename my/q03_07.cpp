@@ -9,7 +9,7 @@ constexpr int sum_bit(string_view S, const int bit) {
   int sum = 0;
   int tmp = 0;
 
-  for (const int i : iota(size_t{0}, L - 1)) {
+  for (const size_t i : iota(0u, L - 1)) {
     const int num = S.at(i) - '0';
     if (num < 0 || num > 9) {
       throw invalid_argument("argument must be number");
