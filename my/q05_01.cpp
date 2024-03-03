@@ -8,14 +8,14 @@ constexpr int happy_max(const vector<vector<int>> &z) {
   using std::views::iota;
   using std::ranges::max_element;
 
-  const int N = z.size();
-  constexpr int M = 3;
+  const size_t N = z.size();
+  constexpr size_t M = 3;
   vector<vector<int>> dp(N + 1, vector<int>(M));
 
-  for (const int i : iota(0, N)) {
-    for (const int j : iota(0, M)) {
+  for (const size_t i : iota(0u, N)) {
+    for (const size_t j : iota(0u, M)) {
       vector<int> tmp(M, -1); // TODO: views::(filter|transform), ranges::to (C++23)
-      for (const int k : iota(0, M)) {
+      for (const size_t k : iota(0u, M)) {
         if (k != j) {
           tmp[k] = dp[i][k] + z[i][j];
         }

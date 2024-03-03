@@ -10,10 +10,10 @@ constexpr int bridges(const Pairs<int> &E, const int N) {
   // const int N = ;  // TODO
   int count = 0;
 
-  for (const int j : ev) {
+  for (const size_t j : ev) {
     UnionFind uf(N);
 
-    for (const int i : ev) {
+    for (const size_t i : ev) {
       if (i != j) {
         const auto [u, v] = E.at(i);
         uf.unite(u, v);

@@ -14,7 +14,7 @@ using std::invalid_argument;
 constexpr int countx(const vector<int> &a, const int x) {
   using std::views::iota;
 
-  unsigned int prev = 0; // 前回選んだ小屋のindex
+  size_t prev = 0; // 前回選んだ小屋のindex
   int count = 1; // 小屋を選んだ個数
 
   // 貪欲法
