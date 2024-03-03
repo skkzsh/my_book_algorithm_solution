@@ -15,7 +15,7 @@ map<unsigned int, unsigned int> pairing_paren(string_view parens) {
   map<unsigned int, unsigned int> result;
   std::stack<unsigned int> st; // 左括弧の index を格納する stack
 
-  for (const size_t i : iota(0u, parens.length())) {
+  for (const auto i : iota(0u, parens.length())) {
     switch (parens.at(i)) {
       case '(':
         st.push(i);

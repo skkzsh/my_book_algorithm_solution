@@ -26,19 +26,19 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
   // const int N = ;  // TODO
   vector<UnionFind> ufs(E.size(), N);
 
-  for (const size_t i : iota(0u, E.size())) {
+  for (const auto i : iota(0u, E.size())) {
     for (const auto &[u, v] : E.at(i)) {
       ufs.at(i).unite(u, v);
     }
   }
 
   map<vector<int>, int> counts;
-  for (const int v : iota(0, N)) {
+  for (const auto v : iota(0, N)) {
     ++counts[roots(v, ufs)]; // TODO: at
   }
 
   vector<int> results(N);
-  for (const int v : iota(0, N)) {
+  for (const auto v : iota(0, N)) {
     results.at(v) = counts.at(roots(v, ufs));
   }
 

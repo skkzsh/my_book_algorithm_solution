@@ -16,12 +16,12 @@ constexpr int max_pairing(Pairs<int> r, Pairs<int> b) {
   std::vector<bool> used(r.size());  // rが使用済かどうか
   int count = 0;
 
-  for (const size_t j : iota(0u, b.size())) {
+  for (const auto j : iota(0u, b.size())) {
     int max_second = - INF;
     std::optional<int> max_key;
     const auto [bx, by] = b.at(j);
 
-    for (const size_t i : iota(0u, r.size())) {
+    for (const auto i : iota(0u, r.size())) {
       const auto [rx, ry] = r.at(i);
       if (!used.at(i) && rx < bx && ry < by) {
         if (max_second < ry) {

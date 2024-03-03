@@ -12,10 +12,10 @@ constexpr int happy_max(const vector<vector<int>> &z) {
   constexpr size_t M = 3;
   vector<vector<int>> dp(N + 1, vector<int>(M));
 
-  for (const size_t i : iota(0u, N)) {
-    for (const size_t j : iota(0u, M)) {
+  for (const auto i : iota(0u, N)) {
+    for (const auto j : iota(0u, M)) {
       vector<int> tmp(M, -1); // TODO: views::(filter|transform), ranges::to (C++23)
-      for (const size_t k : iota(0u, M)) {
+      for (const auto k : iota(0u, M)) {
         if (k != j) {
           tmp[k] = dp[i][k] + z[i][j];
         }

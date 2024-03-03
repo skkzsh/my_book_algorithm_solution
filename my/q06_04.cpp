@@ -18,7 +18,7 @@ constexpr int countx(const vector<int> &a, const int x) {
   int count = 1; // 小屋を選んだ個数
 
   // 貪欲法
-  for (const size_t i : iota(0u, a.size())) {
+  for (const auto i : iota(0u, a.size())) {
     if (a.at(i) - a.at(prev) >= x) {
       ++count;
       prev = i;
