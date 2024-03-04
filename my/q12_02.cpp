@@ -1,9 +1,13 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 #include <algorithm>
-using std::invalid_argument;
+#include <expected>
+// using std::invalid_argument;
+using std::expected;
+using std::unexpected;
+using std::string;
 
-constexpr int min_cost(Pairs<int> shops, const int M) { // {cost, count}
+constexpr expected<int, string> min_cost(Pairs<int> shops, const int M) { // {cost, count}
   std::sort(shops.begin(), shops.end());
 
   int cost = 0;
@@ -19,14 +23,15 @@ constexpr int min_cost(Pairs<int> shops, const int M) { // {cost, count}
     }
   }
 
-  throw invalid_argument("Cannot");
+  // throw invalid_argument("Cannot");
+  return unexpected("Cannot");
 }
 
 
 const struct TestParam {
   const Pairs<int> shops;
   const int M;
-  const int expected;
+  const expected<int, string> gold;
 } PARAMS[] {
   {
     {
@@ -46,12 +51,20 @@ const struct TestParam {
     30,
     130,
   },
+  {
+      {
+        {4, 1},
+        {2, 4},
+      },
+      6,
+      unexpected("Cannot"),
+    },
 };
 
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(min_cost(GetParam().shops, GetParam().M), GetParam().expected);
+  EXPECT_EQ(min_cost(GetParam().shops, GetParam().M), GetParam().gold);
 }
 
 INSTANTIATE_TEST_SUITE_P(
@@ -60,11 +73,10 @@ INSTANTIATE_TEST_SUITE_P(
     ::testing::ValuesIn(PARAMS)
                          );
 
-
-TEST(InvalidTestSuite, Cannot) {
-  const Pairs<int> shops {
-    {4, 1},
-    {2, 4},
-  };
-  EXPECT_THROW(min_cost(shops, 6), invalid_argument);
-}
+// TEST(InvalidTestSuite, Cannot) {
+//   const Pairs<int> shops {
+//     {4, 1},
+//     {2, 4},
+//   };
+//   EXPECT_THROW(min_cost(shops, 6), invalid_argument);
+// }
