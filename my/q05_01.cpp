@@ -33,7 +33,7 @@ constexpr int happy_max(const vector<vector<int>> &z) {
 class TestSuite : public ::testing::TestWithParam<SingleTestParam<vector<vector<int>>>> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(happy_max(GetParam().x), GetParam().expected);
+  EXPECT_EQ(happy_max(GetParam().x), GetParam().gold);
 }
 
 const SingleTestParam<vector<vector<int>>> PARAMS[] {

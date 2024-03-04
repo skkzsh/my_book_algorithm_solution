@@ -61,7 +61,7 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
 const struct TestParam {
   const vector<Pairs<int>> E;
   const int N;
-  const vector<int> expected;
+  const vector<int> gold;
 } PARAMS[] {
   {
     {
@@ -92,7 +92,7 @@ const struct TestParam {
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_THAT(cities(GetParam().E, GetParam().N), ElementsAreArray(GetParam().expected));
+  EXPECT_THAT(cities(GetParam().E, GetParam().N), ElementsAreArray(GetParam().gold));
 }
 
 INSTANTIATE_TEST_SUITE_P(

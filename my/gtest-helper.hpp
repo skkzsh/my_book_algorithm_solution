@@ -8,14 +8,14 @@ using std::pair;
 
 template<class T> struct SingleTestParam {
   const T x;
-  const int expected;
+  const int gold;
   string_view test_name = "default";
 };
 
 template<class T> struct PairTestParam {
   const T a;
   const T b;
-  const unsigned int expected;
+  const unsigned int gold;
   string_view test_name = "default";
 };
 

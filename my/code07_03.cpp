@@ -38,7 +38,7 @@ constexpr int min_push(Pairs<int> ps) {
 class SubTestSuite : public TestWithParam<SingleTestParam<pair<int, int>>> {};
 
 TEST_P(SubTestSuite, Ex) {
-  EXPECT_EQ(count(GetParam().x), GetParam().expected);
+  EXPECT_EQ(count(GetParam().x), GetParam().gold);
 }
 
 constexpr SingleTestParam<pair<int, int>> SUB_PARAMS[] {
@@ -60,7 +60,7 @@ INSTANTIATE_TEST_SUITE_P(
 class TestSuite : public TestWithParam<SingleTestParam<Pairs<int>>> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(min_push(GetParam().x), GetParam().expected);
+  EXPECT_EQ(min_push(GetParam().x), GetParam().gold);
 }
 
 const SingleTestParam<Pairs<int>> PARAMS[] {

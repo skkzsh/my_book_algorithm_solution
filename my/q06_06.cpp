@@ -50,7 +50,7 @@ constexpr double bisection(const Constants<int> &constants, const pair<double, d
 constexpr struct TestParam {
   const Constants<int> constants;
   const pair<double, double> interval;
-  const double expected;
+  const double gold;
 } PARAMS[] {
   { {1, 1, 1}, {0, 200}, 100 },
   { {53, 82, 49}, {1.58, 1.65}, 1.63372043395339 },
@@ -59,7 +59,7 @@ constexpr struct TestParam {
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_NEAR(bisection(GetParam().constants, GetParam().interval), GetParam().expected, EPS);
+  EXPECT_NEAR(bisection(GetParam().constants, GetParam().interval), GetParam().gold, EPS);
 }
 
 INSTANTIATE_TEST_SUITE_P(

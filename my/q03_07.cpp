@@ -45,8 +45,8 @@ constexpr int sum_combi(string_view S) {
 class SubTestSuite : public ::testing::TestWithParam<std::pair<int, int>> {};
 
 TEST_P(SubTestSuite, Test) {
-  const auto [bit, expected] = GetParam();
-  EXPECT_EQ(sum_bit("125", bit), expected);
+  const auto [bit, gold] = GetParam();
+  EXPECT_EQ(sum_bit("125", bit), gold);
 }
 
 constexpr std::pair<int, int> PARAMS[] {

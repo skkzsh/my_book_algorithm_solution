@@ -60,7 +60,7 @@ constexpr unsigned int festival_binary(Trio<int> Z) {
 
 const struct TestParam {
   const Trio<int> Z;
-  const unsigned int expected;
+  const unsigned int gold;
 } PARAMS[] {
   {
     {
@@ -107,8 +107,8 @@ const struct TestParam {
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(festival_simple(GetParam().Z), GetParam().expected);
-  EXPECT_EQ(festival_binary(GetParam().Z), GetParam().expected);
+  EXPECT_EQ(festival_simple(GetParam().Z), GetParam().gold);
+  EXPECT_EQ(festival_binary(GetParam().Z), GetParam().gold);
 }
 
 INSTANTIATE_TEST_SUITE_P(

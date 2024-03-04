@@ -37,7 +37,7 @@ constexpr unsigned int max_pairing(vector<int> a, vector<int> b) {
 class TestSuite : public ::testing::TestWithParam<PairTestParam<vector<int>>> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().expected);
+  EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().gold);
 }
 
 const PairTestParam<vector<int>> PARAMS[] {

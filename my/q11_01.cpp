@@ -32,7 +32,7 @@ constexpr int bridges(const Pairs<int> &E, const int N) {
 const struct TestParam {
   const Pairs<int> E;
   const int N;
-  const int expected;
+  const int gold;
 } PARAMS[] {
   {
     {
@@ -73,7 +73,7 @@ const struct TestParam {
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().expected);
+  EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().gold);
 }
 
 INSTANTIATE_TEST_SUITE_P(
