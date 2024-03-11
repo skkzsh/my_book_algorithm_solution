@@ -8,7 +8,7 @@ typedef enum {
   BLUE = 1,
 } COLOR;
 
-bool recursive_search(const vector<unordered_multiset<int>> &G, const int v, vector<optional<COLOR>> &color) {
+bool recursive_search(const vector<multiset<int>> &G, const int v, vector<optional<COLOR>> &color) {
   color.at(v) = RED;
 
   for (const auto n : G.at(v)) {
@@ -21,7 +21,7 @@ bool recursive_search(const vector<unordered_multiset<int>> &G, const int v, vec
   return true;
 }
 
-bool is_bipartite_by_recursive(const unordered_multimap<int, int> &E) {
+bool is_bipartite_by_recursive(const multimap<int, int> &E) {
   const auto G = to_adjacency_list(E);
 
   vector<optional<COLOR>> colors(G.size());
@@ -30,7 +30,7 @@ bool is_bipartite_by_recursive(const unordered_multimap<int, int> &E) {
 }
 
 TEST(TestSuite, Ex) {
-  const unordered_multimap<int, int> E {
+  const multimap<int, int> E {
     {0, 1},
     {0, 3},
     {1, 2},

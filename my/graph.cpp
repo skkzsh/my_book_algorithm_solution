@@ -2,11 +2,10 @@
 #include <set>
 #include <stdexcept>
 #include <format>
-#include <unordered_set>
 
 // TODO: test
 
-size_t order_edge_set(const unordered_multimap<int, int>& E) {
+size_t order_edge_set(const multimap<int, int>& E) {
   using std::set;
   using std::next;
   using std::invalid_argument;
@@ -37,10 +36,10 @@ size_t order_edge_set(const unordered_multimap<int, int>& E) {
   return V.size();
 }
 
-vector<unordered_multiset<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct) {
+vector<multiset<int>> to_adjacency_list(const multimap<int, int>& E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
-  vector<unordered_multiset<int>> G(N);
+  vector<multiset<int>> G(N);
 
   for (const auto &[u, v] : E) {
     G.at(u).insert(v);

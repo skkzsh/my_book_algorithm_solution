@@ -6,7 +6,7 @@ using ::testing::ElementsAreArray;
 using std::vector;
 
 // E: 辺集合
-vector<int> BFS(const unordered_multimap<int, int> &E, const int s) {
+vector<int> BFS(const multimap<int, int> &E, const int s) {
   const auto G = to_adjacency_list(E);
 
   using std::optional;
@@ -44,7 +44,7 @@ vector<int> BFS(const unordered_multimap<int, int> &E, const int s) {
 }
 
 TEST(TestSuite, Ex) {
-  const unordered_multimap<int, int> E {
+  const multimap<int, int> E {
     {0, 1},
     {0, 2},
     {0, 4},
