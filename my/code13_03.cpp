@@ -1,6 +1,5 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
-#include "template.hpp"
 #include <queue>
 #include <ranges>
 using ::testing::ElementsAreArray;

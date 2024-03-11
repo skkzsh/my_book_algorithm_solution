@@ -1,7 +1,6 @@
 #include "gmock/gmock.h"
 #include "union-find.hpp"
 #include "graph.hpp"
-#include "template.hpp"
 using ::testing::ElementsAreArray;
 using std::vector;
 
