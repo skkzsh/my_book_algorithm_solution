@@ -5,7 +5,7 @@
 using ::testing::ElementsAreArray;
 using std::vector;
 
-// E: 辺集合 (連結かつ0以上の連番であること)
+// E: 辺集合
 vector<int> BFS(const Pairs<int> &E, const int s) {
   const vector<vector<int>> G = to_adjacency_list(E);
 

@@ -37,14 +37,16 @@ size_t order_edge_set(const Pairs<int>& E) {
   return V.size();
 }
 
-vector<vector<int>> to_adjacency_list(const Pairs<int>& E) {
+vector<vector<int>> to_adjacency_list(const Pairs<int>& E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
   vector<vector<int>> G(N);
 
   for (const auto &[u, v] : E) {
     G.at(u).push_back(v);
-    G.at(v).push_back(u); // 無向グラフ
+    if (!is_direct) {
+      G.at(v).push_back(u); // 無向グラフ
+    }
   }
 
   return G;

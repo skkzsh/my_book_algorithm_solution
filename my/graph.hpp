@@ -13,4 +13,5 @@ using std::vector;
 size_t order_edge_set(const Pairs<int>& E);
 
 // 辺集合を隣接リスト表現に変換する
-vector<vector<int>> to_adjacency_list(const Pairs<int>& E);
+// is_direct: 有向グラフかどうか
+vector<vector<int>> to_adjacency_list(const Pairs<int>& E, const bool is_direct = false);
