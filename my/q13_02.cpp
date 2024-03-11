@@ -17,7 +17,7 @@ void recursive_search(const vector<vector<int>> &G, const int v, vector<bool> &s
   }
 }
 
-bool exists_path_by_recursive(const Pairs<int> &E, const pair<int, int> &p) {
+bool exists_path_by_recursive(const unordered_multimap<int, int> &E, const pair<int, int> &p) {
   const vector<vector<int>> G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 
@@ -28,7 +28,7 @@ bool exists_path_by_recursive(const Pairs<int> &E, const pair<int, int> &p) {
   return seen.at(t);
 }
 
-bool exists_path_by_bfs(const Pairs<int> &E, const pair<int, int> &p) {
+bool exists_path_by_bfs(const unordered_multimap<int, int> &E, const pair<int, int> &p) {
   const vector<vector<int>> G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 
@@ -58,7 +58,7 @@ bool exists_path_by_bfs(const Pairs<int> &E, const pair<int, int> &p) {
 }
 
 TEST(TestSuite, Ex) {
-  const Pairs<int> E {
+  const unordered_multimap<int, int> E {
       {0, 1},
       {0, 2},
       {0, 4},

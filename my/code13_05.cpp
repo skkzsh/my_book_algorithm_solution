@@ -21,7 +21,7 @@ bool recursive_search(const vector<vector<int>> &G, const int v, vector<optional
   return true;
 }
 
-bool is_bipartite_by_recursive(const Pairs<int> &E) {
+bool is_bipartite_by_recursive(const unordered_multimap<int, int> &E) {
   const vector<vector<int>> G = to_adjacency_list(E);
 
   vector<optional<COLOR>> colors(G.size());
@@ -30,7 +30,7 @@ bool is_bipartite_by_recursive(const Pairs<int> &E) {
 }
 
 TEST(TestSuite, Ex) {
-  const Pairs<int> E {
+  const unordered_multimap<int, int> E {
     {0, 1},
     {0, 3},
     {1, 2},

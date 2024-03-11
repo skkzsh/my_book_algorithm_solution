@@ -6,7 +6,8 @@ using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
 vector<int> decay(const Pairs<int> &E) {
-  const auto N = order_edge_set(E);
+  const unordered_multimap M(E.begin(), E.end());
+  const auto N = order_edge_set(M);
 
   UnionFind uf(N);
   vector<int> results(E.size());

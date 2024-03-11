@@ -5,12 +5,11 @@
 
 // TODO: test
 
-using std::set;
-using std::invalid_argument;
-using std::format;
-
-size_t order_edge_set(const Pairs<int>& E) {
+size_t order_edge_set(const unordered_multimap<int, int>& E) {
+  using std::set;
   using std::next;
+  using std::invalid_argument;
+  using std::format;
 
   set<int> V; // 頂点集合
   for (const auto &[u, v] : E) {
@@ -37,7 +36,7 @@ size_t order_edge_set(const Pairs<int>& E) {
   return V.size();
 }
 
-vector<vector<int>> to_adjacency_list(const Pairs<int>& E, const bool is_direct) {
+vector<vector<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
   vector<vector<int>> G(N);
