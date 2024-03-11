@@ -1,16 +1,14 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
+#include "template.hpp"
 #include <queue>
 #include <ranges>
 using ::testing::ElementsAreArray;
 using std::vector;
 
-// G: 隣接リスト (無向グラフ)
-// 連結かつ0以上の連番であること
-// 隣接リストが無向グラフとして整合していること (2->5があるなら5->2があること)
-vector<int> BFS(const vector<vector<int>> &G, const int s) {
-  order_adjacency_list(G);
-  validate_undirected(G);
+// E: 辺集合 (連結かつ0以上の連番であること)
+vector<int> BFS(const Pairs<int> &E, const int s) {
+  const vector<vector<int>> G = to_adjacency_list(E);
 
   using std::optional;
   using std::ranges::transform;
@@ -47,17 +45,21 @@ vector<int> BFS(const vector<vector<int>> &G, const int s) {
 }
 
 TEST(TestSuite, Ex) {
-  const vector<vector<int>> G {
-    {1, 2, 4},
-    {0, 3, 4, 8},
-    {0, 5},
-    {1, 7, 8},
-    {0, 1, 8},
-    {2, 6, 8},
-    {5, 7},
-    {3, 6},
-    {1, 3, 4, 5},
+  const Pairs<int> E {
+    {0, 1},
+    {0, 2},
+    {0, 4},
+    {1, 3},
+    {1, 4},
+    {1, 8},
+    {2, 5},
+    {3, 7},
+    {3, 8},
+    {4, 8},
+    {5, 6},
+    {5, 8},
+    {6, 7},
   };
 
-  EXPECT_THAT(BFS(G, 0), ElementsAreArray({0, 1, 1, 2, 1, 2, 3, 3, 2}));
+  EXPECT_THAT(BFS(E, 0), ElementsAreArray({0, 1, 1, 2, 1, 2, 3, 3, 2}));
 }

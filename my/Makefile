@@ -54,7 +54,7 @@ define CXX_WITH_GRAPH
 $(1): $(1).o $(GRAPH_OBJ)
 	$(CXX) $(CXXFLAGS) $$^ -o $$@
 
-$(1).o: $(1).cpp $(GRAPH_HDR)
+$(1).o: $(1).cpp $(GRAPH_HDR) $(TEMPLATE_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_GRAPH), $(eval $(call CXX_WITH_GRAPH, $(T))))
