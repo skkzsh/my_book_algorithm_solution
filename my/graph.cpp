@@ -2,6 +2,7 @@
 #include <set>
 #include <stdexcept>
 #include <format>
+#include <unordered_set>
 
 // TODO: test
 
@@ -36,15 +37,15 @@ size_t order_edge_set(const unordered_multimap<int, int>& E) {
   return V.size();
 }
 
-vector<vector<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct) {
+vector<unordered_multiset<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
-  vector<vector<int>> G(N);
+  vector<unordered_multiset<int>> G(N);
 
   for (const auto &[u, v] : E) {
-    G.at(u).push_back(v);
+    G.at(u).insert(v);
     if (!is_direct) {
-      G.at(v).push_back(u); // 無向グラフ
+      G.at(v).insert(u); // 無向グラフ
     }
   }
 

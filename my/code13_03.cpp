@@ -7,7 +7,7 @@ using std::vector;
 
 // E: 辺集合
 vector<int> BFS(const unordered_multimap<int, int> &E, const int s) {
-  const vector<vector<int>> G = to_adjacency_list(E);
+  const auto G = to_adjacency_list(E);
 
   using std::optional;
   using std::ranges::transform;

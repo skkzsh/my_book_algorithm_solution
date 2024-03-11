@@ -3,10 +3,13 @@
 #include "template.hpp" // TODO
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 // #include <map>
-using std::vector;
+// #include <set>using std::vector;
 using std::unordered_multimap;
+using std::unordered_multiset;
 // using std::multimap;
+// using std::multiset;
 
 // TODO: クラス化したい
 
@@ -18,4 +21,4 @@ size_t order_edge_set(const unordered_multimap<int, int>& E);
 
 // 辺集合を隣接リスト表現に変換する
 // is_direct: 有向グラフかどうか
-vector<vector<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct = false);
+vector<unordered_multiset<int>> to_adjacency_list(const unordered_multimap<int, int>& E, const bool is_direct = false);

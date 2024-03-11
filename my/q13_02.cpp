@@ -7,7 +7,7 @@ using std::pair;
 // E: 辺集合
 // p: {s, t}
 
-void recursive_search(const vector<vector<int>> &G, const int v, vector<bool> &seen) {
+void recursive_search(const vector<unordered_multiset<int>> &G, const int v, vector<bool> &seen) {
   seen.at(v)= true;
 
   for (const auto n : G.at(v)) {
@@ -18,7 +18,7 @@ void recursive_search(const vector<vector<int>> &G, const int v, vector<bool> &s
 }
 
 bool exists_path_by_recursive(const unordered_multimap<int, int> &E, const pair<int, int> &p) {
-  const vector<vector<int>> G = to_adjacency_list(E, true);
+  const auto G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 
   vector<bool> seen(G.size());
@@ -29,7 +29,7 @@ bool exists_path_by_recursive(const unordered_multimap<int, int> &E, const pair<
 }
 
 bool exists_path_by_bfs(const unordered_multimap<int, int> &E, const pair<int, int> &p) {
-  const vector<vector<int>> G = to_adjacency_list(E, true);
+  const auto G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 
   vector<bool> seen(G.size());
