@@ -4,6 +4,7 @@
 
 // TODO: 型の制約としたい
 size_t vertex_num_of_connected_graph(const Pairs<int> &E) {
+  using std::next;
   using std::invalid_argument;
 
   std::set<int> V; // 頂点集合
@@ -12,16 +13,19 @@ size_t vertex_num_of_connected_graph(const Pairs<int> &E) {
     V.insert(v);
   }
 
-  auto prev = V.begin();
-  auto curr = std::next(prev);
+  if (!V.empty()) {
+    auto prev = V.begin();
 
-  if (*prev != 0) {
-    throw invalid_argument("Minimum number of vertex must be zero");
-  }
+    if (*prev != 0) {
+      throw invalid_argument("Minimum number of vertex must be zero");
+    }
 
-  for (; curr != V.end(); ++prev, ++curr) {
-    if (*curr - *prev != 1) {
-      throw invalid_argument("Vertex set is NOT sequential");
+    if (V.size() > 1) {
+      for (auto curr = next(prev); curr != V.end(); ++prev, ++curr) {
+        if (*curr - *prev != 1) {
+          throw invalid_argument("Vertex must be sequential");
+        }
+      }
     }
   }
 
