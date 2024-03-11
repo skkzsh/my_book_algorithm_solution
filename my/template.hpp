@@ -1,5 +1,9 @@
 #pragma once
 
+#include <vector>
+#include <iostream>
+// #include <print> // TODO: C++23
+
 using std::vector;
 using std::pair;
 
@@ -14,7 +18,7 @@ template<class T> void chmax(T& a, T b) {
 template<class T> constexpr void print2d(const vector<vector<T>> vv) {
   using std::cout;
   using std::endl;
-  // TODO: println
+  // using std::println;
 
   cout << "print2d start" << endl;
   for (vector<T> v : vv) {

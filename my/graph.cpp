@@ -1,14 +1,9 @@
 #include "graph.hpp"
-// #include "template.hpp" // TODO
 #include <set>
 #include <stdexcept>
 
 // TODO: 型の制約としたい
-
-// TODO:
-// TODO: Pairs
-// int vertex_num_of_connected_graph(const Pairs<int> &E) {
-size_t vertex_num_of_connected_graph(const std::vector<std::pair<int, int>> &E) {
+size_t vertex_num_of_connected_graph(const Pairs<int> &E) {
   using std::invalid_argument;
 
   std::set<int> V; // 頂点集合
@@ -25,7 +20,7 @@ size_t vertex_num_of_connected_graph(const std::vector<std::pair<int, int>> &E) 
   }
 
   for (; curr != V.end(); ++prev, ++curr) {
-    if(*curr - *prev != 1) {
+    if (*curr - *prev != 1) {
       throw invalid_argument("Vertex set is NOT sequential");
     }
   }
