@@ -4,6 +4,9 @@
 using ::testing::ElementsAreArray;
 using std::vector;
 
+// G: 隣接リスト (無向グラフ)
+// 連結かつ0以上の連番であること
+// 隣接リストが無向グラフとして整合していること (2->5があるなら5->2があること)
 vector<unsigned int> BFS(const vector<vector<unsigned int>> &G, const unsigned int s) {
   using std::optional;
   using std::ranges::transform;

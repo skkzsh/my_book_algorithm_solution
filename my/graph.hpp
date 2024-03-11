@@ -2,7 +2,9 @@
 
 #include "template.hpp"
 
+// TODO: 型の制約としたい
 // E: 辺集合
-// 0以上の連番であること (連結であること) を検証する
-// 連結の場合, 頂点数を返す
-size_t vertex_num_of_connected_graph(const Pairs<int> &E);
+// 頂点数 (位数) を返す
+// ただし, 頂点が0以上の連番でない場合, 例外を投げる
+// なお, 連結かどうかは判定してない
+size_t graph_order(const Pairs<int> &E);

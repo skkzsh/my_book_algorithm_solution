@@ -6,7 +6,7 @@
 
 // E: 辺集合 (連結かつ0以上の連番であること)
 constexpr int bridges(const Pairs<int> &E) {
-  const auto N = vertex_num_of_connected_graph(E);
+  const auto N = graph_order(E);
 
   const auto ev = std::views::iota(0u, E.size());
   int count = 0;

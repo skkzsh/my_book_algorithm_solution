@@ -2,8 +2,7 @@
 #include <set>
 #include <stdexcept>
 
-// TODO: 型の制約としたい
-size_t vertex_num_of_connected_graph(const Pairs<int> &E) {
+size_t graph_order(const Pairs<int> &E) {
   using std::next;
   using std::invalid_argument;
 
