@@ -7,7 +7,7 @@ using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
 vector<int> decay(const Pairs<int> &E) {
-  const auto N = graph_order(E);
+  const auto N = order_edge_set(E);
 
   UnionFind uf(N);
   vector<int> results(E.size());

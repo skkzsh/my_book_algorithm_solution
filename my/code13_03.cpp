@@ -1,4 +1,5 @@
 #include "gmock/gmock.h"
+#include "graph.hpp"
 #include <queue>
 #include <ranges>
 using ::testing::ElementsAreArray;
@@ -7,12 +8,14 @@ using std::vector;
 // G: 隣接リスト (無向グラフ)
 // 連結かつ0以上の連番であること
 // 隣接リストが無向グラフとして整合していること (2->5があるなら5->2があること)
-vector<unsigned int> BFS(const vector<vector<unsigned int>> &G, const unsigned int s) {
+vector<int> BFS(const vector<vector<int>> &G, const int s) {
+  order_adjacency_list(G);
+
   using std::optional;
   using std::ranges::transform;
 
-  vector<optional<unsigned int>> dists(G.size());
-  std::queue<unsigned int> todo;
+  vector<optional<int>> dists(G.size());
+  std::queue<int> todo;
 
   dists.at(s) = 0;
   todo.push(s);
@@ -30,7 +33,7 @@ vector<unsigned int> BFS(const vector<vector<unsigned int>> &G, const unsigned i
   }
 
   // optionalはがし
-  vector<unsigned int> results(G.size());
+  vector<int> results(G.size());
   transform(dists, results.begin(),
             [](const auto x) { return x.value(); }  // TODO: optional<auto> or auto
             );
@@ -43,7 +46,7 @@ vector<unsigned int> BFS(const vector<vector<unsigned int>> &G, const unsigned i
 }
 
 TEST(TestSuite, Ex) {
-  const vector<vector<unsigned int>> G {
+  const vector<vector<int>> G {
     {1, 2, 4},
     {0, 3, 4, 8},
     {0, 5},
