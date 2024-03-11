@@ -10,6 +10,7 @@ using std::vector;
 // 隣接リストが無向グラフとして整合していること (2->5があるなら5->2があること)
 vector<int> BFS(const vector<vector<int>> &G, const int s) {
   order_adjacency_list(G);
+  validate_undirected(G);
 
   using std::optional;
   using std::ranges::transform;
