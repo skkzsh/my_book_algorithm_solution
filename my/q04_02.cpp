@@ -43,7 +43,7 @@ vector<long long> tribo_wrapper(const int N) {
   // optionalはがし
   vector<long long> results(N + 1);
   transform(memo, results.begin(),
-            [](const auto x) { return x.value(); }  // TODO: optional<auto> or auto
+            [](const auto o) { return o.value(); }  // TODO: optional<auto> or auto
             );
   // transform(memo, results.begin(), &optional<long long>::value); // TODO: projection
 
@@ -51,7 +51,7 @@ vector<long long> tribo_wrapper(const int N) {
   // using std::views::transform;
   // using std::ranges::to;
   // vector results = memo | transform(
-  //           [](const auto x) { return x.value(); }  // TODO: optional<auto> or auto
+  //           [](const auto o) { return o.value(); }  // TODO: optional<auto> or auto
   //           ) | to<vector<long long>>();
 
   return results;

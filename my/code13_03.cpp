@@ -22,10 +22,10 @@ vector<int> BFS(const Pairs<int> &E, const int s) {
     const auto v = todo.front();
     todo.pop();
 
-    for (const auto x : G.at(v)) {
-      if (!dists.at(x).has_value()) {
-        dists.at(x) = dists.at(v).value() + 1;
-        todo.push(x);
+    for (const auto n : G.at(v)) {
+      if (!dists.at(n).has_value()) {
+        dists.at(n) = dists.at(v).value() + 1;
+        todo.push(n);
       }
     }
   }
@@ -33,7 +33,7 @@ vector<int> BFS(const Pairs<int> &E, const int s) {
   // optionalはがし
   vector<int> results(G.size());
   transform(dists, results.begin(),
-            [](const auto x) { return x.value(); }  // TODO: optional<auto> or auto
+            [](const auto o) { return o.value(); }  // TODO: optional<auto> or auto
             );
 
   // TODO: C++23
