@@ -11,6 +11,10 @@ UNION_FIND_SRC = union-find.cpp
 UNION_FIND_OBJ = $(UNION_FIND_SRC:.cpp=.o)
 UNION_FIND_HDR = $(UNION_FIND_SRC:.cpp=.hpp)
 
+GRAPH_SRC = graph.cpp
+GRAPH_OBJ = $(GRAPH_SRC:.cpp=.o)
+GRAPH_HDR = $(GRAPH_SRC:.cpp=.hpp)
+
 TARGETS = $(basename $(wildcard *[01][0-9]_[0-9][0-9].cpp))
 TARGETS_WITH_GTEST_HELPER = q05_01 q06_02 code07_03 q07_01 q07_02 q09_02 q09_03
 TARGETS_WITH_TYPE = q04_06
@@ -36,15 +40,16 @@ $(TARGETS_WITH_TEMPLATE): %: %.cpp $(TEMPLATE_HDR)
 
 # TODO: rm *11_*.o されるのを調査 (cleanに追加)
 define CXX_WITH_UNION_FIND
-$(1): $(1).o $(UNION_FIND_OBJ)
+$(1): $(1).o $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 	$(CXX) $(CXXFLAGS) $$^ -o $$@
 
-$(1).o: $(1).cpp $(UNION_FIND_HDR) $(TEMPLATE_HDR) $(GTEST_HELPER_HDR)
+$(1).o: $(1).cpp $(UNION_FIND_HDR) $(GRAPH_HDR) $(TEMPLATE_HDR) $(GTEST_HELPER_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_UNION_FIND), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
 
 $(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HDR)
+$(GRAPH_OBJ): $(GRAPH_SRC) $(GRAPH_HDR)
 
 .cpp.o:
 	$(CXX) $(CXX_BASE_FLAGS) -c $<
@@ -56,7 +61,7 @@ testall: $(TARGETS)
 #	$(RUN_SCRIPT) $(C20LESS_TARGETS)
 
 clean:
-	$(RM) $(TARGETS) $(UNION_FIND_OBJ)
+	$(RM) $(TARGETS) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 
 #c20lessclean:
 #	$(RM) $(C20LESS_TARGETS)

@@ -1,13 +1,14 @@
 #include "gtest/gtest.h"
 #include "union-find.hpp"
+#include "graph.hpp"
 #include "template.hpp"
 #include <ranges>
 
 // E: 辺集合 (連結かつ0以上の連番であること)
-// N: 頂点数 (Gと整合が取れていること)
-constexpr int bridges(const Pairs<int> &E, const int N) {
+constexpr int bridges(const Pairs<int> &E) {
+  const auto N = vertex_num_of_connected_graph(E);
+
   const auto ev = std::views::iota(0u, E.size());
-  // const int N = ;  // TODO
   int count = 0;
 
   for (const auto j : ev) {
@@ -31,7 +32,6 @@ constexpr int bridges(const Pairs<int> &E, const int N) {
 
 const struct TestParam {
   const Pairs<int> E;
-  const int N;
   const int gold;
 } PARAMS[] {
   {
@@ -44,7 +44,6 @@ const struct TestParam {
       {4, 5},
       {5, 6},
     },
-    7,
     4,
   },
   {
@@ -54,7 +53,6 @@ const struct TestParam {
       {0, 2},
       {1, 2},
     },
-    3,
     0,
   },
   {
@@ -65,7 +63,6 @@ const struct TestParam {
       {3, 4},
       {4, 5},
     },
-    6,
     5,
   },
 };
@@ -73,7 +70,7 @@ const struct TestParam {
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(bridges(GetParam().E, GetParam().N), GetParam().gold);
+  EXPECT_EQ(bridges(GetParam().E), GetParam().gold);
 }
 
 INSTANTIATE_TEST_SUITE_P(

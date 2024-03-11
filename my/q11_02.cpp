@@ -1,13 +1,14 @@
 #include "gmock/gmock.h"
 #include "union-find.hpp"
+#include "graph.hpp"
 #include "template.hpp"
 using ::testing::ElementsAreArray;
 using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
-// N: 頂点数 (Gと整合が取れていること)
-vector<int> decay(const Pairs<int> &E, const int N) {
-  // const int N = ;  // TODO
+vector<int> decay(const Pairs<int> &E) {
+  const auto N = vertex_num_of_connected_graph(E);
+
   UnionFind uf(N);
   vector<int> results(E.size());
 
@@ -23,7 +24,6 @@ vector<int> decay(const Pairs<int> &E, const int N) {
 
 const struct TestParam {
   const Pairs<int> E;
-  const int N;
   const vector<int> gold;
 } PARAMS[] {
   {
@@ -34,7 +34,6 @@ const struct TestParam {
       {1, 2},
       {0, 3},
     },
-    4,
     {1, 1, 2, 3, 4},
   },
   {
@@ -45,16 +44,15 @@ const struct TestParam {
       {2, 3},
       {3, 4},
     },
-    6,
     {2, 3, 4, 5, 6},
   },
-  { {{0, 1}}, 2, {2} },
+  { {{0, 1}}, {2} },
 };
 
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
-  EXPECT_THAT(decay(GetParam().E, GetParam().N), ElementsAreArray(GetParam().gold));
+  EXPECT_THAT(decay(GetParam().E), ElementsAreArray(GetParam().gold));
 }
 
 INSTANTIATE_TEST_SUITE_P(
