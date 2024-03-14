@@ -57,8 +57,28 @@ bool exists_path_by_bfs(const multimap<int, int> &E, const pair<int, int> &p) {
   return false;
 }
 
-// TODO: test pattern
-TEST(TestSuite, Ex) {
+TEST(TestSuite, PathExists) {
+  const multimap<int, int> E {
+    {0, 1},
+    {0, 2},
+    {0, 4},
+    {1, 3},
+    {1, 4},
+    {1, 8},
+    {2, 5},
+    {3, 7},
+    {3, 8},
+    {4, 8},
+    {5, 6},
+    {5, 8},
+    {6, 7},
+  };
+
+  EXPECT_TRUE(exists_path_by_recursive(E, {0, 7}));
+  EXPECT_TRUE(exists_path_by_bfs(E, {0, 7}));
+}
+
+TEST(TestSuite, PathNotExists) {
   const multimap<int, int> E {
       {0, 1},
       {0, 2},
@@ -67,14 +87,14 @@ TEST(TestSuite, Ex) {
       {1, 4},
       {1, 8},
       {2, 5},
-      {3, 7},
+      // {3, 7}, // tを孤立させる
       {3, 8},
       {4, 8},
-      {5, 6},
+      // {5, 6}, // tを孤立させる
       {5, 8},
       {6, 7},
     };
 
-  EXPECT_TRUE(exists_path_by_recursive(E, {0, 7}));
-  EXPECT_TRUE(exists_path_by_bfs(E, {0, 7}));
+  EXPECT_FALSE(exists_path_by_recursive(E, {0, 7}));
+  EXPECT_FALSE(exists_path_by_bfs(E, {0, 7}));
 }
