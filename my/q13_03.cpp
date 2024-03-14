@@ -13,12 +13,14 @@ bool recursive_search(const vector<multiset<int>> &G, const int v, const COLOR p
   colors.at(v) = curr;
 
   for (const auto n : G.at(v)) {
-    if (!colors.at(n).has_value()) {
+    if (colors.at(n).has_value()) {
+      if (colors.at(n).value() == curr) {
+        return false;
+      }
+    } else {
       if (!recursive_search(G, n, curr, colors)) {
         return false;
       }
-    } else if (colors.at(n).value() == curr) {
-      return false;
     }
   }
   return true;
