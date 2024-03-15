@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "gtest-helper.hpp"
 #include <algorithm>
 #include <ranges>
 
@@ -13,9 +12,7 @@ template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 constexpr unsigned int festival_simple(const Trio<int> &Z) {
   unsigned int count = 0;
 
-  const auto [A, B, C] = Z;
-
-  for (const int a : A) {
+  for (const auto [A, B, C] = Z; const int a : A) {
     for (const int b : B) {
       if (a < b) {
         for (const int c : C) {
