@@ -4,7 +4,7 @@ using std::string_view;
 using std::views::iota;
 using std::invalid_argument;
 
-constexpr int sum_bit(string_view S, const int bit) {
+constexpr int sum_bit(const string_view S, const int bit) {
   const auto L = S.length();
   int sum = 0;
   int tmp = 0;
@@ -30,7 +30,7 @@ constexpr int sum_bit(string_view S, const int bit) {
   return sum;
 }
 
-constexpr int sum_combi(string_view S) {
+constexpr int sum_combi(const string_view S) {
   const auto L = S.size();
   int sum_all = 0;
 

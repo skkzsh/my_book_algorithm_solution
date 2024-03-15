@@ -5,7 +5,7 @@ using std::string;
 using std::string_view;
 using std::get;
 
-constexpr string longest_common_substring(string_view S, string_view T) {
+constexpr string longest_common_substring(const string_view S, const string_view T) {
   using std::vector;
   using namespace std::ranges;
   vector<vector<string>> dp(S.length() + 1, vector<string>(T.length() + 1));
