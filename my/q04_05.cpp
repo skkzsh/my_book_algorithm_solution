@@ -61,7 +61,7 @@ int count753permutation(const int K) {
     candidates.insert(stoi(s));
   } while (next_permutation(s).found);
 
-  return count_if(candidates, [K](int c) { return c <= K; });
+  return count_if(candidates, [K](const int c) { return c <= K; });
 }
 
 

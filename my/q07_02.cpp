@@ -22,8 +22,7 @@ constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
     const auto [bx, by] = b.at(j);
 
     for (const auto i : iota(0u, r.size())) {
-      const auto [rx, ry] = r.at(i);
-      if (!used.at(i) && rx < bx && ry < by) {
+      if (const auto [rx, ry] = r.at(i); !used.at(i) && rx < bx && ry < by) {
         if (max_second < ry) {
           max_second = ry;
           max_key = i;
