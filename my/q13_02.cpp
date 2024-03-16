@@ -51,7 +51,6 @@ bool exists_path_by_bfs(const multimap<int, int> &E, const pair<int, int> &p) {
         todo.push(n);
       }
     }
-
   }
 
   return false;

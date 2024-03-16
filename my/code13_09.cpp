@@ -1,6 +1,5 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
-using std::optional;
 using ::testing::ElementsAreArray;
 using ::testing::Field;
 using ::testing::AllOf;
@@ -28,8 +27,6 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex
 
 // E: 木 (連結, サイクルなし) TODO
 vector<Vertex> tree(const multimap<int, int> &E, const int root) {
-  using std::ranges::transform;
-
   const auto G = to_adjacency_list(E);
 
   vector<Vertex> V(G.size());
@@ -42,7 +39,10 @@ vector<Vertex> tree(const multimap<int, int> &E, const int root) {
 
 // FieldsAreでもいいけど, ちょっと親切
 Matcher<Vertex> IsVertex(const int depth, const int size) {
-  return AllOf(Field(&Vertex::depth, depth), Field(&Vertex::size, size));
+  return AllOf(
+    Field(&Vertex::depth, depth),
+    Field(&Vertex::size, size)
+  );
 }
 
 // TODO: test case

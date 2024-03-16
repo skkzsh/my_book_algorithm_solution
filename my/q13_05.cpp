@@ -15,10 +15,10 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> 
     }
   }
 
-  order.push_back(v);
+  order.push_back(v); // 帰りがけ
 }
 
-list<int> topological_sort(const multimap<int, int> &E) {
+list<int> topological_sort_by_recursive(const multimap<int, int> &E) {
   using std::views::iota;
 
   const auto G = to_adjacency_list(E, true);
@@ -53,5 +53,5 @@ TEST(TestSuite, Ex) {
   };
 
   // 解はひとつでない
-  EXPECT_THAT(topological_sort(E), ElementsAreArray({4, 2, 1, 6, 3, 7, 0, 5}));
+  EXPECT_THAT(topological_sort_by_recursive(E), ElementsAreArray({4, 2, 1, 6, 3, 7, 0, 5}));
 }
