@@ -2,7 +2,9 @@
 #include "graph.hpp"
 using std::optional;
 using ::testing::ElementsAreArray;
-using ::testing::FieldsAre;
+using ::testing::Field;
+using ::testing::AllOf;
+using ::testing::Matcher;
 
 constexpr int NA = -1;
 
@@ -17,9 +19,9 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex
 
   for (const auto n : G.at(v)) {
     if (V.at(n).depth == NA) {
-      V.at(n).depth = V.at(v).depth + 1;
+      V.at(n).depth = V.at(v).depth + 1; // 行きがけ
       recursive_search(G, n, V);
-      V.at(v).size += V.at(n).size;
+      V.at(v).size += V.at(n).size; //　帰りがけ
     }
   }
 }
@@ -38,6 +40,11 @@ vector<Vertex> tree(const multimap<int, int> &E, const int root) {
   return V;
 }
 
+// FieldsAreでもいいけど, ちょっと親切
+Matcher<Vertex> IsVertex(const int depth, const int size) {
+  return AllOf(Field(&Vertex::depth, depth), Field(&Vertex::size, size));
+}
+
 // TODO: test case
 TEST(TestSuite, Ex) {
   const multimap<int, int> T {
@@ -53,16 +60,15 @@ TEST(TestSuite, Ex) {
   };
 
   EXPECT_THAT(tree(T, 0), ElementsAreArray({
-    // AllOf(Field(&Vertex::depth, 0), Field(&Vertex::size, 10)),
-    FieldsAre(0, 10),
-    FieldsAre(1, 6),
-    FieldsAre(1, 3),
-    FieldsAre(2, 1),
-    FieldsAre(2, 3),
-    FieldsAre(2, 1),
-    FieldsAre(2, 2),
-    FieldsAre(3, 1),
-    FieldsAre(3, 1),
-    FieldsAre(3, 1),
+    IsVertex(0, 10),
+    IsVertex(1, 6),
+    IsVertex(1, 3),
+    IsVertex(2, 1),
+    IsVertex(2, 3),
+    IsVertex(2, 1),
+    IsVertex(2, 2),
+    IsVertex(3, 1),
+    IsVertex(3, 1),
+    IsVertex(3, 1),
   }));
 }
