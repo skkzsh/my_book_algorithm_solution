@@ -7,11 +7,11 @@
 using std::vector;
 using std::pair;
 
-template<class T> void chmin(T& a, T b) {
+template<class T> constexpr void chmin(T& a, const T b) {
   a = std::min(a, b);
 }
 
-template<class T> void chmax(T& a, T b) {
+template<class T> constexpr void chmax(T& a, const T b) {
   a = std::max(a, b);
 }
 
@@ -21,8 +21,8 @@ template<class T> constexpr void print2d(const vector<vector<T>> vv) {
   // using std::println;
 
   cout << "print2d start" << endl;
-  for (vector<T> v : vv) {
-    for (T i : v) {
+  for (const vector<T> v : vv) {
+    for (const T i : v) {
       cout << i << ' ';
     }
     cout << endl;
