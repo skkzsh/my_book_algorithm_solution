@@ -3,7 +3,6 @@
 #include <queue>
 #include <ranges>
 using ::testing::ElementsAreArray;
-using std::vector;
 
 // E: 辺集合
 vector<int> BFS(const multimap<int, int> &E, const int s) {

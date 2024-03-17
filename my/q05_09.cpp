@@ -2,7 +2,6 @@
 #include "template.hpp"
 #include <numeric>
 #include <algorithm>
-using std::vector;
 
 // TODO: 実装
 constexpr int min_union_cost(const vector<int> &slimes) {

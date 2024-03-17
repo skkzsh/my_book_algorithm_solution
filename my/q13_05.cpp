@@ -3,7 +3,6 @@
 #include <ranges>
 #include <list>
 using ::testing::ElementsAreArray;
-using std::vector;
 using std::list;
 
 void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen, list<int> &order) {

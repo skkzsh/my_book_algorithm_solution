@@ -27,7 +27,6 @@
 
 constexpr bool can_done(Pairs<int> tasks) { // {d, t}
   using std::ranges::sort;
-  using std::pair;
 
   sort(tasks, {}, &pair<int, int>::second);
 

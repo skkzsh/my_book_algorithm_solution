@@ -4,7 +4,6 @@
 #include <ranges>
 #include <algorithm>
 using ::testing::ElementsAreArray;
-using std::vector;
 
 vector<int> roots(const int v, const vector<UnionFind> &ufs) {
   vector<int> results(ufs.size());

@@ -4,8 +4,6 @@
 #include <numeric>
 using ::testing::TestWithParam;
 using ::testing::ValuesIn;
-using std::vector;
-using std::pair;
 
 // n * b = a + d
 // を満たすような最小の整数 d (>= 0) を返す

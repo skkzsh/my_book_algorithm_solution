@@ -2,7 +2,6 @@
 #include "union-find.hpp"
 #include "graph.hpp"
 using ::testing::ElementsAreArray;
-using std::vector;
 
 // E: 辺集合 (0以上の連番であること)
 vector<int> decay(const Pairs<int> &E) {
