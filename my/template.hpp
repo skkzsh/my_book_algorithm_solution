@@ -22,8 +22,8 @@ template<class CC> constexpr void print2d(const CC cc) {
   // using std::println;
 
   cout << "print2d start" << endl;
-  for (const auto c : cc) {
-    for (const auto x : c) {
+  for (const auto& c : cc) {
+    for (const auto& x : c) {
       cout << x << ' ';
     }
     cout << endl;
