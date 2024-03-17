@@ -80,3 +80,18 @@ TEST(TestSuite, Ex) {
 
   EXPECT_EQ(shortest_path(maze, 8, 8), 16);
 }
+
+TEST(TestSuite, Impossible) {
+  const vector<string_view> maze {
+    ".#....#G",
+    ".#.#...#", // Goalを壁で囲む
+    "...#.##.",
+    "#.##...#",
+    "...###.#",
+    ".#.....#",
+    "...#.#..",
+    "S.......",
+  };
+
+  EXPECT_THROW(shortest_path(maze, 8, 8), std::bad_optional_access);
+}
