@@ -5,12 +5,16 @@ jobs:
   test:
     docker:
       - image: archlinux
+    environment:
+      GTEST_COLOR: yes # Google Test の出力が白黒にならないようにする
     steps:
       - checkout
       - run:
           command: pacman -Syu --noconfirm make clang gtest
       - run:
-          command: cd my; make clean testall
+          command: cd my; make clean all
+      - run:
+          command: cd my; make testall
       - slack/notify:
           event: fail
           template: basic_fail_1
