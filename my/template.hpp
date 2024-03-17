@@ -15,15 +15,16 @@ template<class T> constexpr void chmax(T& a, const T b) {
   a = std::max(a, b);
 }
 
-template<class T> constexpr void print2d(const vector<vector<T>> vv) {
+// TODO: concept
+template<class CC> constexpr void print2d(const CC cc) {
   using std::cout;
   using std::endl;
   // using std::println;
 
   cout << "print2d start" << endl;
-  for (const vector<T> v : vv) {
-    for (const T i : v) {
-      cout << i << ' ';
+  for (const auto c : cc) {
+    for (const auto x : c) {
+      cout << x << ' ';
     }
     cout << endl;
   }
