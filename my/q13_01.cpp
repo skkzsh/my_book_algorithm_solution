@@ -1,6 +1,11 @@
 #include "gtest/gtest.h"
 #include "graph.hpp"
 #include <ranges>
+using testing::TestWithParam;
+using testing::Combine;
+using testing::ValuesIn;
+using testing::Values;
+using std::tuple;
 
 int count_connected(const multimap<int, int> &E, auto search) {
   using std::views::iota;
@@ -63,16 +68,19 @@ const struct TestParam {
   }
 };
 
-class TestSuite : public ::testing::TestWithParam<TestParam> {};
+class TestSuite : public TestWithParam<tuple<TestParam, void(*)(const vector<multiset<int>> &, const int, vector<bool> &)>> {};
 
-// TODO: combine
 TEST_P(TestSuite, Ex) {
-  EXPECT_EQ(count_connected(GetParam().E, recursive_search), GetParam().gold);
-  EXPECT_EQ(count_connected(GetParam().E, bfs), GetParam().gold);
+  const auto [p, search] = GetParam();
+  EXPECT_EQ(count_connected(p.E, search), p.gold);
 }
 
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(PARAMS)
+    Combine(
+      ValuesIn(PARAMS),
+      Values(&recursive_search, &bfs)
+    )
+    // testing::PrintToStringParamName() // TODO
                          );
