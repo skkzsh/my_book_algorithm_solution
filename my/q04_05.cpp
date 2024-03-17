@@ -63,6 +63,7 @@ int count753permutation(const int K) {
   return count_if(candidates, [K](const int c) { return c <= K; });
 }
 
+// TODO: combine
 
 TEST(TestSuite, Test0) {
   EXPECT_EQ(count753recursive(356), 0);

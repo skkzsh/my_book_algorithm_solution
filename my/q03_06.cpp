@@ -36,6 +36,8 @@ constexpr int count_better(const int K, const int N) {
   return count;
 }
 
+// TODO: combine
+
 TEST(TestSuite, SolutionNotExists) {
   EXPECT_EQ(count_simple(3, 10), 0);
   EXPECT_EQ(count_better(3, 10), 0);

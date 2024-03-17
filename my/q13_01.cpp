@@ -65,6 +65,7 @@ const struct TestParam {
 
 class TestSuite : public ::testing::TestWithParam<TestParam> {};
 
+// TODO: combine
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(count_connected(GetParam().E, recursive_search), GetParam().gold);
   EXPECT_EQ(count_connected(GetParam().E, bfs), GetParam().gold);

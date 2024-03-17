@@ -56,6 +56,8 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
   return *max_element(tmp);
 }
 
+// TODO: combine
+
 TEST(TestSuite, Ex1) {
   EXPECT_EQ(darts_simple({3, 14, 15, 9}, 50), 48);
   EXPECT_EQ(darts_binary({3, 14, 15, 9}, 50), 48);
