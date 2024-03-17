@@ -3,6 +3,8 @@
 #include "template.hpp" // TODO
 #include <map>
 #include <set>
+#include <queue>
+#include <stack>
 using std::multimap;
 using std::multiset;
 
@@ -17,3 +19,7 @@ size_t order_edge_set(const multimap<int, int>& E);
 // 辺集合を隣接リスト表現に変換する
 // is_direct: 有向グラフかどうか
 vector<multiset<int>> to_adjacency_list(const multimap<int, int>& E, const bool is_direct = false);
+
+void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen);
+
+void bfs(const vector<multiset<int>> &G, const int v, vector<bool> &seen);

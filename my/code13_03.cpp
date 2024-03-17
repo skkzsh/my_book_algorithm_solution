@@ -5,7 +5,7 @@
 using ::testing::ElementsAreArray;
 
 // E: 辺集合
-vector<int> BFS(const multimap<int, int> &E, const int s) {
+vector<int> bfs(const multimap<int, int> &E, const int s) {
   const auto G = to_adjacency_list(E);
 
   using std::optional;
@@ -59,5 +59,5 @@ TEST(TestSuite, Ex) {
     {6, 7},
   };
 
-  EXPECT_THAT(BFS(E, 0), ElementsAreArray({0, 1, 1, 2, 1, 2, 3, 3, 2}));
+  EXPECT_THAT(bfs(E, 0), ElementsAreArray({0, 1, 1, 2, 1, 2, 3, 3, 2}));
 }

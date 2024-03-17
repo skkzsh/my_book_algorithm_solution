@@ -1,21 +1,9 @@
 #include "gtest/gtest.h"
 #include "graph.hpp"
-#include <queue>
-#include <stack>
 using std::pair;
 
 // E: 辺集合
 // p: {s, t}
-
-void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen) {
-  seen.at(v)= true;
-
-  for (const auto n : G.at(v)) {
-    if (!seen.at(n)) {
-      recursive_search(G, n, seen);
-    }
-  }
-}
 
 bool exists_path_by_recursive(const multimap<int, int> &E, const pair<int, int> &p) {
   const auto G = to_adjacency_list(E, true);

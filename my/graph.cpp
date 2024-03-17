@@ -50,3 +50,32 @@ vector<multiset<int>> to_adjacency_list(const multimap<int, int>& E, const bool 
 
   return G;
 }
+
+void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen) {
+  seen.at(v)= true;
+
+  for (const auto n : G.at(v)) {
+    if (!seen.at(n)) {
+      recursive_search(G, n, seen);
+    }
+  }
+}
+
+void bfs(const vector<multiset<int>> &G, const int v, vector<bool> &seen) {
+  std::queue<int> todo; // BFS
+
+  seen.at(v) = true;
+  todo.push(v);
+
+  while (!todo.empty()) {
+    const auto v = todo.front();
+    todo.pop();
+
+    for (const auto n : G.at(v)) {
+      if (!seen.at(n)) {
+        seen.at(n) = true;
+        todo.push(n);
+      }
+    }
+  }
+}

@@ -42,6 +42,7 @@ bool is_bipartite_by_bfs(const multimap<int, int> &E) {
   vector<optional<COLOR>> colors(G.size());
   std::queue<int> todo; // BFS
 
+  // 初期化: 0に赤色を塗る
   colors.at(0) = RED;
   todo.push(0);
 
