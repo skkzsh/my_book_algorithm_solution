@@ -1,9 +1,6 @@
-#include "gtest/gtest.h"
 #include "gtest-helper.hpp"
 #include "template.hpp"
 #include <numeric>
-using ::testing::TestWithParam;
-using ::testing::ValuesIn;
 
 // n * b = a + d
 // を満たすような最小の整数 d (>= 0) を返す
@@ -48,8 +45,8 @@ constexpr SingleTestParam<pair<int, int>> SUB_PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     SubTestSuite,
-    ValuesIn(SUB_PARAMS),
-    [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
+    testing::ValuesIn(SUB_PARAMS),
+    [](const TestParamInfo<SubTestSuite::ParamType>& info) {
       return string(info.param.test_name);
     }
                          );
@@ -87,5 +84,5 @@ const SingleTestParam<Pairs<int>> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ValuesIn(PARAMS)
+    testing::ValuesIn(PARAMS)
                          );

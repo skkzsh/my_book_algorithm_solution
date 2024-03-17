@@ -63,6 +63,6 @@ constexpr std::pair<string_view, string_view> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairStringSuite,
-    ::testing::ValuesIn(PARAMS),
+    testing::ValuesIn(PARAMS),
     PrintToSecondParamName
                          );

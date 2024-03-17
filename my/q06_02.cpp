@@ -101,7 +101,7 @@ const struct TestParam {
     },
   };
 
-class TestSuite : public ::testing::TestWithParam<TestParam> {};
+class TestSuite : public testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(festival_simple(GetParam().Z), GetParam().gold);
@@ -111,5 +111,5 @@ TEST_P(TestSuite, Ex) {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(PARAMS)
+    testing::ValuesIn(PARAMS)
                          );

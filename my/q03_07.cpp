@@ -42,7 +42,7 @@ constexpr int sum_combi(const string_view S) {
 }
 
 
-class SubTestSuite : public ::testing::TestWithParam<std::pair<int, int>> {};
+class SubTestSuite : public testing::TestWithParam<std::pair<int, int>> {};
 
 TEST_P(SubTestSuite, Test) {
   const auto [bit, gold] = GetParam();
@@ -59,7 +59,7 @@ constexpr std::pair<int, int> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     SubTestSuite,
-    ::testing::ValuesIn(PARAMS),
+    testing::ValuesIn(PARAMS),
     [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
       return std::to_string(info.param.first);
     }

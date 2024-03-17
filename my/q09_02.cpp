@@ -1,4 +1,3 @@
-#include "gtest/gtest.h"
 #include "gtest-helper.hpp"
 #include <stack>
 using std::invalid_argument;
@@ -52,6 +51,6 @@ constexpr std::pair<string_view, string_view> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     PairStringSuite,
-    ::testing::ValuesIn(PARAMS),
+    testing::ValuesIn(PARAMS),
     PrintToSecondParamName
                          );

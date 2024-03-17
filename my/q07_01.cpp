@@ -1,4 +1,3 @@
-#include "gtest/gtest.h"
 #include "gtest-helper.hpp"
 #include <algorithm>
 using std::vector;
@@ -34,7 +33,7 @@ constexpr unsigned int max_pairing(vector<int> a, vector<int> b) {
 }
 
 
-class TestSuite : public ::testing::TestWithParam<PairTestParam<vector<int>>> {};
+class TestSuite : public TestWithParam<PairTestParam<vector<int>>> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().gold);
@@ -71,5 +70,5 @@ const PairTestParam<vector<int>> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(PARAMS)
+    testing::ValuesIn(PARAMS)
                          );

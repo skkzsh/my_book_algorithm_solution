@@ -56,7 +56,7 @@ constexpr struct TestParam {
   { {53, 82, 49}, {1.58, 1.65}, 1.63372043395339 },
 };
 
-class TestSuite : public ::testing::TestWithParam<TestParam> {};
+class TestSuite : public testing::TestWithParam<TestParam> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_NEAR(bisection(GetParam().constants, GetParam().interval), GetParam().gold, EPS);
@@ -65,5 +65,5 @@ TEST_P(TestSuite, Ex) {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(PARAMS)
+    testing::ValuesIn(PARAMS)
                          );

@@ -63,6 +63,8 @@ int product_th_binary(vector<int> a, vector<int> b, const int K) {
   return right;
 }
 
+// TODO: combine
+
 TEST(TestSuite, Ex1) {
   EXPECT_EQ(product_th_simple({2, 3}, {3, 5}, 3), 10);
   EXPECT_EQ(product_th_binary({2, 3}, {3, 5}, 3), 10);

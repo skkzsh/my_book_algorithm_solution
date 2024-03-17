@@ -1,4 +1,3 @@
-#include "gtest/gtest.h"
 #include "gtest-helper.hpp"
 #include <algorithm>
 #include <ranges>
@@ -30,7 +29,7 @@ constexpr int happy_max(const vector<vector<int>> &z) {
 }
 
 
-class TestSuite : public ::testing::TestWithParam<SingleTestParam<vector<vector<int>>>> {};
+class TestSuite : public TestWithParam<SingleTestParam<vector<vector<int>>>> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(happy_max(GetParam().x), GetParam().gold);
@@ -71,5 +70,5 @@ const SingleTestParam<vector<vector<int>>> PARAMS[] {
 INSTANTIATE_TEST_SUITE_P(
     Inst,
     TestSuite,
-    ::testing::ValuesIn(PARAMS)
+    testing::ValuesIn(PARAMS)
                          );

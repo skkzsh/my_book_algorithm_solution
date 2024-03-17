@@ -1,6 +1,8 @@
 #pragma once
 
 #include "gtest/gtest.h"
+using ::testing::TestWithParam;
+using ::testing::TestParamInfo;
 using std::string_view;
 using std::string;
 using std::pair;
@@ -20,9 +22,9 @@ template<class T> struct PairTestParam {
 };
 
 
-class PairStringSuite : public ::testing::TestWithParam<pair<string_view, string_view>> {};
+class PairStringSuite : public TestWithParam<pair<string_view, string_view>> {};
 
 // TODO: NOT header
-string PrintToSecondParamName(const testing::TestParamInfo<PairStringSuite::ParamType>& info) {
+string PrintToSecondParamName(const TestParamInfo<PairStringSuite::ParamType>& info) {
   return string(info.param.second);
 }
