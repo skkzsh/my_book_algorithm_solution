@@ -16,7 +16,7 @@ template<class T> constexpr void chmax(T& a, const T b) {
 }
 
 // TODO: concept
-template<class CC> constexpr void print2d(const CC cc) {
+constexpr void print2d(const auto cc) {
   using std::cout;
   using std::endl;
   // using std::println;
