@@ -1,5 +1,5 @@
 CXX = g++
-CXX_BASE_FLAGS = -Wall -Wextra -O2 -std=c++2b
+CXX_BASE_FLAGS = -Wall -Wextra -std=c++2b # -O2
 CXXFLAGS = $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread
 # -g
 
