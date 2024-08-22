@@ -3,18 +3,19 @@
 #include <ranges>
 using std::vector;
 using std::invalid_argument;
-using namespace std::ranges;
+using std::ranges::sort;
 
 // O(N^2 * log N)
 consteval int product_th_simple(const vector<int> &a, const vector<int> &b, const int K) {
    using std::views::cartesian_product;
+   using std::views::transform;
+   using std::ranges::to;
 
-   // TODO: ranges:to
-   vector<int> p; // (a.size() * b.size())
-
-   for (const auto& [i, j] : cartesian_product(a, b)) {
-       p.push_back(i * j);
-   }
+   // TODO: 構造化束縛を簡潔に or なくしたい
+   vector p = cartesian_product(a, b) | transform([](const auto t) {
+                                          const auto& [i, j] = t;
+                                          return i * j;
+                                        }) | to<vector>();
 
   sort(p);
 
@@ -37,6 +38,7 @@ constexpr int countx(const vector<int> &a, const vector<int> &b, const int x) {
 
     j - 1 までで (j - 1) - 0 + 1 = jコ
   */
+  using std::ranges::upper_bound;
 
   int count = 0;
   for (const int m : a) {

@@ -5,14 +5,14 @@
 #include <algorithm>
 using ::testing::ElementsAreArray;
 
+// TODO: constexpr (C++23)
 vector<int> roots(const int v, const vector<UnionFind> &ufs) {
-  vector<int> results(ufs.size());
+  using std::views::transform;
+  using std::ranges::to;
 
-  for (UnionFind uf : ufs) {
-    results.push_back(uf.root(v));
-  }
-
-  return results;
+  return ufs | transform(
+                 [v](UnionFind uf) {return uf.root(v);}
+               ) | to<vector>();
 }
 
 // E: 辺集合 (0以上の連番であること)

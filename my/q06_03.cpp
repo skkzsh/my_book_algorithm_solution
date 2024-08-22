@@ -21,18 +21,23 @@ consteval int darts_simple(const vector<int> &a, const int M) {
 
 // O(N^2 log N)
 constexpr int darts_binary(const vector<int> &a, const int M) {
-  using namespace std::ranges;
+  using std::ranges::min_element;
+  using std::ranges::max_element;
+  using std::ranges::sort;
+  using std::ranges::upper_bound;
+  using std::ranges::to;
+  using std::views::transform;
   using std::prev;
 
   if (4 * *min_element(a) > M) {
     throw invalid_argument("Solution does not exist");
   }
 
-  // TODO: ranges::to
-  vector<int> aa(a.size() * a.size());
-  for (const auto& [i, j] : cartesian_product(a, a)) {
-    aa.push_back(i + j);
-  }
+ // TODO: 構造化束縛を簡潔に or なくしたい
+  vector aa = cartesian_product(a, a) | transform([](const auto t) {
+                                          const auto& [i, j] = t;
+                                          return i + j;
+                                        }) | to<vector>();
   sort(aa);
 
   /*
@@ -43,10 +48,10 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     <=> aa[i - 1] + aa[j] <= M < aa[i] + aa[j]
   */
 
-  vector<int> tmp(aa.size());
-  for (const int k : aa) {
-    tmp.push_back(k + *prev(upper_bound(aa, M - k)));
-  }
+  // TODO: 一時変数をなくしたい
+  const vector tmp = aa | transform([=](const int k) {
+                            return k + *prev(upper_bound(aa, M - k));
+                          }) | to<vector>();
 
   return *max_element(tmp);
 }
