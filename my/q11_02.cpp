@@ -1,17 +1,22 @@
 #include "gmock/gmock.h"
 #include "union-find.hpp"
 #include "graph.hpp"
+#include <ranges>
 using ::testing::ElementsAreArray;
 
 // E: 辺集合 (0以上の連番であること)
 vector<int> decay(const Pairs<int> &E) {
+  using std::views::iota;
+  using std::views::reverse;
+
   const multimap M(E.begin(), E.end());
   const auto N = order_edge_set(M);
 
   UnionFind uf(N);
   vector<int> results(E.size());
 
-  for (int e = E.size() - 1; e >= 0; --e) {
+  // TODO: enumerate (C++23)
+  for (const auto e : iota(0u, E.size()) | reverse) {
     results.at(e) = uf.count_set();
     const auto [u, v] = E.at(e);
     uf.unite(u, v);

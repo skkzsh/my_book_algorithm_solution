@@ -11,6 +11,7 @@ constexpr int happy_max(const vector<vector<int>> &z) {
   constexpr size_t M = 3;
   vector<vector<int>> dp(N + 1, vector<int>(M));
 
+  // TODO: cartesian_product (C++23)
   for (const auto i : iota(0u, N)) {
     for (const auto j : iota(0u, M)) {
       vector<int> tmp(M, -1); // TODO: views::(filter|transform), ranges::to (C++23)

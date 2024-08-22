@@ -17,6 +17,8 @@ constexpr int count(const pair<int, int> &p) {
 constexpr int min_push(Pairs<int> ps) {
   vector<int> counts(ps.size());
 
+  // TODO: reverse, enumerate (C++23)
+  // for (const auto i : iota(0u, ps.size()) | reverse) {
   for (int i = ps.size() - 1; i >= 0; --i) {
     counts.at(i) = count(ps.at(i));
     // std::cout << "i: "  << i << ", count: " << counts.at(i) << std::endl;  // debug

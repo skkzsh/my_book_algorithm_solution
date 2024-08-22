@@ -15,6 +15,7 @@ constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   std::vector<bool> used(r.size());  // rが使用済かどうか
   unsigned int count = 0;
 
+  // TODO: enumerate (C++23)
   for (const auto j : iota(0u, b.size())) {
     int max_second = - INF;
     std::optional<int> max_key;

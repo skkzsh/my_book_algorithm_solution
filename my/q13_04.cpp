@@ -16,6 +16,7 @@ int shortest_path(const vector<string_view> &maze, const int H, const int W) {
   using std::views::iota;
   using std::initializer_list;
 
+  // TODO: cartesian_product (C++23)
   pair<int, int> s, g;
   for (const auto i : iota(0, H)) {
     for (const auto j : iota(0, W)) {

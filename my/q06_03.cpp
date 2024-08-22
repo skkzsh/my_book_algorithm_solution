@@ -8,6 +8,7 @@ using std::invalid_argument;
 consteval int darts_simple(const vector<int> &a, const int M) {
   int max = -1;
 
+  // TODO: cartesian_product (C++23)
   for (const int p : a) {
     for (const int q : a) {
       for (const int r : a) {
@@ -32,6 +33,7 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     throw invalid_argument("Solution does not exist");
   }
 
+  // TODO: cartesian_product (C++23)
   vector<int> aa(a.size() * a.size());
   for (const int i : a) {
     for (const int j : a) {

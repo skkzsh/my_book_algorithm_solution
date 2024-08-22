@@ -2,6 +2,7 @@
 using std::invalid_argument;
 
 consteval int count_simple(const int K, const int N) {
+  // TODO: cartesian_product (C++23)
   int count = 0;
   for (int x = 0; x <= K; ++x) {
     for (int y = 0; y <= K; ++y) {
@@ -25,6 +26,7 @@ constexpr int count_better(const int K, const int N) {
   // K > nの場合, 0 <= x,y,z <= nの範囲のみ探索すれば十分
   const int boundary = std::min(K, N);
 
+  // TODO: cartesian_product (C++23)
   int count = 0;
   for (int x = 0; x <= boundary; ++x) {
     for (int y = 0; y <= boundary; ++y) {

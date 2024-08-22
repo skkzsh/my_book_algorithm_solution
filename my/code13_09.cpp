@@ -20,7 +20,7 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex
     if (V.at(n).depth == NA) {
       V.at(n).depth = V.at(v).depth + 1; // 行きがけ
       recursive_search(G, n, V);
-      V.at(v).size += V.at(n).size; //　帰りがけ
+      V.at(v).size += V.at(n).size; // 帰りがけ
     }
   }
 }
