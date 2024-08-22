@@ -1,14 +1,15 @@
 #include "gtest/gtest.h"
+#include <ranges>
 using std::invalid_argument;
+using std::views::iota;
+using std::views::cartesian_product;
 
 consteval int count_simple(const int K, const int N) {
-  // TODO: cartesian_product (C++23)
+  // TODO: count_if
   int count = 0;
-  for (int x = 0; x <= K; ++x) {
-    for (int y = 0; y <= K; ++y) {
-      if (const int z = N - x - y; z >= 0 && z <= K) {
-        ++count;
-      }
+  for (const auto& [x, y] : cartesian_product(iota(0, K + 1), iota(0, K + 1))) {
+    if (const int z = N - x - y; z >= 0 && z <= K) {
+      ++count;
     }
   }
   return count;
@@ -26,13 +27,11 @@ constexpr int count_better(const int K, const int N) {
   // K > nの場合, 0 <= x,y,z <= nの範囲のみ探索すれば十分
   const int boundary = std::min(K, N);
 
-  // TODO: cartesian_product (C++23)
+  // TODO: count_if
   int count = 0;
-  for (int x = 0; x <= boundary; ++x) {
-    for (int y = 0; y <= boundary; ++y) {
-      if (const int z = N - x - y; z >= 0 && z <= K) {
-        ++count;
-      }
+  for (const auto& [x, y] : cartesian_product(iota(0, boundary + 1), iota(0, boundary + 1))) {
+    if (const int z = N - x - y; z >= 0 && z <= K) {
+      ++count;
     }
   }
   return count;

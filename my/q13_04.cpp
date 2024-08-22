@@ -14,21 +14,19 @@ int shortest_path(const vector<string_view> &maze, const int H, const int W) {
   using std::queue;
   using std::pair;
   using std::views::iota;
+  using std::views::cartesian_product;
   using std::initializer_list;
 
-  // TODO: cartesian_product (C++23)
   pair<int, int> s, g;
-  for (const auto i : iota(0, H)) {
-    for (const auto j : iota(0, W)) {
-      switch (maze.at(i).at(j)) {
-        case 'S':
-          s = {i, j}; break;
-        case 'G':
-          g = {i, j}; break;
-        default:
-          break;
-        // TODO: validation
-      }
+  for (const auto& [i, j] : cartesian_product(iota(0, H), iota(0, W))) {
+    switch (maze.at(i).at(j)) {
+      case 'S':
+        s = {i, j}; break;
+      case 'G':
+        g = {i, j}; break;
+      default:
+        break;
+      // TODO: validation
     }
   }
   const auto [sx, sy] = s;

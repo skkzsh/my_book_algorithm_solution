@@ -1,25 +1,23 @@
 #include "gtest/gtest.h"
 #include <algorithm>
-// #include <ranges>
+#include <ranges>
 using std::vector;
 using std::invalid_argument;
 using namespace std::ranges;
 
 // O(N^2 * log N)
 consteval int product_th_simple(const vector<int> &a, const vector<int> &b, const int K) {
-  // TODO: C++23
-  // using std::views::cartesian_product;
-  // for (const auto& [i, j] : cartesian_product(a, b)) {
-  //     p.push_back(i * j);
-  // }
+   using std::views::cartesian_product;
 
-  vector<int> p; // (a.size() * b.size())
-  for (const int i : a) {
-    for (const int j : b) {
-      p.push_back(i * j);
-    }
-  }
+   // TODO: ranges:to
+   vector<int> p; // (a.size() * b.size())
+
+   for (const auto& [i, j] : cartesian_product(a, b)) {
+       p.push_back(i * j);
+   }
+
   sort(p);
+
   return p.at(K - 1);
 }
 
