@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-#include <iostream>
-// #include <print> // TODO: C++23
+#include <print>
 
 using std::vector;
 using std::pair;
@@ -17,18 +16,18 @@ template<class T> constexpr void chmax(T& a, const T b) {
 
 // TODO: concept
 constexpr void print2d(const auto cc) {
-  using std::cout;
-  using std::endl;
-  // using std::println;
+  using std::print;
+  using std::println;
 
-  cout << "print2d start" << endl;
+  println("print2d start");
   for (const auto& c : cc) {
+    // println("{}", c); // TODO
     for (const auto& x : c) {
-      cout << x << ' ';
+      print("{} ", x);
     }
-    cout << endl;
+    println("");
   }
-  cout << "print2d end" << endl;
+  println("print2d end");
 }
 
 template<class T> using Pairs = vector<pair<T, T>>;
