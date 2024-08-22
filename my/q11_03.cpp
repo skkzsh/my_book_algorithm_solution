@@ -17,6 +17,7 @@ vector<int> roots(const int v, const vector<UnionFind> &ufs) {
 
 // E: 辺集合 (0以上の連番であること)
 // N: 都市の数 (Eと整合が取れていること)
+// TODO: constexpr (C++23)
 vector<int> cities(const vector<Pairs<int>> &E, const int N) {
   using std::views::iota;
   // using std::views::enumerate;

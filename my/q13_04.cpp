@@ -9,7 +9,7 @@ using std::string_view;
 // .: 通路
 // #: 壁
 
-int shortest_path(const vector<string_view> &maze, const int H, const int W) {
+constexpr int shortest_path(const vector<string_view> &maze, const int H, const int W) {
   using std::optional;
   using std::queue;
   using std::pair;
