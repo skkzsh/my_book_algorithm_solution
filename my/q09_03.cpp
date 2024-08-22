@@ -9,14 +9,13 @@ using std::map;
 using std::invalid_argument;
 
 map<unsigned int, unsigned int> pairing_paren(const string_view parens) {
-  using std::views::iota;
+  using std::views::enumerate;
 
   map<unsigned int, unsigned int> result;
   std::stack<unsigned int> st; // 左括弧の index を格納する stack
 
-  // TODO: enumerate
-  for (const auto i : iota(0u, parens.length())) {
-    switch (parens.at(i)) {
+  for (const auto& [i, paren] : parens | enumerate) {
+    switch (paren) {
       case '(':
         st.push(i);
         break;

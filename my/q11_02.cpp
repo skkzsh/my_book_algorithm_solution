@@ -15,7 +15,7 @@ vector<int> decay(const Pairs<int> &E) {
   UnionFind uf(N);
   vector<int> results(E.size());
 
-  // TODO: enumerate (C++23)
+  // enumerateを使う？ (C++23)
   for (const auto e : iota(0u, E.size()) | reverse) {
     results.at(e) = uf.count_set();
     const auto [u, v] = E.at(e);

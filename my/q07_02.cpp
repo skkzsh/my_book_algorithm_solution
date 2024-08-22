@@ -6,7 +6,7 @@
 constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   constexpr int INF = 1 << 29; // 十分大きな値
 
-  using std::views::iota;
+  using std::views::enumerate;
   using std::ranges::sort;
 
   sort(r);
@@ -15,19 +15,19 @@ constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   std::vector<bool> used(r.size());  // rが使用済かどうか
   unsigned int count = 0;
 
-  // TODO: enumerate (C++23)
-  for (const auto j : iota(0u, b.size())) {
+  for (const auto& [bx, by] : b) {
     int max_second = - INF;
     std::optional<int> max_key;
-    const auto [bx, by] = b.at(j);
 
-    for (const auto i : iota(0u, r.size())) {
-      if (const auto [rx, ry] = r.at(i); !used.at(i) && rx < bx && ry < by) {
+    // TODO: enumerate を使いつつ, 構造化束縛をまとめたい
+    for (int i = 0; const auto& [rx, ry] : r) {
+      if (!used.at(i) && rx < bx && ry < by) {
         if (max_second < ry) {
           max_second = ry;
           max_key = i;
         }
       }
+      ++i;
     }
 
     if (max_key.has_value()) {

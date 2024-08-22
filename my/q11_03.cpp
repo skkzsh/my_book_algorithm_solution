@@ -25,7 +25,6 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
   // const int N = ;  // TODO
   vector<UnionFind> ufs(E.size(), N);
 
-  // TODO: enumerate (C++23)
   // for (const auto &[i, e] : E | enumerate) {
   for (const auto i : iota(0u, E.size())) {
     for (const auto &[u, v] : E.at(i)) {
