@@ -26,6 +26,12 @@ TARGETS_WITH_GRAPH = code13_% q13_%
 
 RUN_SCRIPT = ./runall.sh
 
+# Apple Silicon だと /opt/homebrew 配下に gtest が置かれる
+ifeq ($(shell uname -p), arm)
+    export CPATH := /opt/homebrew/include:$(CPATH)
+    export LIBRARY_PATH := /opt/homebrew/lib:$(LIBRARY_PATH)
+endif
+
 all: $(TARGETS)
 
 #c20less: $(C20LESS_TARGETS)
