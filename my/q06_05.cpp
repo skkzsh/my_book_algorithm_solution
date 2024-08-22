@@ -5,7 +5,7 @@ using std::invalid_argument;
 using namespace std::ranges;
 
 // O(N^2 * log N)
-constexpr int product_th_simple(const vector<int> &a, const vector<int> &b, const int K) {
+consteval int product_th_simple(const vector<int> &a, const vector<int> &b, const int K) {
   vector<int> p; // (a.size() * b.size())
   for (const int i : a) {
     for (const int j : b) {

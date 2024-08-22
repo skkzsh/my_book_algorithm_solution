@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 using std::invalid_argument;
 
-constexpr int count_simple(const int K, const int N) {
+consteval int count_simple(const int K, const int N) {
   int count = 0;
   for (int x = 0; x <= K; ++x) {
     for (int y = 0; y <= K; ++y) {

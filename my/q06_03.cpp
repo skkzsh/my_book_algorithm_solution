@@ -5,7 +5,7 @@ using std::vector;
 using std::invalid_argument;
 
 // O(N^4)
-constexpr int darts_simple(const vector<int> &a, const int M) {
+consteval int darts_simple(const vector<int> &a, const int M) {
   int max = -1;
 
   for (const int p : a) {
