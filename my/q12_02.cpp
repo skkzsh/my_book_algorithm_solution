@@ -8,7 +8,7 @@ using std::unexpected;
 using std::string;
 
 constexpr expected<int, string> min_cost(Pairs<int> shops, const int M) { // {cost, count}
-  std::sort(shops.begin(), shops.end());
+  std::ranges::sort(shops);
 
   int cost = 0;
   int count = 0;
