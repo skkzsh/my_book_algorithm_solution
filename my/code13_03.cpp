@@ -6,10 +6,11 @@ using ::testing::ElementsAreArray;
 
 // E: 辺集合
 vector<int> bfs(const multimap<int, int> &E, const int s) {
-  const auto G = to_adjacency_list(E);
-
   using std::optional;
-  using std::ranges::transform;
+  using std::views::transform;
+  using std::ranges::to;
+
+  const auto G = to_adjacency_list(E);
 
   vector<optional<int>> dists(G.size());
   std::queue<int> todo;
@@ -30,16 +31,9 @@ vector<int> bfs(const multimap<int, int> &E, const int s) {
   }
 
   // optionalはがし
-  vector<int> results(G.size());
-  transform(dists, results.begin(),
-            [](const auto o) { return o.value(); }  // TODO: optional<auto> or auto
-            );
-
-  // TODO: C++23
-  // using std::views::transform;
-  // using std::ranges::to;
-
-  return results;
+  return dists | transform(
+                     [](const auto o) { return o.value(); }  // TODO: optional<auto> or concept
+                     ) | to<vector>();
 }
 
 TEST(TestSuite, Ex) {

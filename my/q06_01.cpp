@@ -5,27 +5,22 @@ using ::testing::ElementsAreArray;
 using std::vector;
 
 constexpr vector<int> ranking(const vector<int> &a) {
-  using namespace std::ranges;
+  using std::ranges::sort;
+  using std::ranges::find;
+  using std::ranges::to;
+  using std::views::transform;
 
   // aをsortしたvector
   vector sorted(a);
   sort(sorted);
 
-  vector<int> results(a.size());
-
-  transform(a, results.begin(),
-            [sorted](const int i) {
-              return find(sorted, i) - sorted.begin();
-              // find(sorted, a[i]) - sorted.begin();
-              // find(a, sorted[i]) - a.begin();
-            }
-            );
-
-  // TODO: C++23
-  // using std::views::transform;
-  // using std::ranges::to;
-
-  return results;
+  return a | transform(
+                  [sorted](const int i) {
+                    return find(sorted, i) - sorted.begin();
+                    // find(sorted, a[i]) - sorted.begin();
+                    // find(a, sorted[i]) - a.begin();
+                  }
+                  ) | to<vector<int>>();
 }
 
 TEST(TestSuite, Ex) {
