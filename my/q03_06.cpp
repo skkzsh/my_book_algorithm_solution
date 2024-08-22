@@ -1,18 +1,22 @@
 #include "gtest/gtest.h"
 #include <ranges>
+#include <algorithm>
 using std::invalid_argument;
 using std::views::iota;
 using std::views::cartesian_product;
+using std::ranges::count_if;
 
 consteval int count_simple(const int K, const int N) {
-  // TODO: count_if
-  int count = 0;
-  for (const auto& [x, y] : cartesian_product(iota(0, K + 1), iota(0, K + 1))) {
-    if (const int z = N - x - y; z >= 0 && z <= K) {
-      ++count;
+  const auto seq = iota(0, K + 1);
+
+  // TODO: 構造化束縛を簡潔に or なくしたい
+  return count_if(cartesian_product(seq, seq),
+    [K, N](const auto& t) {
+      const auto& [x, y] = t;
+      const int z = N - x - y;
+      return 0 <= z && z <= K;
     }
-  }
-  return count;
+  );
 }
 
 constexpr int count_better(const int K, const int N) {
@@ -25,16 +29,16 @@ constexpr int count_better(const int K, const int N) {
   }
 
   // K > nの場合, 0 <= x,y,z <= nの範囲のみ探索すれば十分
-  const int boundary = std::min(K, N);
+  const auto seq = iota(0, std::min(K, N) + 1);
 
-  // TODO: count_if
-  int count = 0;
-  for (const auto& [x, y] : cartesian_product(iota(0, boundary + 1), iota(0, boundary + 1))) {
-    if (const int z = N - x - y; z >= 0 && z <= K) {
-      ++count;
+  // TODO: 構造化束縛を簡潔に or なくしたい
+  return count_if(cartesian_product(seq, seq),
+    [K, N](const auto& t) {
+      const auto& [x, y] = t;
+      const int z = N - x - y;
+      return 0 <= z && z <= K;
     }
-  }
-  return count;
+  );
 }
 
 // TODO: combine
