@@ -37,7 +37,8 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
   vector aa = cartesian_product(a, a) | transform([](const auto t) {
                                           const auto& [i, j] = t;
                                           return i + j;
-                                        }) | to<vector>();
+                                        })
+                                      | to<vector>();
   sort(aa);
 
   /*
@@ -51,7 +52,8 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
   // TODO: 一時変数をなくしたい
   const vector tmp = aa | transform([=](const int k) {
                             return k + *prev(upper_bound(aa, M - k));
-                          }) | to<vector>();
+                          })
+                        | to<vector>();
 
   return *max_element(tmp);
 }

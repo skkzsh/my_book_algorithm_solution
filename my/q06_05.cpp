@@ -15,7 +15,8 @@ consteval int product_th_simple(const vector<int> &a, const vector<int> &b, cons
    vector p = cartesian_product(a, b) | transform([](const auto t) {
                                           const auto& [i, j] = t;
                                           return i * j;
-                                        }) | to<vector>();
+                                        })
+                                      | to<vector>();
 
   sort(p);
 

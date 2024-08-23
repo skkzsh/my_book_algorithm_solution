@@ -9,9 +9,8 @@ vector<int> roots(const int v, const vector<UnionFind> &ufs) {
   using std::views::transform;
   using std::ranges::to;
 
-  return ufs | transform(
-                 [v](UnionFind uf) {return uf.root(v);}
-               ) | to<vector>();
+  return ufs | transform([v](UnionFind uf) { return uf.root(v); })
+             | to<vector>();
 }
 
 // E: 辺集合 (0以上の連番であること)

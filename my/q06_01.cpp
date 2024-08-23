@@ -13,13 +13,12 @@ constexpr vector<int> ranking(const vector<int> &a) {
   vector sorted(a);
   sort(sorted);
 
-  return a | transform(
-                  [sorted](const int i) {
-                    return find(sorted, i) - sorted.begin();
-                    // find(sorted, a[i]) - sorted.begin();
-                    // find(a, sorted[i]) - a.begin();
-                  }
-                  ) | to<vector<int>>();
+  return a | transform([sorted](const int i) {
+               return find(sorted, i) - sorted.begin();
+               // find(sorted, a[i]) - sorted.begin();
+               // find(a, sorted[i]) - a.begin();
+             })
+           | to<vector<int>>();
 }
 
 TEST(TestSuite, Ex) {

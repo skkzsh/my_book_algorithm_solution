@@ -31,9 +31,8 @@ vector<int> bfs(const multimap<int, int> &E, const int s) {
   }
 
   // optionalはがし
-  return dists | transform(
-                     [](const auto o) { return o.value(); }  // TODO: optional<auto> or concept
-                     ) | to<vector>();
+  return dists | transform([](const auto o) { return o.value(); })  // TODO: optional<auto> or concept
+               | to<vector>();
 }
 
 TEST(TestSuite, Ex) {
