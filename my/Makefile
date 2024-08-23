@@ -2,6 +2,7 @@ CXX := g++
 CXX_BASE_FLAGS ?= -Wall -Wextra -std=c++2b # -O2
 CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread
 # -g
+# pkg-config --cflags --libs gtest_main gtest
 
 TYPE_HDR := type.h
 TEMPLATE_HDR := template.hpp
@@ -30,7 +31,8 @@ RUN_SCRIPT := ./runall.sh
 
 # Apple Silicon だと /opt/homebrew 配下に gtest が置かれる
 ifeq ($(shell uname -p), arm)
-    export CPATH := /opt/homebrew/include:$(CPATH)
+    export CPLUS_INCLUDE_PATH := /opt/homebrew/include:$(CPLUS_INCLUDE_PATH)
+    # export CPATH := /opt/homebrew/include:$(CPATH)
     export LIBRARY_PATH := /opt/homebrew/lib:$(LIBRARY_PATH)
 endif
 
