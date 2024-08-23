@@ -1,12 +1,10 @@
 #include "gtest-helper.hpp"
 #include "template.hpp"
-#include <ranges>
 #include <algorithm>
 
 constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   constexpr int INF = 1 << 29; // 十分大きな値
 
-  using std::views::enumerate;
   using std::ranges::sort;
 
   sort(r);

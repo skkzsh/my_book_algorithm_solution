@@ -48,6 +48,7 @@ size_t EdgeSet::order() const {
 
 vector<vector<int>> EdgeSet::to_adjacency_list() const {
   vector<vector<int>> G(order()); // 隣接リスト表現
+  // vector<vector<int>> G(order(), vector<int>(size())); // 隣接リスト表現
 
   for (const auto &[u, v] : P) {
     G.at(u).push_back(v);

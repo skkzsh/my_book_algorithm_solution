@@ -2,7 +2,6 @@
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
-#include <algorithm>
 using ::testing::ElementsAreArray;
 
 // TODO: constexpr (C++23)

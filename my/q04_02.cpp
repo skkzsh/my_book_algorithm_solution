@@ -1,5 +1,4 @@
 #include "gmock/gmock.h"
-#include <algorithm>
 #include <ranges>
 using ::testing::ElementsAreArray;
 using std::vector;
