@@ -22,10 +22,9 @@ TARGETS_WITH_TEMPLATE := q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
 TARGETS_WITH_UNION_FIND := code11_% q11_%
 TARGETS_WITH_GRAPH := code13_% q13_%
 
+# C++23とC++23未満のターゲットで分割 (MacでC++23をcompileしづらいため)
 TARGETS_C23 := q03_06 q06_03 q06_05 q07_02 q09_03 q13_04
-# C++23未満のターゲット (MacでC++23をcompileしづらいため)
 TARGETS_C23LESS := $(filter-out $(TARGETS_C23), $(TARGETS))
-# TARGETS_C20LESS := q03_06 q03_07 q04_01 q04_05 q04_06 q05_01 q05_02 q05_04 q05_05 q05_06 q05_07 q05_08 q05_09 q06_01 q06_03 q06_04 q06_05 q06_06 code07_03 q07_01 q07_02 q07_03 q09_02 q09_03 code11_03 q11_01 q11_02 q11_03 q12_02 # code13_04
 
 RUN_SCRIPT := ./runall.sh
 
@@ -37,8 +36,8 @@ endif
 
 all: $(TARGETS)
 
+c23: $(TARGETS_C23)
 c23less: $(TARGETS_C23LESS)
-#c20less: $(TARGETS_C20LESS)
 
 $(TARGETS_WITH_GTEST_HELPER): %: %.cpp $(GTEST_HELPER_HDR) $(TEMPLATE_HDR)
 	$(CXX) $(CXXFLAGS) $< -o $@
@@ -78,17 +77,17 @@ $(GRAPH_OBJ): $(GRAPH_SRC) $(GRAPH_HDR) $(TEMPLATE_HDR)
 testall: $(TARGETS)
 	$(RUN_SCRIPT) $(TARGETS)
 
+c23testall: $(TARGETS_C23)
+	$(RUN_SCRIPT) $(TARGETS_C23)
 c23lesstestall: $(TARGETS_C23LESS)
 	$(RUN_SCRIPT) $(TARGETS_C23LESS)
-#c20lesstestall: $(TARGETS_C20LESS)
-#	$(RUN_SCRIPT) $(TARGETS_C20LESS)
 
 clean:
 	$(RM) $(TARGETS) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 
+c23clean:
+	$(RM) $(TARGETS_C23) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 c23lessclean:
 	$(RM) $(TARGETS_C23LESS) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
-#c20lessclean:
-#	$(RM) $(TARGETS_C20LESS)
 
-.PHONY: testall clean c23less c23lesstestall c23lessclean # c20less c20lesstestall c20lessclean
+.PHONY: testall clean c23 c23testall c23clean c23less c23lesstestall c23lessclean
