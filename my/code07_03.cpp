@@ -26,7 +26,7 @@ constexpr int min_push(Pairs<int> ps) {
     }
   }
 
-  return std::accumulate(counts.begin(), counts.end(), 0); // TODO: using ranges
+  return std::accumulate(counts.begin(), counts.end(), 0); // ranges を使いたいが, 実装がない
 }
 
 

@@ -9,9 +9,8 @@ using std::ranges::count_if;
 consteval int count_simple(const int K, const int N) {
   const auto seq = iota(0, K + 1);
 
-  // TODO: 構造化束縛を簡潔に or なくしたい
   return count_if(cartesian_product(seq, seq),
-    [K, N](const auto& t) {
+    [K, N](const auto& t) {  // TODO: 構造化束縛を簡潔に or なくしたい
       const auto& [x, y] = t;
       const int z = N - x - y;
       return 0 <= z && z <= K;
@@ -31,9 +30,8 @@ constexpr int count_better(const int K, const int N) {
   // K > nの場合, 0 <= x,y,z <= nの範囲のみ探索すれば十分
   const auto seq = iota(0, std::min(K, N) + 1);
 
-  // TODO: 構造化束縛を簡潔に or なくしたい
   return count_if(cartesian_product(seq, seq),
-    [K, N](const auto& t) {
+    [K, N](const auto& t) {  // TODO: 構造化束縛を簡潔に or なくしたい
       const auto& [x, y] = t;
       const int z = N - x - y;
       return 0 <= z && z <= K;

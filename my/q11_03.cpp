@@ -32,7 +32,7 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
 
   map<vector<int>, int> counts;
   for (const auto v : iota(0, N)) {
-    ++counts[roots(v, ufs)]; // TODO: at
+    ++counts[roots(v, ufs)]; // at を使えない
   }
 
   // for (const int u : iota(0, N)) {

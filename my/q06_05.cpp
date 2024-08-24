@@ -11,8 +11,7 @@ consteval int product_th_simple(const vector<int> &a, const vector<int> &b, cons
    using std::views::transform;
    using std::ranges::to;
 
-   // TODO: 構造化束縛を簡潔に or なくしたい
-   vector p = cartesian_product(a, b) | transform([](const auto t) {
+   vector p = cartesian_product(a, b) | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
                                           const auto& [i, j] = t;
                                           return i * j;
                                         })

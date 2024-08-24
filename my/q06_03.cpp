@@ -42,8 +42,7 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     throw invalid_argument("Solution does not exist");
   }
 
- // TODO: 構造化束縛を簡潔に or なくしたい
-  vector aa = cartesian_product(a, a) | transform([](const auto t) {
+  vector aa = cartesian_product(a, a) | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
                                           const auto& [i, j] = t;
                                           return i + j;
                                         })
