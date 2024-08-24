@@ -23,8 +23,9 @@ TARGETS_WITH_TEMPLATE := q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
 TARGETS_WITH_UNION_FIND := code11_% q11_%
 TARGETS_WITH_GRAPH := code13_% q13_%
 
-# C++23とC++23未満のターゲットで分割 (MacでC++23をcompileしづらいため)
-TARGETS_C23 := q03_06 q06_03 q06_05 q07_02 q09_03 q13_04
+# C++23とC++23未満のターゲットで分割
+# (cartesian_product や enumerate が Mac で compile しづらいため)
+TARGETS_C23 := q03_06 q06_03 q06_05 q13_04 # q09_03
 TARGETS_C23LESS := $(filter-out $(TARGETS_C23), $(TARGETS))
 
 RUN_SCRIPT := ./runall.sh
