@@ -3,22 +3,38 @@
 #include <queue>
 using std::vector;
 using std::string_view;
+using std::pair;
 
 // S: スタート
 // G: ゴール
 // .: 通路
 // #: 壁
 
-constexpr int shortest_path(const vector<string_view> &maze, const int H, const int W) {
+constexpr int shortest_path(const vector<string_view> &maze, const pair<int, int> dimensions) {
   using std::optional;
   using std::queue;
-  using std::pair;
+  // using std::string_view::npos;
   using std::views::iota;
   using std::views::cartesian_product;
+  // using std::views::enumerate;
   using std::initializer_list;
 
-  // enumerate を使うのもいい
+  const auto [H, W] = dimensions;
+
   pair<int, int> s, g;
+
+  // for (const auto &[i, row] : maze | enumerate) {
+  //   size_t j;
+  //   j = row.find('S');
+  //   if (j != std::string_view::npos) {
+  //     s = {i, j};
+  //   }
+  //   j = row.find('G');
+  //   if (j != std::string_view::npos) {
+  //     g = {i, j};
+  //   }
+  // }
+
   for (const auto& [i, j] : cartesian_product(iota(0, H), iota(0, W))) {
     switch (maze.at(i).at(j)) {
       case 'S':
@@ -78,7 +94,7 @@ TEST(TestSuite, Ex) {
     "S.......",
   };
 
-  EXPECT_EQ(shortest_path(maze, 8, 8), 16);
+  EXPECT_EQ(shortest_path(maze, {8, 8}), 16);
 }
 
 TEST(TestSuite, Impossible) {
@@ -93,5 +109,5 @@ TEST(TestSuite, Impossible) {
     "S.......",
   };
 
-  EXPECT_THROW(shortest_path(maze, 8, 8), std::bad_optional_access);
+  EXPECT_THROW(shortest_path(maze, {8, 8}), std::bad_optional_access);
 }
