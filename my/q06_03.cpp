@@ -2,31 +2,40 @@
 #include "template.hpp"
 #include <algorithm>
 #include <ranges>
+
 using std::vector;
-using std::invalid_argument;
+using std::ranges::max_element;
+using std::ranges::to;
+using std::views::filter;
+using std::views::transform;
 using std::views::cartesian_product;
+using std::invalid_argument;
 
 // O(N^4)
-consteval int darts_simple(const vector<int> &a, const int M) {
-  int max = -1;
+constexpr int darts_simple(const vector<int> &a, const int M) {
+  // 一時変数をなくしたい
+  const vector sums = cartesian_product(a, a, a, a)
+                      | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
+                          const auto& [p, q, r, s] = t;
+                          return p + q + r + s;
+                        })
+                      | filter([M](const int sum) {
+                          return sum <= M;
+                        })
+                      | to<vector>(); // 直接maxを取りたい
 
-  for (const auto& [p, q, r, s] : cartesian_product(a, a, a, a)) {
-    if (const int tmp = p + q + r + s; tmp <= M) {
-      chmax(max, tmp);
-    }
+  if (sums.size() == 0) {
+    throw invalid_argument("Solution does not exist");
   }
 
-  return max;
+  return *max_element(sums);
 }
 
 // O(N^2 log N)
 constexpr int darts_binary(const vector<int> &a, const int M) {
   using std::ranges::min_element;
-  using std::ranges::max_element;
   using std::ranges::sort;
   using std::ranges::upper_bound;
-  using std::ranges::to;
-  using std::views::transform;
   using std::prev;
 
   if (4 * *min_element(a) > M) {
@@ -49,11 +58,11 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     <=> aa[i - 1] + aa[j] <= M < aa[i] + aa[j]
   */
 
-  // TODO: 一時変数をなくしたい
+  // 一時変数をなくしたい
   const vector tmp = aa | transform([=](const int k) {
                             return k + *prev(upper_bound(aa, M - k));
                           })
-                        | to<vector>();
+                        | to<vector>();  // 直接maxを取りたい
 
   return *max_element(tmp);
 }
@@ -73,7 +82,7 @@ TEST(TestSuite, Boundary) {
 }
 
 TEST(TestSuite, greater_than_M) {
-  EXPECT_EQ(darts_simple({1}, 3), -1);
+  EXPECT_THROW(darts_simple({1}, 3), invalid_argument);
   EXPECT_THROW(darts_binary({1}, 3), invalid_argument);
   // 3を越えない範囲の最大値 <=> 3以下の最大値
   // <=> 3を越えたら例外 (3は例外でない) <=> 4以上は例外

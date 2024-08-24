@@ -49,7 +49,7 @@ constexpr int countx(const vector<int> &a, const vector<int> &b, const int x) {
 }
 
 // O(N * log N * log C)
-int product_th_binary(vector<int> a, vector<int> b, const int K) {
+constexpr int product_th_binary(vector<int> a, vector<int> b, const int K) {
   sort(a);
   sort(b);
 
