@@ -1,8 +1,9 @@
 #include "gtest/gtest.h"
 #include "type.h"
 using std::vector;
+// using std::optional;
 
-// TODO: Use optional
+// TODO: Use optional & 処理をまとめる
 constexpr bool func(const int i, const int w, const vector<int> &a, vector<vector<Tri_Bool>> &memo) {
   // すでに計算済みならば解をリターン
   if (memo[i][w] != Tri_Undetermined) {
@@ -20,6 +21,8 @@ constexpr bool func(const int i, const int w, const vector<int> &a, vector<vecto
   }
 
   // a[i - 1] を選ばない場合, 選ぶ場合
+  // TODO: w >= a[i - 1] の判定?
+  // std::cout << w - a.at(i - 1) << std::endl;
   if (func(i - 1, w, a, memo) || func(i - 1, w - a[i - 1], a, memo)) {
     memo[i][w] = Tri_True;
     return memo[i][w];
