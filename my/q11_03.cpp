@@ -2,13 +2,12 @@
 #include "union-find.hpp"
 #include "template.hpp"
 #include <ranges>
+
 using ::testing::ElementsAreArray;
+using std::views::transform;
+using std::ranges::to;
 
-// TODO: constexpr (C++23)
-vector<int> roots(const int v, const vector<UnionFind> &ufs) {
-  using std::views::transform;
-  using std::ranges::to;
-
+constexpr vector<int> roots(const int v, const vector<UnionFind> &ufs) {
   return ufs | transform([v](UnionFind uf) { return uf.root(v); })
              | to<vector>();
 }
@@ -36,11 +35,6 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
     ++counts[roots(v, ufs)]; // TODO: at
   }
 
-  vector<int> results(N);
-  for (const auto v : iota(0, N)) {
-    results.at(v) = counts.at(roots(v, ufs));
-  }
-
   // for (const int u : iota(0, N)) {
   //     int count = 0;
   //     for (const int v : iota(0, N)) {
@@ -53,7 +47,8 @@ vector<int> cities(const vector<Pairs<int>> &E, const int N) {
   //     results.at(u) = count;
   // }
 
-  return results;
+  return iota(0, N) | transform([=](const int v) { return counts.at(roots(v, ufs)); })
+                    | to<vector>();
 }
 
 
