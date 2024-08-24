@@ -4,6 +4,8 @@ CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread
 # -g
 # pkg-config --cflags --libs gtest_main gtest
 
+RUN_SCRIPT := ./runall.sh
+
 TYPE_HDR := type.h
 TEMPLATE_HDR := template.hpp
 GTEST_HELPER_HDR := gtest-helper.hpp
@@ -28,7 +30,6 @@ TARGETS_WITH_GRAPH := code13_% q13_%
 TARGETS_C23 := q03_06 q06_03 q06_05 q13_04 # q09_03
 TARGETS_C23LESS := $(filter-out $(TARGETS_C23), $(TARGETS))
 
-RUN_SCRIPT := ./runall.sh
 
 # Apple Silicon だと /opt/homebrew 配下に gtest が置かれる
 ifeq ($(shell uname -p), arm)
@@ -37,10 +38,10 @@ ifeq ($(shell uname -p), arm)
     export LIBRARY_PATH := /opt/homebrew/lib:$(LIBRARY_PATH)
 endif
 
-all: $(TARGETS)
 
-c23: $(TARGETS_C23)
-c23less: $(TARGETS_C23LESS)
+.PHONY: testall clean c23 c23testall c23clean c23less c23lesstestall c23lessclean
+
+all: $(TARGETS)
 
 $(TARGETS_WITH_GTEST_HELPER): %: %.cpp $(GTEST_HELPER_HDR) $(TEMPLATE_HDR)
 	$(CXX) $(CXXFLAGS) $< -o $@
@@ -55,24 +56,27 @@ $(TARGETS_WITH_TEMPLATE): %: %.cpp $(TEMPLATE_HDR)
 
 define CXX_WITH_UNION_FIND
 $(1): $(1).o $(UNION_FIND_OBJ) $(GRAPH_OBJ)
-	$(CXX) $(CXXFLAGS) $$^ -o $$@
+	$$(CXX) $$(CXXFLAGS) $$^ -o $$@
 
 $(1).o: $(1).cpp $(UNION_FIND_HDR) $(GRAPH_HDR) $(TEMPLATE_HDR) $(GTEST_HELPER_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_UNION_FIND), $(eval $(call CXX_WITH_UNION_FIND, $(T))))
 
+
 define CXX_WITH_GRAPH
 $(1): $(1).o $(GRAPH_OBJ)
-	$(CXX) $(CXXFLAGS) $$^ -o $$@
+	$$(CXX) $$(CXXFLAGS) $$^ -o $$@
 
 $(1).o: $(1).cpp $(GRAPH_HDR)
 endef
 
 $(foreach T, $(TARGETS_WITH_GRAPH), $(eval $(call CXX_WITH_GRAPH, $(T))))
 
+
 $(UNION_FIND_OBJ): $(UNION_FIND_SRC) $(UNION_FIND_HDR)
 $(GRAPH_OBJ): $(GRAPH_SRC) $(GRAPH_HDR) $(TEMPLATE_HDR)
+
 
 .cpp.o:
 	$(CXX) $(CXX_BASE_FLAGS) -c $<
@@ -80,17 +84,21 @@ $(GRAPH_OBJ): $(GRAPH_SRC) $(GRAPH_HDR) $(TEMPLATE_HDR)
 testall: $(TARGETS)
 	$(RUN_SCRIPT) $(TARGETS)
 
-c23testall: $(TARGETS_C23)
-	$(RUN_SCRIPT) $(TARGETS_C23)
-c23lesstestall: $(TARGETS_C23LESS)
-	$(RUN_SCRIPT) $(TARGETS_C23LESS)
-
 clean:
 	$(RM) $(TARGETS) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 
-c23clean:
-	$(RM) $(TARGETS_C23) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
-c23lessclean:
-	$(RM) $(TARGETS_C23LESS) $(UNION_FIND_OBJ) $(GRAPH_OBJ)
 
-.PHONY: testall clean c23 c23testall c23clean c23less c23lesstestall c23lessclean
+UPPERCASE = $(shell echo $(1) | tr [:lower:] [:upper:])
+
+# 与えられたターゲットに対して, ルール一式を作るマクロ
+define GENERATE_RULES
+$(1): $$(TARGETS_$(call UPPERCASE, $(1)))
+
+$(1)testall: $$(TARGETS_$(call UPPERCASE, $(1)))
+	$$(RUN_SCRIPT) $$(TARGETS_$(call UPPERCASE, $(1)))
+
+$(1)clean:
+	$$(RM) $$(TARGETS_$(call UPPERCASE, $(1))) $$(UNION_FIND_OBJ) $$(GRAPH_OBJ)
+endef
+
+$(foreach T, c23 c23less, $(eval $(call GENERATE_RULES, $(T))))
