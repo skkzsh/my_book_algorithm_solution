@@ -21,7 +21,7 @@ constexpr void print2d(const auto cc) {
 
   println("print2d start");
   for (const auto& c : cc) {
-    // println("{}", c); // TODO
+    // println("{}", c | join_with(" ")); // TODO
     for (const auto& x : c) {
       print("{} ", x);
     }
