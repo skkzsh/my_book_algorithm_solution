@@ -2,14 +2,18 @@
 #include "template.hpp"
 #include <numeric>
 #include <algorithm>
-// #include <ranges>
+#include <ranges>
 using std::vector;
 using std::invalid_argument;
 
 constexpr double aqua(const int M, const vector<int> &a) {
   using std::accumulate;
   using std::next;
-  using namespace std::ranges;
+  using std::min;
+  using std::views::iota;
+  using std::views::transform;
+  using std::ranges::to;
+  using std::ranges::max_element;
   constexpr int INF = 1 << 29; // 十分大きな値
 
   const int N = a.size();
@@ -26,14 +30,12 @@ constexpr double aqua(const int M, const vector<int> &a) {
   // もらう方式
   for (int n = 1; n <= N; ++n) {
     for (int m = 1; m <= min(n, M); ++m) {
-      // TODO: 一時変数なくせないか
-      // auto tmp = std::views::iota(0, n - m + 1) | std::views::transform([=](const int i) {
-      //      return dp[n - i - 1][m - 1] + (double) accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0) / (i + 1);
-      // });
-      vector<double> tmp(n - m + 1);
-      for (int i = 0; i <= n - m; ++i) {
-        tmp[i] = dp[n - i - 1][m - 1] + static_cast<double>(accumulate(next(a.end(), -N + n - i - 1), next(a.end(), -N + n), 0)) / (i + 1);
-      }
+      // 一時変数をなくしたい
+      const vector tmp = iota(0, n - m + 1)
+                         | transform([=](const int i) {
+                             return dp[n - i - 1][m - 1] + static_cast<double>(accumulate(next(a.end(), - N + n - i - 1), next(a.end(), - N + n), 0)) / (i + 1);
+                           })
+                         | to<vector>();  // 直接maxを取りたい
       dp[n][m] = *max_element(tmp);
     }
   }
