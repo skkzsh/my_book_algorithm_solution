@@ -4,24 +4,26 @@
 using std::vector;
 using std::string_view;
 using std::pair;
+using std::optional;
+
+struct Point {
+    int x, y;
+};
 
 // S: スタート
 // G: ゴール
 // .: 通路
 // #: 壁
 
-constexpr int shortest_path(const vector<string_view> &maze, const pair<int, int> dimensions) {
-  using std::optional;
-  using std::queue;
+constexpr pair<Point, Point> locate_start_and_goal(const vector<string_view> &maze, const Point dimensions) {
   // using std::string_view::npos;
+  // using std::views::enumerate;
   using std::views::iota;
   using std::views::cartesian_product;
-  // using std::views::enumerate;
-  using std::initializer_list;
 
   const auto [H, W] = dimensions;
 
-  pair<int, int> s, g;
+  optional<Point> s, g;
 
   // for (const auto &[i, row] : maze | enumerate) {
   //   size_t j;
@@ -46,40 +48,50 @@ constexpr int shortest_path(const vector<string_view> &maze, const pair<int, int
       // TODO: validation
     }
   }
-  const auto [sx, sy] = s;
-  const auto [gx, gy] = g;
 
+  if (!s.has_value() || !g.has_value()) {
+   throw std::invalid_argument("No start or goal point exist in the maze");
+  }
+
+  return {s.value(), g.value()};
+}
+
+constexpr int shortest_path(const vector<string_view> &maze, const Point dimensions) {
+  using std::queue;
+  using std::initializer_list;
+
+  const auto [s, g] = locate_start_and_goal(maze, dimensions);
+
+  const auto [H, W] = dimensions;
   vector<vector<optional<int>>> dists(H, vector<optional<int>>(W));
-  queue<pair<int, int>> todo; // BFS
+  queue<Point> todo; // BFS
 
-  dists.at(sx).at(sy) = 0;
+  dists.at(s.x).at(s.y) = 0;
   todo.push(s);
 
   while (!todo.empty()) {
-    const auto v = todo.front();
+    const Point v = todo.front();
     todo.pop();
-    const auto [vx, vy] = v;
 
-    for (const auto &[i, j] : initializer_list<pair<int, int>>{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}) {
-      const pair<int, int> n = {vx + i, vy + j};
-      const auto [nx, ny] = n;
+    for (const auto &[i, j] : initializer_list<Point>{{-1, 0}, {1, 0}, {0, -1}, {0, 1}}) {
+      const Point n = {v.x + i, v.y + j};
 
-      if (nx < 0 || ny < 0 || nx >= H || ny >= W) {
+      if (n.x < 0 || n.y < 0 || n.x >= H || n.y >= W) {
         continue;
       }
 
-      if (maze.at(nx).at(ny) == '#') {
+      if (maze.at(n.x).at(n.y) == '#') {
         continue;
       }
 
-      if (!dists.at(nx).at(ny).has_value()) {
-        dists.at(nx).at(ny) = dists.at(vx).at(vy).value() + 1;
+      if (!dists.at(n.x).at(n.y).has_value()) {
+        dists.at(n.x).at(n.y) = dists.at(v.x).at(v.y).value() + 1;
         todo.push(n);
       }
     }
   }
 
-  return dists.at(gx).at(gy).value();
+  return dists.at(g.x).at(g.y).value();
 }
 
 TEST(TestSuite, Ex) {
@@ -110,4 +122,34 @@ TEST(TestSuite, Impossible) {
   };
 
   EXPECT_THROW(shortest_path(maze, {8, 8}), std::bad_optional_access);
+}
+
+TEST(TestSuite, StartNotExists) {
+  const vector<string_view> maze {
+    ".#....#G",
+    ".#.#...#",
+    "...#.##.",
+    "#.##...#",
+    "...###.#",
+    ".#.....#",
+    "...#.#..",
+    "#.......",
+  };
+
+  EXPECT_THROW(shortest_path(maze, {8, 8}), std::invalid_argument);
+}
+
+TEST(TestSuite, GoalNotExists) {
+  const vector<string_view> maze {
+    ".#....##",
+    ".#.#...#",
+    "...#.##.",
+    "#.##...#",
+    "...###.#",
+    ".#.....#",
+    "...#.#..",
+    "S.......",
+  };
+
+  EXPECT_THROW(shortest_path(maze, {8, 8}), std::invalid_argument);
 }
