@@ -7,9 +7,8 @@ endif
 
 CXX := g++
 CXX_BASE_FLAGS ?= -Wall -Wextra -std=$(CXX_STD) # -O2
-CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread
-# -g
-# pkg-config --cflags --libs gtest_main gtest
+CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread # -g
+# pkg-config --cflags --libs gtest_main
 
 RUN_SCRIPT := ./runall.sh
 
@@ -38,11 +37,11 @@ TARGETS_23 := q03_06 q06_03 q06_05 q13_04 # q09_03
 TARGETS_2B := $(filter-out $(TARGETS_23), $(TARGETS))
 
 
-# Apple Silicon だと /opt/homebrew 配下に gtest が置かれる
+# Apple Silicon だと /opt/homebrew 配下に gtest が置かれるため, 自前でパスを通す
 ifeq ($(shell uname -p), arm)
-	export CPLUS_INCLUDE_PATH := /opt/homebrew/include:$(CPLUS_INCLUDE_PATH)
-	# export CPATH := /opt/homebrew/include:$(CPATH)
-	export LIBRARY_PATH := /opt/homebrew/lib:$(LIBRARY_PATH)
+	export CPLUS_INCLUDE_PATH := /opt/homebrew/opt/googletest/include:$(CPLUS_INCLUDE_PATH)
+	# export CPATH := /opt/homebrew/opt/googletest/include:$(CPATH)
+	export LIBRARY_PATH := /opt/homebrew/opt/googletest/lib:$(LIBRARY_PATH)
 endif
 
 
