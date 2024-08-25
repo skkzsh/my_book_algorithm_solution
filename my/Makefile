@@ -1,4 +1,4 @@
-ifeq ($(shell uname -s), Darwin)
+ifeq ($(shell uname -s), Darwin) # Mac では c++23 が使えない
 	CXX_STD := c++2b
 else
 	CXX_STD := c++23
@@ -32,10 +32,10 @@ TARGETS_WITH_TEMPLATE := q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
 TARGETS_WITH_UNION_FIND := code11_% q11_%
 TARGETS_WITH_GRAPH := code13_% q13_%
 
-# C++23とC++23未満のターゲットで分割
+# C++23とC++23未満でターゲットを分割
 # (cartesian_product や enumerate が Mac で compile しづらいため)
-TARGETS_C23 := q03_06 q06_03 q06_05 q13_04 # q09_03
-TARGETS_C23LESS := $(filter-out $(TARGETS_C23), $(TARGETS))
+TARGETS_23 := q03_06 q06_03 q06_05 q13_04 # q09_03
+TARGETS_2B := $(filter-out $(TARGETS_23), $(TARGETS))
 
 
 # Apple Silicon だと /opt/homebrew 配下に gtest が置かれる
@@ -46,7 +46,7 @@ ifeq ($(shell uname -p), arm)
 endif
 
 
-.PHONY: testall clean c23 c23testall c23clean c23less c23lesstestall c23lessclean
+.PHONY: testall clean 23 23testall 23clean 2b 2btestall 2bclean
 
 all: $(TARGETS)
 
@@ -108,4 +108,4 @@ $(1)clean:
 	$$(RM) $$(TARGETS_$(call UPPERCASE, $(1))) $$(UNION_FIND_OBJ) $$(GRAPH_OBJ)
 endef
 
-$(foreach T, c23 c23less, $(eval $(call GENERATE_RULES, $(T))))
+$(foreach T, 23 2b, $(eval $(call GENERATE_RULES, $(T))))
