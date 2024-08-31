@@ -5,6 +5,7 @@
 
 using std::vector;
 using std::pair;
+using std::tuple;
 
 template<class T> constexpr void chmin(T& a, const T b) {
   a = std::min(a, b);
@@ -31,3 +32,12 @@ constexpr void print2d(const auto cc) {
 }
 
 template<class T> using Pairs = vector<pair<T, T>>;
+
+template <typename... Args>
+auto sum_tuple(const tuple<Args...>& t) {
+    using std::apply;
+
+    return apply([](auto&&... args) {
+        return (args + ...);
+    }, t);
+}

@@ -13,14 +13,10 @@ using std::invalid_argument;
 
 // O(N^4)
 constexpr int darts_simple(const vector<int> &a, const int M) {
-  using std::apply;
-
   // 一時変数をなくしたい
   const vector sums = cartesian_product(a, a, a, a) // TODO: a * 4
-                      | transform([](const auto t) { // TODO: 簡易化
-                          return apply([](auto&&... args) {
-                            return (args + ...);
-                          }, t);
+                      | transform([](const auto t) {
+                          return sum_tuple(t);
                         })
                       | filter([M](const int sum) {
                           return sum <= M;
@@ -45,9 +41,8 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     throw invalid_argument("Solution does not exist");
   }
 
-  vector aa = cartesian_product(a, a) | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
-                                          const auto& [i, j] = t;
-                                          return i + j;
+  vector aa = cartesian_product(a, a) | transform([](const auto t) {
+                                          return sum_tuple(t);
                                         })
                                       | to<vector>();
   sort(aa);
