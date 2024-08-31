@@ -13,11 +13,14 @@ using std::invalid_argument;
 
 // O(N^4)
 constexpr int darts_simple(const vector<int> &a, const int M) {
+  using std::apply;
+
   // 一時変数をなくしたい
-  const vector sums = cartesian_product(a, a, a, a)
-                      | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
-                          const auto& [p, q, r, s] = t;
-                          return p + q + r + s;
+  const vector sums = cartesian_product(a, a, a, a) // TODO: a * 4
+                      | transform([](const auto t) { // TODO: 簡易化
+                          return apply([](auto&&... args) {
+                            return (args + ...);
+                          }, t);
                         })
                       | filter([M](const int sum) {
                           return sum <= M;
