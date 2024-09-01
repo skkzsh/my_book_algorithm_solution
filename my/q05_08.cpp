@@ -22,7 +22,7 @@ constexpr double aqua(const int M, const vector<int> &a) {
     throw invalid_argument("0 <= M <= N required");
   }
 
-  vector<vector<double>> dp(N + 1, vector<double>(M + 1, - INF));
+  vector<vector<double>> dp(N + 1, vector<double>(M + 1, -INF));
 
   // 初期条件
   dp[0][0] = 0;

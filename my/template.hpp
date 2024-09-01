@@ -7,11 +7,11 @@ using std::vector;
 using std::pair;
 using std::tuple;
 
-template<class T> constexpr void chmin(T& a, const T b) {
+template <class T> constexpr void chmin(T &a, const T b) {
   a = std::min(a, b);
 }
 
-template<class T> constexpr void chmax(T& a, const T b) {
+template <class T> constexpr void chmax(T &a, const T b) {
   a = std::max(a, b);
 }
 
@@ -21,9 +21,9 @@ constexpr void print2d(const auto cc) {
   using std::println;
 
   println("print2d start");
-  for (const auto& c : cc) {
+  for (const auto &c : cc) {
     // println("{}", c | join_with(" ")); // TODO
-    for (const auto& x : c) {
+    for (const auto &x : c) {
       print("{} ", x);
     }
     println("");
@@ -31,10 +31,10 @@ constexpr void print2d(const auto cc) {
   println("print2d end");
 }
 
-template<class T> using Pairs = vector<pair<T, T>>;
+template <class T> using Pairs = vector<pair<T, T>>;
 
 template <typename... Args>
-auto sum_tuple(const tuple<Args...>& t) {
+auto sum_tuple(const tuple<Args...> &t) {
     using std::apply;
 
     return apply([](auto&&... args) {

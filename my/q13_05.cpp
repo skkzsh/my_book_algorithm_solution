@@ -8,7 +8,7 @@ using std::list;
 // TODO: BFS
 
 void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen, list<int> &order) {
-  seen.at(v)= true;
+  seen.at(v) = true;
 
   for (const auto n : G.at(v)) {
     if (!seen.at(n)) {

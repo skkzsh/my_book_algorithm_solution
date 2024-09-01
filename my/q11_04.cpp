@@ -2,7 +2,7 @@
 using std::vector;
 using std::tuple;
 
-template<class T> using Trios = vector<tuple<T, T, T>>;
+template <class T> using Trios = vector<tuple<T, T, T>>;
 
 // TODO: 実装
 

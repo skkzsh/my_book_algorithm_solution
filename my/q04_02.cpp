@@ -12,15 +12,14 @@ constexpr long long tribo(const int N, vector<optional<long long>> &memo) {
   }
 
   // ベースケース
-  switch(N) {
+  switch (N) {
     case 0:
-    case 1:
-      memo[N] = 0; break;
-    case 2:
-      memo[N] = 1; break;
+    case 1: memo[N] = 0; break;
+    case 2: memo[N] = 1; break;
     default:
       // 答えをメモ化しながら, 再帰呼び出し
-      memo[N] = tribo(N - 1, memo) + tribo(N - 2, memo) + tribo(N - 3, memo); break;
+      memo[N] = tribo(N - 1, memo) + tribo(N - 2, memo) + tribo(N - 3, memo);
+      break;
   }
 
   return memo[N].value();
@@ -41,7 +40,7 @@ constexpr vector<long long> tribo_wrapper(const int N) {
   tribo(N, memo);
 
   // optionalはがし
-  return memo | transform([](const auto o) { return o.value(); })  // TODO: optional<auto> or concept
+  return memo | transform([](const auto o) { return o.value(); }) // TODO: optional<auto> or concept
               | to<vector>();
 }
 

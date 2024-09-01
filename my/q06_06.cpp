@@ -1,12 +1,12 @@
 #include "gtest/gtest.h"
-#include <cmath> // Arch
+#include <cmath>   // Arch
 #include <numbers> // Mac
 
 using std::invalid_argument;
 using std::tuple;
 using std::pair;
 
-template<class T> using Constants = tuple<T, T, T>;
+template <class T> using Constants = tuple<T, T, T>;
 
 constexpr double EPS = 1e-6; // 精度
 
@@ -63,7 +63,7 @@ TEST_P(TestSuite, Ex) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

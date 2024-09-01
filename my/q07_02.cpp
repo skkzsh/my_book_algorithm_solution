@@ -10,15 +10,15 @@ constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
   sort(r);
   sort(b);
 
-  std::vector<bool> used(r.size());  // rが使用済かどうか
+  std::vector<bool> used(r.size()); // rが使用済かどうか
   unsigned int count = 0;
 
-  for (const auto& [bx, by] : b) {
-    int max_second = - INF;
+  for (const auto &[bx, by] : b) {
+    int max_second = -INF;
     std::optional<int> max_key;
 
     // TODO: enumerate を使いつつ, 構造化束縛をまとめたい
-    for (int i = 0; const auto& [rx, ry] : r) {
+    for (int i = 0; const auto &[rx, ry] : r) {
       if (!used.at(i) && rx < bx && ry < by) {
         if (max_second < ry) {
           max_second = ry;
@@ -119,7 +119,7 @@ const PairTestParam<Pairs<int>> PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

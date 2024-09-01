@@ -3,7 +3,7 @@
 using std::vector;
 using std::invalid_argument;
 
-constexpr int INF = 1 << 29;  // 十分大きな値
+constexpr int INF = 1 << 29; // 十分大きな値
 
 constexpr bool partial_sum_exists_pull(const int W, const int K, const vector<int> &a) {
   if (K < 0) {

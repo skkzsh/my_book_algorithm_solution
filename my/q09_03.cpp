@@ -15,7 +15,7 @@ map<unsigned int, unsigned int> pairing_paren(const string_view parens) {
   map<unsigned int, unsigned int> result;
   std::stack<unsigned int> st; // 左括弧の index を格納する stack
 
-  // for (const auto& [i, paren] : parens | enumerate) {
+  // for (const auto &[i, paren] : parens | enumerate) {
   for (const auto i : iota(0u, parens.length())) {
     switch (parens.at(i)) {
       case '(':
@@ -63,8 +63,8 @@ constexpr std::pair<string_view, string_view> PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    PairStringSuite,
-    testing::ValuesIn(PARAMS),
-    PrintToSecondParamName
-                         );
+  Inst,
+  PairStringSuite,
+  testing::ValuesIn(PARAMS),
+  PrintToSecondParamName
+);

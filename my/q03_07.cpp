@@ -57,14 +57,12 @@ constexpr std::pair<int, int> PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    SubTestSuite,
-    testing::ValuesIn(PARAMS),
-    [](const testing::TestParamInfo<SubTestSuite::ParamType>& info) {
-      return std::to_string(info.param.first);
-    }
-                         );
-
+  Inst,
+  SubTestSuite,
+  testing::ValuesIn(PARAMS),
+  [](const testing::TestParamInfo<SubTestSuite::ParamType> &info) {
+    return std::to_string(info.param.first);
+  });
 
 TEST(TestSuite, Test1) {
   EXPECT_EQ(sum_combi("125"), 176);

@@ -74,7 +74,7 @@ TEST_P(TestSuite, Ex) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

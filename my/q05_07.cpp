@@ -43,7 +43,7 @@ constexpr std::tuple<string_view, string_view, string_view> PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

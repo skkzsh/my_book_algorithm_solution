@@ -35,7 +35,7 @@ constexpr int count753recursive(const int K) {
 
   // if (count753map[3] > 0 && count753map[5] > 0 && count753map[7] > 0) {
   if (all_of(count753map,
-             [](const auto& p) { return p.second > 0; })) {
+             [](const auto &p) { return p.second > 0; })) {
     return count753recursive(K - 1) + 1;
   }
   return count753recursive(K - 1);

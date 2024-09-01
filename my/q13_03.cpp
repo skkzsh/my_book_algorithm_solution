@@ -51,7 +51,7 @@ bool is_bipartite_by_bfs(const multimap<int, int> &E) {
     todo.pop();
     const auto curr = colors.at(v);
 
-    for (const auto n: G.at(v)) {
+    for (const auto n : G.at(v)) {
       if (colors.at(n).has_value()) {
         if (colors.at(n).value() == curr) {
           return false;

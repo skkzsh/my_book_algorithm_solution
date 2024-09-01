@@ -6,7 +6,7 @@ using std::vector;
 using std::tuple;
 using std::get;
 
-template<class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
+template <class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
 // O(N ^ 3)
 constexpr unsigned int festival_simple(const Trio<int> &Z) {
@@ -68,38 +68,38 @@ const struct TestParam {
     3,
   },
   {
-      {
-        {1, 1, 1},
-        {2, 2, 2},
-        {3, 3, 3},
-      },
-      27,
-    },
     {
-      {
-        {3, 14, 159, 2, 6, 53},
-        {58, 9, 79, 323, 84, 6},
-        {2643, 383, 2, 79, 50, 288},
-      },
-      87,
+      {1, 1, 1},
+      {2, 2, 2},
+      {3, 3, 3},
     },
+    27,
+  },
+  {
     {
-      {
-        {1, 1},
-        {1, 1},
-        {2, 2},
-      },
-      0,
+      {3, 14, 159, 2, 6, 53},
+      {58, 9, 79, 323, 84, 6},
+      {2643, 383, 2, 79, 50, 288},
     },
+    87,
+  },
+  {
     {
-      {
-        {1, 1},
-        {2, 2},
-        {2, 2},
-      },
-      0,
+      {1, 1},
+      {1, 1},
+      {2, 2},
     },
-  };
+    0,
+  },
+  {
+    {
+      {1, 1},
+      {2, 2},
+      {2, 2},
+    },
+    0,
+  },
+};
 
 class TestSuite : public testing::TestWithParam<TestParam> {};
 
@@ -109,7 +109,7 @@ TEST_P(TestSuite, Ex) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

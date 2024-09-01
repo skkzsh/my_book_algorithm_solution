@@ -9,7 +9,7 @@ using std::set;
 // 辺集合
 class EdgeSet {
  public:
-  EdgeSet(const Pairs<int>& P);
+  EdgeSet(const Pairs<int> &P);
   size_t size() const; // 辺数
   pair<int, int> at(const int i) const;
   size_t order() const; // 頂点数 (位数)

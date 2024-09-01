@@ -15,7 +15,7 @@ constexpr int countx(const vector<int> &a, const int x) {
   using std::views::iota;
 
   size_t prev = 0; // 前回選んだ小屋のindex
-  int count = 1; // 小屋を選んだ個数
+  int count = 1;   // 小屋を選んだ個数
 
   // 貪欲法
   for (const auto i : iota(0u, a.size())) {
@@ -41,7 +41,7 @@ constexpr int cows(const vector<int> &a, const int M) {
   while (right - left > 1) {
     if (const int x = (left + right) / 2; countx(a, x) >= M) { // Mコ以上選べた => もっと距離を離せる => xはもっと大きい (true領域を更新)
       left = x;
-    } else {  // Mコ選べなかった => 距離を離せていない => xはもっと小さい (false領域を更新)
+    } else { // Mコ選べなかった => 距離を離せていない => xはもっと小さい (false領域を更新)
       right = x;
     }
   }

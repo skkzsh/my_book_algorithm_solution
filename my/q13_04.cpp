@@ -7,7 +7,7 @@ using std::pair;
 using std::optional;
 
 struct Point {
-    int x, y;
+  int x, y;
 };
 
 // S: スタート
@@ -37,20 +37,17 @@ constexpr pair<Point, Point> locate_start_and_goal(const vector<string_view> &ma
   //   }
   // }
 
-  for (const auto& [i, j] : cartesian_product(iota(0, H), iota(0, W))) {
+  for (const auto &[i, j] : cartesian_product(iota(0, H), iota(0, W))) {
     switch (maze.at(i).at(j)) {
-      case 'S':
-        s = {i, j}; break;
-      case 'G':
-        g = {i, j}; break;
-      default:
-        break;
+      case 'S': s = {i, j}; break;
+      case 'G': g = {i, j}; break;
+      default: break;
       // TODO: validation
     }
   }
 
   if (!s.has_value() || !g.has_value()) {
-   throw std::invalid_argument("No start or goal point exist in the maze");
+    throw std::invalid_argument("No start or goal point exist in the maze");
   }
 
   return {s.value(), g.value()};

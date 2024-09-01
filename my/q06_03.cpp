@@ -15,12 +15,8 @@ using std::invalid_argument;
 constexpr int darts_simple(const vector<int> &a, const int M) {
   // 一時変数をなくしたい
   const vector sums = cartesian_product(a, a, a, a) // TODO: a * 4
-                      | transform([](const auto t) {
-                          return sum_tuple(t);
-                        })
-                      | filter([M](const int sum) {
-                          return sum <= M;
-                        })
+                      | transform([](const auto t) { return sum_tuple(t); })
+                      | filter([M](const int sum) { return sum <= M; })
                       | to<vector>(); // 直接maxを取りたい
 
   if (sums.size() == 0) {
@@ -41,10 +37,9 @@ constexpr int darts_binary(const vector<int> &a, const int M) {
     throw invalid_argument("Solution does not exist");
   }
 
-  vector aa = cartesian_product(a, a) | transform([](const auto t) {
-                                          return sum_tuple(t);
-                                        })
-                                      | to<vector>();
+  vector aa = cartesian_product(a, a)
+              | transform([](const auto t) { return sum_tuple(t); })
+              | to<vector>();
   sort(aa);
 
   /*

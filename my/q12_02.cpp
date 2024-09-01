@@ -52,13 +52,13 @@ const struct TestParam {
     130,
   },
   {
-      {
-        {4, 1},
-        {2, 4},
-      },
-      6,
-      unexpected("Cannot"),
+    {
+      {4, 1},
+      {2, 4},
     },
+    6,
+    unexpected("Cannot"),
+  },
 };
 
 class TestSuite : public testing::TestWithParam<TestParam> {};
@@ -68,10 +68,10 @@ TEST_P(TestSuite, Ex) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);
 
 // TEST(InvalidTestSuite, Cannot) {
 //   const Pairs<int> shops {

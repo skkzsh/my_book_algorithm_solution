@@ -19,16 +19,17 @@ constexpr int min_push(Pairs<int> ps) {
 
   for (int i = ps.size() - 1; i >= 0; --i) {
     counts.at(i) = count(ps.at(i));
-    // std::cout << "i: "  << i << ", count: " << counts.at(i) << std::endl;  // debug
+    // debug
+    // std::cout << "i: "  << i << ", count: " << counts.at(i) << std::endl;
 
     for (int j = i; j >= 0; --j) {
       ps.at(j).first += counts.at(i);
     }
   }
 
-  return std::accumulate(counts.begin(), counts.end(), 0); // ranges を使いたいが, 実装がない
+  return std::accumulate(counts.begin(), counts.end(), 0);
+  // ranges を使いたいが, 実装がない
 }
-
 
 class SubTestSuite : public TestWithParam<SingleTestParam<pair<int, int>>> {};
 
@@ -43,14 +44,12 @@ constexpr SingleTestParam<pair<int, int>> SUB_PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    SubTestSuite,
-    testing::ValuesIn(SUB_PARAMS),
-    [](const TestParamInfo<SubTestSuite::ParamType>& info) {
-      return string(info.param.test_name);
-    }
-                         );
-
+  Inst,
+  SubTestSuite,
+  testing::ValuesIn(SUB_PARAMS),
+  [](const TestParamInfo<SubTestSuite::ParamType> &info) {
+    return string(info.param.test_name);
+  });
 
 class TestSuite : public TestWithParam<SingleTestParam<Pairs<int>>> {};
 
@@ -82,7 +81,7 @@ const SingleTestParam<Pairs<int>> PARAMS[] {
 };
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    testing::ValuesIn(PARAMS)
-                         );
+  Inst,
+  TestSuite,
+  testing::ValuesIn(PARAMS)
+);

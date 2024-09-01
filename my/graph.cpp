@@ -5,7 +5,7 @@
 
 // TODO: test
 
-size_t order_edge_set(const multimap<int, int>& E) {
+size_t order_edge_set(const multimap<int, int> &E) {
   using std::set;
   using std::next;
   using std::invalid_argument;
@@ -36,7 +36,7 @@ size_t order_edge_set(const multimap<int, int>& E) {
   return V.size();
 }
 
-vector<multiset<int>> to_adjacency_list(const multimap<int, int>& E, const bool is_direct) {
+vector<multiset<int>> to_adjacency_list(const multimap<int, int> &E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
   vector<multiset<int>> G(N);
@@ -52,7 +52,7 @@ vector<multiset<int>> to_adjacency_list(const multimap<int, int>& E, const bool 
 }
 
 void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen) {
-  seen.at(v)= true;
+  seen.at(v) = true;
 
   for (const auto n : G.at(v)) {
     if (!seen.at(n)) {

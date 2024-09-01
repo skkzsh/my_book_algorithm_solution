@@ -12,7 +12,7 @@ consteval int product_th_simple(const vector<int> &a, const vector<int> &b, cons
    using std::ranges::to;
 
    vector p = cartesian_product(a, b) | transform([](const auto t) { // TODO: 構造化束縛を簡潔に or なくしたい
-                                          const auto& [i, j] = t;
+                                          const auto &[i, j] = t;
                                           return i * j;
                                         })
                                       | to<vector>();

@@ -7,15 +7,11 @@ constexpr long long tribo(const int N) {
   }
 
   // ベースケース
-  switch(N) {
+  switch (N) {
     case 0:
-    case 1:
-      return 0;
-    case 2:
-      return 1;
-    default:
-      // 再帰呼び出し
-      return tribo(N - 1) + tribo(N - 2) + tribo(N - 3);
+    case 1:  return 0;
+    case 2:  return 1;
+    default: return tribo(N - 1) + tribo(N - 2) + tribo(N - 3); // 再帰呼び出し
   }
 }
 

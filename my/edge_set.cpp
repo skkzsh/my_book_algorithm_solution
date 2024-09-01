@@ -9,7 +9,7 @@ using std::format;
 
 // ただし, 頂点が0以上の連番でない場合, 例外を投げる
 // なお, 連結かどうかは判定してない
-EdgeSet::EdgeSet(const Pairs<int>& P) : P(P) {
+EdgeSet::EdgeSet(const Pairs<int> &P) : P(P) {
   using std::next;
 
   for (const auto &[u, v] : P) {

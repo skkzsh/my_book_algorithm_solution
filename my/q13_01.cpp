@@ -65,7 +65,7 @@ const struct TestParam {
       {6, 7},
     },
     3,
-  }
+  },
 };
 
 class TestSuite : public TestWithParam<tuple<TestParam, void(*)(const vector<multiset<int>> &, const int, vector<bool> &)>> {};
@@ -76,11 +76,9 @@ TEST_P(TestSuite, Ex) {
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    Inst,
-    TestSuite,
-    Combine(
-      ValuesIn(PARAMS),
-      Values(&recursive_search, &bfs)
-    )
-    // testing::PrintToStringParamName() // TODO
-                         );
+  Inst,
+  TestSuite,
+  Combine(ValuesIn(PARAMS),
+          Values(&recursive_search, &bfs))
+  // testing::PrintToStringParamName() // TODO
+);
