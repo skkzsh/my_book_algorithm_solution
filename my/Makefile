@@ -1,5 +1,6 @@
-ifeq ($(shell uname -s), Darwin) # Mac では c++23 が使えない
-	CXX_STD := c++2b
+ifeq ($(shell uname -s), Darwin)
+	CXX_STD := c++23
+	# CXX_STD := c++2c
 else
 	CXX_STD := c++23
 	# CXX_STD := c++2c
