@@ -7,6 +7,7 @@ using std::vector;
 using std::pair;
 using std::tuple;
 
+// <totally_ordered T>
 template <class T> constexpr void chmin(T &a, const T b) {
   a = std::min(a, b);
 }

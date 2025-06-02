@@ -5,8 +5,9 @@
 using std::invalid_argument;
 using std::tuple;
 using std::pair;
+using std::integral;
 
-template <class T> using Constants = tuple<T, T, T>;
+template <integral T> using Constants = tuple<T, T, T>;
 
 constexpr double EPS = 1e-6; // 精度
 
