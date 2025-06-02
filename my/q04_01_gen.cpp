@@ -5,11 +5,8 @@ std::generator<long long> tribo_generator() {
   using std::tie;
   using std::tuple;
 
-  long long a = 0, b = 0, c = 1;
-
-  while (true) {
+  for (long long a = 0, b = 0, c = 1 ;; tie(a, b, c) = tuple{b, c, a + b + c}) {
     co_yield a;
-    tie(a, b, c) = tuple{b, c, a + b + c};
   }
 }
 
