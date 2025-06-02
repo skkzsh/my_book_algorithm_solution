@@ -32,7 +32,7 @@ constexpr bool partial_sum_exists_push(const int W, const vector<int> &a) {
         if (n < N) {
           dp[n + 1][w] = true;
         }
-        if (w + a[n] <= W) {
+        if (n < N && w + a[n] <= W) {
           dp[n][w + a[n]] = true;
         }
       }
