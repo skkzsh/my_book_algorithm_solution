@@ -16,8 +16,8 @@ constexpr long long tribo(const int N) {
 }
 
 
-TEST(TestSuite, Test20) {
-  EXPECT_EQ(tribo(20), 35890);
+TEST(TestSuite, Test30) {
+  EXPECT_EQ(tribo(30), 15'902'591);
 }
 
 TEST(TestSuite, Negative) {
