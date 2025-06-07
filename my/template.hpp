@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <print>
+// #include <concepts>
 
 using std::vector;
 using std::pair;
@@ -31,6 +32,11 @@ constexpr void print2d(const auto cc) {
   }
   println("print2d end");
 }
+
+// template <typename T>
+// concept OptionalLike = requires(T opt) {
+//   { opt.value() };
+// };
 
 template <class T> using Pairs = vector<pair<T, T>>;
 
