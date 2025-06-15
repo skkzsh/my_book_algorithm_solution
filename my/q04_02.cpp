@@ -3,7 +3,7 @@
 using ::testing::ElementsAreArray;
 using std::vector;
 using std::optional;
-using std::invalid_argument;
+using std::domain_error;
 
 constexpr long long tribo(const int N, vector<optional<long long>> &memo) {
   // すでに計算済みならば解をリターン
@@ -31,7 +31,7 @@ constexpr vector<long long> tribo_wrapper(const int N) {
   using std::ranges::to;
 
   if (N < 0) {
-    throw invalid_argument("argument must not be negative");
+    throw domain_error("argument must not be negative");
   }
 
   // tribo(N) の解をメモ化する配列
@@ -101,5 +101,5 @@ TEST(TestSuite, Test50) {
 }
 
 TEST(TestSuite, Negative) {
-  EXPECT_THROW(tribo_wrapper(-1), invalid_argument);
+  EXPECT_THROW(tribo_wrapper(-1), domain_error);
 }

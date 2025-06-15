@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include <ranges>
 #include <algorithm>
-using std::invalid_argument;
+using std::domain_error;
 using std::views::iota;
 using std::views::cartesian_product;
 using std::ranges::count_if;
@@ -20,7 +20,7 @@ consteval int count_simple(const int K, const int N) {
 
 constexpr int count_better(const int K, const int N) {
   if (K < 0 || N < 0) {
-    throw invalid_argument("argument must not be negative");
+    throw domain_error("argument must not be negative");
   }
 
   if (3 * K < N) { // この場合, 条件を満たす組は存在しない
@@ -57,9 +57,9 @@ TEST(TestSuite, k_greater_than_n) {
 }
 
 TEST(TestSuite, k_negative) {
-  EXPECT_THROW(count_better(-1, 3), invalid_argument);
+  EXPECT_THROW(count_better(-1, 3), domain_error);
 }
 
 TEST(TestSuite, n_negative) {
-  EXPECT_THROW(count_better(3, -1), invalid_argument);
+  EXPECT_THROW(count_better(3, -1), domain_error);
 }

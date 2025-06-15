@@ -1,9 +1,9 @@
 #include "gtest/gtest.h"
-using std::invalid_argument;
+using std::domain_error;
 
 constexpr long long tribo(const int N) {
   if (N < 0) {
-    throw invalid_argument("argument must not be negative");
+    throw domain_error("argument must not be negative");
   }
 
   // ベースケース
@@ -21,5 +21,5 @@ TEST(TestSuite, Test30) {
 }
 
 TEST(TestSuite, Negative) {
-  EXPECT_THROW(tribo(-1), invalid_argument);
+  EXPECT_THROW(tribo(-1), domain_error);
 }
