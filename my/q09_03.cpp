@@ -8,7 +8,7 @@ using std::string_view;
 using std::map;
 using std::invalid_argument;
 
-map<unsigned int, unsigned int> pairing_paren(const string_view parens) {
+constexpr map<unsigned int, unsigned int> pairing_paren(const string_view parens) {
   // using std::views::enumerate;
   using std::views::iota;
 

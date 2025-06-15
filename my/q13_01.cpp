@@ -7,7 +7,7 @@ using ::testing::ValuesIn;
 using ::testing::Values;
 using std::tuple;
 
-int count_connected(const multimap<int, int> &E, auto search) {
+constexpr int count_connected(const multimap<int, int> &E, auto search) {
   using std::views::iota;
 
   const auto G = to_adjacency_list(E);

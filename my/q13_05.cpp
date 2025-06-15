@@ -7,7 +7,7 @@ using std::list;
 
 // TODO: BFS
 
-void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen, list<int> &order) {
+constexpr void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen, list<int> &order) {
   seen.at(v) = true;
 
   for (const auto n : G.at(v)) {
@@ -19,7 +19,7 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> 
   order.push_back(v); // 帰りがけ
 }
 
-list<int> topological_sort_by_recursive(const multimap<int, int> &E) {
+constexpr list<int> topological_sort_by_recursive(const multimap<int, int> &E) {
   using std::views::iota;
 
   const auto G = to_adjacency_list(E, true);

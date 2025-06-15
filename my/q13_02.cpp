@@ -5,7 +5,7 @@ using std::pair;
 // E: 辺集合
 // p: {s, t}
 
-bool exists_path_by_recursive(const multimap<int, int> &E, const pair<int, int> &p) {
+constexpr bool exists_path_by_recursive(const multimap<int, int> &E, const pair<int, int> &p) {
   const auto G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 
@@ -16,7 +16,7 @@ bool exists_path_by_recursive(const multimap<int, int> &E, const pair<int, int> 
   return seen.at(t);
 }
 
-bool exists_path_by_bfs(const multimap<int, int> &E, const pair<int, int> &p) {
+constexpr bool exists_path_by_bfs(const multimap<int, int> &E, const pair<int, int> &p) {
   const auto G = to_adjacency_list(E, true);
   const auto [s, t] = p;
 

@@ -2,7 +2,7 @@
 #include <stack>
 using std::invalid_argument;
 
-double polish(const std::string_view expr) {
+constexpr double polish(const std::string_view expr) {
   std::stack<double> st;
 
   for (const char c : expr) {

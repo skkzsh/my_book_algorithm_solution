@@ -4,7 +4,7 @@
 #include <ranges>
 
 // E: 辺集合 (連結かつ0以上の連番であること)
-int bridges(const Pairs<int> &E) {
+constexpr int bridges(const Pairs<int> &E) {
   const multimap M(E.begin(), E.end());
   const auto N = order_edge_set(M);
 

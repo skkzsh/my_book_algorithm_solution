@@ -13,7 +13,7 @@ struct Vertex {
 };
 
 // NOTE: 最短経路のような導出となっている
-void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex> &V) {
+constexpr void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex> &V) {
   V.at(v).size = 1;
 
   for (const auto n : G.at(v)) {
@@ -26,7 +26,7 @@ void recursive_search(const vector<multiset<int>> &G, const int v, vector<Vertex
 }
 
 // E: 木 (連結, サイクルなし) TODO
-vector<Vertex> tree(const multimap<int, int> &E, const int root) {
+constexpr vector<Vertex> tree(const multimap<int, int> &E, const int root) {
   const auto G = to_adjacency_list(E);
 
   vector<Vertex> V(G.size());
@@ -38,7 +38,7 @@ vector<Vertex> tree(const multimap<int, int> &E, const int root) {
 }
 
 // FieldsAreでもいいけど, ちょっと親切
-Matcher<Vertex> IsVertex(const int depth, const int size) {
+constexpr Matcher<Vertex> IsVertex(const int depth, const int size) {
   return AllOf(
     Field(&Vertex::depth, depth),
     Field(&Vertex::size, size)

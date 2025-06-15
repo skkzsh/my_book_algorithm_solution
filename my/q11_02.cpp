@@ -5,8 +5,7 @@
 using ::testing::ElementsAreArray;
 
 // E: 辺集合 (0以上の連番であること)
-// TODO: constexpr (C++23)
-vector<int> decay(const Pairs<int> &E) {
+constexpr vector<int> decay(const Pairs<int> &E) {
   using std::views::iota;
   using std::views::reverse;
 
