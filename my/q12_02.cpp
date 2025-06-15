@@ -1,13 +1,15 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 #include <algorithm>
-#include <expected>
+// #include <expected>
 // using std::invalid_argument;
-using std::expected;
-using std::unexpected;
-using std::string;
+// using std::expected;
+// using std::unexpected;
+// using std::string;
+using std::optional;
+using std::nullopt;
 
-constexpr expected<int, string> min_cost(Pairs<int> shops, const int M) { // {cost, count}
+constexpr optional<int> min_cost(Pairs<int> shops, const int M) { // {cost, count}
   std::ranges::sort(shops);
 
   int cost = 0;
@@ -23,15 +25,16 @@ constexpr expected<int, string> min_cost(Pairs<int> shops, const int M) { // {co
     }
   }
 
+  return nullopt;
+  // return unexpected("Cannot");
   // throw invalid_argument("Cannot");
-  return unexpected("Cannot");
 }
 
 
 const struct TestParam {
   const Pairs<int> shops;
   const int M;
-  const expected<int, string> gold;
+  const optional<int> gold;
 } PARAMS[] {
   {
     {
@@ -57,7 +60,8 @@ const struct TestParam {
       {2, 4},
     },
     6,
-    unexpected("Cannot"),
+    nullopt,
+    // unexpected("Cannot"),
   },
 };
 

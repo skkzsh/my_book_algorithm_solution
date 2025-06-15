@@ -9,32 +9,33 @@ using std::ranges::to;
 using std::views::filter;
 using std::views::transform;
 using std::views::cartesian_product;
-using std::invalid_argument;
+using std::optional;
+using std::nullopt;
 
 // O(N^4)
-constexpr int darts_simple(const vector<int> &a, const int M) {
+constexpr optional<int> darts_simple(const vector<int> &a, const int M) {
   // 一時変数をなくしたい
   const vector sums = cartesian_product(a, a, a, a) // TODO: a * 4
                       | transform([](const auto t) { return sum_tuple(t); })
                       | filter([M](const int sum) { return sum <= M; })
                       | to<vector>(); // 直接maxを取りたい
 
-  if (sums.size() == 0) {
-    throw invalid_argument("Solution does not exist");
+  if (sums.empty()) {
+    return nullopt;
   }
 
   return *max_element(sums);
 }
 
 // O(N^2 log N)
-constexpr int darts_binary(const vector<int> &a, const int M) {
+constexpr optional<int> darts_binary(const vector<int> &a, const int M) {
   using std::ranges::min_element;
   using std::ranges::sort;
   using std::ranges::upper_bound;
   using std::prev;
 
   if (4 * *min_element(a) > M) {
-    throw invalid_argument("Solution does not exist");
+    return nullopt;
   }
 
   vector aa = cartesian_product(a, a)
@@ -74,8 +75,8 @@ TEST(TestSuite, Boundary) {
 }
 
 TEST(TestSuite, greater_than_M) {
-  EXPECT_THROW(darts_simple({1}, 3), invalid_argument);
-  EXPECT_THROW(darts_binary({1}, 3), invalid_argument);
+  EXPECT_EQ(darts_simple({1}, 3), nullopt);
+  EXPECT_EQ(darts_binary({1}, 3), nullopt);
   // 3を越えない範囲の最大値 <=> 3以下の最大値
   // <=> 3を越えたら例外 (3は例外でない) <=> 4以上は例外
 }
