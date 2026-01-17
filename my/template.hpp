@@ -17,6 +17,15 @@ template <class T> constexpr void chmax(T &a, const T b) {
   a = std::max(a, b);
 }
 
+// 更新があれば, trueを返す版
+template <class T> constexpr bool chminb(T &a, const T b) {
+  if (a > b) {
+    a = b;
+    return true;
+  }
+  return false;
+}
+
 // TODO: concept
 constexpr void print2d(const auto cc) {
   using std::print;

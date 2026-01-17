@@ -19,12 +19,19 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
   dists.at(s) = 0;
 
   for (const auto i : iota(0u, G.size())) { // 始点sから到達可能な負閉路を持たないなら, 高々頂点数-1回の反復で収束する
+    bool updated = false; // 更新があったかどうか
+
     for (const auto u : iota(0u, G.size())) {
       if (dists.at(u) != INF) {
         for (const auto &[v, l] : G.at(u)) {
-          chmin(dists.at(v), dists.at(u) + l);
+          updated = chminb(dists.at(v), dists.at(u) + l);
         }
       }
+    }
+
+    if (i == G.size() - 1 && updated) {
+      // 頂点数回目の反復で更新があった <=> 負閉路が存在
+      return unexpected(true);
     }
   }
 
@@ -57,4 +64,21 @@ TEST(TestSuite, Ex) {
   EXPECT_THAT(bellman_ford(E, 0).value(), ElementsAreArray({0, 3, 53, 24, -1, 7}));
 }
 
-// TODO: negative cycle
+TEST(TestSuite, HasNegativeCycle) {
+  const map<pair<int, int>, int> E {
+      {{2, 3}, -10},
+      {{2, 4},  -5},
+      {{2, 5}, 100},
+      {{4, 2},  57},
+      {{4, 3},  25},
+      {{4, 5},   8},
+      {{3, 1},  -5},
+      {{1, 2}, -50}, // 負閉路にする
+      {{1, 3},  57},
+      {{1, 4},  -4},
+      {{0, 1},   3},
+      {{0, 3}, 100},
+  };
+
+  EXPECT_EQ(bellman_ford(E, 0), unexpected(true));
+}
