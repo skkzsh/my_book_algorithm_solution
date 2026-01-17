@@ -5,6 +5,7 @@
 using ::testing::ElementsAreArray;
 
 // E: 辺集合
+// s: 始点
 constexpr vector<int> bfs(const multimap<int, int> &E, const int s) {
   using std::optional;
   using std::views::transform;

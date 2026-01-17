@@ -7,6 +7,7 @@ using std::unexpected;
 using ::testing::ElementsAreArray;
 
 // E: 辺集合 (重み付き)
+// s: 始点
 // 始点sから到達可能な負閉路を持つ場合, unexpectedを返す
 constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int> &E, const int s) {
   using std::views::iota;
@@ -36,7 +37,7 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
     }
 
     if (i == G.size() - 1 && updated) {
-      // 頂点数回目の反復で更新があった <=> 負閉路が存在
+      // 頂点数回目の反復でも更新があった <=> 始点sから到達可能な負閉路を持つ
       return unexpected(true);
     }
   }
