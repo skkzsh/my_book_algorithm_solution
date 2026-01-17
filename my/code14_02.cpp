@@ -1,5 +1,6 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
+#include <ranges>
 #include <expected>
 using std::expected;
 using std::unexpected;
@@ -27,6 +28,11 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
           updated = chminb(dists.at(v), dists.at(u) + l);
         }
       }
+    }
+
+    // 更新がなければ (収束したら) 反復を終わっていい
+    if (!updated) {
+      break;
     }
 
     if (i == G.size() - 1 && updated) {
