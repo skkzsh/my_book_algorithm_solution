@@ -7,6 +7,8 @@
 #include <stack>
 using std::multimap;
 using std::multiset;
+using std::map;
+using std::pair;
 
 // TODO: クラス化したい
 
@@ -16,9 +18,12 @@ using std::multiset;
 // なお, 連結かどうかは判定してない
 size_t order_edge_set(const multimap<int, int> &E);
 
-// 辺集合を隣接リスト表現に変換する
+// 辺集合 (重みなし) を隣接リスト表現に変換する
 // is_direct: 有向グラフかどうか
 vector<multiset<int>> to_adjacency_list(const multimap<int, int> &E, const bool is_direct = false);
+
+// 辺集合 (重みあり) を隣接リスト表現に変換する
+vector<map<int, int>> to_adjacency_list(const map<pair<int, int>, int> &E);
 
 void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen);
 

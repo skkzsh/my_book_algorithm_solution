@@ -32,7 +32,7 @@ TARGETS_WITH_GTEST_HELPER := q05_01 code07_03 q07_01 q07_02 q09_02 q09_03
 TARGETS_WITH_TYPE := q04_06
 TARGETS_WITH_TEMPLATE := q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
 TARGETS_WITH_UNION_FIND := code11_% q11_%
-TARGETS_WITH_GRAPH := code13_% q13_%
+TARGETS_WITH_GRAPH := code13_% q13_% code14_%
 
 # C++23とC++23未満でターゲットを分割
 # (cartesian_product, enumerate, generator などが Mac で compile しづらいため)

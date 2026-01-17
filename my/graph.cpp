@@ -1,7 +1,7 @@
 #include "graph.hpp"
-#include <set>
 #include <stdexcept>
 #include <format>
+#include <ranges>
 
 // TODO: test
 
@@ -36,6 +36,7 @@ size_t order_edge_set(const multimap<int, int> &E) {
   return V.size();
 }
 
+// 重みなし
 vector<multiset<int>> to_adjacency_list(const multimap<int, int> &E, const bool is_direct) {
   const auto N = order_edge_set(E);
 
@@ -46,6 +47,22 @@ vector<multiset<int>> to_adjacency_list(const multimap<int, int> &E, const bool 
     if (!is_direct) {
       G.at(v).insert(u); // 無向グラフ
     }
+  }
+
+  return G;
+}
+
+// 重みあり
+vector<map<int, int>> to_adjacency_list(const map<pair<int, int>, int> &E) {
+  using std::views::keys;
+  using std::ranges::to;
+
+  const auto N = order_edge_set(E | keys | to<multimap>());
+
+  vector<map<int, int>> G(N);
+
+  for (const auto &[e, l] : E) {
+    G.at(e.first).insert({e.second, l});
   }
 
   return G;
