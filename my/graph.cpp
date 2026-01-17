@@ -1,7 +1,7 @@
 #include "graph.hpp"
 #include <stdexcept>
 #include <format>
-#include <ranges>
+// #include <ranges>
 
 // TODO: test
 
@@ -53,20 +53,20 @@ vector<multiset<int>> to_adjacency_list(const multimap<int, int> &E, const bool 
 }
 
 // 重みあり
-vector<map<int, int>> to_adjacency_list(const map<pair<int, int>, int> &E) {
-  using std::views::keys;
-  using std::ranges::to;
-
-  const auto N = order_edge_set(E | keys | to<multimap>());
-
-  vector<map<int, int>> G(N);
-
-  for (const auto &[e, l] : E) {
-    G.at(e.first).insert({e.second, l});
-  }
-
-  return G;
-}
+// vector<map<int, int>> to_adjacency_list(const map<pair<int, int>, int> &E) {
+//   using std::views::keys;
+//   using std::ranges::to;
+//
+//   const auto N = order_edge_set(E | keys | to<multimap>());
+//
+//   vector<map<int, int>> G(N);
+//
+//   for (const auto &[e, l] : E) {
+//     G.at(e.first).insert({e.second, l});
+//   }
+//
+//   return G;
+// }
 
 void recursive_search(const vector<multiset<int>> &G, const int v, vector<bool> &seen) {
   seen.at(v) = true;

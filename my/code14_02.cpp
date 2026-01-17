@@ -4,30 +4,33 @@
 #include <expected>
 using std::expected;
 using std::unexpected;
+using std::map;
+using std::pair;
 using ::testing::ElementsAreArray;
 
 // E: 辺集合 (重み付き)
 // s: 始点
 // 始点sから到達可能な負閉路を持つ場合, unexpectedを返す
 constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int> &E, const int s) {
+  using std::views::keys;
+  using std::ranges::to;
   using std::views::iota;
   constexpr int INF = 1 << 29; // 十分大きな値
 
-  const auto G = to_adjacency_list(E);
-  // debug
-  // print2d(G);
+  const auto N = order_edge_set(E | keys | to<multimap>());
 
-  vector<int> dists(G.size(), INF);
+  vector dists(N, INF);
   dists.at(s) = 0;
 
-  for (const auto i : iota(0u, G.size())) { // 始点sから到達可能な負閉路を持たないなら, 高々頂点数-1回の反復で収束する
+  for (const auto i : iota(0u, N)) { // 始点sから到達可能な負閉路を持たないなら, 高々頂点数-1回の反復で収束する
     bool updated = false; // 更新があったかどうか
 
-    for (const auto u : iota(0u, G.size())) {
-      if (dists.at(u) != INF) {
-        for (const auto &[v, l] : G.at(u)) {
-          updated = chminb(dists.at(v), dists.at(u) + l);
-        }
+    for (const auto &[edge, weight] : E) {
+      const auto &[from, to] = edge;
+
+      // 始点が到達可能な頂点であれば, 緩和する
+      if (dists.at(from) != INF) {
+          updated = chminb(dists.at(to), dists.at(from) + weight);
       }
     }
 
@@ -36,8 +39,8 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
       break;
     }
 
-    if (i == G.size() - 1 && updated) {
-      // 頂点数回目の反復でも更新があった <=> 始点sから到達可能な負閉路を持つ
+    // 頂点数回目の反復でも更新があった <=> 始点sから到達可能な負閉路を持つ
+    if (i == N - 1 && updated) {
       return unexpected(true);
     }
   }
@@ -48,7 +51,7 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
 TEST(TestSuite, Ex) {
   const map<pair<int, int>, int> E {
       // 非常に効率の悪い順序で定義
-      // ...だけどmapは順不同だし, 内部で隣接リスト (vector) 化されるので意味はない
+      // ...だけどmapなので意味はない
       {{2, 3}, -10},
       {{2, 4},  -5},
       {{2, 5}, 100},
