@@ -1,9 +1,13 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
+#include <expected>
+using std::expected;
+using std::unexpected;
 using ::testing::ElementsAreArray;
 
-// E: 辺集合
-constexpr vector<int> bellman_ford(const map<pair<int, int>, int> &E, const int s) {
+// E: 辺集合 (重み付き)
+// 始点sから到達可能な負閉路を持つ場合, unexpectedを返す
+constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int> &E, const int s) {
   using std::views::iota;
   constexpr int INF = 1 << 29; // 十分大きな値
 
@@ -50,7 +54,7 @@ TEST(TestSuite, Ex) {
   //   println("{} ", x);
   // }
 
-  EXPECT_THAT(bellman_ford(E, 0), ElementsAreArray({0, 3, 53, 24, -1, 7}));
+  EXPECT_THAT(bellman_ford(E, 0).value(), ElementsAreArray({0, 3, 53, 24, -1, 7}));
 }
 
 // TODO: negative cycle
