@@ -1,9 +1,13 @@
 #include "gmock/gmock.h"
 #include "graph.hpp"
 #include <ranges>
-using std::map;
-using std::pair;
+#include <queue>
+using ::testing::TestWithParam;
+using ::testing::Combine;
+using ::testing::ValuesIn;
+using ::testing::Values;
 using ::testing::ElementsAreArray;
+using std::tuple;
 
 // E: 辺集合 (重み付き)
 // s: 始点
@@ -53,8 +57,46 @@ constexpr vector<int> dijkstra(const map<pair<int, int>, int> &E, const int s) {
   return dists;
 }
 
-TEST(TestSuite, Ex) {
-  const map<pair<int, int>, int> E {
+constexpr vector<int> dijkstra_heap(const map<pair<int, int>, int> &E, const int s) {
+  constexpr int INF = 1 << 29; // 十分大きな値
+
+  const auto G = to_adjacency_list(E);
+
+  vector<int> dists(G.size(), INF);
+  // 昇順ヒープ {最短路長, 頂点}
+  std::priority_queue<pair<int, int>, vector<pair<int, int>>, std::greater<pair<int, int>>> pq;
+
+  dists.at(s) = 0;
+  pq.push({dists.at(s), s});
+
+  while (!pq.empty()) {
+    // 使用済でない頂点のうち, distが最小の頂点
+    const auto [dist, v] = pq.top();
+    pq.pop();
+
+    if (dist <= dists.at(v)) { // ヒープに残ったゴミでなければ
+      for (const auto &[to, weight] : G.at(v)) { // 頂点vを始点とした各辺を緩和する
+        if (chminb(dists.at(to), dists.at(v) + weight)) {
+          pq.push({dists.at(to), to}); // 更新があればヒープに追加
+        }
+      }
+    }
+
+    // debug
+    std::println("{}: {}, {}, {}", v, dist, pq, dists);
+  }
+
+  return dists;
+}
+
+
+const struct TestParam {
+  const map<pair<int, int>, int> E;
+  const int s;
+  const vector<int> gold;
+} PARAMS[] {
+  {
+    {
       {{0, 1},  3},
       {{0, 2},  5},
       {{1, 2},  4},
@@ -64,7 +106,23 @@ TEST(TestSuite, Ex) {
       {{3, 5},  2},
       {{4, 3},  7},
       {{4, 5},  8},
-  };
+    },
+    0,
+    {0, 3, 5, 14, 9, 16},
+  },
+};
 
-  EXPECT_THAT(dijkstra(E, 0), ElementsAreArray({0, 3, 5, 14, 9, 16}));
+class TestSuite : public TestWithParam<tuple<TestParam, vector<int>(*)(const map<pair<int, int>, int> &, const int)>> {};
+
+TEST_P(TestSuite, Ex) {
+  const auto [p, algo] = GetParam();
+  EXPECT_THAT(algo(p.E, p.s), ElementsAreArray(p.gold));
 }
+
+INSTANTIATE_TEST_SUITE_P(
+  Inst,
+  TestSuite,
+  Combine(ValuesIn(PARAMS),
+          Values(&dijkstra, &dijkstra_heap))
+  // testing::PrintToStringParamName() // TODO
+);
