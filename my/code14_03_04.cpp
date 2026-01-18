@@ -8,6 +8,7 @@ using ::testing::ValuesIn;
 using ::testing::Values;
 using ::testing::ElementsAreArray;
 using std::tuple;
+using std::println;
 
 // E: 辺集合 (重み付き)
 // s: 始点
@@ -45,26 +46,28 @@ constexpr vector<int> dijkstra(const map<pair<int, int>, int> &E, const int s) {
       for (const auto &[to, weight] : G.at(min_v.value())) {
         chmin(dists.at(to), dists.at(min_v.value()) + weight);
         // debug
-        // std::println("{} -> {}: {}", min_v.value(), to, dists);
+        // println("{} -> {}: {}", min_v.value(), to, dists);
       }
     }
 
     // debug
-    std::println("{}: {}, {}", min_v.value(), min_dist, dists);
-    // std::println("{}", used);
+    println("{}: {}, {}", min_v.value(), min_dist, dists);
+    // println("{}", used);
   }
 
   return dists;
 }
 
 constexpr vector<int> dijkstra_heap(const map<pair<int, int>, int> &E, const int s) {
+  using std::priority_queue;
+  using std::greater;
   constexpr int INF = 1 << 29; // 十分大きな値
 
   const auto G = to_adjacency_list(E);
 
   vector<int> dists(G.size(), INF);
   // 昇順ヒープ {最短路長, 頂点}
-  std::priority_queue<pair<int, int>, vector<pair<int, int>>, std::greater<pair<int, int>>> pq;
+  priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 
   dists.at(s) = 0;
   pq.push({dists.at(s), s});
@@ -83,7 +86,7 @@ constexpr vector<int> dijkstra_heap(const map<pair<int, int>, int> &E, const int
     }
 
     // debug
-    std::println("{}: {}, {}, {}", v, dist, pq, dists);
+    println("{}: {}, {}, {}", v, dist, pq, dists);
   }
 
   return dists;
