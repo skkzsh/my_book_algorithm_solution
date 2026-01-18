@@ -4,8 +4,6 @@
 #include <expected>
 using std::expected;
 using std::unexpected;
-using std::map;
-using std::pair;
 using ::testing::ElementsAreArray;
 
 // E: 辺集合 (重み付き)
