@@ -32,8 +32,6 @@ constexpr vector<int> dijkstra(const map<pair<int, int>, int> &E, const int s) {
         min_v = v;
       }
     }
-    // debug
-    // std::println("{}: {}", min_v.value(), min_dist);
 
     if (min_v.has_value()) {
       // 最小の頂点があれば, 使用済とする
@@ -42,8 +40,14 @@ constexpr vector<int> dijkstra(const map<pair<int, int>, int> &E, const int s) {
       // 最小の頂点を始点とした各辺を緩和する
       for (const auto &[to, weight] : G.at(min_v.value())) {
         chmin(dists.at(to), dists.at(min_v.value()) + weight);
+        // debug
+        // std::println("{} -> {}: {}", min_v.value(), to, dists);
       }
     }
+
+    // debug
+    std::println("{}: {}, {}", min_v.value(), min_dist, dists);
+    // std::println("{}", used);
   }
 
   return dists;

@@ -30,6 +30,8 @@ constexpr expected<vector<int>, bool> bellman_ford(const map<pair<int, int>, int
       if (dists.at(from) != INF) {
           updated = chminb(dists.at(to), dists.at(from) + weight);
       }
+      // debug
+      std::println("{} ({} -> {}): {}", i, from, to, dists);
     }
 
     // 更新がなければ (収束したら) 反復を終わっていい
