@@ -8,7 +8,7 @@ using ::testing::ElementsAreArray;
 using ::testing::Pair;
 
 // E: 辺集合 (重み付き, 無向グラフ)
-// 最小全域木の辺集合 (昇順) を返す
+// 最小全域木の辺集合 (重みの昇順) を返す
 constexpr list<pair<int, int>> kruskal(const map<pair<int, int>, int> &E) {
   using std::views::keys;
   using std::views::transform;
