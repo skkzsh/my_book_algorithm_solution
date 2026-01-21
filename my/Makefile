@@ -31,7 +31,7 @@ TARGETS := $(basename $(wildcard *[01][0-9]_[0-9][0-9]*.cpp))
 TARGETS_WITH_GTEST_HELPER := q05_01 code07_03 q07_01 q07_02 q09_02 q09_03
 TARGETS_WITH_TYPE := q04_06
 TARGETS_WITH_TEMPLATE := q05_04 q05_06 q05_07 q05_08 q05_09 q06_03 q07_03
-TARGETS_WITH_UNION_FIND := code11_% q11_%
+TARGETS_WITH_UNION_FIND := code11_% q11_% code15_%
 TARGETS_WITH_GRAPH := $(foreach prefix, code q, $(foreach num, 13 14, $(prefix)$(num)_%))
 
 # C++23とC++23未満でターゲットを分割

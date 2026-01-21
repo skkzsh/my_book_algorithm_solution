@@ -1,14 +1,43 @@
 #include "gmock/gmock.h"
+#include "union-find.hpp"
+#include "graph.hpp"
+#include <ranges>
+#include <list>
+using std::list;
 using ::testing::ElementsAreArray;
 using ::testing::Pair;
-using std::map;
-using std::set;
-using std::pair;
 
 // E: 辺集合 (重み付き, 無向グラフ)
-constexpr set<pair<int, int>> kruskal(const map<pair<int, int>, int> &E) {
-  // TODO: 実装
-  return {};
+// 最小全域木の辺集合 (昇順) を返す
+constexpr list<pair<int, int>> kruskal(const map<pair<int, int>, int> &E) {
+  using std::views::keys;
+  using std::views::transform;
+  using std::ranges::to;
+
+  const auto N = order_edge_set(E | keys | to<multimap>());
+
+  // 重みで昇順sortするのに, multimapを使ってみる
+  const auto sorted = E | transform([](const auto& p) {
+            return pair{p.second, p.first};  // valueとkeyに反転
+        })
+        | to<multimap>();
+  // debug
+  // println("{}", sorted);
+
+  list<pair<int, int>> results;
+  UnionFind uf(N);
+
+  for (const auto &[weight, edge] : sorted) {
+    const auto &[u, v] = edge;
+    if (!uf.is_same_set(u, v)) {
+      results.push_back(edge);
+      uf.unite(u, v);
+      // debug
+      // println("{}", edge);
+    }
+  }
+
+  return results;
 }
 
 TEST(TestSuite, Ex) {
@@ -27,12 +56,12 @@ TEST(TestSuite, Ex) {
   };
 
   EXPECT_THAT(kruskal(E), ElementsAreArray({
-    Pair(0, 3),
-    Pair(0, 5),
+    Pair(4, 6),
     Pair(0, 7),
     Pair(1, 6),
+    Pair(0, 3),
     Pair(2, 7),
-    Pair(4, 6),
+    Pair(0, 5),
     Pair(6, 7),
   }));
 }
