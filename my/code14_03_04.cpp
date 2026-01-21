@@ -8,7 +8,6 @@ using ::testing::ValuesIn;
 using ::testing::Values;
 using ::testing::ElementsAreArray;
 using std::tuple;
-using std::println;
 
 // E: 辺集合 (重み付き)
 // s: 始点
@@ -25,7 +24,7 @@ constexpr vector<int> dijkstra(const map<pair<int, int>, int> &E, const int s) {
   vector<int> dists(G.size(), INF);
   dists.at(s) = 0;
 
-  for (const auto i : iota(0u, G.size())) {
+  for (const auto _ : iota(0u, G.size())) {
     // 使用済でない頂点のうち, distsが最小の頂点を探す
     // min_elementは使えない?
     int min_dist = INF;

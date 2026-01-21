@@ -30,8 +30,8 @@ constexpr list<pair<int, int>> kruskal(const map<pair<int, int>, int> &E) {
   for (const auto &[weight, edge] : sorted) {
     const auto &[u, v] = edge;
     if (!uf.is_same_set(u, v)) {
-      results.push_back(edge);
       uf.unite(u, v);
+      results.push_back(edge);
       // debug
       // println("{}", edge);
     }
