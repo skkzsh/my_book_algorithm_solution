@@ -27,11 +27,10 @@ constexpr list<pair<int, int>> kruskal(const map<pair<int, int>, int> &E) {
   list<pair<int, int>> results;
   UnionFind uf(N);
 
-  for (const auto &[weight, edge] : sorted) {
-    const auto &[u, v] = edge;
-    if (!uf.is_same_set(u, v)) {
-      uf.unite(u, v);
-      results.push_back(edge);
+  for (const auto &[_, e] : sorted) {
+    if (!uf.is_same_set(e.first, e.second)) {
+      uf.unite(e.first, e.second);
+      results.push_back(e);
       // debug
       // println("{}", edge);
     }

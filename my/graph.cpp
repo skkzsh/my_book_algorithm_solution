@@ -61,8 +61,8 @@ vector<map<int, int>> to_adjacency_list(const map<pair<int, int>, int> &E) {
 
   vector<map<int, int>> G(N);
 
-  for (const auto &[e, l] : E) {
-    G.at(e.first).insert({e.second, l});
+  for (const auto &[e, weight] : E) {
+    G.at(e.first).insert({e.second, weight});
   }
 
   return G;
