@@ -1,15 +1,21 @@
 BasedOnStyle: LLVM
 # BasedOnStyle: Google
 Language: Cpp
-Standard: c++23
-# ColumnLimit: 120
+Standard: c++20 # c++23
+ColumnLimit: 100 # 120
 
 # PointerAlignment: Left
 # ReferenceAlignment: Left
 
 ContinuationIndentWidth: 2
-SpaceBeforeCpp11BracedList: true
 SpacesBeforeTrailingComments: 1
 IndentCaseLabels: true
+BinPackArguments: false
+# AlignAfterOpenBracket: BlockIndent
 
+SpaceBeforeCpp11BracedList: true
+# Cpp11BracedListStyle
+
+# AllowAllArgumentsOnNextLine: true
 AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Inline
