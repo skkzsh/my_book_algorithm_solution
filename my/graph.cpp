@@ -5,8 +5,7 @@
 
 // TODO: test
 
-// 注:
-// map系やset系は効率 (全走査, 追加, メモリ等) が悪い
+// NOTE: map系やset系は効率 (全走査, 追加, メモリ等) が悪い
 
 size_t order_edge_set(const multimap<int, int> &E) {
   using std::set;

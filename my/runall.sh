@@ -9,7 +9,7 @@ for t in $@; do
   ./$t
   exit_code=$(( $exit_code | $?))
   # 1つでも1があれば1を返す
-  # 注: 非ゼロが1以外のときは考えてない
+  # NOTE: 非ゼロが1以外のときは考えてない
 done
 
 exit $exit_code

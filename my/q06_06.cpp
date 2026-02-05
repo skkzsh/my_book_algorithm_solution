@@ -46,7 +46,7 @@ constexpr double bisection(const Constants<int> &constants, const pair<double, d
   return right;
 }
 
-// 解は複数あるが, 返却値はそのうちの1つであり, 探索範囲によって変わることに注意
+// NOTE: 解は複数あるが, 返却値はそのうちの1つであり, 探索範囲によって変わることに注意
 
 constexpr struct TestParam {
   const Constants<int> constants;
