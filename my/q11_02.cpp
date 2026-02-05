@@ -8,9 +8,9 @@ using ::testing::ElementsAreArray;
 constexpr vector<int> decay(const Pairs<int> &E) {
   using std::views::iota;
   using std::views::reverse;
+  using std::ranges::to;
 
-  const multimap M(E.begin(), E.end());
-  const auto N = order_edge_set(M);
+  const auto N = order_edge_set(E | to<multimap>());
 
   UnionFind uf(N);
   vector<int> results(E.size());

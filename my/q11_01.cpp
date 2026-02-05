@@ -5,8 +5,9 @@
 
 // E: 辺集合 (連結かつ0以上の連番であること)
 constexpr int bridges(const Pairs<int> &E) {
-  const multimap M(E.begin(), E.end());
-  const auto N = order_edge_set(M);
+  using std::ranges::to;
+
+  const auto N = order_edge_set(E | to<multimap>());
 
   const auto ev = std::views::iota(0u, E.size());
   int count = 0;
