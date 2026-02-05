@@ -3,7 +3,6 @@
 #include <algorithm>
 using std::string;
 using std::string_view;
-using std::get;
 
 constexpr string longest_common_substring(const string_view S, const string_view T) {
   using std::vector;

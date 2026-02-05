@@ -1,10 +1,8 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <ranges>
-
 using std::vector;
 using std::tuple;
-using std::get;
 
 template <class T> using Trio = tuple<vector<T>, vector<T>, vector<T>>;
 
@@ -29,7 +27,7 @@ constexpr unsigned int festival_simple(const Trio<int> &Z) {
 }
 
 // O(N log N)
-constexpr unsigned int festival_binary(Trio<int> Z) {
+constexpr unsigned int festival_binary(const Trio<int> Z) {
   using namespace std::ranges;
 
   // for (const int i : std::views::iota(0, 3)) {
