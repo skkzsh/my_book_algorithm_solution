@@ -38,7 +38,7 @@ constexpr unsigned int max_pairing(Pairs<int> r, Pairs<int> b) {
 }
 
 
-class TestSuite : public TestWithParam<PairTestParam<Pairs<int>>> {};
+class TestSuite : public testing::TestWithParam<PairTestParam<Pairs<int>>> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(max_pairing(GetParam().a, GetParam().b), GetParam().gold);

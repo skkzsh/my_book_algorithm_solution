@@ -31,7 +31,7 @@ constexpr int min_push(Pairs<int> ps) {
   // ranges を使いたいが, 実装がない
 }
 
-class SubTestSuite : public TestWithParam<SingleTestParam<pair<int, int>>> {};
+class SubTestSuite : public testing::TestWithParam<SingleTestParam<pair<int, int>>> {};
 
 TEST_P(SubTestSuite, Ex) {
   EXPECT_EQ(count(GetParam().x), GetParam().gold);
@@ -47,11 +47,11 @@ INSTANTIATE_TEST_SUITE_P(
   Inst,
   SubTestSuite,
   testing::ValuesIn(SUB_PARAMS),
-  [](const TestParamInfo<SubTestSuite::ParamType> &info) {
-    return string(info.param.test_name);
+  [](const testing::TestParamInfo<SubTestSuite::ParamType> &info) {
+    return std::string(info.param.test_name);
   });
 
-class TestSuite : public TestWithParam<SingleTestParam<Pairs<int>>> {};
+class TestSuite : public testing::TestWithParam<SingleTestParam<Pairs<int>>> {};
 
 TEST_P(TestSuite, Ex) {
   EXPECT_EQ(min_push(GetParam().x), GetParam().gold);
