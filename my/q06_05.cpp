@@ -51,7 +51,7 @@ constexpr int product_th_binary(vector<int> a, vector<int> b, const int K) {
   sort(a);
   sort(b);
 
-  assert(a.at(0) > 0 && b.at(0) > 0);
+  [[assert: a.at(0) > 0 && b.at(0) > 0]];
 
   int left = 0; // 常にfalse (∵ a, b > 0)
   int right = a.at(a.size() - 1) * b.at(b.size() - 1); // 常にtrue

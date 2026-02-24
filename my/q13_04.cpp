@@ -47,7 +47,7 @@ constexpr pair<Point, Point> locate_start_and_goal(const vector<string_view> &ma
   }
 
   // start & goal point must exist
-  assert(s.has_value() && g.has_value());
+  [[assert: s.has_value() && g.has_value()]];
 
   return {s.value(), g.value()};
 }
