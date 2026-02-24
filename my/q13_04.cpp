@@ -46,14 +46,13 @@ constexpr pair<Point, Point> locate_start_and_goal(const vector<string_view> &ma
     }
   }
 
-  if (!s.has_value() || !g.has_value()) {
-    throw std::invalid_argument("No start or goal point exist in the maze");
-  }
+  // start & goal point must exist
+  assert(s.has_value() && g.has_value());
 
   return {s.value(), g.value()};
 }
 
-constexpr int shortest_path(const vector<string_view> &maze, const Point dimensions) {
+constexpr optional<int> shortest_path(const vector<string_view> &maze, const Point dimensions) {
   using std::queue;
   using std::initializer_list;
 
@@ -88,7 +87,7 @@ constexpr int shortest_path(const vector<string_view> &maze, const Point dimensi
     }
   }
 
-  return dists.at(g.x).at(g.y).value();
+  return dists.at(g.x).at(g.y);
 }
 
 TEST(TestSuite, Ex) {
@@ -118,7 +117,7 @@ TEST(TestSuite, Impossible) {
     "S.......",
   };
 
-  EXPECT_THROW(shortest_path(maze, {8, 8}), std::bad_optional_access);
+  EXPECT_EQ(shortest_path(maze, {8, 8}), std::nullopt);
 }
 
 TEST(TestSuite, StartNotExists) {
@@ -133,7 +132,7 @@ TEST(TestSuite, StartNotExists) {
     "#.......",
   };
 
-  EXPECT_THROW(shortest_path(maze, {8, 8}), std::invalid_argument);
+  EXPECT_DEATH(shortest_path(maze, {8, 8}), "");
 }
 
 TEST(TestSuite, GoalNotExists) {
@@ -148,5 +147,5 @@ TEST(TestSuite, GoalNotExists) {
     "S.......",
   };
 
-  EXPECT_THROW(shortest_path(maze, {8, 8}), std::invalid_argument);
+  EXPECT_DEATH(shortest_path(maze, {8, 8}), "");
 }
