@@ -2,7 +2,6 @@
 #include <cmath>   // Arch
 #include <numbers> // Mac
 
-using std::invalid_argument;
 using std::tuple;
 using std::pair;
 using std::integral;
@@ -23,17 +22,13 @@ constexpr double bisection(const Constants<int> &constants, const pair<double, d
 
   auto [left, right] = interval;
 
-  if (left >= right) {
-    throw invalid_argument("left must be less than right");
-  }
+  assert(left < right);
 
   // debug
   // std::cout << func(left, constants) << ' ' << func(right, constants) << std::endl;
 
   // func(left) < 0 かつ func(right) > 0 が必要条件
-  if (func(left, constants) >= 0 || func(right, constants) <= 0) {
-    throw invalid_argument("func(left) < 0 and func(right) > 0 required");
-  }
+  assert(func(left, constants) < 0 && func(right, constants) > 0);
 
   while (right - left > EPS) {
     if (const double t = (left + right) / 2; func(t, constants) >= 0) {

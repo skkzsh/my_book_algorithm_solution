@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <ranges>
 using std::vector;
-using std::domain_error;
 
 constexpr double aqua(const int M, const vector<int> &a) {
   using std::accumulate;
@@ -18,9 +17,7 @@ constexpr double aqua(const int M, const vector<int> &a) {
 
   const int N = a.size();
 
-  if (M > N || M < 0) {
-    throw domain_error("0 <= M <= N required");
-  }
+  assert(M >= 0 && M <= N);
 
   vector<vector<double>> dp(N + 1, vector<double>(M + 1, -INF));
 
@@ -63,9 +60,9 @@ TEST(TestSuite, Sample3) {
 
 TEST(TestSuite, M_Negative) {
   const vector a {9, 1, 2, 3, 9};
-  EXPECT_THROW(aqua(-1, a), domain_error);
+  EXPECT_DEATH(aqua(-1, a), "");
 }
 TEST(TestSuite, M_GreaterThan_N) {
   const vector a {9, 1, 2, 3, 9};
-  EXPECT_THROW(aqua(6, a), domain_error);
+  EXPECT_DEATH(aqua(6, a), "");
 }

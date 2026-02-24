@@ -2,7 +2,6 @@
 #include <ranges>
 using std::string_view;
 using std::views::iota;
-using std::invalid_argument;
 
 constexpr int sum_bit(const string_view S, const int bit) {
   const auto L = S.length();
@@ -11,9 +10,7 @@ constexpr int sum_bit(const string_view S, const int bit) {
 
   for (const auto i : iota(0u, L - 1)) {
     const int num = S.at(i) - '0';
-    if (num < 0 || num > 9) {
-      throw invalid_argument("argument must be number");
-    }
+    assert(num >= 0 && num <= 9);
 
     tmp += num;
 
@@ -69,5 +66,5 @@ TEST(TestSuite, Test1) {
 }
 
 TEST(TestSuite, NotNumber) {
-  EXPECT_THROW(sum_combi("1?5"), invalid_argument);
+  EXPECT_DEATH(sum_combi("1?5"), "");
 }

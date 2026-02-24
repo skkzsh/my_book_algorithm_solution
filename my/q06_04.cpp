@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
 #include <ranges>
 using std::vector;
-using std::invalid_argument;
 
 /*
   元の問題: 「選んだMコの小屋のうち2つの小屋の距離の最小値」の最大値を求める
@@ -31,9 +30,7 @@ constexpr int countx(const vector<int> &a, const int x) {
 constexpr int cows(const vector<int> &a, const int M) {
   const int N = a.size();
 
-  if (M < 2 || M > N) {
-    throw invalid_argument("2 <= M <= N required");
-  }
+  assert(M >= 2 && M <= N);
 
   int left = 0; // 常にtrue
   int right = a.at(N - 1) + 1; // 常にfalse
@@ -54,7 +51,7 @@ TEST(TestSuite, Ex) {
 }
 
 TEST(TestSuite, M_less_than_2) {
-  EXPECT_THROW(cows({1, 2, 4, 8, 9}, 1), invalid_argument);
+  EXPECT_DEATH(cows({1, 2, 4, 8, 9}, 1), "");
 }
 
 TEST(TestSuite, M_equal_to_2) {
@@ -66,5 +63,5 @@ TEST(TestSuite, M_equal_to_N) {
 }
 
 TEST(TestSuite, M_greater_than_N) {
-  EXPECT_THROW(cows({1, 2, 4, 8, 9}, 6), invalid_argument);
+  EXPECT_DEATH(cows({1, 2, 4, 8, 9}, 6), "");
 }

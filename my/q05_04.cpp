@@ -1,14 +1,11 @@
 #include "gtest/gtest.h"
 #include "template.hpp"
 using std::vector;
-using std::domain_error;
 
 constexpr int INF = 1 << 29; // 十分大きな値
 
 constexpr bool partial_sum_exists_pull(const int W, const int K, const vector<int> &a) {
-  if (K < 0) {
-    throw domain_error("K must be not negative");
-  }
+  assert(K >= 0);
 
   const int N = a.size();
   vector<vector<int>> dp(N + 1, vector<int>(W + 1, INF));
@@ -32,9 +29,7 @@ constexpr bool partial_sum_exists_pull(const int W, const int K, const vector<in
 }
 
 constexpr bool partial_sum_exists_push(const int W, const int K, const vector<int> &a) {
-  if (K < 0) {
-    throw domain_error("K must be not negative");
-  }
+  assert(K >= 0);
 
   const int N = a.size();
   vector<vector<int>> dp(N + 1, vector<int>(W + 1, INF));
@@ -69,6 +64,6 @@ TEST(TestSuite, TestTrue) {
 
 TEST(TestSuite, K_Negative) {
   const vector a {1, 2, 4, 5, 11};
-  EXPECT_THROW(partial_sum_exists_pull(10, -1, a), domain_error);
-  EXPECT_THROW(partial_sum_exists_push(10, -1, a), domain_error);
+  EXPECT_DEATH(partial_sum_exists_pull(10, -1, a), "");
+  EXPECT_DEATH(partial_sum_exists_push(10, -1, a), "");
 }

@@ -1,15 +1,12 @@
 #include "gtest/gtest.h"
 #include <algorithm>
 #include <unordered_set>
-using std::domain_error;
 
 // 3, 5, 7のカウントから算出する
 constexpr int count753recursive(const int K) {
   using std::ranges::all_of;
 
-  if (K < 0) {
-    throw domain_error("argument must not be negative");
-  }
+  assert(K >= 0);
 
   if (K < 357) {
     return 0;
@@ -48,9 +45,7 @@ int count753permutation(const int K) {
   using std::stoi;
   using std::unordered_set;
 
-  if (K < 0) {
-    throw domain_error("argument must not be negative");
-  }
+  assert(K >= 0);
 
   string s = "357";
   // int digit = std::to_string(K).length(); // TODO: 4ケタ以上の場合に対応する
@@ -97,6 +92,6 @@ TEST(TestSuite, Test4digitMin) {
 }
 
 TEST(TestSuite, Negative) {
-  EXPECT_THROW(count753recursive(-1), domain_error);
-  EXPECT_THROW(count753permutation(-1), domain_error);
+  EXPECT_DEATH(count753recursive(-1), "");
+  EXPECT_DEATH(count753permutation(-1), "");
 }

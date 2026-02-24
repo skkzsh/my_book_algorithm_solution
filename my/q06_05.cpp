@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <ranges>
 using std::vector;
-using std::domain_error;
 using std::ranges::sort;
 
 // O(N^2 * log N)
@@ -52,9 +51,7 @@ constexpr int product_th_binary(vector<int> a, vector<int> b, const int K) {
   sort(a);
   sort(b);
 
-  if (a.at(0) <= 0 || b.at(0) <= 0) {
-    throw domain_error("a and b must be positive numbers");
-  }
+  assert(a.at(0) > 0 && b.at(0) > 0);
 
   int left = 0; // 常にfalse (∵ a, b > 0)
   int right = a.at(a.size() - 1) * b.at(b.size() - 1); // 常にtrue
@@ -83,6 +80,6 @@ TEST(TestSuite, Ex2) {
 }
 
 TEST(TestSuite, Zero) {
-  EXPECT_THROW(product_th_binary({1, 0, 1}, {1, 1, 1}, 1), domain_error);
-  EXPECT_THROW(product_th_binary({1, 1, 1}, {1, 1, 0}, 1), domain_error);
+  EXPECT_DEATH(product_th_binary({1, 0, 1}, {1, 1, 1}, 1), "");
+  EXPECT_DEATH(product_th_binary({1, 1, 1}, {1, 1, 0}, 1), "");
 }

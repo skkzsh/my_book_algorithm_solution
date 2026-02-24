@@ -1,10 +1,7 @@
 #include "gtest/gtest.h"
-using std::domain_error;
 
 constexpr long long tribo(const int N) {
-  if (N < 0) {
-    throw domain_error("argument must not be negative");
-  }
+  assert(N >= 0);
 
   // ベースケース
   switch (N) {
@@ -21,5 +18,5 @@ TEST(TestSuite, Test30) {
 }
 
 TEST(TestSuite, Negative) {
-  EXPECT_THROW(tribo(-1), domain_error);
+  EXPECT_DEATH(tribo(-1), "");
 }
