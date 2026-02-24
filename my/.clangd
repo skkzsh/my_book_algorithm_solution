@@ -1,5 +1,5 @@
 CompileFlags:
   Add:
-    - -std=c++23
+    - -std=c++26
     - -I/opt/homebrew/opt/googletest/include
     # Mac前提

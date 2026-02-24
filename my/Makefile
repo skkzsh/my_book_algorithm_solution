@@ -1,9 +1,7 @@
 ifeq ($(shell uname -s), Darwin)
-	CXX_STD := c++23
-	# CXX_STD := c++2c
+	CXX_STD := c++26
 else
-	CXX_STD := c++23
-	# CXX_STD := c++2c
+	CXX_STD := c++26
 endif
 
 CXX := g++
