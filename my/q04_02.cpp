@@ -40,7 +40,7 @@ constexpr vector<long long> tribo_wrapper(const int N) {
   tribo(N, memo);
 
   // optionalはがし
-  return memo | transform([](const auto o) { return o.value(); }) // TODO: optional<auto> or concept
+  return memo | transform([](const auto& o) { return o.value(); }) // TODO: optional<auto> or concept
               | to<vector>();
 }
 
