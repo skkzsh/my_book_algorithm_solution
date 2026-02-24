@@ -90,5 +90,5 @@ TEST(TestSuite, HasNegativeCycle) {
       {{0, 3}, 100},
   };
 
-  EXPECT_EQ(bellman_ford(E, 0), unexpected(true));
+  EXPECT_FALSE(bellman_ford(E, 0).has_value());
 }

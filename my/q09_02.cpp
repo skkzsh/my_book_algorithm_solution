@@ -37,7 +37,7 @@ constexpr expected<double, string> polish(const string_view expr) {
 
 
 TEST(TestSuite, Q) {
-  EXPECT_EQ(polish("34+12-*").value(), -7);
+  EXPECT_EQ(polish("34+12-*"), -7);
 }
 
 const struct UnexpectedTestParam {
