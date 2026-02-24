@@ -17,9 +17,10 @@ consteval int count_simple(const int K, const int N) {
     });
 }
 
-constexpr int count_better(const int K, const int N) {
-  assert(K >= 0 && N >= 0);
-
+constexpr int count_better(const int K, const int N)
+  [[pre: K >= 0]]
+  [[pre: N >= 0]]
+{
   if (3 * K < N) { // この場合, 条件を満たす組は存在しない
     return 0;
   }

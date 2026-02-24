@@ -2,11 +2,12 @@ ifeq ($(shell uname -s), Darwin)
 	CXX_STD := c++26
 else
 	CXX_STD := c++26
+	CXX_BASE_FLAGS ?= -fcontracts
 endif
 
 CXX := g++
-CXX_BASE_FLAGS ?= -Wall -Wextra -std=$(CXX_STD) # -O2
-CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread # -fcontracts -g
+CXX_BASE_FLAGS += -Wall -Wextra -std=$(CXX_STD) # -O2
+CXXFLAGS ?= $(CXX_BASE_FLAGS) -lgtest_main -lgtest -lpthread # -g
 # --coverage
 # -ftrapv -fsanitize=undefined -fsanitize=integer -fsanitize=address -fstack-protector-strong
 # pkg-config --cflags --libs gtest_main
