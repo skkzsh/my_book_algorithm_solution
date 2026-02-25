@@ -50,7 +50,7 @@ constexpr void print2d(const auto cc) {
 template <class T> using Pairs = vector<pair<T, T>>;
 
 template <typename... Args>
-auto sum_tuple(const tuple<Args...> &t) {
+constexpr auto sum_tuple(const tuple<Args...> &t) {
     using std::apply;
 
     return apply([](auto&&... args) {

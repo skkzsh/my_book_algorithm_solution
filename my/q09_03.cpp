@@ -55,7 +55,7 @@ TEST(TestSuite, Q) {
 }
 
 
-const struct UnexpectedTestParam {
+constexpr struct UnexpectedTestParam {
   const string_view parens;
   const string_view message;
 } PARAMS[] {

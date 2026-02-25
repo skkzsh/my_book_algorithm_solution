@@ -40,7 +40,7 @@ TEST(TestSuite, Q) {
   EXPECT_EQ(polish("34+12-*"), -7);
 }
 
-const struct UnexpectedTestParam {
+constexpr struct UnexpectedTestParam {
   const string_view expr;
   const string_view message;
 } PARAMS[] {

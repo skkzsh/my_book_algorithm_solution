@@ -39,7 +39,7 @@ constexpr int count753recursive(const int K) {
 }
 
 // 3, 5, 7の順列から算出する
-int count753permutation(const int K) {
+constexpr int count753permutation(const int K) {
   using namespace std::ranges;
   using std::string;
   using std::stoi;
