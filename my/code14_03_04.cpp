@@ -126,5 +126,14 @@ INSTANTIATE_TEST_SUITE_P(
   TestSuite,
   Combine(ValuesIn(PARAMS),
           Values(&dijkstra, &dijkstra_heap))
-  // testing::PrintToStringParamName() // TODO
+  // TODO: test name
+  // [](const testing::TestParamInfo<TestSuite::ParamType> &info) {
+  //   using std::to_string;
+  //   const auto [p, algo] = info.param;
+
+  //   // インデックスを付与してユニーク化
+  //   auto test_name = to_string(info.index) + '_' + std::meta::name_of(^algo);
+
+  //   return test_name;
+  // }
 );
