@@ -1,5 +1,6 @@
 #include "gmock/gmock.h"
 #include <ranges>
+#include <algorithm>
 #include <stack>
 #include <expected>
 using std::expected;
@@ -66,12 +67,22 @@ constexpr struct UnexpectedTestParam {
 
 class UnexpectedTestSuite : public testing::TestWithParam<UnexpectedTestParam> {};
 
-TEST_P(UnexpectedTestSuite, Unexpected) {
+TEST_P(UnexpectedTestSuite, Ex) {
   EXPECT_EQ(pairing_paren(GetParam().parens).error(), GetParam().message);
 }
 
 INSTANTIATE_TEST_SUITE_P(
   Inst,
   UnexpectedTestSuite,
-  testing::ValuesIn(PARAMS)
+  testing::ValuesIn(PARAMS),
+  [](const testing::TestParamInfo<UnexpectedTestSuite::ParamType> &info) {
+    using std::ranges::replace;
+
+    auto test_name = string(info.param.message);
+    // 空白やクォートが許容されてないので置換
+    replace(test_name, ' ', '_');
+    replace(test_name, '\'', '_');
+
+    return test_name;
+  }
 );

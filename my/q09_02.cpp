@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+#include <ranges>
+#include <algorithm>
 #include <stack>
 #include <expected>
 using std::expected;
@@ -53,12 +55,23 @@ constexpr struct UnexpectedTestParam {
 
 class UnexpectedTestSuite : public testing::TestWithParam<UnexpectedTestParam> {};
 
-TEST_P(UnexpectedTestSuite, Unexpected) {
+TEST_P(UnexpectedTestSuite, Ex) {
   EXPECT_EQ(polish(GetParam().expr).error(), GetParam().message);
 }
 
 INSTANTIATE_TEST_SUITE_P(
   Inst,
   UnexpectedTestSuite,
-  testing::ValuesIn(PARAMS)
+  testing::ValuesIn(PARAMS),
+  [](const testing::TestParamInfo<UnexpectedTestSuite::ParamType> &info) {
+    using std::ranges::replace;
+    using std::to_string;
+
+    // インデックスを付与してユニーク化
+    auto test_name = to_string(info.index) + '_' + string(info.param.message);
+    // 空白が許容されてないので置換
+    replace(test_name, ' ', '_');
+
+    return test_name;
+  }
 );
