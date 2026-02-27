@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: pacman -Syu --noconfirm make clang gtest
+          command: pacman -Syu --noconfirm --needed make clang gtest
       - run:
           command: cd my; make clean all
       - run:
